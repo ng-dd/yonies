@@ -3,10 +3,10 @@ const parser = require('body-parser');
 const path = require('path');
 require('dotenv').config()
 
-const routes = require('../routes/routes');
-const db = require('../db');
+const routes = require('./routes/routes');
+const db = require('./db');
 
-const port = process.env.PORT || 4201;
+const port = process.env.PORT || 4200;
 const app = express();
 
 app.use(parser.json());
