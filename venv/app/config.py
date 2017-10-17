@@ -1,0 +1,1 @@
+SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://gabekatz:plantlife@python-orbit.ckxebk8g2hgg.us-west-2.rds.amazonaws.com:5432/'
