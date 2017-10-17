@@ -25,7 +25,9 @@
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "pg": "^7.3.0",
     "rxjs": "^5.4.2",
+    "sequelize": "^4.14.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
