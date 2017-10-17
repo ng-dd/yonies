@@ -41,3 +41,15 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Python virtual env 
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
