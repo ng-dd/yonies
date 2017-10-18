@@ -1,16 +1,26 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+// const Sequelize = require('sequelize');
+// const db = require('../db');
 
-const Category = db.define('user', {
-  Name: {
-    type: Sequelize.STRING
-  }
-}, {
-  timestamps: false,
-})
+// const Category = db.define('user', {
+//   Name: {
+//     type: Sequelize.STRING
+//   }
+// }, {
+//   timestamps: false,
+// })
 
-Category.hasMany(Post);
+module.exports = (sequelize, DataTypes) => {
+  const Category = sequelize.define('category', {
+    name: {
+      type: DataTypes.STRING
+    }
+  }, {
+    timestamps: false
+  })
+}
 
-Category.sync();
+// Category.hasMany(Post);
 
-module.exports = Category;
+// Category.sync();
+
+// module.exports = Category;

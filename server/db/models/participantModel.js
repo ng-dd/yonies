@@ -1,16 +1,27 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+// const Sequelize = require('sequelize');
+// const db = require('../db');
 
-const Participant = db.define('user', {
-  UserId: {
-    type: Sequelize.STRING
-  }
-}, {
-  timestamps: false,
-})
+// const Participant = db.define('user', {
+//   UserId: {
+//     type: Sequelize.STRING
+//   }
+// }, {
+//   timestamps: false,
+// })
+'use strict'
 
-Participant.belongsTo(RoomStat);
+module.exports = (sequelize, DataTypes) => {
+  const Participant = sequelize.define('participant', {
+    user_id: {
+      type: DataTypes.STRING
+    }
+  }, {
+    timestamps: false,
+  })
+}
 
-Participant.sync();
+// Participant.belongsTo(RoomStat);
 
-module.exports = Participant;
+// Participant.sync();
+
+// module.exports = Participant;

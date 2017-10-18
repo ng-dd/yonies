@@ -1,19 +1,32 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+// const Sequelize = require('sequelize');
+// const db = require('../db');
 
-const Friend = db.define('user', {
-  UserId: {
-    type: Sequelize.STRING
-  },
-  FriendId: {
-    type: Sequelize.STRING
-  }
-}, {
-  timestamps: false,
-})
+// const Friend = db.define('user', {
+//   UserId: {
+//     type: Sequelize.STRING
+//   },
+//   FriendId: {
+//     type: Sequelize.STRING
+//   }
+// }, {
+//   timestamps: false,
+// })
 
-Friend.belongsTo(User);
+module.exports = (sequelize, DataTypes) => {
+  const Friend = sequelize.define('friend', {
+    user_id: {
+      type: DataTypes.STRING
+    },
+    friend_id: {
+      type: DataTypes.STRING
+    }
+  }, {
+    timestamps: false,
+  })
+}
 
-Friend.sync();
+// Friend.belongsTo(User);
 
-module.exports = Friend;
+// Friend.sync();
+
+// module.exports = Friend;
