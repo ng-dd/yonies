@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UserService } from '../services/user.service';
+import { PostService } from '../services/post.service';
+import { HashService } from '../services/hash.service';
+import { Http, Response, Headers } from '@angular/http';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,9 +12,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
-  constructor() { }
+  myForm: FormGroup;
+  username: string = '';
+  postForm: FormGroup;
+  hashForm: FormGroup;
+  hashButton: boolean = false;
+  postButton: boolean = false;
+  userButton: boolean = false;
 
-  ngOnInit() {
+  constructor(private http: Http, private hashService: HashService, private postService: PostService, private userService: UserService, private fb: FormBuilder) { 
+    this.myForm = fb.group({
+      'username': null
+    })
+    this.postForm = fb.group({
+      'post': null
+    })
+    this.hashForm = fb.group({
+      'hash': null
+    })
   }
 
+  toggleQuery(value: any) {
+    if (value === 'Hashes') {
+      this.postButton = false;
+      this.userButton = false;
+      this.hashButton = true;
+    } 
+    if (value === 'Posts') {
+      this.postButton = true;
+      this.userButton = false;
+      this.hashButton = false;      
+    }
+    if (value === 'People') {
+      this.postButton = false;
+      this.userButton = true;
+      this.hashButton = false; 
+    }
+  }
+
+  searchUsers(query) {
+    console.log(query)
+    this.userService.getUser(query)
+    this.myForm.reset();
+  } 
+
+  searchHashTags(query) {
+    console.log(query)
+    this.hashService.getHash(query)
+    this.hashForm.reset();
+  }
+
+  searchPosts(query) {
+    console.log(query)
+    // this.postService.getPost(query)
+    this.postService.getTwitch(query.post)
+    this.postService.getYouTube(query.post)
+    this.postService.getTwitter(query.post)
+    this.postForm.reset();
+  }
+  //toggle between search bars
+  //one search bar to search for users
+
+  //one search bar to search for hashtags
+
+  //one search bar to search for posts
+
+  ngOnInit() {}
 }

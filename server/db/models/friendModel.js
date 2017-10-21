@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
   })
+  return Friend
 }
 
 // Friend.belongsTo(User);

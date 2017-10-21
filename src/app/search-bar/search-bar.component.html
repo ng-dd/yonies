@@ -1,3 +1,17 @@
-<p>
-  search-bar works!
-</p>
+<div class="order-form">
+  <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
+    <input formControlName="username" placeholder="search people">
+    <input type='submit' value='search users'>
+  </form>
+  <form *ngIf="postButton" [formGroup]='postForm' (ngSubmit)="searchPosts(postForm.value)">
+    <input formControlName="post" placeholder="search posts">
+    <input type='submit' value='search posts'>
+  </form>
+  <form *ngIf="hashButton" [formGroup]='hashForm' (ngSubmit)="searchHashTags(hashForm.value)">
+    <input formControlName="hash" placeholder="search hashtags">
+    <input type='submit' value='search hash'>
+  </form>
+  <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
+  <input value="People" type="submit" (click)="toggleQuery('People')">
+  <input value="Posts" type="submit" (click)="toggleQuery('Posts')">
+</div>

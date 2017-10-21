@@ -5,14 +5,17 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {
-  ssl:'Amazon RDS'
+    ssl:'Amazon RDS'
   }});
-
-
-  const db ={}
   
-  db.Sequelize = Sequelize;
-  db.sequelize = sequelize;
+  sequelize.authenticate()
+    .then(console.log('connected to the database!'))
+    .catch(err => console.log('error connecting to database!', err));
+
+  let db ={}
+  
+  // db.Sequelize = Sequelize;
+  // db.sequelize = sequelize;
   
   //Models
   db.user = require('../db/models/userModel')(sequelize, Sequelize);
@@ -28,49 +31,50 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
   
   //Associations
   
-  //users
-  db.user.hasMany(db.like);
-  db.user.hasMany(db.message);
-  db.user.hasMany(db.roomstat);
-  db.user.hasMany(db.friend);
+  // users
+//   db.user.hasMany(db.like);
+//   db.user.hasMany(db.message);
+//   db.user.hasMany(db.roomstat);
+//   db.user.hasMany(db.friend);
 
-  //likes
-  db.like.belongsTo(db.user);
-  db.like.belongsTo(db.post);
+//   //likes
+//   db.like.belongsTo(db.user);
+//   db.like.belongsTo(db.post);
 
-  //messages
-  db.message.belongsTo(db.user);
-  db.message.belongsTo(db.friend);
+//   //messages
+//   db.message.belongsTo(db.user);
+//   db.message.belongsTo(db.friend);
 
-  //room stats
-  db.roomStat.belongsTo(db.user);
-  db.roomState.hasMany(db.participant);
+//   //room stats
+//   db.roomStat.belongsTo(db.user);
+//   db.roomStat.hasMany(db.participant);
 
-  //friends
-  db.friend.belongsTo(db.user);
+//   //friends
+//   db.friend.belongsTo(db.user);
 
-  //posts
-  db.post.hasMany(db.hashTag);
-  db.post.hasMany(db.like);
-  db.post.belongsTo(db.category);
+//   //posts
+//  db.post.hasMany(db.hashTag);
+//  db.post.hasMany(db.like);
+//  db.post.belongsTo(db.category);
 
-  //participants
-  db.participant.belongsTo(db.roomStat);
+//   //participants
+//  db.participant.belongsTo(db.roomStat);
 
-  //categories
-  db.category.hasMany(db.post);
+//   //categories
+//  db.category.hasMany(db.post);
 
-  //hash tags
-  db.hashTag.belongsTo(db.post);
+//   // hash tags
+//  db.hashTag.belongsTo(db.post);
 
 
-//SYNC???
-db.sync();
+// //SYNC???
+for(var key in db) {
+  (db[key]).sync()
+
+}
+// db.sync();
 
 // db.authenticate()
-sequelize.authenticate()
-  .then(console.log('connected to the database!'))
-  .catch(err => console.log('error connecting to database!', err));
 
 
 

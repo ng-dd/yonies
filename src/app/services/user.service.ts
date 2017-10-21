@@ -6,12 +6,12 @@ export class UserService {
 
   constructor(private http: Http) { }
   
-  getUser(user) {
-    this.http.get(`/users/${user.id}`)
+  getUser(user) { 
+    this.http.get(`http://localhost:4201/users/${user.username}`)
     .subscribe((data) => {
       console.log(data)
     }, (err) => {
-      console.log(err)
+      console.log('nahhh', err)
     })
   }
 

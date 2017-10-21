@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     timestamps: false,
   })
+  return Participant
 }
 
 // Participant.belongsTo(RoomStat);

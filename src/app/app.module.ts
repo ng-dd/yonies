@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
+import { HttpModule }  from '@angular/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ContentItemComponent } from './content-item/content-item.component';
@@ -16,21 +18,16 @@ import { StreamViewComponent } from './stream-view/stream-view.component';
 import { StreamChatLogComponent } from './stream-chat-log/stream-chat-log.component';
 import { SingleCelebFeedComponent } from './single-celeb-feed/single-celeb-feed.component';
 
-//firebase modules
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { firebaseConfig } from '../environments/firebase.config';
-
 //services
-import { UserService } from './services/user.service';
-import { PostService } from './services/post.service';
-import { LikesService } from './services/likes.service';
-import { MessageService } from './services/message.service';
-import { FriendService } from './services/friend.service';
-import { CategoryService } from './services/category.service';
-import { RoomstatService } from './services/roomstat.service';
-import { AuthService } from './services/auth.services';
+import { UserService } from './services/user.service'
+import { HashService } from './services/hash.service'
+import { PostService } from './services/post.service'
+import { LikesService } from './services/likes.service'
+import { MessageService } from './services/message.service'
+import { FriendService } from './services/friend.service'
+import { CategoryService } from './services/category.service'
+import { RoomstatService } from './services/roomstat.service'
+import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
@@ -46,13 +43,16 @@ import { AuthService } from './services/auth.services';
     NotificationsComponent,
     StreamViewComponent,
     StreamChatLogComponent,
-    SingleCelebFeedComponent
+    SingleCelebFeedComponent,
+    TestingComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,  
   ],
   providers: [
-    AuthService,
     UserService,
     PostService,
     LikesService,
@@ -60,8 +60,9 @@ import { AuthService } from './services/auth.services';
     FriendService,
     CategoryService,
     RoomstatService,
+    HashService,
+    FormBuilder
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
