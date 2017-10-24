@@ -15,9 +15,11 @@
   <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
   <input value="People" type="submit" (click)="toggleQuery('People')">
   <input value="Posts" type="submit" (click)="toggleQuery('Posts')">
-  
-  <div>
-    hi
-    {{tweets}}
-  </div>
+  <input value='auth' type='button' (click)="auth()">
+  <ul>
+    <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
+      {{tweet}}
+    </div>
+  </ul>
+
 </div>

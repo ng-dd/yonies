@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpModule }  from '@angular/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TwitterService } from 'ng2-twitter';
 
 import { AppComponent } from './app.component';
 import { ContentItemComponent } from './content-item/content-item.component';
@@ -62,8 +61,7 @@ import { TestingComponent } from './testing/testing.component';
     CategoryService,
     RoomstatService,
     HashService,
-    FormBuilder,
-    TwitterService
+    FormBuilder
   ],
   bootstrap: [AppComponent]
 })
