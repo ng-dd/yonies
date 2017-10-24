@@ -1,4 +1,5 @@
 <div class="order-form">
+
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">
     <input type='submit' value='search users'>
@@ -14,4 +15,9 @@
   <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
   <input value="People" type="submit" (click)="toggleQuery('People')">
   <input value="Posts" type="submit" (click)="toggleQuery('Posts')">
+  
+  <div>
+    hi
+    {{tweets}}
+  </div>
 </div>

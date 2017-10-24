@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Jsonp } from '@angular/http';
+import { Observable } from 'rxjs';
+import { TwitterService } from 'ng2-twitter';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class PostService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private twitter: TwitterService) { }
 
   createAuthorizationHeader(headers:Headers) {
     headers.append('Client-ID', 'kgr6km89embc4kfjknb072gmhkvj8u'); 
@@ -29,15 +32,24 @@ export class PostService {
     })
   }
 
-  getTwitter(query) {
-    var headers = new Headers();
+  // getTwitter(query: string): Observable<any> {
+  //   return this.http.get(`http://localhost:4201/tweets/${query}`)
+  //   .map((res) => {return res.json()})
+  // }
 
-    this.http.get(`https://api.twitter.com/1.1/search/tweets.json?oauth_consumer_key=6CBsjafaj3F2f1AMudmMW5xSB&oauth_token=920364354737864704-puoJWNWhL4nrETA9P9rwB7W25mZ821m&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1508554105&oauth_nonce=Iihc7k&oauth_version=1.0&oauth_signature=GgZrKiVP4WR3yRW2enAkLyI6o9c%3D&q=${query}`)
-    .subscribe((data) => {
-      console.log(data.json(), 'this is twitter data')
-    }, (err) => {
-      console.log(err, 'this is the error')
-    })
+  getTwitter(query) {
+    // return this.twitter.get(`https://api.twitter.com/1.1/search/tweets.json?q=${query}`,
+    // {
+    //   count: 5
+    // },
+    // {
+    //   consumerKey: '6CBsjafaj3F2f1AMudmMW5xSB',
+    //   consumerSecret: 'BlZMYXZz3VsbObqi8tnDhT36UAxfdMqI2aTnRRBTUdBUeihIjj'
+    // },
+    // {
+    //   token: '920364354737864704-puoJWNWhL4nrETA9P9rwB7W25mZ821m',
+    //   tokenSecret: 'WaQV14WDuDOTYiL8o9qC5JmuwfW1woxkxApDGfdgYHems'
+    // })
   }
 
   getPost(post) {

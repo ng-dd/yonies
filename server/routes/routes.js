@@ -53,4 +53,7 @@ router.get('/hashes/:id', hashController.getHash)
 router.post('/hashes', hashController.addHash)
 // router.delete('/hashes', hashController.deleteHash)
 
+//tweets
+router.get('/tweets/:id', postController.getTweets)
+
 module.exports = router;

@@ -4,11 +4,13 @@ import { UserService } from '../services/user.service';
 import { PostService } from '../services/post.service';
 import { HashService } from '../services/hash.service';
 import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import { HttpModule }  from '@angular/http';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.css']
+  styleUrls: ['./search-bar.component.css'],
 })
 export class SearchBarComponent implements OnInit {
 
@@ -19,8 +21,9 @@ export class SearchBarComponent implements OnInit {
   hashButton: boolean = false;
   postButton: boolean = false;
   userButton: boolean = false;
+  tweets: Object;
 
-  constructor(private http: Http, private hashService: HashService, private postService: PostService, private userService: UserService, private fb: FormBuilder) { 
+  constructor(private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
     })
@@ -31,6 +34,8 @@ export class SearchBarComponent implements OnInit {
       'hash': null
     })
   }
+
+
 
   toggleQuery(value: any) {
     if (value === 'Hashes') {
@@ -64,10 +69,16 @@ export class SearchBarComponent implements OnInit {
 
   searchPosts(query) {
     console.log(query)
-    // this.postService.getPost(query)
     this.postService.getTwitch(query.post)
-    this.postService.getYouTube(query.post)
-    this.postService.getTwitter(query.post)
+    // this.postService.getYouTube(query.post)
+    // this.postService.getTwitter(query.post)
+    // .subscribe((data) => {
+    //   console.log(data, 'this s in the search bar componebt')
+    //   // this.tweets = data.html;
+    //   // console.log(this.tweets, 'this is the tweets')
+    // }, (err) => {
+    //   console.log(err)
+    // })
     this.postForm.reset();
   }
   //toggle between search bars
@@ -77,5 +88,6 @@ export class SearchBarComponent implements OnInit {
 
   //one search bar to search for posts
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

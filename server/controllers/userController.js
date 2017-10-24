@@ -26,22 +26,26 @@ module.exports = {
     },
 
     getUser: (req, res) => {
-        if (!redis.redisClient.get(req.params.id)) {
-            User.findAll({where: {username: req.params.id}})
-            .then((data) => {
-                redis.redisClient.set(`userData${req.params.id}`, data)
-            })
-            .catch((err) => {
-                res.status(500).send(err);
-            })
-        } else {
-            res.send(JSON.parse(redis.redisClient.get(req.params.id)));
-        }
+        redis.redisClient.get(JSON.stringify(req.params.id), (err, reply) => {
+            if (reply === null) {
+                User.findAll({where: {username: req.params.id}})
+                .then((data) => {
+                    console.log(data, req.params.id)
+                    redis.redisClient.set(JSON.stringify(req.params.id), JSON.stringify(data))
+                    res.send(data)
+                })
+                .catch((err) => {
+                    res.status(500).send(err)
+                })
+            } else {
+                res.send(JSON.parse(reply))
+            }
+        })
     },
 
     deleteUser: (req, res) => {
         User.destroy({
-            where: {id: req.params.userId}
+            where: {username: req.params.id}
         })
         .then(() => {
             res.send('deleted user')
