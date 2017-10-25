@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
-  host: 'orbitdb.cxdawuxv7dpb.us-west-2.rds.amazonaws.com',
+  host: '',
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {
