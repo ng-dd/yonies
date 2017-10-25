@@ -27,6 +27,7 @@ import { MessageService } from './services/message.service'
 import { FriendService } from './services/friend.service'
 import { CategoryService } from './services/category.service'
 import { RoomstatService } from './services/roomstat.service'
+import { ScriptService } from './services/script.service'
 import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
@@ -61,6 +62,7 @@ import { TestingComponent } from './testing/testing.component';
     CategoryService,
     RoomstatService,
     HashService,
+    ScriptService,
     FormBuilder
   ],
   bootstrap: [AppComponent]

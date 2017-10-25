@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { PostService } from '../services/post.service';
 import { HashService } from '../services/hash.service';
+import { ScriptService } from '../services/script.service';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ElementRef } from '@angular/core';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class SearchBarComponent implements OnInit {
   userButton: boolean = false;
   tweets: any;
 
-  constructor(private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
+  constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
     })
@@ -69,7 +71,7 @@ export class SearchBarComponent implements OnInit {
     this.hashService.getHash(query)
     this.hashForm.reset();
   }
-
+  
   searchPosts(query) {
     this.tweets = [];
     // console.log(query, 'this is from searchbar')
@@ -84,13 +86,14 @@ export class SearchBarComponent implements OnInit {
         .subscribe((data) => {
           var el = document.createElement('html');
           el.innerHTML = data;
-          // console.log(el.getElementsByTagName('script'), 'yooo')
-          // this.sanitizer.bypassSecurityTrustScript(el.getElementsByTagName('script'))
-          // console.log(el.innerHTML);
-          const fragment = document.createRange().createContextualFragment('<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>');   
-          console.log(fragment, 'fraaag')       
+          console.log(el, 'fraaag') 
           var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
           this.tweets.push(twt);
+          this.scriptService.load('twitterWidget')
+          .then(data => {
+            console.log('script loaded ', data);
+          })
+          .catch(error => console.log(error));    
         })
       }
     }, (err) => {
@@ -98,7 +101,7 @@ export class SearchBarComponent implements OnInit {
     })
     this.postForm.reset();
   }
-
+  
   auth() {
     this.http.get('http://localhost:4201/auth')
     .subscribe((data) => {
@@ -117,11 +120,17 @@ export class SearchBarComponent implements OnInit {
   }
   //toggle between search bars
   //one search bar to search for users
-
+  
   //one search bar to search for hashtags
-
+  
   //one search bar to search for posts
-
+  
+  createDiv(node_name,textElement) {
+    var _nodeElement = document.createElement(node_name);
+    _nodeElement.innerHTML = textElement;
+    return _nodeElement;
+  }
+  
   ngOnInit() {
   }
 }
