@@ -9,7 +9,7 @@ export class HashService {
   getHash(hash) {
     this.http.get(`http://localhost:4201/hashes/${hash.hash}`)
     .subscribe((data) => {
-      console.log(data)
+      console.log(data.json())
     }, (err) => {
       console.log(err)
     })
