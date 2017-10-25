@@ -48,15 +48,40 @@ module.exports = {
         })
     },
 
+    //instagram token = f0a54dbb0ceb404986e7cacf5d1ae4c1
+    //search recent tweets
+    // search: function(req, res) {
+    //     var searchquery = req.body.query;
+    //     var encsearchquery = encodeURIComponent(searchquery);
+    //     var bearerheader = 'Bearer ' + req.body.token;
+    //     axios.get('https://api.twitter.com/1.1/search/tweets.json?q=' + req.params.id +
+    //     '&result_type=recent&count=5', {headers: {Authorization: bearerheader}})
+    //     .then((data) => {
+    //         // res.json(data.data.statuses)
+    //         var ids = data.data.statuses.map((status) => {
+    //             return status.id_str;
+    //         })
+
+    //         res.json(ids);
+            
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //         res.send(err)
+    //     })
+    // },
+
+    //search tweets by user
     search: function(req, res) {
         var searchquery = req.body.query;
         var encsearchquery = encodeURIComponent(searchquery);
         var bearerheader = 'Bearer ' + req.body.token;
-        axios.get('https://api.twitter.com/1.1/search/tweets.json?q=' + req.params.id +
-        '&result_type=recent&count=5', {headers: {Authorization: bearerheader}})
+        axios.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' + req.params.id +
+        '&count=5&result_type=recent', {headers: {Authorization: bearerheader}})
         .then((data) => {
             // res.json(data.data.statuses)
-            var ids = data.data.statuses.map((status) => {
+            console.log(data)
+            var ids = data.data.map((status) => {
                 return status.id_str;
             })
 

@@ -18,7 +18,7 @@ export class PostService {
     this.createAuthorizationHeader(headers);
     this.http.get(`https://api.twitch.tv/kraken/channels/${query}/videos?limit=10`, {headers: headers})
     .subscribe((data) => {
-      // console.log(data.json(), 'this is the twitch data');
+      console.log(data.json(), 'this is the twitch data');
     }, (err) => {
       // console.log('nope')
     })
