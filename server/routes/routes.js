@@ -58,4 +58,7 @@ router.post('/tweets/:id', postController.search)
 router.get('/auth', postController.authorize)
 router.get('/embed/:id', postController.embed)
 
+//youtube tags
+router.get('/youtubetags/:id', postController.youTubeVideoTags)
+
 module.exports = router;

@@ -25,6 +25,8 @@ export class SearchBarComponent implements OnInit {
   postButton: boolean = false;
   userButton: boolean = false;
   tweets: any;
+  twitch: any;
+  youtube: any;
 
   constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
@@ -38,6 +40,8 @@ export class SearchBarComponent implements OnInit {
     })
 
     this.tweets = [];
+    this.twitch = [];
+    this.youtube = [];
   }
 
 
@@ -74,19 +78,51 @@ export class SearchBarComponent implements OnInit {
   
   searchPosts(query) {
     this.tweets = [];
+    this.twitch = [];
+    this.youtube = [];
     // console.log(query, 'this is from searchbar')
     this.postService.getTwitch(query.post)
+    .subscribe((data) => {
+      console.log(data, 'hello');
+    //   var ids = data.videos.map((video) => {
+    //     return video._id;
+    //   })
+    //   var iframes = ids.map((id) => {
+    //     return `<iframe
+    //     src="http://player.twitch.tv/?video=${id}&autoplay=true"
+    //     height="400"
+    //     width="600"
+    //     frameborder="0"
+    //     scrolling="no"
+    //     allowfullscreen="false">
+    // </iframe>`     
+    //   })
+    //   // console.log(iframes)
+    //   iframes.forEach((frame) => {
+    //     let e = document.createElement('html');
+    //     e.innerHTML = frame;
+    //     console.log(e.innerHTML)
+    //     this.twitch.push(e.innerHTML);
+    //   })
+    //   console.log(this.twitch)
+    })
     this.postService.getYouTube(query.post)
+    .subscribe((data) => {
+      data.items.forEach((video) => {
+        // var link = this.sanitizer.bypassSecurityTrustUrl('https://www.youtube.com/embed/' + video.id.videoId)
+        this.youtube.push({name: 'youtubeSource', src: 'https://www.youtube.com/embed/' + video.id.videoId})
+        this.scriptService.load({name: 'youtubeSource', src: 'https://www.youtube.com/embed/' + video.id.videoId}.name)
+      })
+      console.log(this.youtube)
+    })
     this.postService.getTwitter(query.post)
     .subscribe((data) => {
-      // console.log(data, 'this s in the search bar componebt')
-      // this.tweets = data;
       for (var i = 0; i < data.length; i++) {
         this.postService.getEmbed(data[i])
         .subscribe((data) => {
           var el = document.createElement('html');
           el.innerHTML = data;
-          console.log(el, 'fraaag') 
+          // console.log(el, 'fraaag') 
           var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
           this.tweets.push(twt);
           this.scriptService.load('twitterWidget')

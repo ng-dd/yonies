@@ -48,8 +48,7 @@ module.exports = {
         })
     },
 
-    //instagram token = f0a54dbb0ceb404986e7cacf5d1ae4c1
-    //search recent tweets
+    // search recent tweets
     // search: function(req, res) {
     //     var searchquery = req.body.query;
     //     var encsearchquery = encodeURIComponent(searchquery);
@@ -91,6 +90,25 @@ module.exports = {
         .catch((err) => {
             console.log(err)
             res.send(err)
+        })
+    },
+
+    //so theyll search for a youtube video if they like it,then get the tags from it and save it to somewhere
+    //searching celebs should show us youtube videos tweets instagram posts and twitch videos  
+    //so when follow a celeb, user will collect tags relating to the posts of each celeb,
+    //user dashboard will have posts relating to a tags of the user
+
+    //get tags from a youtube video
+    youTubeVideoTags: function(req, res) {
+        axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY&fields=items(snippet(title,description,tags))&part=snippet&id=${req.params.id}`)
+        .then((data) => {
+            console.log('got the youtube tag data')
+            console.log(data.data)
+            res.json(data.data)
+        })
+        .catch(err => {
+            console.log('couldnt get youtube tags')
+            res.status(500).send(err)
         })
     },
 

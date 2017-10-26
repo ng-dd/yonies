@@ -13,22 +13,18 @@ export class PostService {
     headers.append('Client-ID', 'kgr6km89embc4kfjknb072gmhkvj8u'); 
   } 
   
-  getTwitch(query) {
+  getTwitch(query): Observable<any> {
     var headers = new Headers()
     this.createAuthorizationHeader(headers);
-    this.http.get(`https://api.twitch.tv/kraken/channels/${query}/videos?limit=10`, {headers: headers})
-    .subscribe((data) => {
-      console.log(data.json(), 'this is the twitch data');
-    }, (err) => {
-      // console.log('nope')
+    return this.http.get(`https://api.twitch.tv/kraken/channels/${query}/videos?limit=5`, {headers: headers})
+    .map((res) => {
+      return res.json()
     })
   }
 
-  getYouTube(query) {
-    this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=channel&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
-    .subscribe((data) => {
-      // console.log(data.json(), 'this is the youtube data')
-    })
+  getYouTube(query): Observable<any> {
+    return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
+    .map((res) => {return res.json()})
   }
 
   getEmbed(id): Observable<any> {
