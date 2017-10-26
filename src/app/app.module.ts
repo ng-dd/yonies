@@ -18,16 +18,26 @@ import { StreamViewComponent } from './stream-view/stream-view.component';
 import { StreamChatLogComponent } from './stream-chat-log/stream-chat-log.component';
 import { SingleCelebFeedComponent } from './single-celeb-feed/single-celeb-feed.component';
 
+// import { Peer } from 'simple-peer'; //webrtc 
+
+//firebase modules
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { firebaseConfig } from '../environments/firebase.config';
+// import * as YT from 'youtube';
+
 //services
-import { UserService } from './services/user.service'
+import { UserService } from './services/user.service';
+import { PostService } from './services/post.service';
+import { LikesService } from './services/likes.service';
+import { MessageService } from './services/message.service';
+import { FriendService } from './services/friend.service';
+import { CategoryService } from './services/category.service';
+import { RoomstatService } from './services/roomstat.service';
+import { AuthService } from './services/auth.services';
+import { ScriptService } from './services/script.service';
 import { HashService } from './services/hash.service'
-import { PostService } from './services/post.service'
-import { LikesService } from './services/likes.service'
-import { MessageService } from './services/message.service'
-import { FriendService } from './services/friend.service'
-import { CategoryService } from './services/category.service'
-import { RoomstatService } from './services/roomstat.service'
-import { ScriptService } from './services/script.service'
 import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
@@ -52,6 +62,8 @@ import { TestingComponent } from './testing/testing.component';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,  
+    AngularFireModule.initializeApp(firebaseConfig), // imports firebase/app needed for everything
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [
     UserService,
