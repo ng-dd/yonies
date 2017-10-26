@@ -27,6 +27,7 @@ export class SearchBarComponent implements OnInit {
   tweets: any;
   twitch: any;
   youtube: any;
+  content: any;
 
   constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
@@ -42,6 +43,7 @@ export class SearchBarComponent implements OnInit {
     this.tweets = [];
     this.twitch = [];
     this.youtube = [];
+    this.content = [];
   }
 
 
@@ -80,13 +82,14 @@ export class SearchBarComponent implements OnInit {
     this.tweets = [];
     this.twitch = [];
     this.youtube = [];
+    this.content = [];
     // console.log(query, 'this is from searchbar')
     this.postService.getTwitch(query.post)
     .subscribe((data) => {
-      console.log(data, 'hello');
-    //   var ids = data.videos.map((video) => {
-    //     return video._id;
-    //   })
+      console.log(data, 'twitch in sbar component');
+      data.videos.forEach((video) => {
+        this.twitch.push(this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`));
+      })
     //   var iframes = ids.map((id) => {
     //     return `<iframe
     //     src="http://player.twitch.tv/?video=${id}&autoplay=true"
@@ -97,23 +100,15 @@ export class SearchBarComponent implements OnInit {
     //     allowfullscreen="false">
     // </iframe>`     
     //   })
-    //   // console.log(iframes)
-    //   iframes.forEach((frame) => {
-    //     let e = document.createElement('html');
-    //     e.innerHTML = frame;
-    //     console.log(e.innerHTML)
-    //     this.twitch.push(e.innerHTML);
-    //   })
-    //   console.log(this.twitch)
+      console.log(this.twitch, 'TWITCH<<<<<<<<<<')
     })
     this.postService.getYouTube(query.post)
     .subscribe((data) => {
       data.items.forEach((video) => {
         // var link = this.sanitizer.bypassSecurityTrustUrl('https://www.youtube.com/embed/' + video.id.videoId)
-        this.youtube.push({name: 'youtubeSource', src: 'https://www.youtube.com/embed/' + video.id.videoId})
-        this.scriptService.load({name: 'youtubeSource', src: 'https://www.youtube.com/embed/' + video.id.videoId}.name)
+        this.youtube.push(this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId))
       })
-      console.log(this.youtube)
+      console.log(this.youtube, 'YOUTUBE<<<<<<<<')
     })
     this.postService.getTwitter(query.post)
     .subscribe((data) => {
