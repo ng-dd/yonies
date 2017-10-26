@@ -1,11 +1,11 @@
 <div>
-  <h1>Hello Username</h1>
-  <p>First Name: David</p>
-  <p>Last Name: Kang</p>
-  <p>Age: 24</p>
-  <p>Street Address: 26823 Chaucer Place</p>
-  <p>City: Stevenson Ranch</p>
-  <p>State: CA</p>
-  <p>Zip Code: 91381</p>
-  <p>Email: davidxkang@gmail.com</p>
+  <h3>test</h3>
+  <h4 >Hello {{user.first_name}} {{user.last_name}}</h4>
+  <p>Username: {{user.username}}</p>
+  <p>Age: {{user.age || UNAVAILABLE}}</p>
+  <p>Street Address: {{user.street_address || UNAVAILABLE}}</p>
+  <p>City: {{user.city || UNAVAILABLE}}</p>
+  <p>State: {{user.state || UNAVAILABLE}}</p>
+  <p>Zip Code: {{user.zip_code || UNAVAILABLE}}</p>
+  <p>Email: {{user.email || UNAVAILABLE}}</p> 
 </div>

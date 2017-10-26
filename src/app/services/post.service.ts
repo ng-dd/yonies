@@ -12,6 +12,11 @@ export class PostService {
   createAuthorizationHeader(headers:Headers) {
     headers.append('Client-ID', 'kgr6km89embc4kfjknb072gmhkvj8u'); 
   } 
+
+  createAccessHeader(headers:Headers) {
+    headers.append('Access-Control-Allow-Origin', '*')
+    headers.append('Access-Control-Request-Method', 'POST')
+  }
   
   getTwitch(query): Observable<any> {
     var headers = new Headers()
