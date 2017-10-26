@@ -25,6 +25,20 @@ module.exports = {
         })
     },
 
+    // getUser: (req, res) => {
+    //     if (!redis.redisClient.get(req.params.id)) {
+    //         User.findAll({where: {username: req.params.id}})
+    //         .then((data) => {
+    //             redis.redisClient.set(`userData${req.params.id}`, data)
+    //         })
+    //         .catch((err) => {
+    //             res.status(500).send(err);
+    //         })
+    //     } else {
+    //         res.send(JSON.parse(redis.redisClient.get(req.params.id)));
+    //     }
+    // },
+
     getUser: (req, res) => {
         redis.redisClient.get(JSON.stringify(req.params.id), (err, reply) => {
             if (reply === null) {

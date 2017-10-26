@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 require('dotenv').config();
+// dotenv.load();
 
 console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
 const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
@@ -33,8 +34,7 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
   
   //Associations
   
-  // users
-//   db.user.hasMany(db.like);
+//   db.user.hasMany(db.like, {foreignKey: 'user_id'});
 //   db.user.hasMany(db.message);
 //   db.user.hasMany(db.roomstat);
 //   db.user.hasMany(db.friend);
