@@ -50,7 +50,7 @@ export class AuthService {
 
   facebookLogin() {
     firebase.auth()
-      .signInWithRedirect(new firebase.auth.FacebookAuthProvider)
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider)
       .then(res => {
         console.log(res);
       });
