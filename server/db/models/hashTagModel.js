@@ -15,7 +15,7 @@
 module.exports = (sequelize, DataTypes) => {
   const HashTag = sequelize.define('hashtag', {
     post_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     label: {
       type: DataTypes.STRING

@@ -15,10 +15,11 @@ export class FriendService {
     })
   }
 
-  addFriend(friend) {
-    this.http.post('/friends', {
-      userId: friend.userId,
-      friendId: friend.friendID
+  addFriend(user, friend) {
+    console.log('user-->', user, 'friend-->', String(friend))
+    this.http.post('http://localhost:4201/friends', {
+      user_id: user,
+      friend_id: String(friend)
     })
   }
 

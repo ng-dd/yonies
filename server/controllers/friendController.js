@@ -1,10 +1,10 @@
-const Friend = require('../db/index').friend;
+const Friend = require('../db/index').Friend;
 
 module.exports = {
     addFriend: (req, res) => {
         Friend.create({
-            user_id: req.body.userId,
-            friend_id: req.body.friendId
+            user_id: req.body.user_id,
+            friend_id: req.body.friend_id
        })
        .then((data) => {
            res.send(data)

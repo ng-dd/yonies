@@ -14,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
+app.use('/', routes);
 app.use(function(req, res, next){
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
   res.header("Pragma", "no-cache");
@@ -27,7 +28,6 @@ app.use(function(req, res, next){
       return next();
   }
 })
-app.use('/', routes);
 
 app.use(express.static(path.join(__dirname, '../dist')))
 app.get('/', (req, res) => {

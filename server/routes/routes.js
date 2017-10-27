@@ -53,6 +53,7 @@ router.get('/hashes/:id', hashController.getHash)
 router.post('/hashes', hashController.addHash)
 // router.delete('/hashes', hashController.deleteHash)
 
+
 //tweets
 router.post('/tweets/:id', postController.search)
 router.get('/auth', postController.authorize)
@@ -60,5 +61,9 @@ router.get('/embed/:id', postController.embed)
 
 //youtube tags
 router.get('/youtubetags/:id', postController.youTubeVideoTags)
+
+//instagram
+// router.get('/instagram/:id', postController.insta)
+router.get('/instagram', postController.insta)
 
 module.exports = router;
