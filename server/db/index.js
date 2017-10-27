@@ -36,7 +36,7 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
   
   //Associations
   
-  db.User.hasMany(db.Like);
+  db.User.hasMany(db.Like, {foreignKey: User_id});
   db.User.hasMany(db.Message);
   db.User.hasMany(db.RoomStat);
   db.User.hasMany(db.Friend);
