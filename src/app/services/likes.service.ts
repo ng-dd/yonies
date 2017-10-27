@@ -10,7 +10,7 @@ export class LikesService {
   constructor(private http: Http) { }
 
     getLikes(like) {
-      this.http.get('/likes')
+      this.http.get(`http://localhost:4201/likes/${like.user_id}`)
       .subscribe((data) => {
         console.log(data)
       }, (err) => {
