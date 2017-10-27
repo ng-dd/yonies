@@ -5,10 +5,10 @@ const request = require('request');
 module.exports = {
     addPost: (req, res) => {
         Post.create({
-            post_url: req.body.url,
-            post_like_count: req.body.postlike,
+            post_url: req.body.post_url,
+            post_like_count: req.body.post_like_count,
             comment: req.body.comment,
-            comment_like_count: req.body.commentlike,
+            comment_like_count: req.body.comment_like_count,
             parent: req.body.parent
         })
         .then((data) => {
@@ -93,7 +93,7 @@ module.exports = {
         '&count=5&result_type=recent', {headers: {Authorization: bearerheader}})
         .then((data) => {
             // res.json(data.data.statuses)
-            console.log(data)
+            // console.log(data)
             var ids = data.data.map((status) => {
                 return status.id_str;
             })

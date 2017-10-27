@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { UserService } from '../services/user.service';
 import * as firebase from 'firebase/app';
 
 
@@ -11,6 +12,7 @@ export class AuthService {
 
   constructor(
     private firebaseAuth: AngularFireAuth,
+    private userService: UserService
   ) {
     this.user = firebaseAuth.authState;
   }
@@ -35,12 +37,14 @@ export class AuthService {
   }
 
   signup(email: string, password: string, firstname: string, lastname: string) {
+    let user = firebase.auth().currentUser;    
     this.firebaseAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value, value.uid);
         this.confirmEmail();
+        this.userService.addUser({user_id:user.uid})
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -73,11 +77,13 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    let user = firebase.auth().currentUser;    
     this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Nice, it worked!');
+        this.userService.addUser({username: user.email, user_id: user.uid})
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);

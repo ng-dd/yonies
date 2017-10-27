@@ -25,15 +25,16 @@ export class UserService {
   addUser(user) {
     this.http.post('http://localhost:4201/users', {
       username: user.username,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      adminstatus: user.adminstatus,
+      user_id: user.user_id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      admin_status: user.admin_status,
       age: user.age,
       gender: user.gender,
       address: user.address,
       city: user.city,
       state: user.state,
-      zipcode: user.zipcode,
+      zip_code: user.zip_code,
       email: user.email,
       phone: user.phone
     })

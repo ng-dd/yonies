@@ -5,6 +5,7 @@ module.exports = {
     addUser: (req, res) => {
         User.create({
             username: req.body.username,
+            user_id: req.body.user_id,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             admin_status: req.body.admin_status,

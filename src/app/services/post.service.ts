@@ -77,23 +77,12 @@ export class PostService {
     })
   }
 
-  addPost(post) {
-    this.http.post('/posts', {
-      url: post.url,
-      postlike: post.postLikes,
-      comment: post.comment,
-      commentlike: post.commentLikes,
-      parent: post.parent 
+  addPost(post): Observable<any> {
+    console.log(post.url, '<<<<<< POST')
+    return this.http.post('http://localhost:4201/posts', {
+      post_url: post.url 
     })
-    .subscribe((data) => {
-      this.http.post('http://localhost:4201/likes', {
-        user_id: 'something',
-        post_id: JSON.parse(data['._body']).id
-      })
-      // console.log(data);
-    }, (err) => {
-      console.log(err)
-    })
+    .map((res) => {return res.json()})
   }
 
   deletePost(post) {

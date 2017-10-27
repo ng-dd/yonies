@@ -4,15 +4,16 @@ require('dotenv').config();
 // import { Like } from '../db/models/likeModel';
 // import { User } from '../db/models/userModel';
 
-console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
-const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
-  host: process.env.DATABASE_URL,
-  port: 5432,
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl:'Amazon RDS'
-  }});
+// console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
+// const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
+//   host: 'orbitdb.cxdawuxv7dpb.us-west-2.rds.amazonaws.com',
+//   port: 5432,
+//   dialect: 'postgres',
+//   dialectOptions: {
+//     ssl:'Amazon RDS'
+//   }});
   
+  const sequelize = new Sequelize('postgres://gqhmxfxh:0moqyFAzfF1UOx3Nw8kKuly4cdpyH3f5@pellefant.db.elephantsql.com:5432/gqhmxfxh', {dialect: 'postgres'})
   sequelize.authenticate()
     .then(console.log('connected to the database!'))
     .catch(err => console.log('error connecting to database!', err));
@@ -80,10 +81,7 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
 //   dbkeys[i].sync()
 // }
 for (var key in db) {
-  console.log(db[key])
-  if(db[key] === 'roomstat') {
-    (db[key]).sync({force: true})
-  }
+  // console.log(db[key])
   (db[key]).sync()
 }
   // console.log(dbkeys)
