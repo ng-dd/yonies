@@ -16,7 +16,7 @@ module.exports = {
 
     getLike: (req, res) => {
         Like.findAll({
-            where: {user_id: req.params.userid}
+            where: {user_id: req.params.id}
         })
         .then((data) => {
             res.send(data)
