@@ -1,8 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule }  from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Design modules Material Design and Flex layout modules, hammerjs for gestures
+import { MaterialModule } from './material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { ContentItemComponent } from './content-item/content-item.component';
@@ -64,6 +70,8 @@ import { LoginComponent } from './login/login.component';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,  
+    MaterialModule,
+    FlexLayoutModule,
     AngularFireModule.initializeApp(firebaseConfig), // imports firebase/app needed for everything
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
