@@ -1,19 +1,19 @@
-const User = require('../db/index').user;
+const User = require('../db/index').User;
 const redis = require('../redis.js');
 
 module.exports = {
     addUser: (req, res) => {
         User.create({
             username: req.body.username,
-            first_name: req.body.firstname,
-            last_name: req.body.lastname,
-            admin_status: req.body.adminstatus,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            admin_status: req.body.admin_status,
             age: req.body.age,
             gender: req.body.gender,
-            street_address: req.body.address,
+            street_address: req.body.street_address,
             city: req.body.city,
             state: req.body.state,
-            zip_code: req.body.zipcode,
+            zip_code: req.body.zip_code,
             email: req.body.email,
             phone: req.body.phone
         })

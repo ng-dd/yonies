@@ -1,11 +1,17 @@
 <div>
   <button (click)="onLoginWithInstagram()">Authenticate with Instagram</button>
 
+  <div *ngFor="let pic of grams; let i=index">
+    <div *ngIf="i<2">
+      <img src={{pic.images.standard_resolution.url}}>
+      <p>{{pic.caption.text}}</p>
+    </div>
+  </div>
   <!-- <form [formGroup]='instaForm' (ngSubmit)="searchInsta(instaForm.value)">
       <input formControlName="hash" placeholder="search hashtags">
     <input type="submit" value="Submit">
   </form> -->
-  <img src={{instagram}}>
+  
   <button (click)="searchDavid()">load</button>
   <button (click)="log()">log</button>
 

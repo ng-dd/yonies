@@ -27,9 +27,11 @@ export class PostService {
     })
   }
 
-  // getYouTube(query): Observable<any> {
-  //   return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
-  //   .map((res) => {return res.json()})
+  getYouTube(query): Observable<any> {
+    return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
+    .map((res) => {return res.json()})
+  }
+    
   // getInstagram(userid, token) {
   //   var headers = new Headers()
   //   this.createAccessHeader(headers)
@@ -39,12 +41,12 @@ export class PostService {
   //   })
   // }
 
-  getYouTube(query) {
-    this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=channel&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
-    .subscribe((data) => {
-      // console.log(data.json(), 'this is the youtube data')
-    })
-  }
+  // getYouTube(query) {
+  //   this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=channel&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
+  //   .subscribe((data) => {
+  //     // console.log(data.json(), 'this is the youtube data')
+  //   })
+  // }
 
   getEmbed(id): Observable<any> {
     return this.http.get(`http://localhost:4201/embed/${id}`)
@@ -84,7 +86,11 @@ export class PostService {
       parent: post.parent 
     })
     .subscribe((data) => {
-      console.log(data);
+      this.http.post('http://localhost:4201/likes', {
+        user_id: 'something',
+        post_id: JSON.parse(data['._body']).id
+      })
+      // console.log(data);
     }, (err) => {
       console.log(err)
     })

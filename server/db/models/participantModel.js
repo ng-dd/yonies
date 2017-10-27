@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   const Participant = sequelize.define('participant', {
     user_id: {
       type: DataTypes.STRING
+    },
+    room_id: {
+      type: DataTypes.STRING
     }
   }, {
     timestamps: false,

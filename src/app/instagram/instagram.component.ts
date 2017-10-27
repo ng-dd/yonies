@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class InstagramComponent {
 
-  instagram: any;
+  grams: any;
 
   constructor( public postService: PostService) { }
 
@@ -32,8 +32,9 @@ export class InstagramComponent {
     console.log('searching')
     this.postService.getInstagram()
     .subscribe((data) => {
-      console.log(JSON.parse(data._body).data[0].images.standard_resolution.url, 'component<<<<<<<<,')
-      this.instagram = JSON.parse(data._body).data[0].images.standard_resolution.url;
+      // console.log(JSON.parse(data._body).data[0].images.standard_resolution.url, 'component<<<<<<<<,')
+      console.log(JSON.parse(data._body).data, 'component<<<<<<<<,')
+      this.grams = JSON.parse(data._body).data;
     }, (err) => {
       console.log(err, 'insta component error')
     })

@@ -36,39 +36,40 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
   
   //Associations
   
-  db.User.hasMany(db.Like, {foreignKey: User_id});
-  db.User.hasMany(db.Message);
-  db.User.hasMany(db.RoomStat);
-  db.User.hasMany(db.Friend);
+  db.User.hasMany(db.Like, {foreignKey: 'user_id'});
+  db.User.hasMany(db.Message, {foreignKey: 'user_id'});
+  db.User.hasMany(db.RoomStat, {foreignKey: 'user_id'});
+  db.User.hasMany(db.Friend, {foreignKey: 'user_id'});
 
   //likes
-  db.Like.belongsTo(db.User);
-  db.Like.belongsTo(db.Post);
+  db.Like.belongsTo(db.User, {foreignKey: 'user_id'});
+  db.Like.belongsTo(db.Post, {foreignKey: 'post_id'});
 
   //messages
-  db.Message.belongsTo(db.User);
-  db.Message.belongsTo(db.Friend);
+  db.Message.belongsTo(db.User, {foreignKey: 'user_id'});
+  // db.Message.belongsTo(db.Friend, {foreignKey: 'friend_id'});
 
   //room stats
-  db.RoomStat.belongsTo(db.User);
-  db.RoomStat.hasMany(db.Participant);
+  db.RoomStat.belongsTo(db.User, {foreignKey: 'user_id'});
+  db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
 
   //Friends
-  db.Friend.belongsTo(db.User);
+  // db.Friend.hasMany(db.Message, {foreignKey: 'friend_id'});
+  db.Friend.belongsTo(db.User, {foreignKey: 'user_id'});
 
   //Posts
- db.Post.hasMany(db.HashTag);
- db.Post.hasMany(db.Like);
- db.Post.belongsTo(db.Category);
+  db.Post.hasMany(db.HashTag, {foreignKey: 'post_id'});
+  db.Post.hasMany(db.Like, {foreignKey: 'post_id'});
+  db.Post.belongsTo(db.Category, {foreignKey: 'catgory_id'});
 
   //Participants
- db.Participant.belongsTo(db.RoomStat);
+  db.Participant.belongsTo(db.RoomStat, {foreignKey: 'room_id'});
 
   //categories
- db.Category.hasMany(db.Post);
+  db.Category.hasMany(db.Post, {foreignKey: 'catgory_id'});
 
   // hash tags
- db.HashTag.belongsTo(db.Post);
+  db.HashTag.belongsTo(db.Post, {foreignKey: 'post_id'});
 
 
 //SYNC???
@@ -79,6 +80,10 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
 //   dbkeys[i].sync()
 // }
 for (var key in db) {
+  console.log(db[key])
+  if(db[key] === 'roomstat') {
+    (db[key]).sync({force: true})
+  }
   (db[key]).sync()
 }
   // console.log(dbkeys)

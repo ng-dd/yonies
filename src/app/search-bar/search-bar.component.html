@@ -13,9 +13,18 @@
     <input type='submit' value='search hash'>
   </form>
   <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
-  <input value="People" type="submit" (click)="toggleQuery('People')">
+  <input value="Users" type="submit" (click)="toggleQuery('People')">
   <input value="Posts" type="submit" (click)="toggleQuery('Posts')">
   <input value='auth' type='button' (click)="auth()">
+
+  <ul>
+    <li *ngFor="let user of users">
+      IS THIS WORKING?
+      User: {{user.username}}
+      Name: {{user.first_name}} {{user.last_name}}
+      <button (click)="addFriend(user.user_id)">Add Friend</button>
+    </li>
+  </ul>
   <ul>
     <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
         {{tweet}}
