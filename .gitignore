@@ -52,6 +52,7 @@ Thumbs.db
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+.env
 
 #config files
 firebase.config.ts

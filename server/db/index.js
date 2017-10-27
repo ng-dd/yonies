@@ -1,6 +1,8 @@
 var Sequelize = require('sequelize');
 require('dotenv').config();
 // dotenv.load();
+// import { Like } from '../db/models/likeModel';
+// import { User } from '../db/models/userModel';
 
 console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
 const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
@@ -21,59 +23,67 @@ const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
   // db.sequelize = sequelize;
   
   //Models
-  db.user = require('../db/models/userModel')(sequelize, Sequelize);
-  db.like = require('../db/models/likeModel')(sequelize, Sequelize);
-  db.message = require('../db/models/messageModel')(sequelize, Sequelize);
-  db.category = require('../db/models/categoryModel')(sequelize, Sequelize);
-  db.friend = require('../db/models/friendModel')(sequelize, Sequelize);
-  db.hashTag = require('../db/models/hashTagModel')(sequelize, Sequelize);
-  db.participant = require('../db/models/participantModel')(sequelize, Sequelize);
-  db.post = require('../db/models/postModel')(sequelize, Sequelize);
-  db.roomStat = require('../db/models/roomStatModel')(sequelize, Sequelize);
+  db.User = require('../db/models/userModel')(sequelize, Sequelize);
+  db.Like = require('../db/models/likeModel')(sequelize, Sequelize);
+  db.Message = require('../db/models/messageModel')(sequelize, Sequelize);
+  db.Category = require('../db/models/categoryModel')(sequelize, Sequelize);
+  db.Friend = require('../db/models/friendModel')(sequelize, Sequelize);
+  db.HashTag = require('../db/models/hashTagModel')(sequelize, Sequelize);
+  db.Participant = require('../db/models/participantModel')(sequelize, Sequelize);
+  db.Post = require('../db/models/postModel')(sequelize, Sequelize);
+  db.RoomStat = require('../db/models/roomStatModel')(sequelize, Sequelize);
 
   
   //Associations
   
-//   db.user.hasMany(db.like, {foreignKey: 'user_id'});
-//   db.user.hasMany(db.message);
-//   db.user.hasMany(db.roomstat);
-//   db.user.hasMany(db.friend);
+  db.User.hasMany(db.Like);
+  db.User.hasMany(db.Message);
+  db.User.hasMany(db.RoomStat);
+  db.User.hasMany(db.Friend);
 
-//   //likes
-//   db.like.belongsTo(db.user);
-//   db.like.belongsTo(db.post);
+  //likes
+  db.Like.belongsTo(db.User);
+  db.Like.belongsTo(db.Post);
 
-//   //messages
-//   db.message.belongsTo(db.user);
-//   db.message.belongsTo(db.friend);
+  //messages
+  db.Message.belongsTo(db.User);
+  db.Message.belongsTo(db.Friend);
 
-//   //room stats
-//   db.roomStat.belongsTo(db.user);
-//   db.roomStat.hasMany(db.participant);
+  //room stats
+  db.RoomStat.belongsTo(db.User);
+  db.RoomStat.hasMany(db.Participant);
 
-//   //friends
-//   db.friend.belongsTo(db.user);
+  //Friends
+  db.Friend.belongsTo(db.User);
 
-//   //posts
-//  db.post.hasMany(db.hashTag);
-//  db.post.hasMany(db.like);
-//  db.post.belongsTo(db.category);
+  //Posts
+ db.Post.hasMany(db.HashTag);
+ db.Post.hasMany(db.Like);
+ db.Post.belongsTo(db.Category);
 
-//   //participants
-//  db.participant.belongsTo(db.roomStat);
+  //Participants
+ db.Participant.belongsTo(db.RoomStat);
 
-//   //categories
-//  db.category.hasMany(db.post);
+  //categories
+ db.Category.hasMany(db.Post);
 
-//   // hash tags
-//  db.hashTag.belongsTo(db.post);
+  // hash tags
+ db.HashTag.belongsTo(db.Post);
 
 
-// //SYNC???
-for(var key in db) {
+//SYNC???
+// for(var key in db) {
+// var dbkeys = Object.keys(db)
+// for (var i = 2; i < dbkeys.length; i++) {
+//   console.log(dbkeys[i])
+//   dbkeys[i].sync()
+// }
+for (var key in db) {
   (db[key]).sync()
-
 }
+  // console.log(dbkeys)
+  // db[key].sync()
+// }
 // db.sync();
 
 // db.authenticate()

@@ -62,4 +62,8 @@ router.get('/embed/:id', postController.embed)
 //youtube tags
 router.get('/youtubetags/:id', postController.youTubeVideoTags)
 
+//instagram
+// router.get('/instagram/:id', postController.insta)
+router.get('/instagram', postController.insta)
+
 module.exports = router;

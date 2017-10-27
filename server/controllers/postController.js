@@ -71,6 +71,20 @@ module.exports = {
     // },
 
     //search tweets by user
+    insta: function(req, res) {
+        // var userid = req.params.id;
+        axios.get('https://api.instagram.com/v1/users/244021744/media/recent/?access_token=244021744.485c416.b94164e94429496f8acee5fb4af8e790')
+        .then((data) => {
+            res.json(data.data);
+            // res.json(data.data.body)
+            console.log(data, 'data<<<<')
+        })
+        .catch((err) => {
+            console.log(err, 'ERR<<<<<<<<')
+            res.send(err);
+        })
+    },
+
     search: function(req, res) {
         var searchquery = req.body.query;
         var encsearchquery = encodeURIComponent(searchquery);

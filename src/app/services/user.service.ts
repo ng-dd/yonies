@@ -16,6 +16,10 @@ export class UserService {
     })
   }
 
+  getUserTest(user) { 
+    return this.http.get(`http://localhost:4201/users/${user.username}`)
+  }
+
   addUser(user) {
     this.http.post('http://localhost:4201/users', {
       username: user.username,

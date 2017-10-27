@@ -1,5 +1,12 @@
 <div>
-<button (click)="onLoginWithInstagram()">Authenticate with Instagram</button>
+  <button (click)="onLoginWithInstagram()">Authenticate with Instagram</button>
 
-<img src="https://i.kinja-img.com/gawker-media/image/upload/s--IAZ9HQVq--/c_scale,fl_progressive,q_80,w_800/otfericyawxbtsiaoiaj.png">
+  <!-- <form [formGroup]='instaForm' (ngSubmit)="searchInsta(instaForm.value)">
+      <input formControlName="hash" placeholder="search hashtags">
+    <input type="submit" value="Submit">
+  </form> -->
+  <img src={{instagram}}>
+  <button (click)="searchDavid()">load</button>
+  <button (click)="log()">log</button>
+
 </div>
