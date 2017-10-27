@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class RoomstatService {
 
   constructor(private http: Http) { }
   
-  getRoomstat(room) {
-    this.http.get('/rooms')
-    .subscribe((data) => {
+  getRoomstat(room): Observable<any> {
+    return this.http.get('http://localhost:4201/rooms/' + room )
+    .map((data) => {
       console.log(data)
+      return data
     }, (err) => {
       console.log(err)
     })

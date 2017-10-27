@@ -28,6 +28,7 @@ export class SearchBarComponent implements OnInit {
   twitch: any;
   youtube: any;
   content: any;
+  videoUrl: string;
 
   constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
@@ -171,6 +172,17 @@ export class SearchBarComponent implements OnInit {
     var _nodeElement = document.createElement(node_name);
     _nodeElement.innerHTML = textElement;
     return _nodeElement;
+  }
+
+  roomStart(vid) {
+    console.log(vid.src['changingThisBreaksApplicationSecurity']);
+    let url  = vid.src['changingThisBreaksApplicationSecurity']
+    if (url.indexOf('youtube') >= 0){
+      this.videoUrl = url.slice(url.indexOf('embed')+ 6, url.length)
+      console.log(this.videoUrl)
+    } else {
+      this.videoUrl = url;
+    }
   }
   
   ngOnInit() {

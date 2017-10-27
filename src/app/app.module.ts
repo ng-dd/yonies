@@ -39,6 +39,7 @@ import { AuthService } from './services/auth.services';
 import { ScriptService } from './services/script.service';
 import { HashService } from './services/hash.service'
 import { TestingComponent } from './testing/testing.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { TestingComponent } from './testing/testing.component';
     StreamViewComponent,
     StreamChatLogComponent,
     SingleCelebFeedComponent,
-    TestingComponent
+    TestingComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ import { TestingComponent } from './testing/testing.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [
+    AuthService,
     UserService,
     PostService,
     LikesService,
