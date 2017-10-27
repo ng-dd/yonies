@@ -3,7 +3,7 @@ require('dotenv').config();
 
 console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
 const sequelize = new Sequelize('OrbitDB', 'ngdd', 'plantlife', {
-  host: 'orbitdb.cxdawuxv7dpb.us-west-2.rds.amazonaws.com',
+  host: process.env.DATABASE_URL,
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {

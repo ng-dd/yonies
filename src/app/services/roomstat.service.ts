@@ -15,6 +15,14 @@ export class RoomstatService {
     })
   }
 
+  getHostId(room) {
+    this.http.get('http://localhost:4201/rooms/' + room )
+    .subscribe((data) => {
+      console.log(JSON.parse(data['_body'])[0]['host_id'])
+      return JSON.parse(data['_body'])[0]['host_id']
+    })
+  }
+
   addRoomstat(room) {
     this.http.post('/rooms', {
       categoryId: room.categoryId,
