@@ -48,15 +48,39 @@ module.exports = {
         })
     },
 
+    // search recent tweets
+    // search: function(req, res) {
+    //     var searchquery = req.body.query;
+    //     var encsearchquery = encodeURIComponent(searchquery);
+    //     var bearerheader = 'Bearer ' + req.body.token;
+    //     axios.get('https://api.twitter.com/1.1/search/tweets.json?q=' + req.params.id +
+    //     '&result_type=recent&count=5', {headers: {Authorization: bearerheader}})
+    //     .then((data) => {
+    //         // res.json(data.data.statuses)
+    //         var ids = data.data.statuses.map((status) => {
+    //             return status.id_str;
+    //         })
+
+    //         res.json(ids);
+            
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //         res.send(err)
+    //     })
+    // },
+
+    //search tweets by user
     search: function(req, res) {
         var searchquery = req.body.query;
         var encsearchquery = encodeURIComponent(searchquery);
         var bearerheader = 'Bearer ' + req.body.token;
-        axios.get('https://api.twitter.com/1.1/search/tweets.json?q=' + req.params.id +
-        '&result_type=recent&count=5', {headers: {Authorization: bearerheader}})
+        axios.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' + req.params.id +
+        '&count=5&result_type=recent', {headers: {Authorization: bearerheader}})
         .then((data) => {
             // res.json(data.data.statuses)
-            var ids = data.data.statuses.map((status) => {
+            console.log(data)
+            var ids = data.data.map((status) => {
                 return status.id_str;
             })
 
@@ -66,6 +90,25 @@ module.exports = {
         .catch((err) => {
             console.log(err)
             res.send(err)
+        })
+    },
+
+    //so theyll search for a youtube video if they like it,then get the tags from it and save it to somewhere
+    //searching celebs should show us youtube videos tweets instagram posts and twitch videos  
+    //so when follow a celeb, user will collect tags relating to the posts of each celeb,
+    //user dashboard will have posts relating to a tags of the user
+
+    //get tags from a youtube video
+    youTubeVideoTags: function(req, res) {
+        axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY&fields=items(snippet(title,description,tags))&part=snippet&id=${req.params.id}`)
+        .then((data) => {
+            console.log('got the youtube tag data')
+            console.log(data.data)
+            res.json(data.data)
+        })
+        .catch(err => {
+            console.log('couldnt get youtube tags')
+            res.status(500).send(err)
         })
     },
 

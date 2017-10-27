@@ -20,6 +20,27 @@
     <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
         {{tweet}}
     </div>
+    <!-- <div *ngFor="let vid of youtube">
+    <iframe width="420" height="315"
+    [src]=vid>
+    </iframe>
+  </div>
+  <div *ngFor='let vid of twitch'>
+    <iframe
+    [src]=vid
+    height="315"
+    width="420"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen="false">
+</iframe>
+  </div> -->
+  <div *ngFor='let vid of content'>
+    <iframe
+    [src]='vid.src'
+    height='315'
+    width='420'>
+  </iframe>
+  </div>
   </ul>
-
 </div>
