@@ -69,7 +69,6 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       this.counter ++
     }
     this.p = new SimplePeer({ initiator: location.hash === '#1', trickle: false });
-    console.log('uhh.. hello?')
     console.log('initial peer information: ', this.p)
     this.p.on('error', (err) => { console.log('error', err) });
     this.p.on('signal', function (data) {

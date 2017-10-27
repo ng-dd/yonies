@@ -10,9 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     category_id: {
       type: DataTypes.INTEGER
     },
-    room_id: {
-      type: DataTypes.INTEGER
-    },
     person_count: {
       type: DataTypes.INTEGER
     },

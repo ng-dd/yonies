@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserService } from '../services/user.service';
 import * as firebase from 'firebase/app';
+import { UserService } from './user.service';
 
 
 @Injectable()
@@ -48,6 +49,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value, value.uid);
+
         this.confirmEmail();
         this.userService.addUser({uid: user.uid})
       })
