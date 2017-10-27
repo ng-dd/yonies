@@ -1,10 +1,10 @@
-const Like = require('../db/index').likes;
+const Like = require('../db/index').like;
 
 module.exports = {
     addLike: (req, res) => {
         Like.create({
-            user_id: req.body.userId,
-            post_id: req.body.postId
+            user_id: req.body.user_id,
+            post_id: req.body.post_id
         })
         .then((data) => {
             res.send(data)

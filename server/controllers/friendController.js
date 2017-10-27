@@ -16,7 +16,7 @@ module.exports = {
 
     getFriend: (req, res) => {
         Friend.findAll({
-            where: {user_id: req.params.userId}
+            where: {user_id: req.params.id}
         })
         .then((data) => {
             res.send(data)
