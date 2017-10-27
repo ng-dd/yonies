@@ -8,21 +8,21 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     category_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     room_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     person_count: {
       type: DataTypes.INTEGER
     },
     host_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     duration: {
       type: DataTypes.STRING
     },
-    rtc_id: {
+    peer_id: {
       type: DataTypes.STRING
     }
   });

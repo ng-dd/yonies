@@ -15,10 +15,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Friend = sequelize.define('friend', {
     user_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     friend_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     }
   }, {
     timestamps: false,
