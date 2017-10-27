@@ -9,7 +9,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-prod": "ng build --prod --output-hashing=false",
+    "build-sw-workbox":"node build-sw-workbox.js",
+    "build-full-workbox": "npm run build-prod && workbox generate:sw",
+    "build-full-ngsw":"npm run build-prod && cp ./src/worker-basic.PATCHED.js ./dist/worker-basic.min.js",
+    "build-full-handmade":"npm run build-prod && cp ./src/sw-handmade.js ./dist/"
+
   },
   "engines": {
     "node": "6.11.4",
@@ -24,12 +30,14 @@
     "@angular/compiler": "^4.2.4",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/core": "^4.2.4",
+    "@angular/flex-layout": "^2.0.0-beta.9",
     "@angular/forms": "^4.2.4",
     "@angular/http": "^4.2.4",
     "@angular/material": "^2.0.0-beta.12",
-    "@angular/platform-browser": "^4.2.4",
+    "@angular/platform-browser": "^4.4.6",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular-snapscroll": "^1.3.1",
     "angularfire2": "^5.0.0-rc.3",
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",
