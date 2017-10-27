@@ -16,7 +16,7 @@ module.exports = {
 
     getLike: (req, res) => {
         Like.findAll({
-            where: {user_id: req.params.userId}
+            where: {user_id: req.params.userid}
         })
         .then((data) => {
             res.send(data)
@@ -28,7 +28,7 @@ module.exports = {
 
     deleteLike: (req, res) => {
         Like.destroy({
-            where: {id: req.params.userId}
+            where: {id: req.params.id}
         })
         .then(() => {
             res.send('deleted user')
