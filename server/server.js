@@ -3,6 +3,8 @@ const parser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const http = require('http'); 
+const socketIO = require('socket.io');
+
 require('dotenv').config()
 
 const routes = require('./routes/routes');
@@ -27,6 +29,30 @@ app.use(function(req, res, next){
   } else {
       return next();
   }
+})
+
+// Socket Chat Functionality - variables
+const users = [];
+let username = '';
+let userid = '';
+let hostUserName = '';
+let hostUserid = '';
+
+// Socket IO connection
+io.on('connection', function(socket) {
+  // Listen for requests from users in room
+
+  // Listen for request for host id
+
+  // Listen for user to request chat
+
+  // Listen for host to approve chat
+
+  // Listen for new chat messages
+
+  // End Chat
+
+  // Disconnect 
 })
 
 app.use(express.static(path.join(__dirname, '../dist')))
