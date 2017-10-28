@@ -86,6 +86,7 @@ export class SearchBarComponent implements OnInit {
   } 
 
   visitWall(user) {
+    this.content = [];
     this.userService.getUser({username: user})
     .subscribe((data) => {
       this.likeService.getLikes({user_id: data[0].user_id})
@@ -98,7 +99,6 @@ export class SearchBarComponent implements OnInit {
             this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].post_url)})
           })
         })
-
       })
     })
   }
