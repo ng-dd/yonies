@@ -1,4 +1,4 @@
-![](https://drive.google.com/file/d/0B9p-8nAPMOySdUlKdktfRHBkUmc/view?usp=sharing)
+![](https://lh3.googleusercontent.com/rVduSg1MkKOFJCTY2mzz1q30wSEk8VmhpH7_cJuz-Y9CX_JRuUvvtiFF79wKLNmbN1XNEj44JYe5dSE=w3200-h1746-rw)
 Yonies
 =======================
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
