@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     friend_id: {
       type: DataTypes.INTEGER
     }
+  },
+  {
+    timestamps: false,
   });
   return Message;
 } 
