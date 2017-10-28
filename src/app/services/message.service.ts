@@ -16,11 +16,11 @@ export class MessageService {
   }
 
   addMessage(message) {
-    this.http.post('/messages', {
-      videoDm: message.videoDm,
-      message: message.message,
-      userId: message.userId,
-      friendId: message.friendId
+    this.http.post('http://localhost:4201/messages', {
+      video_dm: message.video_dm,
+      message_dm: message.message_dm,
+      user_id: message.user_id,
+      friend_id: message.friend_id
     })
   }
 

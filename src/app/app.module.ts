@@ -52,6 +52,8 @@ import { HashService } from './services/hash.service'
 import { TestingComponent } from './testing/testing.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { InstagramComponent } from './instagram/instagram.component';
+import { MessagesComponent } from './messages/messages.component';
 import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
@@ -72,6 +74,8 @@ import { ChatComponent } from './chat/chat.component';
     TestingComponent,
     LoginComponent,
     NotFoundComponent,
+    InstagramComponent,
+    MessagesComponent
     ChatComponent
   ],
   imports: [

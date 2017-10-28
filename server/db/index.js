@@ -1,8 +1,5 @@
 var Sequelize = require('sequelize');
 require('dotenv').config();
-// dotenv.load();
-// import { Like } from '../db/models/likeModel';
-// import { User } from '../db/models/userModel';
 
 console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
@@ -54,14 +51,12 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 
   // //messages
   // db.Message.belongsTo(db.User, {foreignKey: 'user_id'});
-  // db.Message.belongsTo(db.Friend, {foreignKey: 'friend_id'});
 
-  //room stats
+  // //room stats
   // db.RoomStat.belongsTo(db.User, {foreignKey: 'user_id'});
   // db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
 
-  //Friends
-  // db.Friend.hasMany(db.Message, {foreignKey: 'friend_id'});
+  // //Friends
   // db.Friend.belongsTo(db.User, {foreignKey: 'user_id'});
 
   // //Posts
