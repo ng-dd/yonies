@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
 
   constructor(private http: Http) { }
   
-  getUser(user) { 
-    this.http.get(`http://localhost:4201/users/${user.username}`)
-    .subscribe((data) => {
-      console.log(data.json(), '<-- THIS IS DATA')
-      return data.json;
-
-      
-    }, (err) => {
-      console.log('nahhh', err)
-    })
+  getUser(user): Observable <any> { 
+    return this.http.get(`http://localhost:4201/users/${user.username}`)
+    .map((res) => {return res.json()});
   }
 
   getUserTest(user) { 

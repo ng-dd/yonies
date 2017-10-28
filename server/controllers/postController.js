@@ -128,7 +128,7 @@ module.exports = {
 
     getPost: (req, res) => {
         Post.findAll({
-            where: {post_url: req.params.id}
+            where: {id: req.params.id}
         })
         .then((data) => {
             console.log('retrieving post data')

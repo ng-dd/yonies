@@ -9,13 +9,9 @@ export class LikesService {
 
   constructor(private http: Http) { }
 
-    getLikes(like) {
-      this.http.get(`http://localhost:4201/likes/${like.user_id}`)
-      .subscribe((data) => {
-        console.log(data)
-      }, (err) => {
-        console.log(err)
-      })
+    getLikes(like): Observable <any> {
+      return this.http.get(`http://localhost:4201/likes/${like.user_id}`)
+      .map((data) => {return data.json()})
     }
 
     addLike(like): Observable<any> {
