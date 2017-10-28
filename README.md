@@ -1,4 +1,4 @@
-![](https://lh4.googleusercontent.com/-PVw-ZUM9vV8/UuWeH51os0I/AAAAAAAAD6M/0Ikg7viJftQ/w1286-h566-no/hackathon-starter-logo.jpg)
+![](https://drive.google.com/file/d/0B9p-8nAPMOySdUlKdktfRHBkUmc/view?usp=sharing)
 Yonies
 =======================
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
@@ -6,7 +6,7 @@ Yonies
 [![Build Status](https://travis-ci.org/angular/material2.svg?branch=master)](https://travis-ci.org/angular/material2)
 [![Gitter](https://badges.gitter.im/angular/material2.svg)](https://gitter.im/angular/material2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Live Demo**: http://hackathonstarter-sahat.rhcloud.com
+**Live Demo**: http://yoniesapp.com
 
 ## Yonies - Stream and Follow, Together! ##
 We’ve been working to develop a totally new type of watch party. We call it Yonies!
