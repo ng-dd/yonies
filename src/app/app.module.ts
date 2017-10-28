@@ -46,6 +46,7 @@ import { ScriptService } from './services/script.service';
 import { HashService } from './services/hash.service'
 import { TestingComponent } from './testing/testing.component';
 import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { InstagramComponent } from './instagram/instagram.component';
 
 @NgModule({
@@ -65,6 +66,7 @@ import { InstagramComponent } from './instagram/instagram.component';
     SingleCelebFeedComponent,
     TestingComponent,
     LoginComponent,
+    NotFoundComponent,
     InstagramComponent
   ],
   imports: [
