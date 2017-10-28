@@ -1,5 +1,10 @@
 # Yonies
 [![MIT license](http://img.shields.io/badge/license-MIT-lightgrey.svg)](http://opensource.org/licenses/MIT)
+[![npm version](https://badge.fury.io/js/%40angular%2Fmaterial.svg)](https://www.npmjs.com/package/%40angular%2Fmaterial)
+[![Build Status](https://travis-ci.org/angular/material2.svg?branch=master)](https://travis-ci.org/angular/material2)
+[![Gitter](https://badges.gitter.im/angular/material2.svg)](https://gitter.im/angular/material2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+This is the home for the Yonies team.
 
 ## Yonies - Stream and Follow, Together! ##
 We’ve been working to develop a totally new type of watch party. We call it Yonies!
@@ -12,13 +17,11 @@ Pop culture is more entertaining when it’s shared with the people who know us 
 
 ![Gif](LINK) 
 
-Yonies will be available soon. 
-
-Happy YoYo!
+Yonies will be available soon. Happy YoYo!
 
 Team Yonies
 
-## Table of Contents
+#### Quick links
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
@@ -30,6 +33,11 @@ Team Yonies
 1. [Team](#team)
 1. [Contributing](#contributing)
 1. [Help](#help)
+
+
+### Getting started
+
+See our [Getting Started Guide][getting-started] to get Yonies up and running.
 
 ## Usage ##
 ### How to Get Started On Heroku
@@ -54,54 +62,29 @@ This project uses:
 Other tools and technologies used:
 * [Angular CLI](https://cli.angular.io): frontend scaffolding
 * [Redis](https://cli.angular.io): frontend scaffolding
-* [Docker](https://cli.angular.io): frontend scaffolding
-* [NginX](https://cli.angular.io): frontend scaffolding
-* [AWS](https://cli.angular.io): frontend scaffolding
-* [Bootstrap](http://www.getbootstrap.com): layout and styles
-* [Font Awesome](http://fontawesome.io): icons
-* [TypeScript](https://www.typescriptlang.org): typed superset of JavaScript
-* [Adobe Creative Suite](https://cli.angular.io): frontend scaffolding
-* [Socket.IO](https://cli.angular.io): frontend scaffolding
-* [SQL Alchemy](https://cli.angular.io): frontend scaffolding
-* [Sequelize](https://cli.angular.io): frontend scaffolding
-* [PostGRES](https://cli.angular.io): frontend scaffolding
 
-## Development ##
-`npm run dev`: [concurrently](https://github.com/kimmobrunfeldt/concurrently) execute Firebase, Angular build, TypeScript compiler, Flask and Express servers.
-
-A window will automatically open at [localhost:4200](http://localhost:4200). Angular and Express files are being watched. Any change automatically creates a new bundle, restart Express server and reload your browser.
-
-### Scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build
-
-### Production
-`npm run prod`: run the project with a production bundle and AOT compilation listening at [localhost:3000](http://localhost:3000) . 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-### Tests
-### Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-### Team
+### Yonies Team
   - __Product Owner__: [Nadina Gerlach](https://github.com/nadinagerlach)
-  - __Scrum Master__: [David Kang](https://github.com/davidxkang)
-  - __Development Team Members__: [Gabriel Katz](https://github.com/gabekatz), [Dan Kim](https://github.com/dankim9)
+  - __Scrum Master__: [Gabriel Katz](https://github.com/gabekatz)
+  - __Development Team Members__: [David Kang](https://github.com/davidxkang), [Dan Kim](https://github.com/dankim9)
 
-## Contributing
+### Project status
+Yonies is currently in beta and under active development.
+During beta, new features will be added regularly and APIs will evolve based on user feedback.
 
-See [CONTRIBUTING.md](https://github.com/unexpected-lion/ourglass/blob/master/contributing.md) for contribution guidelines.
+If you'd like to contribute, you must follow our [contributing guidelines](https://github.com/unexpected-lion/ourglass/blob/master/contributing.md).
+You can look through the issues (which should be up-to-date on who is working on which features
+and which pieces are blocked) and make a comment.
+Also see our [`Good for community contribution`](https://github.com/angular/material2/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+for+community+contribution%22)
+label.
 
-## Help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+High level stuff planned for Q4 2017 (October - December):
+* RC and stable release
+* Research and prototyping for virtual-scroll
+* Research and exploration for data visualization
+* cdkTree and matTree
+* Expanded cdkTable features
+* cdk/svg
+* cdk/dialog
+* Switch build to bazel
+* Overlay positioning improvements
