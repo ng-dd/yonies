@@ -79,24 +79,11 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
   // db.HashTag.belongsTo(db.Post, {foreignKey: 'post_id'});
 
 
-//SYNC???
-// for(var key in db) {
-// var dbkeys = Object.keys(db)
-// for (var i = 2; i < dbkeys.length; i++) {
-//   console.log(dbkeys[i])
-//   dbkeys[i].sync()
-// }
+//SYNC
+
 for (var key in db) {
   console.log('@@@@@@@@@@@@SYNCING@@@@@@@@@@@: ', key)
   db[key].sync({force: true})
 }
-  // console.log(dbkeys)
-  // db[key].sync()
-// }
-// db.sync();
-
-// db.authenticate()
-
-
 
 module.exports = db;
