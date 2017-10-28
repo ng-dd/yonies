@@ -1,14 +1,14 @@
-const Post = require('../db/index').post;
+const Post = require('../db/index').Post;
 const axios = require('axios');
 const request = require('request');
 
 module.exports = {
     addPost: (req, res) => {
         Post.create({
-            post_url: req.body.url,
-            post_like_count: req.body.postlike,
+            post_url: req.body.post_url,
+            post_like_count: req.body.post_like_count,
             comment: req.body.comment,
-            comment_like_count: req.body.commentlike,
+            comment_like_count: req.body.comment_like_count,
             parent: req.body.parent
         })
         .then((data) => {
@@ -93,7 +93,7 @@ module.exports = {
         '&count=5&result_type=recent', {headers: {Authorization: bearerheader}})
         .then((data) => {
             // res.json(data.data.statuses)
-            console.log(data)
+            // console.log(data)
             var ids = data.data.map((status) => {
                 return status.id_str;
             })
@@ -106,11 +106,6 @@ module.exports = {
             res.send(err)
         })
     },
-
-    //so theyll search for a youtube video if they like it,then get the tags from it and save it to somewhere
-    //searching celebs should show us youtube videos tweets instagram posts and twitch videos  
-    //so when follow a celeb, user will collect tags relating to the posts of each celeb,
-    //user dashboard will have posts relating to a tags of the user
 
     //get tags from a youtube video
     youTubeVideoTags: function(req, res) {
@@ -128,7 +123,7 @@ module.exports = {
 
     getPost: (req, res) => {
         Post.findAll({
-            where: {post_url: req.params.id}
+            where: {post_id: req.params.id}
         })
         .then((data) => {
             console.log('retrieving post data')
@@ -141,7 +136,7 @@ module.exports = {
 
     deletePost: (req, res) => {
         Post.destroy({
-            where: {id: req.params.id}
+            where: {post_id: req.params.id}
         })
         .then(() => {
             res.send('deleted post')

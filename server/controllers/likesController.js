@@ -1,10 +1,10 @@
-const Like = require('../db/index').likes;
+const Like = require('../db/index').Like;
 
 module.exports = {
     addLike: (req, res) => {
         Like.create({
-            user_id: req.body.userId,
-            post_id: req.body.postId
+            uid: req.body.uid,
+            post_id: req.body.post_id
         })
         .then((data) => {
             res.send(data)
@@ -16,7 +16,7 @@ module.exports = {
 
     getLike: (req, res) => {
         Like.findAll({
-            where: {user_id: req.params.userId}
+            where: {uid: req.params.id}
         })
         .then((data) => {
             res.send(data)
@@ -28,7 +28,7 @@ module.exports = {
 
     deleteLike: (req, res) => {
         Like.destroy({
-            where: {id: req.params.userId}
+            where: {id: req.params.id}
         })
         .then(() => {
             res.send('deleted user')

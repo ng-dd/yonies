@@ -5,6 +5,7 @@ module.exports = {
     addUser: (req, res) => {
         User.create({
             username: req.body.username,
+            uid: req.body.uid,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             admin_status: req.body.admin_status,
@@ -39,21 +40,32 @@ module.exports = {
     //     }
     // },
 
+    // getUser: (req, res) => {
+    //     console.log(req.params.id)
+    //     redis.redisClient.get(JSON.stringify(req.params.id), (err, reply) => {
+    //         if (reply === null) {
+    //             User.findAll({where: {username: req.params.id}})
+    //             .then((data) => {
+    //                 console.log(data, req.params.id)
+    //                 redis.redisClient.set(JSON.stringify(req.params.id), JSON.stringify(data))
+    //                 res.send(data)
+    //             })
+    //             .catch((err) => {
+    //                 res.status(500).send(err)
+    //             })
+    //         } else {
+    //             res.send(JSON.parse(reply))
+    //         }
+    //     })
+    // },
+
     getUser: (req, res) => {
-        redis.redisClient.get(JSON.stringify(req.params.id), (err, reply) => {
-            if (reply === null) {
-                User.findAll({where: {username: req.params.id}})
-                .then((data) => {
-                    console.log(data, req.params.id)
-                    redis.redisClient.set(JSON.stringify(req.params.id), JSON.stringify(data))
-                    res.send(data)
-                })
-                .catch((err) => {
-                    res.status(500).send(err)
-                })
-            } else {
-                res.send(JSON.parse(reply))
-            }
+        User.findAll({where: {username: req.params.id}})
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
         })
     },
 

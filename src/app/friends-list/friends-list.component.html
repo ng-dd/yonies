@@ -1,3 +1,7 @@
-<p>
-  friends-list works!
-</p>
+<div>
+  <input type='button' value='getfriends' (click)="getFriendsList({user_id: '5'})">
+  <div *ngFor="let friend of friendsList">
+    {{friend}}
+    <input type='button' value='visit their wall' (click)="visitWall({user_id: friend})">
+  </div>
+</div>

@@ -1,13 +1,4 @@
-// const Sequelize = require('sequelize');
-// const db = require('../db');
 
-// const Category = db.define('user', {
-//   Name: {
-//     type: Sequelize.STRING
-//   }
-// }, {
-//   timestamps: false,
-// })
 
 module.exports = (sequelize, DataTypes) => {
   const Category = sequelize.define('category', {
@@ -17,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     name: {
+      type: DataTypes.STRING
+    },
+    uid: {
       type: DataTypes.STRING
     }
   }, {

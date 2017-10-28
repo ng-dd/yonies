@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class CategoryService {
 
   constructor(private http: Http) { }
 
-  getCategory(category) {
-    this.http.get('/categories')
-    .subscribe((data) => {
-      console.log(data)
-    }, (err) => {
-      console.log(err)
+  getCategory(category): Observable <any> {
+    return this.http.get(`http://locahost:4201/categories/${category.uid}`)
+    .map((data) => {
+      return data.json();
     })
   }
 
   addCategory(category) {
-    this.http.post('/category', {
-      name: category.name
+    this.http.post('http://localhost:4201/categories', {
+      name: category.name,
+      uid: category.uid
     })
     .subscribe((data) => {
-      console.log('added category', data)
-    }, (err) => {
-      console.log(err)
+      console.log(data, 'category data')
     })
   }
 

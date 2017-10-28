@@ -14,7 +14,7 @@
   </form>
   <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
   <input value="Users" type="submit" (click)="toggleQuery('People')">
-  <input value="Posts" type="submit" (click)="toggleQuery('Posts')">
+  <input value="Posts by People" type="submit" (click)="toggleQuery('Posts')">
   <input value='auth' type='button' (click)="auth()">
 
   <ul>
@@ -26,32 +26,28 @@
     </li>
   </ul>
   <ul>
-    <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
-        {{tweet}}
+    <div *ngFor='let user of users'>
+      <input type='button' value='visit wall' (click)="visitWall(user)">
     </div>
-    <!-- <div *ngFor="let vid of youtube">
-    <iframe width="420" height="315"
-    [src]=vid>
+    <div> 
+      {{keyWord}}
+      <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
+      <!-- <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
+          {{tweet}}
+      </div> -->
+    <div *ngFor='let vid of content'>
+      <iframe
+      [src]='vid.src'
+      height='315'
+      width='420'>
     </iframe>
+    <button (click)='roomStart(vid)'> Start a room</button>
+    <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
+    </div>
   </div>
-  <div *ngFor='let vid of twitch'>
-    <iframe
-    [src]=vid
-    height="315"
-    width="420"
-    frameborder="0"
-    scrolling="no"
-    allowfullscreen="false">
-</iframe>
-  </div> -->
-  <div *ngFor='let vid of content'>
-    <iframe
-    [src]='vid.src'
-    height='315'
-    width='420'>
-  </iframe>
-  <button (click)='roomStart(vid)'> Start a room</button>
-  </div>
-  <app-stream-view [videoId]='videoUrl'></app-stream-view>
+  <!-- <app-stream-view [videoId]='videoUrl'></app-stream-view> -->
   </ul>
+  <div>
+    <input type="button" value="get current user" (click)="currentUser()">
+  </div>
 </div>

@@ -64,36 +64,22 @@ export class PostService {
     return this.http.get(`http://localhost:4201/instagram/`)
       .map((res) => {
         // console.log('here it is', res);
-        return res})
-    
+        return res}) 
   }
 
-  getPost(post) {
-    this.http.get(`http://localhost:4201/posts/${post.post}`)
-    .subscribe((data) => {
-      console.log(data, 'this getPost from post service')
-    }, (err) => {
-      console.log('nah', err)
+  getPost(post): Observable <any> {
+    return this.http.get(`http://localhost:4201/posts/${post.post_id}`)
+    .map((data) => {
+      return data.json();
     })
   }
 
-  addPost(post) {
-    this.http.post('/posts', {
-      url: post.url,
-      postlike: post.postLikes,
-      comment: post.comment,
-      commentlike: post.commentLikes,
-      parent: post.parent 
+  addPost(post): Observable<any> {
+    console.log(post.url, '<<<<<< POST')
+    return this.http.post('http://localhost:4201/posts', {
+      post_url: post.url 
     })
-    .subscribe((data) => {
-      this.http.post('http://localhost:4201/likes', {
-        user_id: 'something',
-        post_id: JSON.parse(data['._body']).id
-      })
-      // console.log(data);
-    }, (err) => {
-      console.log(err)
-    })
+    .map((res) => {return res.json()})
   }
 
   deletePost(post) {
