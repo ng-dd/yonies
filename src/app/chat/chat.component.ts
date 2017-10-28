@@ -10,7 +10,7 @@ declare var $: any;
 })
 export class ChatComponent implements OnInit {
 
-  hostApprovesToChat: boolean;
+  friendWantsToChat: boolean;
   chatInitiated: boolean;
   roomAvailable: boolean;
   haveHostName: boolean;  
@@ -40,6 +40,44 @@ export class ChatComponent implements OnInit {
     this.userID = '';
   }
 
+  // Room group chat functions
+
+  openChatRoom(): void {
+    $('.tap-target').tapTarget('open');
+  }
+
+  // Start a room as the host
+  getHostApproval(): void {
+    this.socket.emit('getHostSocketid');
+  }
+
+  initChat(): void {
+    if (!this.socket.connected) {
+      this.socket.connect();
+    }
+    this.chatInitiated = true;
+    this.haveUserName = false;
+    if (this.friendWantsToChat) {
+      this.friendWantsToChat = false;
+    } else {
+      this.friendWantsToChat = true;
+    }
+  }
+
+  handleUserChatRequest(): void {
+    this.chatEnded = false;
+    this.userID = this.socket.id;
+    this.username = $('#chat-username').val || 'user';
+    this.socket.emit('userRequestInitChat', this.username, this.userID);
+  }
+
+  // Send a Message formatting
+  handleSendMessage(): void {
+    const message = $('#chat-input').val();
+    this.socket.emit('chatMessage', message, this.username);
+    $('#chat-input').val('');
+  }
+  
   // Ending a room chat -- User in Room
   endChatWith(user): void {
     this.socket.emit('endChatWithUser', user);
