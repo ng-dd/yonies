@@ -39,29 +39,6 @@ Team Yonies
 
 See our [Getting Started Guide][getting-started] to get Yonies up and running.
 
-## Usage ##
-### How to Get Started On Heroku
-![Preview](LINK) 
-In the browser, navigate to localhost:4200. From home, login (or sign up) through to proceed to your user dashboard. Feel free to add an order, or view your most recent orders. 
-
-### How to Get Started On Local Host
-1. Install 
-2. Connect to your a Firebase account.
-2. Install Angular CLI: `npm i -g @angular/cli`
-3. From project root folder install all the dependencies: `npm i`
-
-## Requirements ##
-This project uses:
-* [**F**irebase](http://www.firebase.com) ([Firebase](https://www.firebase.com)): database
-* [**E**xpress.js](http://expressjs.com): backend framework
-* [**A**ngular 4](https://angular.io): frontend framework
-* [**N**ode.js](https://nodejs.org): runtime environment
-* [**P**ython](https://www.python.org/): runtime environment
-* [**F**lask](http://expressjs.com): backend framework
-
-Other tools and technologies used:
-* [Angular CLI](https://cli.angular.io): frontend scaffolding
-* [Redis](https://cli.angular.io): frontend scaffolding
 
 ### Yonies Team
   - __Product Owner__: [Nadina Gerlach](https://github.com/nadinagerlach)
