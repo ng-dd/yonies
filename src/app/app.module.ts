@@ -5,6 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Socket IO Chat Requirements
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
 // Design modules Material Design and Flex layout modules, hammerjs for gestures
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -47,7 +51,7 @@ import { HashService } from './services/hash.service'
 import { TestingComponent } from './testing/testing.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { InstagramComponent } from './instagram/instagram.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +71,7 @@ import { InstagramComponent } from './instagram/instagram.component';
     TestingComponent,
     LoginComponent,
     NotFoundComponent,
-    InstagramComponent
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,8 @@ import { InstagramComponent } from './instagram/instagram.component';
     FlexLayoutModule,
     AngularFireModule.initializeApp(firebaseConfig), // imports firebase/app needed for everything
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    SocketIoModule.forRoot(config) // imports Soket Io, needed for chat features
+    
   ],
   providers: [
     AuthService,
