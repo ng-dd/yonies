@@ -46,6 +46,7 @@ import { ScriptService } from './services/script.service';
 import { HashService } from './services/hash.service'
 import { TestingComponent } from './testing/testing.component';
 import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { LoginComponent } from './login/login.component';
     StreamChatLogComponent,
     SingleCelebFeedComponent,
     TestingComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
