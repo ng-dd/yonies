@@ -3,10 +3,10 @@ const RoomStat = require('../db/index').RoomStat;
 module.exports = {
     addRoomstat: (req, res) => {
         RoomStat.create({
-            category_id: req.body.categoryId,
-            room_id: req.body.roomId,
+            category_id: req.body.category_id,
+            room_id: req.body.room_id,
             person_count: req.body.count,
-            host_id: req.body.hostId,
+            host_id: req.body.host_id,
             duration: req.body.duration
         })
         .then((data) => {

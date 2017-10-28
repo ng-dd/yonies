@@ -5,6 +5,7 @@ import { FriendService } from '../services/friend.service';
 import { PostService } from '../services/post.service';
 import { HashService } from '../services/hash.service';
 import { LikesService } from '../services/likes.service';
+import { CategoryService } from '../services/category.service';
 import { ScriptService } from '../services/script.service';
 import { AuthService } from '../services/auth.services';
 import { Http, Response, Headers } from '@angular/http';
@@ -35,8 +36,9 @@ export class SearchBarComponent implements OnInit {
   content: any;
   videoUrl: string;
   users: any;
+  keyWord: any;
 
-  constructor(private friendService: FriendService, private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
+  constructor(private categoryService: CategoryService, private friendService: FriendService, private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
     })
@@ -52,6 +54,7 @@ export class SearchBarComponent implements OnInit {
     this.youtube = [];
     this.content = [];
     this.users = [];
+    this.keyWord = '';
   }
 
 
@@ -114,7 +117,15 @@ export class SearchBarComponent implements OnInit {
     this.friendService.addFriend('11', query)
   }
   
+  follow(person) {
+    let uid = firebase.auth().currentUser.uid;
+    console.log(person, uid)
+    this.categoryService.addCategory({name: person, uid: uid})     
+  }
+
   searchPosts(query) {
+    this.keyWord = '';
+    this.keyWord = query.post;
     this.tweets = [];
     this.twitch = [];
     this.youtube = [];
