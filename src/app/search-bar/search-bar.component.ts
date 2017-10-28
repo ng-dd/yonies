@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { FriendService } from '../services/friend.service';
 import { PostService } from '../services/post.service';
 import { HashService } from '../services/hash.service';
 import { ScriptService } from '../services/script.service';
@@ -29,8 +30,9 @@ export class SearchBarComponent implements OnInit {
   youtube: any;
   content: any;
   videoUrl: string;
+  users: any;
 
-  constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
+  constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private friendService: FriendService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
     })
@@ -68,8 +70,14 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchUsers(query) {
-    console.log(query)
-    this.userService.getUser(query)
+    // console.log(query)
+    this.users = this.userService.getUserTest(query)
+    .subscribe((data) => {
+      console.log(data.json(), '<-- THIS IS DATA')
+      this.users = data.json();
+    }, (err) => {
+      console.log('nahhh', err)
+    })  
     this.myForm.reset();
   } 
 
@@ -77,6 +85,10 @@ export class SearchBarComponent implements OnInit {
     console.log(query)
     this.hashService.getHash(query)
     this.hashForm.reset();
+  }
+
+  addFriend(query) {
+    this.friendService.addFriend('11', query)
   }
   
   searchPosts(query) {

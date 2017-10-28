@@ -9,11 +9,17 @@ export class UserService {
   getUser(user) { 
     this.http.get(`http://localhost:4201/users/${user.username}`)
     .subscribe((data) => {
-      console.log(data.json())
+      console.log(data.json(), '<-- THIS IS DATA')
+      return data.json;
+
       
     }, (err) => {
       console.log('nahhh', err)
     })
+  }
+
+  getUserTest(user) { 
+    return this.http.get(`http://localhost:4201/users/${user.username}`)
   }
 
   addUser(user) {
