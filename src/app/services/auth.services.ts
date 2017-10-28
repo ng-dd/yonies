@@ -44,7 +44,7 @@ export class AuthService {
       .then(value => {
         console.log('Success!', value, value.uid);
         this.confirmEmail();
-        this.userService.addUser({user_id:user.uid})
+        this.userService.addUser({uid: user.uid})
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -83,7 +83,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Nice, it worked!');
-        this.userService.addUser({username: user.email, user_id: user.uid})
+        this.userService.addUser({username: user.email, uid: user.uid})
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);

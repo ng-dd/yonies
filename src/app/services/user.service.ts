@@ -21,7 +21,7 @@ export class UserService {
   addUser(user) {
     this.http.post('http://localhost:4201/users', {
       username: user.username,
-      user_id: user.user_id,
+      uid: user.uid,
       first_name: user.first_name,
       last_name: user.last_name,
       admin_status: user.admin_status,

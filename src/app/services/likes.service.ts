@@ -10,14 +10,15 @@ export class LikesService {
   constructor(private http: Http) { }
 
     getLikes(like): Observable <any> {
-      return this.http.get(`http://localhost:4201/likes/${like.user_id}`)
+      console.log(like, '<<<<<<<<<<<LIKE')
+      return this.http.get(`http://localhost:4201/likes/${like.uid}`)
       .map((data) => {return data.json()})
     }
 
     addLike(like): Observable<any> {
       console.log(like, "<<<<<<<<<<ADDLIKE")
       return this.http.post('http://localhost:4201/likes', {
-        user_id: like.user_id,
+        uid: like.uid,
         post_id: like.post_id
       })
       .map((res) => {return res.json()})

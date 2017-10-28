@@ -1,4 +1,4 @@
-const Post = require('../db/index').post;
+const Post = require('../db/index').Post;
 const axios = require('axios');
 const request = require('request');
 
@@ -107,11 +107,6 @@ module.exports = {
         })
     },
 
-    //so theyll search for a youtube video if they like it,then get the tags from it and save it to somewhere
-    //searching celebs should show us youtube videos tweets instagram posts and twitch videos  
-    //so when follow a celeb, user will collect tags relating to the posts of each celeb,
-    //user dashboard will have posts relating to a tags of the user
-
     //get tags from a youtube video
     youTubeVideoTags: function(req, res) {
         axios.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY&fields=items(snippet(title,description,tags))&part=snippet&id=${req.params.id}`)
@@ -128,7 +123,7 @@ module.exports = {
 
     getPost: (req, res) => {
         Post.findAll({
-            where: {id: req.params.id}
+            where: {post_id: req.params.id}
         })
         .then((data) => {
             console.log('retrieving post data')
@@ -141,7 +136,7 @@ module.exports = {
 
     deletePost: (req, res) => {
         Post.destroy({
-            where: {id: req.params.id}
+            where: {post_id: req.params.id}
         })
         .then(() => {
             res.send('deleted post')

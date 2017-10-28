@@ -89,11 +89,12 @@ export class SearchBarComponent implements OnInit {
     this.content = [];
     this.userService.getUser({username: user})
     .subscribe((data) => {
-      this.likeService.getLikes({user_id: data[0].user_id})
+      console.log(data, '<<<<<<DATA')
+      this.likeService.getLikes({uid: data[0].uid})
       .subscribe((data) => {
-        console.log(data)
+        // console.log(data)
         data.forEach((data) => {
-          this.postService.getPost({post: Number(data.post_id)})
+          this.postService.getPost({post_id: Number(data.post_id)})
           .subscribe((data) => {
             console.log({src: data[0].post_url})
             this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].post_url)})
@@ -189,8 +190,8 @@ export class SearchBarComponent implements OnInit {
     let user = firebase.auth().currentUser;    
     this.postService.addPost(post)
     .subscribe((res) => {
-      console.log(res.id, '<<<<<< RES')
-      this.likeService.addLike({user_id: user.uid, post_id: String(res.id)})
+      console.log(res, '<<<<<< RES')
+      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
       .subscribe((data) => {
         console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
