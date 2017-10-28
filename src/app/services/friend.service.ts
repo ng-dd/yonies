@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class FriendService {
 
   constructor(private http: Http) { }
 
-  getFriend(friend) {
-    this.http.get('/friends')
-    .subscribe((data) => {
-      console.log(data)
-    }, (err) => {
-      console.log(err)
+  getFriend(userId): Observable<any> {
+    return this.http.get(`http://localhost:4201/friends/${userId}`)
+    .map((res) => {
+      return res.json()
     })
   }
 

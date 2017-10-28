@@ -4,11 +4,15 @@ import { UserService } from '../services/user.service';
 import { FriendService } from '../services/friend.service';
 import { PostService } from '../services/post.service';
 import { HashService } from '../services/hash.service';
+import { LikesService } from '../services/likes.service';
 import { ScriptService } from '../services/script.service';
+import { AuthService } from '../services/auth.services';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -32,7 +36,7 @@ export class SearchBarComponent implements OnInit {
   videoUrl: string;
   users: any;
 
-  constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private friendService: FriendService, private fb: FormBuilder) { 
+  constructor(private friendService: FriendService, private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
     })
@@ -47,6 +51,7 @@ export class SearchBarComponent implements OnInit {
     this.twitch = [];
     this.youtube = [];
     this.content = [];
+    this.users = [];
   }
 
 
@@ -70,16 +75,34 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchUsers(query) {
-    // console.log(query)
-    this.users = this.userService.getUserTest(query)
+    console.log(query)
+    this.users = [];
+    this.userService.getUser(query)
     .subscribe((data) => {
-      console.log(data.json(), '<-- THIS IS DATA')
-      this.users = data.json();
-    }, (err) => {
-      console.log('nahhh', err)
-    })  
+      console.log(data, 'users data')
+      this.users.push(data[0].username)
+    })
     this.myForm.reset();
   } 
+
+  visitWall(user) {
+    this.content = [];
+    this.userService.getUser({username: user})
+    .subscribe((data) => {
+      console.log(data, '<<<<<<DATA')
+      this.likeService.getLikes({uid: data[0].uid})
+      .subscribe((data) => {
+        // console.log(data)
+        data.forEach((data) => {
+          this.postService.getPost({post_id: Number(data.post_id)})
+          .subscribe((data) => {
+            console.log({src: data[0].post_url})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].post_url)})
+          })
+        })
+      })
+    })
+  }
 
   searchHashTags(query) {
     console.log(query)
@@ -103,57 +126,45 @@ export class SearchBarComponent implements OnInit {
         this.twitch.push(this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`));
         this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
       })
-    //   var iframes = ids.map((id) => {
-    //     return `<iframe
-    //     src="http://player.twitch.tv/?video=${id}&autoplay=true"
-    //     height="400"
-    //     width="600"
-    //     frameborder="0"
-    //     scrolling="no"
-    //     allowfullscreen="false">
-    // </iframe>`     
-    //   })
-      console.log(this.twitch, 'TWITCH <<<<<<<<<<')
+      this.postService.getYouTube(query.post)
+      .subscribe((data) => {
+        data.items.forEach((video) => {
+          // var link = this.sanitizer.bypassSecurityTrustUrl('https://www.youtube.com/embed/' + video.id.videoId)
+          this.youtube.push(this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId))
+          this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+        })
+        // console.log(this.youtube, 'YOUTUBE <<<<<<<<')
+        this.content.sort((a, b) => {
+          var c = new Date(a.date).getTime()
+          var d = new Date(b.date).getTime()
+          return c > d ? 1 : -1; 
+        })   
     })
 
-    this.postService.getYouTube(query.post)
-    .subscribe((data) => {
-      data.items.forEach((video) => {
-        // var link = this.sanitizer.bypassSecurityTrustUrl('https://www.youtube.com/embed/' + video.id.videoId)
-        this.youtube.push(this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId))
-        this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
-      })
-      // console.log(this.youtube, 'YOUTUBE <<<<<<<<')
-      this.content.sort((a, b) => {
-        var c = new Date(a.date).getTime()
-        var d = new Date(b.date).getTime()
-        console.log(c, d, 'AHHHHHHHHHHHH')
-        return c > d ? 1 : -1; 
-      })
       console.log(this.content, '<<<<<<< CONTENT BY DATES')
     })
 
-    // this.postService.getTwitter(query.post)
-    // .subscribe((data) => {
-    //   for (var i = 0; i < data.length; i++) {
-    //     this.postService.getEmbed(data[i])
-    //     .subscribe((data) => {
-    //       console.log(data, 'TWITTER OMBED DATA <<<<<<<<<<<<<')
-    //       var el = document.createElement('html');
-    //       el.innerHTML = data;
-    //       console.log(el, 'TWITTER <<<<<<<<<<<<') 
-    //       var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
-    //       this.tweets.push(twt);
-    //       this.scriptService.load('twitterWidget')
-    //       .then(data => {
-    //         console.log('script loaded ', data);
-    //       })
-    //       .catch(error => console.log(error));    
-    //     })
-    //   }
-    // }, (err) => {
-    //   console.log(err, 'error from searchPosts')
-    // })
+    this.postService.getTwitter(query.post)
+    .subscribe((data) => {
+      for (var i = 0; i < data.length; i++) {
+        this.postService.getEmbed(data[i])
+        .subscribe((data) => {
+          // console.log(data, 'TWITTER OMBED DATA <<<<<<<<<<<<<')
+          var el = document.createElement('html');
+          el.innerHTML = data;
+          // console.log(el, 'TWITTER <<<<<<<<<<<<') 
+          var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
+          this.tweets.push(twt);
+          this.scriptService.load('twitterWidget')
+          .then(data => {
+            console.log('script loaded ', data);
+          })
+          .catch(error => console.log(error));    
+        })
+      }
+    }, (err) => {
+      console.log(err, 'error from searchPosts')
+    })
     this.postForm.reset();
   }
   
@@ -173,18 +184,26 @@ export class SearchBarComponent implements OnInit {
       console.log(err)
     })
   }
-  //toggle between search bars
-  //one search bar to search for users
-  
-  //one search bar to search for hashtags
-  
-  //one search bar to search for posts
-  
-  createDiv(node_name,textElement) {
-    var _nodeElement = document.createElement(node_name);
-    _nodeElement.innerHTML = textElement;
-    return _nodeElement;
+
+  //add the post to the post table and the likes table
+  likePost(post) {
+    let user = firebase.auth().currentUser;    
+    this.postService.addPost(post)
+    .subscribe((res) => {
+      console.log(res, '<<<<<< RES')
+      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
+      .subscribe((data) => {
+        console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
+      })
+    })  
   }
+
+  //daniel, remember to delete this
+  currentUser() {
+    let user = firebase.auth().currentUser;
+    console.log(user)
+  }
+
 
   roomStart(vid) {
     console.log(vid.src['changingThisBreaksApplicationSecurity']);

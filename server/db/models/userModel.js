@@ -51,12 +51,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return User;
 };  
-
-// User.hasMany(Like);
-// User.hasMany(Message);
-// User.hasMany(RoomStat);
-// User.hasMany(Friend);
-
-// User.sync();
-
-// module.exports = User;

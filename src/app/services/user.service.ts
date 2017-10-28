@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
 
   constructor(private http: Http) { }
   
-  getUser(user) { 
-    this.http.get(`http://localhost:4201/users/${user.username}`)
-    .subscribe((data) => {
-      console.log(data.json(), '<-- THIS IS DATA')
-      return data.json;
-
-      
-    }, (err) => {
-      console.log('nahhh', err)
-    })
+  getUser(user): Observable <any> { 
+    return this.http.get(`http://localhost:4201/users/${user.username}`)
+    .map((res) => {return res.json()});
   }
 
   getUserTest(user) { 
@@ -25,15 +21,16 @@ export class UserService {
   addUser(user) {
     this.http.post('http://localhost:4201/users', {
       username: user.username,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      adminstatus: user.adminstatus,
+      uid: user.uid,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      admin_status: user.admin_status,
       age: user.age,
       gender: user.gender,
       address: user.address,
       city: user.city,
       state: user.state,
-      zipcode: user.zipcode,
+      zip_code: user.zip_code,
       email: user.email,
       phone: user.phone
     })

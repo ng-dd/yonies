@@ -14,7 +14,7 @@
   </form>
   <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
   <input value="Users" type="submit" (click)="toggleQuery('People')">
-  <input value="Posts" type="submit" (click)="toggleQuery('Posts')">
+  <input value="Posts by People" type="submit" (click)="toggleQuery('Posts')">
   <input value='auth' type='button' (click)="auth()">
 
   <ul>
@@ -26,6 +26,10 @@
     </li>
   </ul>
   <ul>
+    <div *ngFor='let user of users'>
+      {{user}}
+      <input type='button' value='visit wall' (click)="visitWall(user)">
+    </div>
     <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
         {{tweet}}
     </div>
@@ -51,7 +55,11 @@
     width='420'>
   </iframe>
   <button (click)='roomStart(vid)'> Start a room</button>
+  <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
   </div>
   <app-stream-view [videoId]='videoUrl'></app-stream-view>
   </ul>
+  <div>
+    <input type="button" value="get current user" (click)="currentUser()">
+  </div>
 </div>

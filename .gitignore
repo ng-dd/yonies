@@ -57,7 +57,3 @@ pip-selfcheck.json
 #config files
 firebase.config.ts
 youtube.config.ts
-<<<<<<< HEAD
-=======
-.env
->>>>>>> Add logic for player of host vs guest

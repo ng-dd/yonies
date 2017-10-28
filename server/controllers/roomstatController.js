@@ -1,4 +1,4 @@
-const RoomStat = require('../db/index').roomStat;
+const RoomStat = require('../db/index').RoomStat;
 
 module.exports = {
     addRoomstat: (req, res) => {

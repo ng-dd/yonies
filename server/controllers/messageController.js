@@ -1,4 +1,4 @@
-const Message = require('../db/index').message;
+const Message = require('../db/index').Message;
 
 module.exports = {
     addMessage: (req, res) => {

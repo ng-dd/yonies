@@ -1,4 +1,4 @@
-const Category = require('../db/index').category;
+const Category = require('../db/index').Category;
 
 module.exports = {
     addCategory: (req, res) => {
