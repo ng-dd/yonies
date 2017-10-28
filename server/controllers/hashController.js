@@ -1,4 +1,4 @@
-const Hash = require('../db/index').hashTag;
+const Hash = require('../db/index').HashTag;
 
 module.exports = {
     addHash: (req, res) => {

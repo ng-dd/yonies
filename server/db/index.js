@@ -37,40 +37,40 @@ require('dotenv').config();
   
   //Associations
   
-  db.User.hasMany(db.Like, {foreignKey: 'user_id'});
-  db.User.hasMany(db.Message, {foreignKey: 'user_id'});
-  db.User.hasMany(db.RoomStat, {foreignKey: 'user_id'});
-  db.User.hasMany(db.Friend, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.Like, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.Message, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.RoomStat, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.Friend, {foreignKey: 'user_id'});
 
-  //likes
-  db.Like.belongsTo(db.User, {foreignKey: 'user_id'});
-  db.Like.belongsTo(db.Post, {foreignKey: 'post_id'});
+  // //likes
+  // db.Like.belongsTo(db.User, {foreignKey: 'user_id'});
+  // db.Like.belongsTo(db.Post, {foreignKey: 'post_id'});
 
-  //messages
-  db.Message.belongsTo(db.User, {foreignKey: 'user_id'});
+  // //messages
+  // db.Message.belongsTo(db.User, {foreignKey: 'user_id'});
   // db.Message.belongsTo(db.Friend, {foreignKey: 'friend_id'});
 
   //room stats
-  db.RoomStat.belongsTo(db.User, {foreignKey: 'user_id'});
-  db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
+  // db.RoomStat.belongsTo(db.User, {foreignKey: 'user_id'});
+  // db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
 
   //Friends
   // db.Friend.hasMany(db.Message, {foreignKey: 'friend_id'});
-  db.Friend.belongsTo(db.User, {foreignKey: 'user_id'});
+  // db.Friend.belongsTo(db.User, {foreignKey: 'user_id'});
 
-  //Posts
-  db.Post.hasMany(db.HashTag, {foreignKey: 'post_id'});
-  db.Post.hasMany(db.Like, {foreignKey: 'post_id'});
-  db.Post.belongsTo(db.Category, {foreignKey: 'catgory_id'});
+  // //Posts
+  // db.Post.hasMany(db.HashTag, {foreignKey: 'post_id'});
+  // db.Post.hasMany(db.Like, {foreignKey: 'post_id'});
+  // db.Post.belongsTo(db.Category, {foreignKey: 'catgory_id'});
 
-  //Participants
-  db.Participant.belongsTo(db.RoomStat, {foreignKey: 'room_id'});
+  // //Participants
+  // db.Participant.belongsTo(db.RoomStat, {foreignKey: 'room_id'});
 
-  //categories
-  db.Category.hasMany(db.Post, {foreignKey: 'catgory_id'});
+  // //categories
+  // db.Category.hasMany(db.Post, {foreignKey: 'catgory_id'});
 
-  // hash tags
-  db.HashTag.belongsTo(db.Post, {foreignKey: 'post_id'});
+  // // hash tags
+  // db.HashTag.belongsTo(db.Post, {foreignKey: 'post_id'});
 
 
 //SYNC???

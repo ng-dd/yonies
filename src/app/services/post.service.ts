@@ -64,12 +64,11 @@ export class PostService {
     return this.http.get(`http://localhost:4201/instagram/`)
       .map((res) => {
         // console.log('here it is', res);
-        return res})
-    
+        return res}) 
   }
 
   getPost(post): Observable <any> {
-    return this.http.get(`http://localhost:4201/posts/${post.post}`)
+    return this.http.get(`http://localhost:4201/posts/${post.post_id}`)
     .map((data) => {
       return data.json();
     })
