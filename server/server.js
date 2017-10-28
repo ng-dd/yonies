@@ -64,10 +64,13 @@ io.on('connection', function(socket) {
     io.emit('', this.);
   });
 
-  // Listen for new chat messages
+  // Listen for new chat messages // sending to all clients, include sender
   socket.on('', () => {
-    io.emit('', this.);
+    io.emit('message', this.);
   });
+  // sending to all clients in 'game' room(channel), include sender
+  io.in('game').emit('message', 'cool game');
+
 
   // End Chat
   socket.on('', () => {
@@ -79,24 +82,6 @@ io.on('connection', function(socket) {
     io.emit('', this.);
   });
   
-  
-// sending to sender-client only
-socket.emit('message', "this is a test");
-
-// sending to all clients, include sender
-io.emit('message', "this is a test");
-
-// sending to all clients except sender
-socket.broadcast.emit('message', "this is a test");
-
-// sending to all clients in 'game' room(channel) except sender
-socket.broadcast.to('game').emit('message', 'nice game');
-
-// sending to all clients in 'game' room(channel), include sender
-io.in('game').emit('message', 'cool game');
-
-// sending to sender client, only if they are in 'game' room(channel)
-socket.to('game').emit('message', 'enjoy the game');
 
 // sending to all clients in namespace 'myNamespace', include sender
 io.of('myNamespace').emit('message', 'gg');
