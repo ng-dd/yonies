@@ -1,0 +1,15 @@
+{
+    "short_name": "Yonies",
+    "name": "Yonies",
+    "icons": [
+      {
+        "src":"",
+        "sizes": "",
+        "type": ""
+      }
+    ],
+    "start_url": "",
+    "background_color": "#fff",
+    "theme_color": "#EC0C37",
+    "display": ""
+  }
