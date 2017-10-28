@@ -36,7 +36,7 @@ export class SearchBarComponent implements OnInit {
   videoUrl: string;
   users: any;
 
-  constructor(private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
+  constructor(private friendService: FriendService, private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
     })
@@ -51,6 +51,7 @@ export class SearchBarComponent implements OnInit {
     this.twitch = [];
     this.youtube = [];
     this.content = [];
+    this.users = [];
   }
 
 
@@ -74,16 +75,33 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchUsers(query) {
-    // console.log(query)
-    this.users = this.userService.getUserTest(query)
+    console.log(query)
+    this.users = [];
+    this.userService.getUser(query)
     .subscribe((data) => {
-      console.log(data.json(), '<-- THIS IS DATA')
-      this.users = data.json();
-    }, (err) => {
-      console.log('nahhh', err)
-    })  
+      console.log(data, 'users data')
+      this.users.push(data[0].username)
+    })
     this.myForm.reset();
   } 
+
+  visitWall(user) {
+    this.userService.getUser({username: user})
+    .subscribe((data) => {
+      this.likeService.getLikes({user_id: data[0].user_id})
+      .subscribe((data) => {
+        console.log(data)
+        data.forEach((data) => {
+          this.postService.getPost({post: Number(data.post_id)})
+          .subscribe((data) => {
+            console.log({src: data[0].post_url})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].post_url)})
+          })
+        })
+
+      })
+    })
+  }
 
   searchHashTags(query) {
     console.log(query)
@@ -182,7 +200,7 @@ export class SearchBarComponent implements OnInit {
   //daniel, remember to delete this
   currentUser() {
     let user = firebase.auth().currentUser;
-    console.log(user.email)
+    console.log(user)
   }
 
 

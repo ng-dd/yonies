@@ -41,6 +41,7 @@ module.exports = {
     // },
 
     getUser: (req, res) => {
+        console.log(req.params.id)
         redis.redisClient.get(JSON.stringify(req.params.id), (err, reply) => {
             if (reply === null) {
                 User.findAll({where: {username: req.params.id}})

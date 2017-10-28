@@ -26,6 +26,10 @@
     </li>
   </ul>
   <ul>
+    <div *ngFor='let user of users'>
+      {{user}}
+      <input type='button' value='visit wall' (click)="visitWall(user)">
+    </div>
     <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
         {{tweet}}
     </div>

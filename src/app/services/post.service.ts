@@ -68,12 +68,10 @@ export class PostService {
     
   }
 
-  getPost(post) {
-    this.http.get(`http://localhost:4201/posts/${post.post}`)
-    .subscribe((data) => {
-      console.log(data, 'this getPost from post service')
-    }, (err) => {
-      console.log('nah', err)
+  getPost(post): Observable <any> {
+    return this.http.get(`http://localhost:4201/posts/${post.post}`)
+    .map((data) => {
+      return data.json();
     })
   }
 
