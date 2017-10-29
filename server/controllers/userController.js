@@ -3,7 +3,7 @@ const redis = require('../redis.js');
 
 module.exports = {
     addUser: (req, res) => {
-        User.create({
+        User.findOrCreate({
             username: req.body.username,
             uid: req.body.uid,
             first_name: req.body.first_name,
@@ -58,6 +58,16 @@ module.exports = {
     //         }
     //     })
     // },
+
+    getUserById: (req, res) => {
+        User.findOne({where: {uid: req.params.id}})
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
 
     getUser: (req, res) => {
         User.findAll({where: {username: req.params.id}})

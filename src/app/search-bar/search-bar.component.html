@@ -21,12 +21,12 @@
     <li *ngFor="let user of users">
       IS THIS WORKING?
       User: {{user.username}}
-      Name: {{user.first_name}} {{user.last_name}}
-      <button (click)="addFriend(user.user_id)">Add Friend</button>
+      <button (click)="addFriend(user)">Add Friend</button>
     </li>
   </ul>
   <ul>
     <div *ngFor='let user of users'>
+      {{user.username}}
       <input type='button' value='visit wall' (click)="visitWall(user)">
     </div>
     <div> 

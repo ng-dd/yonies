@@ -22,21 +22,53 @@ import * as firebase from 'firebase/app';
 })
 export class ContentFeedComponent implements AfterViewInit {
   
-  feed: any;
+  cats: any;
+  uid: any;
+  content: any;
 
-  constructor(private categoryService: CategoryService, private firebaseAuth: AngularFireAuth) {
-    this.feed = [];
+  constructor(private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+    this.content = [];
+    this.cats = [];
+    this.uid = '';
    }
 
   //get current user, get content feed based on keywords of stuff they have liked,
   //so when they like, add the search query of what they liked 
 
   ngAfterViewInit() {
-    let uid = firebase.auth().currentUser.uid;
-    console.log(uid)    
-    this.categoryService.getCategory(uid)
-    .subscribe((data) => {
-      console.log(data)
+    this.content = [];
+    this.afAuth.authState.subscribe((data) => {
+      console.log(data.uid, '<<<<<< DATA.uid')
+      this.categoryService.getCategory({uid: data.uid})
+      .subscribe((data) => {
+        data.forEach((cat) => {
+          this.cats.push(cat.name);
+        })
+
+        this.cats.forEach((cat) => {
+          this.postService.getTwitch(cat)
+          .subscribe((data) => {
+            data.videos.forEach((video) => {
+              this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
+            })
+            this.postService.getYouTube(cat)
+            .subscribe((data) => {
+              data.items.forEach((video) => {
+                console.log(video, 'videos')
+                this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+              })
+              this.content.sort((a, b) => {
+                var c = new Date(a.date).getTime()
+                var d = new Date(b.date).getTime()
+                return c > d ? 1 : -1; 
+              })
+              this.content = this.content.slice(0, 11);   
+          })
+      
+            console.log(this.content, '<<<<<<< CONTENT BY DATES')
+          })
+        })
+      })
     })
   }
 

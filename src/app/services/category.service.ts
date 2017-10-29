@@ -10,7 +10,9 @@ export class CategoryService {
   constructor(private http: Http) { }
 
   getCategory(category): Observable <any> {
-    return this.http.get(`http://locahost:4201/categories/${category.uid}`)
+    var path = category.uid;
+    var realPath = `http://localhost:4201/categories/${path}`;
+    return this.http.get(realPath)
     .map((data) => {
       return data.json();
     })

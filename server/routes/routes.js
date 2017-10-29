@@ -14,6 +14,7 @@ router.get('/getcache/:id', redisController.getSomething);
 router.post('/postcache', redisController.postSomething);
 
 //user routes
+router.get('/userid/:id', userController.getUserById);
 router.get('/users/:id', userController.getUser);
 router.post('/users', userController.addUser);
 router.delete('/users', userController.deleteUser);

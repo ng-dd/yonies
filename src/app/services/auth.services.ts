@@ -17,6 +17,11 @@ export class AuthService {
     this.user = firebaseAuth.authState;
   }
 
+  currentUser() {
+    console.log(firebase.auth().currentUser)
+    return firebase.auth().currentUser;
+  }
+
   confirmEmail() {
     let user = firebase.auth().currentUser;
 

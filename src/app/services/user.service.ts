@@ -10,12 +10,14 @@ export class UserService {
   constructor(private http: Http) { }
   
   getUser(user): Observable <any> { 
+    console.log(user.username, 'inside user service')
     return this.http.get(`http://localhost:4201/users/${user.username}`)
     .map((res) => {return res.json()});
   }
 
-  getUserTest(user) { 
-    return this.http.get(`http://localhost:4201/users/${user.username}`)
+  getUserById(uid): Observable <any> { 
+    return this.http.get(`http://localhost:4201/userid/${uid}`)
+    .map((res) => {return res.json()});
   }
 
   addUser(user) {

@@ -2,6 +2,13 @@
   <input type='button' value='getfriends' (click)="getFriendsList({user_id: '5'})">
   <div *ngFor="let friend of friendsList">
     {{friend}}
-    <input type='button' value='visit their wall' (click)="visitWall({user_id: friend})">
+    <input type='button' value='visit their wall' (click)="visitWall(friend)">
+    <div *ngFor='let vid of content'>
+      <iframe
+      [src]='vid.src'
+      height='315'
+      width='420'>
+    </iframe>
+    </div>
   </div>
 </div>
