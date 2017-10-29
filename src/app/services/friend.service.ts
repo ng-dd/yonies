@@ -20,7 +20,10 @@ export class FriendService {
     console.log('user-->', user, 'friend-->', String(friend))
     this.http.post('http://localhost:4201/friends', {
       user_id: user,
-      friend_id: String(friend)
+      friend_id: friend
+    })
+    .subscribe((data) => {
+      console.log(data);
     })
   }
 

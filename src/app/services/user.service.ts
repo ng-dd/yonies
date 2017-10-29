@@ -14,8 +14,9 @@ export class UserService {
     .map((res) => {return res.json()});
   }
 
-  getUserTest(user) { 
-    return this.http.get(`http://localhost:4201/users/${user.username}`)
+  getUserById(uid): Observable <any> { 
+    return this.http.get(`http://localhost:4201/userid/${uid}`)
+    .map((res) => {return res.json()});
   }
 
   addUser(user) {

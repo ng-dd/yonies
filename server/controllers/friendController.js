@@ -2,6 +2,7 @@ const Friend = require('../db/index').Friend;
 
 module.exports = {
     addFriend: (req, res) => {
+        console.log(req.body.user_id, req.body.friend_id, '<<<<<<<<<<<<<<<<<<<<<')
         Friend.create({
             user_id: req.body.user_id,
             friend_id: req.body.friend_id

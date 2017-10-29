@@ -83,7 +83,7 @@ export class SearchBarComponent implements OnInit {
     this.userService.getUser(query)
     .subscribe((data) => {
       console.log(data, 'users data')
-      this.users.push(data[0].username)
+      this.users.push({username: data[0].username, uid: data[0].uid})
     })
     this.myForm.reset();
   } 
@@ -113,8 +113,10 @@ export class SearchBarComponent implements OnInit {
     this.hashForm.reset();
   }
 
-  addFriend(query) {
-    this.friendService.addFriend('11', query)
+  addFriend(user) {
+    let currId = firebase.auth().currentUser.uid;
+    console.log(currId, user.uid)
+    this.friendService.addFriend(currId, user.uid)
   }
   
   follow(person) {
