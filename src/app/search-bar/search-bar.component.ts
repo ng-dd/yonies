@@ -90,7 +90,8 @@ export class SearchBarComponent implements OnInit {
 
   visitWall(user) {
     this.content = [];
-    this.userService.getUser({username: user})
+    console.log(user, 'user')
+    this.userService.getUser(user)
     .subscribe((data) => {
       console.log(data, '<<<<<<DATA')
       this.likeService.getLikes({uid: data[0].uid})

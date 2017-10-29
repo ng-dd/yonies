@@ -3,7 +3,7 @@ const redis = require('../redis.js');
 
 module.exports = {
     addUser: (req, res) => {
-        User.create({
+        User.findOrCreate({
             username: req.body.username,
             uid: req.body.uid,
             first_name: req.body.first_name,
