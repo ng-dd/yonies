@@ -1,3 +1,8 @@
-<p>
-  content-feed works!
-</p>
+<div *ngFor='let vid of content'>
+    <iframe
+    [src]='vid.src'
+    height='315'
+    width='420'>
+  </iframe>
+  <button (click)='roomStart(vid)'> Start a room</button>
+  </div>
