@@ -3,11 +3,17 @@ const parser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const http = require('http'); 
-const socketIO = require('socket.io');
-
 require('dotenv').config()
 
+// Socket
+const io = require('socket.io')(server);
+const startSocket = require('./socket');
+startSocket(io);
+
+// Routes
 const routes = require('./routes/routes');
+
+// DB
 const db = require('./db');
 
 const port = process.env.PORT || 4201;
@@ -29,74 +35,6 @@ app.use(function(req, res, next){
   } else {
       return next();
   }
-})
-
-// Socket Chat Functionality - define variables
-const users = [];
-let username = '';
-let userid = '';
-let hostUserName = '';
-let hostUserid = '';
-
-// Connect via Socket IO session
-io.on('connection', function(socket) {
-  // Listen for requests from users in room
-  socket.on('getUserSocketid', () => {
-    io.emit('userSocketid', userid);
-  });
-
-  socket.on('', () => {
-    io.emit('', this.);
-  });
-
-  // Listen for request for host id
-  socket.on('', () => {
-    io.emit('', this.);
-  });
-
-  // Listen for user to request chat
-  socket.on('', () => {
-    io.emit('', this.);
-  });
-
-  // Listen for host to approve chat
-  socket.on('', () => {
-    io.emit('', this.);
-  });
-
-  // Listen for new chat messages // sending to all clients, include sender
-  socket.on('', () => {
-    io.emit('message', this.);
-  });
-  // sending to all clients in 'game' room(channel), include sender
-  io.in('game').emit('message', 'cool game');
-
-
-  // End Chat
-  socket.on('', () => {
-    io.emit('', this.);
-  });
-
-  // Disconnect
-  socket.on('', () => {
-    io.emit('', this.);
-  });
-  
-
-// sending to all clients in namespace 'myNamespace', include sender
-io.of('myNamespace').emit('message', 'gg');
-
-// sending to individual socketid (server-side)
-socket.broadcast.to(socketid).emit('message', 'for your eyes only');
-
-// join to subscribe the socket to a given channel (server-side):
-socket.join('some room');
-
-// then simply use to or in (they are the same) when broadcasting or emitting (server-side)
-io.to('some room').emit('some event'):
-
-// leave to unsubscribe the socket to a given channel (server-side)
-socket.leave('some room');
 })
 
 app.use(express.static(path.join(__dirname, '../dist')))
