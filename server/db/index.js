@@ -19,7 +19,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
     acquire: 20000
   }});
   
-  const sequelize = new Sequelize('postgres://gqhmxfxh:0moqyFAzfF1UOx3Nw8kKuly4cdpyH3f5@pellefant.db.elephantsql.com:5432/gqhmxfxh', {dialect: 'postgres'})
+  // const sequelize = new Sequelize('postgres://gqhmxfxh:0moqyFAzfF1UOx3Nw8kKuly4cdpyH3f5@pellefant.db.elephantsql.com:5432/gqhmxfxh', {dialect: 'postgres'})
   sequelize.authenticate()
     .then(console.log('connected to the database!'))
     .catch(err => console.log('error connecting to database!', err));
@@ -43,10 +43,10 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
   
   // //Associations
   
-  db.User.hasMany(db.Like, {foreignKey: 'user_id'});
-  db.User.hasMany(db.Message, {foreignKey: 'user_id'});
-  // db.User.hasMany(db.RoomStat, {foreignKey: 'user_id'});
-  db.User.hasMany(db.Friend, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.Like, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.Message, {foreignKey: 'user_id'});
+  // // db.User.hasMany(db.RoomStat, {foreignKey: 'user_id'});
+  // db.User.hasMany(db.Friend, {foreignKey: 'user_id'});
 
   // //likes
   // db.Like.belongsTo(db.User, {foreignKey: 'user_id'});
@@ -58,7 +58,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 
   //room stats
   // db.RoomStat.belongsTo(db.User, {foreignKey: 'user_id'});
-  db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
+  // db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
 
   //Friends
   // db.Friend.hasMany(db.Message, {foreignKey: 'friend_id'});
@@ -88,7 +88,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 // }
 for (var key in db) {
   console.log('@@@@@@@@@@@@SYNCING@@@@@@@@@@@: ', key)
-  db[key].sync()
+  db[key].sync({force: true})
 }
   // console.log(dbkeys)
   // db[key].sync()

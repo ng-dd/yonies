@@ -17,8 +17,6 @@ import * as firebase from 'firebase/app';
 })
 export class FriendsListComponent implements OnInit {
   friendRoomList: object = [];
-  constructor(private roomStat: RoomstatService) { }
-
   friendsList: any;
   content: any;
 
@@ -64,7 +62,7 @@ export class FriendsListComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.friendRoomList = this.roomStat
+
   }
 
 }

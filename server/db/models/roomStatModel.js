@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     duration: {
       type: DataTypes.STRING
     },
-    peer_id: {
+    room_info: {
       type: DataTypes.STRING({length: 1000})
     }},
     {

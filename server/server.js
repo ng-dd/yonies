@@ -5,9 +5,11 @@ const cors = require('cors');
 
 const app = express();
 
-const http = require('http').createServer(app)
+const http = require('http')
 require('dotenv').config()
-const io = require('socket.io')(http);
+// const io = require('socket.io')(http);
+
+const server = http.createServer(app);
 
 // Socket
 const io = require('socket.io')(server);
@@ -49,13 +51,13 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-// const server = http.createServer(app);
 
-io.on('connection', function(socket) {
-  console.log('a user connected')
-})
 
-http.listen(port, (err)=>{
+// io.on('connection', function(socket) {
+//   console.log('a user connected')
+// })
+
+server.listen(port, (err)=>{
   if (err) {
     return console.log(err)
   }

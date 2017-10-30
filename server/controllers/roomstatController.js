@@ -7,7 +7,7 @@ module.exports = {
             person_count: req.body.person_count,
             host_id: req.body.host_id,
             duration: req.body.duration,
-            peer_id: req.body.peer_id
+            room_info: req.body.room_info
         })
         .then((data) => {
             console.log('Data inserted correctly>>>>>>>> ', data)
@@ -40,7 +40,7 @@ module.exports = {
     },
 
     updateRoomstat: (req, res) => {
-        RoomStat.update({peer_id: req.body.peer_id},
+        RoomStat.update({room_id: req.body.room_id},
         { where: { room_id: req.params.id } })
         .then((data)=>{
             res.send(data);

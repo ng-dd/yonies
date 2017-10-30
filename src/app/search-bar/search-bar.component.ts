@@ -41,8 +41,22 @@ export class SearchBarComponent implements OnInit {
   roomId: any;
   keyWord: any;
 
-  constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private friendService: FriendService, private fb: FormBuilder, private roomstatService: RoomstatService) { 
-  constructor(private categoryService: CategoryService, private friendService: FriendService, private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
+  
+  constructor(
+    private scriptService: ScriptService, 
+    private elementRef: ElementRef, 
+    private sanitizer: DomSanitizer, 
+    private postService: PostService, 
+    private http: Http, 
+    private hashService: HashService, 
+    private userService: UserService, 
+    private friendService: FriendService, 
+    private fb: FormBuilder, 
+    private roomstatService: RoomstatService, 
+    private categoryService: CategoryService, 
+    private firebaseAuth: AngularFireAuth, 
+    private likeService: LikesService, 
+  ) { 
     this.myForm = fb.group({
       'username': null
     })
