@@ -1,0 +1,13 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+}
+
+/* .tweets {
+    grid-column-start: 1;
+}
+
+.vids {
+    grid-column-start: 2;
+} */
+
