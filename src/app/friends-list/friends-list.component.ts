@@ -16,7 +16,7 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./friends-list.component.css']
 })
 export class FriendsListComponent implements OnInit {
-
+  friendRoomList: object = [];
   friendsList: any;
   content: any;
 
@@ -62,6 +62,7 @@ export class FriendsListComponent implements OnInit {
   }
   
   ngOnInit() {
+
   }
 
 }

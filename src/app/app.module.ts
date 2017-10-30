@@ -38,6 +38,7 @@ import { firebaseConfig } from '../environments/firebase.config';
 // import * as YT from 'youtube';
 
 //services
+import { SocketService } from './services/socket.service';
 import { UserService } from './services/user.service';
 import { PostService } from './services/post.service';
 import { LikesService } from './services/likes.service';
@@ -96,6 +97,7 @@ import { ChatComponent } from './chat/chat.component';
     RoomstatService,
     HashService,
     ScriptService,
+    SocketService,
     FormBuilder
   ],
   bootstrap: [AppComponent]

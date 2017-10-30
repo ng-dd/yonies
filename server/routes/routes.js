@@ -46,8 +46,9 @@ router.delete('/categories', categoryController.deleteCategory)
 
 //roomstat
 router.get('/rooms/:id', roomstatController.getRoomstat)
-router.post('/rooms', roomstatController.addRoomstat)
+router.post('/rooms/', roomstatController.addRoomstat)
 router.delete('/rooms', roomstatController.deleteRoomstat)
+router.put('/rooms/:id', roomstatController.updateRoomstat)
 
 //hashes
 router.get('/hashes/:id', hashController.getHash)

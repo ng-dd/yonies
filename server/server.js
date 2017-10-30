@@ -2,8 +2,14 @@ const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const http = require('http'); 
+
+const app = express();
+
+const http = require('http')
 require('dotenv').config()
+// const io = require('socket.io')(http);
+
+const server = http.createServer(app);
 
 // Socket
 const io = require('socket.io')(server);
@@ -17,11 +23,14 @@ const routes = require('./routes/routes');
 const db = require('./db');
 
 const port = process.env.PORT || 4201;
-const app = express();
-
+// const app = express();
+// app.use(express.static(__dirname + '/src/'))
 app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/src/index.html')
+// })
 app.use('/', routes);
 app.use(function(req, res, next){
   res.header("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -42,7 +51,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-const server = http.createServer(app);
+
+
+// io.on('connection', function(socket) {
+//   console.log('a user connected')
+// })
 
 server.listen(port, (err)=>{
   if (err) {

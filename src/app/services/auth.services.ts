@@ -48,6 +48,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value, value.uid);
+
         this.confirmEmail();
         this.userService.addUser({uid: user.uid})
       })

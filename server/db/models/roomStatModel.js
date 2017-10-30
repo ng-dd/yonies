@@ -10,9 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     category_id: {
       type: DataTypes.INTEGER
     },
-    room_id: {
-      type: DataTypes.INTEGER
-    },
     person_count: {
       type: DataTypes.INTEGER
     },
@@ -22,10 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     duration: {
       type: DataTypes.STRING
     },
-    peer_id: {
-      type: DataTypes.STRING
+    room_info: {
+      type: DataTypes.STRING({length: 1000})
+    }},
+    {
+      timestamps: false
     }
-  });
+  );
   return RoomStat;
 } 
 
