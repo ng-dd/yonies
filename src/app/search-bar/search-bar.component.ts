@@ -176,26 +176,41 @@ export class SearchBarComponent implements OnInit {
       console.log(this.content, '<<<<<<< CONTENT BY DATES')
     })
 
-    this.postService.getTwitter(query.post)
+    // this.postService.getTwitter(query.post)
+    // .subscribe((data) => {
+    //   for (var i = 0; i < data.length; i++) {
+    //     this.postService.getEmbed(data[i])
+    //     .subscribe((data) => {
+    //       // console.log(data, 'TWITTER OMBED DATA <<<<<<<<<<<<<')
+    //       var el = document.createElement('html');
+    //       el.innerHTML = data;
+    //       console.log(el, 'TWITTER <<<<<<<<<<<<') 
+    //       var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
+    //       this.tweets.push(twt);
+    //       this.scriptService.load('twitterWidget')
+    //       .then(data => {
+    //         console.log('script loaded ', data);
+    //       })
+    //       .catch(error => console.log(error));    
+    //     })
+    //   }
+    // }, (err) => {
+    //   console.log(err, 'error from searchPosts')
+    // })
+
+    //testing embed timeline
+    this.postService.getEmbed(query.post)
     .subscribe((data) => {
-      for (var i = 0; i < data.length; i++) {
-        this.postService.getEmbed(data[i])
-        .subscribe((data) => {
-          // console.log(data, 'TWITTER OMBED DATA <<<<<<<<<<<<<')
-          var el = document.createElement('html');
-          el.innerHTML = data;
-          console.log(el, 'TWITTER <<<<<<<<<<<<') 
-          var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
-          this.tweets.push(twt);
-          this.scriptService.load('twitterWidget')
-          .then(data => {
-            console.log('script loaded ', data);
-          })
-          .catch(error => console.log(error));    
+      console.log(data, 'twitter oembed data')
+      var el = document.createElement('html');
+      el.innerHTML = data;
+      var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);             
+      this.tweets.push(twt);
+      this.scriptService.load('twitterWidget')
+        .then(data => {
+          console.log('script loaded ', data);
         })
-      }
-    }, (err) => {
-      console.log(err, 'error from searchPosts')
+        .catch(error => console.log(error)); 
     })
     this.postForm.reset();
   }
