@@ -5,7 +5,15 @@ const cors = require('cors');
 const http = require('http'); 
 require('dotenv').config()
 
+// Socket
+const io = require('socket.io')(server);
+const startSocket = require('./socket');
+startSocket(io);
+
+// Routes
 const routes = require('./routes/routes');
+
+// DB
 const db = require('./db');
 
 const port = process.env.PORT || 4201;
