@@ -1,8 +1,5 @@
 var Sequelize = require('sequelize');
 require('dotenv').config();
-// dotenv.load();
-// import { Like } from '../db/models/likeModel';
-// import { User } from '../db/models/userModel';
 
 console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
@@ -54,14 +51,12 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 
   // //messages
   // db.Message.belongsTo(db.User, {foreignKey: 'user_id'});
-  // db.Message.belongsTo(db.Friend, {foreignKey: 'friend_id'});
 
-  //room stats
+  // //room stats
   // db.RoomStat.belongsTo(db.User, {foreignKey: 'user_id'});
   // db.RoomStat.hasMany(db.Participant, {foreignKey: 'room_id'});
 
-  //Friends
-  // db.Friend.hasMany(db.Message, {foreignKey: 'friend_id'});
+  // //Friends
   // db.Friend.belongsTo(db.User, {foreignKey: 'user_id'});
 
   // //Posts
@@ -79,24 +74,11 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
   // db.HashTag.belongsTo(db.Post, {foreignKey: 'post_id'});
 
 
-//SYNC???
-// for(var key in db) {
-// var dbkeys = Object.keys(db)
-// for (var i = 2; i < dbkeys.length; i++) {
-//   console.log(dbkeys[i])
-//   dbkeys[i].sync()
-// }
+//SYNC
+
 for (var key in db) {
   console.log('@@@@@@@@@@@@SYNCING@@@@@@@@@@@: ', key)
   db[key].sync({force: true})
 }
-  // console.log(dbkeys)
-  // db[key].sync()
-// }
-// db.sync();
-
-// db.authenticate()
-
-
 
 module.exports = db;

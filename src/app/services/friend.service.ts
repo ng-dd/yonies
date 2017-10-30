@@ -17,13 +17,13 @@ export class FriendService {
   }
 
   addFriend(user, friend) {
-    console.log('user-->', user, 'friend-->', String(friend))
+    // console.log('user-->', user, 'friend-->', String(friend))
     this.http.post('http://localhost:4201/friends', {
       user_id: user,
       friend_id: friend
     })
-    .subscribe((data) => {
-      console.log(data);
+    .subscribe(data => {
+      return data;
     })
   }
 

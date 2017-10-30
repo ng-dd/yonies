@@ -8,20 +8,17 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    post_url: {
+    type: {
       type: DataTypes.STRING
     },
-    post_like_count: {
-      type: DataTypes.INTEGER
+    text: {
+      type: DataTypes.STRING({length: 250})
     },
-    comment: {
-      type: DataTypes.STRING
-    },
-    comment_like_count: {
+    like_count: {
       type: DataTypes.INTEGER
     },
     parent: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     }
   }, {
     timestamps: false,

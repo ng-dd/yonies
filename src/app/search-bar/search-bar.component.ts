@@ -137,6 +137,9 @@ export class SearchBarComponent implements OnInit {
     console.log(currId, user.uid)
     this.friendService.addFriend(currId, user.uid)
   }
+  // addFriend(query) {
+  //   this.friendService.addFriend(11, String(query))
+  // }
   
   follow(person) {
     let uid = firebase.auth().currentUser.uid;
