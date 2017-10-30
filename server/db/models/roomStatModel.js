@@ -20,9 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     peer_id: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING({length: 1000})
+    }},
+    {
+      timestamps: false
     }
-  });
+  );
   return RoomStat;
 } 
 

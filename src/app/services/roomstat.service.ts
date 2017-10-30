@@ -6,17 +6,18 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class RoomstatService {
-
+  roomId: number;
   constructor(private http: Http) { }
   
-  getRoomstat(room): Observable<any> {
-    return this.http.get('http://localhost:4201/rooms/' + room )
-    .map((data) => {
-      console.log(data)
-      return data
-    }, (err) => {
-      console.log(err)
+  getRoomstat(room, cb) {
+    this.http.get('http://localhost:4201/rooms/' + room )
+    .subscribe((data) => {
+      console.log('data from getRoomStat service: ',data)
+      cb(data)
     })
+    // , (err) => {
+    //   console.log(err)
+    // })
   }
 
   getHostId(room) {
@@ -27,19 +28,32 @@ export class RoomstatService {
     })
   }
 
-  addRoomstat(room) {
-    this.http.post('/rooms', {
-      categoryId: room.categoryId,
-      roomId: room.roomId,
-      count: room.count,
-      hostId: room.hostId,
-      duration: room.duration
+  addRoomstat(cb) {
+    console.log('attempting to add a room', )
+    this.http.post('http://localhost:4201/rooms', {
+      // categoryId: room.categoryId,
+      // count: room.count,
+      // hostId: room.hostId,
+      // duration: room.duration,
+      // peer_id: String(room.peer_id)
+    }).subscribe((data)=>{ 
+      console.log('entered room>>>>>> ', data)
+      cb(data)//['_body'].room_id
     })
-    .subscribe((data) => {
-      console.log(data)
-    }, (err) => {
-      console.log(err)
+    // .map((data) => {
+    //   console.log('data from addRoomStat service: ', data)
+    //   return data;
+    // })
+    // , (err) => {
+    //   console.log(err)
+    // })
+  }
+
+  updateRoomstat(room, info) {
+    return this.http.put('http://localhost:4201/rooms/' + room, {
+      peer_id: String(info.peer_id)
     })
+    .subscribe((data)=>{ return data })
   }
 
   deleteRoomstat(room) {

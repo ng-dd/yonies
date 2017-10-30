@@ -12,6 +12,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
+import { RoomstatService } from '../services/roomstat.service'
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
@@ -36,8 +37,11 @@ export class SearchBarComponent implements OnInit {
   content: any;
   videoUrl: string;
   users: any;
+  roomStarted: boolean = false;
+  roomId: any;
   keyWord: any;
 
+  constructor(private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private friendService: FriendService, private fb: FormBuilder, private roomstatService: RoomstatService) { 
   constructor(private categoryService: CategoryService, private friendService: FriendService, private firebaseAuth: AngularFireAuth, private likeService: LikesService, private scriptService: ScriptService, private elementRef: ElementRef, private sanitizer: DomSanitizer, private postService: PostService, private http: Http, private hashService: HashService, private userService: UserService, private fb: FormBuilder) { 
     this.myForm = fb.group({
       'username': null
@@ -221,15 +225,25 @@ export class SearchBarComponent implements OnInit {
 
   roomStart(vid) {
     console.log(vid.src['changingThisBreaksApplicationSecurity']);
+    this.roomstatService.addRoomstat((roomData)=>{
+      let response = JSON.parse(roomData._body)
+      this.roomId = response.room_id;
+      this.roomStarted = true;
+    })
     let url  = vid.src['changingThisBreaksApplicationSecurity']
     if (url.indexOf('youtube') >= 0){
       this.videoUrl = url.slice(url.indexOf('embed')+ 6, url.length)
-      console.log(this.videoUrl)
     } else {
       this.videoUrl = url;
     }
+    
   }
-  
+
+  connectToRoom(roomId){
+    console.log('room', this.roomId)
+    this.roomStarted = true;
+  } 
+
   ngOnInit() {
   }
 }
