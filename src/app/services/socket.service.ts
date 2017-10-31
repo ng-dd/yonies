@@ -9,36 +9,36 @@ export class SocketService {
   constructor(private socketIo: SocketIo){
 
   }
-  // socketInit() {
-  //   this.socket = this.socketIo(this.SERVER_URL);
-  // }
+  socketInit() {
+    this.socket = this.socketIo(this.SERVER_URL);
+  }
 
-  // send(message: any) {
-  //   this.socket.emit('message', message);
-  // }
+  send(message: any) {
+    this.socket.emit('message', message);
+  }
 
-  // onMessage(): Observable<any> {
-  //   return new Observable(observer => {
-  //     this.socket.on('message', (data) => {
-  //       observer.next(data);
-  //     })
-  //   })
-  // }
+  onMessage(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('message', (data) => {
+        observer.next(data);
+      })
+    })
+  }
 
-  // onConnect(): Observable<any> {
-  //   return new Observable(observer => {
-  //     this.socket.on('connect', () => {
-  //       observer.next();
-  //     })
-  //   })
-  // } 
+  onConnect(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('connect', () => {
+        observer.next();
+      })
+    })
+  } 
 
-  // onDisconnect(): Observable<any> {
-  //   return new Observable(observer => {
-  //     this.socket.on('disconnect', () => {
-  //       observer.next();
-  //     })
-  //   })
-  // }
+  onDisconnect(): Observable<any> {
+    return new Observable(observer => {
+      this.socket.on('disconnect', () => {
+        observer.next();
+      })
+    })
+  }
 
 }

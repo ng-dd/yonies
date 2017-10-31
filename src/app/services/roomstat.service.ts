@@ -6,7 +6,8 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class RoomstatService {
-  roomId: number;
+  roomId: string;
+  selectedUrl: string;
   constructor(private http: Http) { }
   
   getRoomstat(room, cb) {
@@ -58,5 +59,13 @@ export class RoomstatService {
 
   deleteRoomstat(room) {
     this.http.delete(`/rooms/${room.roomId}`)
+  }
+
+  selectVideo(url) {
+    this.selectedUrl = url;
+  }
+
+  getVideo() {
+    return this.selectedUrl;
   }
 }

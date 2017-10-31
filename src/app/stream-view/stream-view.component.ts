@@ -15,7 +15,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./stream-view.component.css']
 })
 export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
-  @Input() videoId: string = 'T8nVCp4E4DE';
+  @Input() videoId: string;
   @Input() roomId: string;
   @HostListener('window:unload', ['event'])
   incoming: string;
@@ -57,6 +57,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
+    this.videoId = this.roomstatService.getVideo();
     // this.ioInit()
   //   console.log('room id from inside stream-view componen>>>>>>', this.roomId)
   //   this.p = new SimplePeer({ initiator: location.hash === '#1', trickle: false });
