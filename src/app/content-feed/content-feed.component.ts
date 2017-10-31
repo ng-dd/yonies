@@ -20,7 +20,7 @@ import * as firebase from 'firebase/app';
   templateUrl: './content-feed.component.html',
   styleUrls: ['./content-feed.component.css']
 })
-export class ContentFeedComponent implements AfterViewInit {
+export class ContentFeedComponent implements OnInit {
   
   cats: any;
   uid: any;
@@ -32,7 +32,6 @@ export class ContentFeedComponent implements AfterViewInit {
     this.cats = [];
     this.uid = '';
     this.liked = false;
-
    }
 
   //get current user, get content feed based on keywords of stuff they have liked,
@@ -46,13 +45,15 @@ export class ContentFeedComponent implements AfterViewInit {
       .subscribe((data) => {
         console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
-    })  
+    }) 
+    this.liked = true; 
   }
 
   checkIfLiked(post) {
     this.liked = false;
     let user = firebase.auth().currentUser;    
     console.log(post)
+    // console.log(this.liked)
     this.likeService.getLikes({uid: user.uid})
     .subscribe((res) => {
       var postIds = res.map((data) => {return data.post_id})
@@ -62,21 +63,23 @@ export class ContentFeedComponent implements AfterViewInit {
           data.forEach((p) => {
             if (p.text === post.url) {
               this.liked = true;
-              console.log(this.liked, 'liked status')
+              console.log(this.liked, 'liked status if true')
               return this.liked;
             }
           })
         })
       })
-      console.log(res)
     })
+    console.log(this.liked, 'liked status if false')
+    return this.liked;
   }
   //check the posts table for a url that match
   //get the post ids from the post tables,
   //check the likes table where post id = any in the post array
   //check if any 
 
-  ngAfterViewInit() {
+  ngOnInit() {
+    console.log('RUNNING in ONINIT')
     this.content = [];
     this.afAuth.authState.subscribe((data) => {
       console.log(data.uid, '<<<<<< DATA.uid')

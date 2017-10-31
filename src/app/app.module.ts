@@ -12,6 +12,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 import { MnFullpageModule } from 'ngx-fullpage';
 
 // Design modules Material Design and Flex layout modules, hammerjs for gestures
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -93,7 +94,8 @@ import { VideoShareComponent } from './video-share/video-share.component';
     AngularFireModule.initializeApp(firebaseConfig), // imports firebase/app needed for everything
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     SocketIoModule.forRoot(config), // imports Soket Io, needed for chat features
-    MnFullpageModule.forRoot() //import full page module
+    MnFullpageModule.forRoot(), //import full page module
+    Angular2FontawesomeModule
   ],
   providers: [
     AuthService,
