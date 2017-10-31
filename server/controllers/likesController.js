@@ -4,7 +4,8 @@ module.exports = {
     addLike: (req, res) => {
         Like.create({
             uid: req.body.uid,
-            post_id: req.body.post_id
+            post_id: req.body.post_id,
+            type: req.body.type
         })
         .then((data) => {
             res.send(data)

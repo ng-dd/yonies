@@ -41,6 +41,9 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginEmail, this.loginPassword);
     this.email = this.password = '';
   }
+  logout() {
+    this.auth.logout();
+  }
   facebookAuth() {
     this.auth.facebookLogin()
   }
