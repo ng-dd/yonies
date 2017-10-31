@@ -121,7 +121,7 @@ module.exports = {
     },
 
     getPost: (req, res) => {
-        Post.findAll({
+        Post.findOne({
             where: {post_id: req.params.id}
         })
         .then((data) => {
@@ -157,5 +157,18 @@ module.exports = {
         .catch(err => {
             res.status(500).send(err);
         })
-    }
+    },
+
+    getComments: (req, res) => {
+        Post.findAll({
+            where: {parent: req.params.id}
+        })
+        .then((data) => {
+            console.log('retrieving post data')
+            res.send(data)
+        })
+        .catch(err=> {
+            res.status(500).send(err)
+        })
+    },
 }

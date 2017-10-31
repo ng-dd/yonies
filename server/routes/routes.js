@@ -69,4 +69,7 @@ router.get('/youtubetags/:id', postController.youTubeVideoTags)
 // router.get('/instagram/:id', postController.insta)
 router.get('/instagram', postController.insta)
 
+//comments
+router.get('/comments/:id', postController.getComments)
+
 module.exports = router;

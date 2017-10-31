@@ -26,13 +26,37 @@ export class ContentFeedComponent implements OnInit {
   uid: any;
   content: any;
   liked: boolean;
+  commentOn: boolean = false;
+  comments: any;
 
   constructor(private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
     this.content = [];
     this.cats = [];
     this.uid = '';
     this.liked = false;
+    this.commentOn = false;
+    this.comments = [];
    }
+
+   test() {
+     console.log('CONTENT>>>', this.content);
+   }
+
+   toggleComment() {
+    if(!this.commentOn) {
+      //get request to get comments on the post id
+      this.postService.getComments(1)
+        .subscribe(data => {
+          this.comments = data;
+          console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
+        })
+    } 
+    this.commentOn = !this.commentOn;
+  }
+
+  // postComment(text) {
+  //   this.postService.addComment(text);
+  // }
 
   //get current user, get content feed based on keywords of stuff they have liked,
   //so when they like, add the search query of what they liked 

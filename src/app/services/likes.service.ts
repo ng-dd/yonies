@@ -19,7 +19,8 @@ export class LikesService {
       console.log(like, "<<<<<<<<<<ADDLIKE")
       return this.http.post('http://localhost:4201/likes', {
         uid: like.uid,
-        post_id: like.post_id
+        post_id: like.post_id,
+        type: like.type
       })
       .map((res) => {return res.json()})
     }

@@ -5,6 +5,10 @@ import { Http, Response, Headers } from '@angular/http';
 export class MessageService {
 
   constructor(private http: Http) { }
+
+  getComments(post) {
+    this.http.get('http://localhost:4201/posts:')
+  }
   
   getMessage(message) {
     this.http.get('/messages')
