@@ -118,8 +118,8 @@ export class SearchBarComponent implements OnInit {
         data.forEach((data) => {
           this.postService.getPost({post_id: Number(data.post_id)})
           .subscribe((data) => {
-            console.log({src: data[0].post_url})
-            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].post_url)})
+            console.log({src: data[0].text})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].text)})
           })
         })
       })
