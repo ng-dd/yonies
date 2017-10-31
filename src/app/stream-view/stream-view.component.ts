@@ -5,7 +5,7 @@ import * as SimplePeer from 'simple-peer'; //webrtc
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RoomstatService } from '../services/roomstat.service';
 import { UserService } from '../services/user.service';
-// import { SocketService } from '../services/socket.service';
+import { SocketService } from '../services/socket.service';
 // import * as YT from 'youtube';
 
 
@@ -40,7 +40,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     private script: ScriptService,
     private afAuth: AngularFireAuth,
     private roomstatService: RoomstatService,
-    // private socketService: SocketService,
+    private socketService: SocketService,
   ) {
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/faG5mmkDbyc');
     this.script.load('youtube')
@@ -58,7 +58,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this.videoId = this.roomstatService.getVideo();
-    // this.ioInit()
+    this.ioInit();
   //   console.log('room id from inside stream-view componen>>>>>>', this.roomId)
   //   this.p = new SimplePeer({ initiator: location.hash === '#1', trickle: false });
   //   // this.peerId = this.p._id;
@@ -154,7 +154,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     
     this.p.on('close', ()=>{  
       this.roomstatService.updateRoomstat(this.roomId, {
-      peer_id: 'closed',
+      room_info: 'closed',
     })
     // })
   })

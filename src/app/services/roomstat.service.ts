@@ -52,7 +52,7 @@ export class RoomstatService {
 
   updateRoomstat(room, info) {
     return this.http.put('http://localhost:4201/rooms/' + room, {
-      peer_id: String(info.peer_id)
+      room_info: String(info.peer_id)
     })
     .subscribe((data)=>{ return data })
   }
