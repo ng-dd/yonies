@@ -32,9 +32,10 @@
     </div>
     <div class="wrapper"> 
         
-<div mnFullpage>
+<div mnFullpage [mnFullpageNavigation]="false">
+                    
 
-    <div id="section0" class="section fp-section fp-table"></div>
+    <div class="section fp-section fp-table"></div>
 
     <div class="section fp-section fp-table" *ngFor='let vid of content'>
       <iframe
@@ -45,7 +46,7 @@
     <button (click)='roomStart(vid)'> Start a room</button>
     <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
     </div>
-    <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
+    <div *ngFor="let tweet of tweets" class="section fp-section fp-table" [innerHTML]= "tweet"> 
         {{tweet}}
     </div>
   </div>
