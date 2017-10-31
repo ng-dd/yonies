@@ -5,10 +5,9 @@ const request = require('request');
 module.exports = {
     addPost: (req, res) => {
         Post.create({
-            post_url: req.body.post_url,
-            post_like_count: req.body.post_like_count,
-            comment: req.body.comment,
-            comment_like_count: req.body.comment_like_count,
+            type: req.body.type,
+            text: req.body.text,
+            like_count: req.body.like_count,
             parent: req.body.parent
         })
         .then((data) => {

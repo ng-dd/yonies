@@ -77,7 +77,7 @@ export class PostService {
   addPost(post): Observable<any> {
     console.log(post.url, '<<<<<< POST')
     return this.http.post('http://localhost:4201/posts', {
-      post_url: post.url 
+      text: post.url 
     })
     .map((res) => {return res.json()})
   }
