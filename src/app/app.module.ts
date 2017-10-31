@@ -4,10 +4,12 @@ import { HttpModule }  from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RoutingModule } from './routing/routing.module';
 
 // Socket IO Chat Requirements
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+import { MnFullpageModule } from 'ngx-fullpage';
 
 // Design modules Material Design and Flex layout modules, hammerjs for gestures
 import { MaterialModule } from './material.module';
@@ -78,6 +80,7 @@ import { ChatComponent } from './chat/chat.component';
   ],
   imports: [
     BrowserModule,
+    RoutingModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,  
@@ -85,8 +88,8 @@ import { ChatComponent } from './chat/chat.component';
     FlexLayoutModule,
     AngularFireModule.initializeApp(firebaseConfig), // imports firebase/app needed for everything
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    SocketIoModule.forRoot(config) // imports Soket Io, needed for chat features
-    
+    SocketIoModule.forRoot(config), // imports Soket Io, needed for chat features
+    MnFullpageModule.forRoot() //import full page module
   ],
   providers: [
     AuthService,

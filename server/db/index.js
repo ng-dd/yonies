@@ -1,9 +1,13 @@
 var Sequelize = require('sequelize');
 require('dotenv').config();
+// dotenv.load();
+// import { Like } from '../db/models/likeModel';
+// import { User } from '../db/models/userModel';
+var dbUrl = require('../../dburl');
 
-console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
+console.log(dbUrl, 'EEEEEEEEEEEEEEEEEEEEE')
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
-  host: process.env.DATABASE_URL,
+  host: dbUrl,
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {
