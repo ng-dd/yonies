@@ -38,10 +38,6 @@ export class ContentFeedComponent implements OnInit {
     this.comments = [];
    }
 
-   test() {
-     console.log('CONTENT>>>', this.content);
-   }
-
    toggleComment() {
     if(!this.commentOn) {
       //get request to get comments on the post id
@@ -54,9 +50,9 @@ export class ContentFeedComponent implements OnInit {
     this.commentOn = !this.commentOn;
   }
 
-  // postComment(text) {
-  //   this.postService.addComment(text);
-  // }
+  postComment(text) {
+    this.postService.addComment(text);
+  }
 
   //get current user, get content feed based on keywords of stuff they have liked,
   //so when they like, add the search query of what they liked 
