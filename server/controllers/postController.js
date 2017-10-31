@@ -133,6 +133,20 @@ module.exports = {
         })
     },
 
+    getPostUrl: (req, res) => {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+        // Post.findAll({
+        //     where: {text: req.params.id}
+        // })
+        // .then((data) => {
+        //     console.log(data)
+        //     res.send(data);
+        // })
+        // .catch(err => {
+        //     res.status(500).send(err)
+        // })
+    },
+
     deletePost: (req, res) => {
         Post.destroy({
             where: {post_id: req.params.id}
