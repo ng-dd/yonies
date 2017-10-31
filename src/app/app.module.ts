@@ -27,6 +27,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { StreamViewComponent } from './stream-view/stream-view.component';
 import { StreamChatLogComponent } from './stream-chat-log/stream-chat-log.component';
 import { SingleCelebFeedComponent } from './single-celeb-feed/single-celeb-feed.component';
+import { RoutingModule } from './routing/routing.module';
 
 // import { Peer } from 'simple-peer'; //webrtc 
 
@@ -54,6 +55,7 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { InstagramComponent } from './instagram/instagram.component';
 import { ChatComponent } from './chat/chat.component';
+import { VideoShareComponent } from './video-share/video-share.component';
 
 @NgModule({
   declarations: [
@@ -74,9 +76,11 @@ import { ChatComponent } from './chat/chat.component';
     LoginComponent,
     NotFoundComponent,
     InstagramComponent,
-    ChatComponent
+    ChatComponent,
+    VideoShareComponent
   ],
   imports: [
+    RoutingModule,
     BrowserModule,
     HttpModule,
     FormsModule,
