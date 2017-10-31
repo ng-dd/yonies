@@ -1,22 +1,26 @@
 var Sequelize = require('sequelize');
 require('dotenv').config();
+// dotenv.load();
+// import { Like } from '../db/models/likeModel';
+// import { User } from '../db/models/userModel';
+var dbUrl = require('../../dburl');
 
-console.log(process.env.DATABASE_URL, 'EEEEEEEEEEEEEEEEEEEEE')
-const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
-  host: process.env.DATABASE_URL,
-  port: 5432,
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl:'Amazon RDS'
-  },
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 20000,
-    acquire: 20000
-  }});
+console.log(dbUrl, 'EEEEEEEEEEEEEEEEEEEEE')
+// const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
+//   host: dbUrl,
+//   port: 5432,
+//   dialect: 'postgres',
+//   dialectOptions: {
+//     ssl:'Amazon RDS'
+//   },
+//   pool: {
+//     max: 5,
+//     min: 0,
+//     idle: 20000,
+//     acquire: 20000
+//   }});
   
-  // const sequelize = new Sequelize('postgres://gqhmxfxh:0moqyFAzfF1UOx3Nw8kKuly4cdpyH3f5@pellefant.db.elephantsql.com:5432/gqhmxfxh', {dialect: 'postgres'})
+  const sequelize = new Sequelize('postgres://gqhmxfxh:0moqyFAzfF1UOx3Nw8kKuly4cdpyH3f5@pellefant.db.elephantsql.com:5432/gqhmxfxh', {dialect: 'postgres'})
   sequelize.authenticate()
     .then(console.log('connected to the database!'))
     .catch(err => console.log('error connecting to database!', err));
@@ -78,7 +82,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 
 for (var key in db) {
   console.log('@@@@@@@@@@@@SYNCING@@@@@@@@@@@: ', key)
-  db[key].sync({force: true})
+  db[key].sync()
 }
 
 module.exports = db;

@@ -38,7 +38,7 @@ module.exports = {
 
     embed: function(req, res) {
         var id = req.params.id;
-        axios.get(`https://publish.twitter.com/oembed?url=https://twitter.com/someone/status/${id}`)
+        axios.get(`https://publish.twitter.com/oembed?maxwidth=350&maxheight=250&url=https://twitter.com/someone/status/${id}&hide_media=true`, {query: {hide_media: true}})
         .then((data) => {
             res.json(data.data.html)
         })
@@ -69,7 +69,6 @@ module.exports = {
     //     })
     // },
 
-    //search tweets by user
     insta: function(req, res) {
         // var userid = req.params.id;
         axios.get('https://api.instagram.com/v1/users/244021744/media/recent/?access_token=244021744.485c416.b94164e94429496f8acee5fb4af8e790')
@@ -83,7 +82,8 @@ module.exports = {
             res.send(err);
         })
     },
-
+    
+    //search tweets by user
     search: function(req, res) {
         var searchquery = req.body.query;
         var encsearchquery = encodeURIComponent(searchquery);
@@ -131,6 +131,20 @@ module.exports = {
         .catch(err=> {
             res.status(500).send(err)
         })
+    },
+
+    getPostUrl: (req, res) => {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+        // Post.findAll({
+        //     where: {text: req.params.id}
+        // })
+        // .then((data) => {
+        //     console.log(data)
+        //     res.send(data);
+        // })
+        // .catch(err => {
+        //     res.status(500).send(err)
+        // })
     },
 
     deletePost: (req, res) => {

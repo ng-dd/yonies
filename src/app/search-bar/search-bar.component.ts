@@ -158,14 +158,11 @@ export class SearchBarComponent implements OnInit {
     this.postService.getTwitch(query.post)
     .subscribe((data) => {
       data.videos.forEach((video) => {
-        this.twitch.push(this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`));
         this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
       })
       this.postService.getYouTube(query.post)
       .subscribe((data) => {
         data.items.forEach((video) => {
-          // var link = this.sanitizer.bypassSecurityTrustUrl('https://www.youtube.com/embed/' + video.id.videoId)
-          this.youtube.push(this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId))
           this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
         })
         // console.log(this.youtube, 'YOUTUBE <<<<<<<<')
@@ -187,7 +184,7 @@ export class SearchBarComponent implements OnInit {
           // console.log(data, 'TWITTER OMBED DATA <<<<<<<<<<<<<')
           var el = document.createElement('html');
           el.innerHTML = data;
-          // console.log(el, 'TWITTER <<<<<<<<<<<<') 
+          console.log(el, 'TWITTER <<<<<<<<<<<<') 
           var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
           this.tweets.push(twt);
           this.scriptService.load('twitterWidget')
@@ -200,6 +197,21 @@ export class SearchBarComponent implements OnInit {
     }, (err) => {
       console.log(err, 'error from searchPosts')
     })
+
+    //testing embed timeline
+    // this.postService.getEmbed(query.post)
+    // .subscribe((data) => {
+    //   console.log(data, 'twitter oembed data')
+    //   var el = document.createElement('html');
+    //   el.innerHTML = data;
+    //   var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);             
+    //   this.tweets.push(twt);
+    //   this.scriptService.load('twitterWidget')
+    //     .then(data => {
+    //       console.log('script loaded ', data);
+    //     })
+    //     .catch(error => console.log(error)); 
+    // })
     this.postForm.reset();
   }
   
