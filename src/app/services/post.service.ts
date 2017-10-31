@@ -74,6 +74,13 @@ export class PostService {
     })
   }
 
+  getPostByUrl(post): Observable <any> {
+    return this.http.get(`http://localhost:4201/postbyid/${post.url}`)
+    .map((data) => {
+      return data.json();
+    })
+  }
+
   addPost(post): Observable<any> {
     console.log(post.url, '<<<<<< POST')
     return this.http.post('http://localhost:4201/posts', {
