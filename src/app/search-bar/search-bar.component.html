@@ -1,9 +1,5 @@
-<input type="text" [(ngModel)]= 'roomId' placeholder="room id"/>
-<button (click)='connectToRoom()'>connect</button> 
-<div class="order-form">
-  <div *ngIf = "roomStarted">
-    <app-stream-view [videoId]='videoUrl' [roomId]='roomId'></app-stream-view>
-  </div>
+<div>
+
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">
     <input type='submit' value='search users'>
@@ -28,18 +24,20 @@
       <button (click)="addFriend(user)">Add Friend</button>
     </li>
   </ul>
-  <ul>
-    <div *ngFor='let user of users'>
+  {{keyWord}}
+  <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
+  <div *ngFor='let user of users'>
       {{user.username}}
       <input type='button' value='visit wall' (click)="visitWall(user)">
     </div>
-    <div> 
-      {{keyWord}}
-      <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
-      <!-- <div *ngFor="let tweet of tweets" [innerHTML]= "tweet"> 
-          {{tweet}}
-      </div> -->
-    <div *ngFor='let vid of content'>
+    <div class="wrapper"> 
+        
+<div mnFullpage [mnFullpageNavigation]="false">
+                    
+
+    <div class="section fp-section fp-table"></div>
+
+    <div class="section fp-section fp-table" *ngFor='let vid of content'>
       <iframe
       [src]='vid.src'
       height='315'
@@ -48,26 +46,12 @@
     <button (click)='roomStart(vid)'> Start a room</button>
     <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
     </div>
+    <div *ngFor="let tweet of tweets" class="section fp-section fp-table" [innerHTML]= "tweet"> 
+        {{tweet}}
+    </div>
   </div>
-  <div *ngFor='let vid of twitch'>
-    <iframe
-    [src]=vid
-    height="315"
-    width="420"
-    frameborder="0"
-    scrolling="no"
-    allowfullscreen="false">
-</iframe>
-  </div> -->
-  <div *ngFor='let vid of content'>
-    <iframe
-    [src]='vid.src'
-    height='315'
-    width='420'>
-  </iframe>
-  <button (click)='roomStart(vid)'> Start a room</button>
-  </div>
-  </ul>
+  <!-- <app-stream-view [videoId]='videoUrl'></app-stream-view> -->
+</div>
   <div>
     <input type="button" value="get current user" (click)="currentUser()">
   </div>

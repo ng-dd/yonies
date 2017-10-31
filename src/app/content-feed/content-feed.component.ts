@@ -20,22 +20,66 @@ import * as firebase from 'firebase/app';
   templateUrl: './content-feed.component.html',
   styleUrls: ['./content-feed.component.css']
 })
-export class ContentFeedComponent implements AfterViewInit {
+export class ContentFeedComponent implements OnInit {
   
   cats: any;
   uid: any;
   content: any;
+  liked: boolean;
 
-  constructor(private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+  constructor(private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
     this.content = [];
     this.cats = [];
     this.uid = '';
+    this.liked = false;
    }
 
   //get current user, get content feed based on keywords of stuff they have liked,
   //so when they like, add the search query of what they liked 
+  likePost(post) {
+    let user = firebase.auth().currentUser;    
+    this.postService.addPost(post)
+    .subscribe((res) => {
+      console.log(res, '<<<<<< RES')
+      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
+      .subscribe((data) => {
+        console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
+      })
+    }) 
+    this.liked = true; 
+  }
 
-  ngAfterViewInit() {
+  checkIfLiked(post) {
+    this.liked = false;
+    let user = firebase.auth().currentUser;    
+    console.log(post)
+    // console.log(this.liked)
+    this.likeService.getLikes({uid: user.uid})
+    .subscribe((res) => {
+      var postIds = res.map((data) => {return data.post_id})
+      postIds.forEach((id) => {
+        this.postService.getPost({post_id: id})
+        .subscribe((data) => {
+          data.forEach((p) => {
+            if (p.text === post.url) {
+              this.liked = true;
+              console.log(this.liked, 'liked status if true')
+              return this.liked;
+            }
+          })
+        })
+      })
+    })
+    console.log(this.liked, 'liked status if false')
+    return this.liked;
+  }
+  //check the posts table for a url that match
+  //get the post ids from the post tables,
+  //check the likes table where post id = any in the post array
+  //check if any 
+
+  ngOnInit() {
+    console.log('RUNNING in ONINIT')
     this.content = [];
     this.afAuth.authState.subscribe((data) => {
       console.log(data.uid, '<<<<<< DATA.uid')
