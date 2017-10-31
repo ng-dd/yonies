@@ -57,76 +57,77 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    this.ioInit()
-    console.log('room id from inside stream-view componen>>>>>>', this.roomId)
-    this.p = new SimplePeer({ initiator: location.hash === '#1', trickle: false });
-    // this.peerId = this.p._id;
-    console.log(this.room)
-    this.roomstatService.getRoomstat(this.roomId, (data)=>{
-      console.log('DATA!!>>>>>>', data['_body'])
-      let parsed = JSON.parse(data['_body'])
-      this.room = parsed[0]
-      console.log('CHECKING ROOM AT!!!!!!!!!', this.room['peer_id'])
-      this.host = this.room['peer_id'];
+    this.videoId = this.roomstatService.getVideo();
+    this.ioInit();
+  //   console.log('room id from inside stream-view componen>>>>>>', this.roomId)
+  //   this.p = new SimplePeer({ initiator: location.hash === '#1', trickle: false });
+  //   // this.peerId = this.p._id;
+  //   console.log(this.room)
+  //   this.roomstatService.getRoomstat(this.roomId, (data)=>{
+  //     console.log('DATA!!>>>>>>', data['_body'])
+  //     let parsed = JSON.parse(data['_body'])
+  //     this.room = parsed[0]
+  //     console.log('CHECKING ROOM AT!!!!!!!!!', this.room['peer_id'])
+  //     this.host = this.room['peer_id'];
 
-      this.p.on('signal', (data) => {
-        if(!this.room['peer_id']){
-          this.host = data;
-          console.log('updating peer id w/: ', JSON.stringify(data));
-          this.roomstatService.updateRoomstat(this.roomId, {
-            peer_id: JSON.stringify(data)
-          })
-        }
-        console.log('creating signal.....');
-        console.log('SIGNAL', JSON.stringify(data));
-        this.targetPeer = JSON.stringify(data);
-      });
-      console.log(this.room)
-      console.log('get room data: ', this.room)
-      console.log('Room info: ', this.room, 'with host: ', this.host)
+  //     this.p.on('signal', (data) => {
+  //       if(!this.room['peer_id']){
+  //         this.host = data;
+  //         console.log('updating peer id w/: ', JSON.stringify(data));
+  //         this.roomstatService.updateRoomstat(this.roomId, {
+  //           peer_id: JSON.stringify(data)
+  //         })
+  //       }
+  //       console.log('creating signal.....');
+  //       console.log('SIGNAL', JSON.stringify(data));
+  //       this.targetPeer = JSON.stringify(data);
+  //     });
+  //     console.log(this.room)
+  //     console.log('get room data: ', this.room)
+  //     console.log('Room info: ', this.room, 'with host: ', this.host)
 
-   //replace with variable upon generating/joining room 
-      // .subscribe((data) => {
-      // })
-      // .unsubscribe(( ) => {
-        // if (roomInfo.hasOwnProperty('host_id')) {
-        //   // this.roomstatService.addRoomstat({
+  //  //replace with variable upon generating/joining room 
+  //     // .subscribe((data) => {
+  //     // })
+  //     // .unsubscribe(( ) => {
+  //       // if (roomInfo.hasOwnProperty('host_id')) {
+  //       //   // this.roomstatService.addRoomstat({
     
-        //   //   hostId: this.p._id,
-        //   // })
-        //   this.host = this.peerId;
-        // } else {
-        //   this.host = roomInfo['host_id'];
-        // }
-      // })
+  //       //   //   hostId: this.p._id,
+  //       //   // })
+  //       //   this.host = this.peerId;
+  //       // } else {
+  //       //   this.host = roomInfo['host_id'];
+  //       // }
+  //     // })
 
-    console.log('oniniting')
-    // if (!this.host) { //set host UID uncomment when auth is established on page
-    //   // this.host = this.afAuth.auth.currentUser.uid
-    // } else {
-    //   this.peerId = String(this.counter);
-    //   this.counter++
-    // }
-    console.log('initial peer information: ', this.p)
-    // this.p.on('error', (err) => { console.log('error', err) });
+  //   console.log('oniniting')
+  //   // if (!this.host) { //set host UID uncomment when auth is established on page
+  //   //   // this.host = this.afAuth.auth.currentUser.uid
+  //   // } else {
+  //   //   this.peerId = String(this.counter);
+  //   //   this.counter++
+  //   // }
+  //   console.log('initial peer information: ', this.p)
+  //   // this.p.on('error', (err) => { console.log('error', err) });
     
-    // this.p.signal(this.host);
+  //   // this.p.signal(this.host);
     
 
-    // document.querySelector('form').addEventListener('submit', function (ev) {
-    //   ev.preventDefault();
-    //   this.p.signal(JSON.parse(this.incoming));
-    // });
-    // this.roomstatService.getHostId(this.room)
-    console.log('target peer i guess', this.targetPeer)
-    this.p.signal(this.targetPeer); //connect to host via get
-    this.p.on('connect', function () {
-      console.log('CONNECT');
-      this.p.send(this.videoUrl);
-    });
-    this.p.on('data', function (data) {
-      console.log('data: ' + data);
-    });
+  //   // document.querySelector('form').addEventListener('submit', function (ev) {
+  //   //   ev.preventDefault();
+  //   //   this.p.signal(JSON.parse(this.incoming));
+  //   // });
+  //   // this.roomstatService.getHostId(this.room)
+  //   console.log('target peer i guess', this.targetPeer)
+  //   this.p.signal(this.targetPeer); //connect to host via get
+  //   this.p.on('connect', function () {
+  //     console.log('CONNECT');
+  //     this.p.send(this.videoUrl);
+  //   });
+  //   this.p.on('data', function (data) {
+  //     console.log('data: ' + data);
+  //   });
     
     (<any>window).onYouTubeIframeAPIReady = () => {
       this.player = new window['YT'].Player('player', {
@@ -153,9 +154,9 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     
     this.p.on('close', ()=>{  
       this.roomstatService.updateRoomstat(this.roomId, {
-      peer_id: 'closed',
+      room_info: 'closed',
     })
-    })
+    // })
   })
   }
   

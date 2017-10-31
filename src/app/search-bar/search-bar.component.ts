@@ -14,6 +14,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
 import { RoomstatService } from '../services/roomstat.service'
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase/app';
 
 
@@ -56,6 +57,7 @@ export class SearchBarComponent implements OnInit {
     private categoryService: CategoryService, 
     private firebaseAuth: AngularFireAuth, 
     private likeService: LikesService, 
+    private router: Router,
   ) { 
     this.myForm = fb.group({
       'username': null
@@ -242,6 +244,7 @@ export class SearchBarComponent implements OnInit {
 
   roomStart(vid) {
     console.log(vid.src['changingThisBreaksApplicationSecurity']);
+
     this.roomstatService.addRoomstat((roomData)=>{
       let response = JSON.parse(roomData._body)
       this.roomId = response.room_id;
@@ -253,12 +256,13 @@ export class SearchBarComponent implements OnInit {
     } else {
       this.videoUrl = url;
     }
-    
+    this.roomstatService.selectVideo(this.videoUrl)
+    this.router.navigate(['/room'])
   }
 
   connectToRoom(roomId){
     console.log('room', this.roomId)
-    this.roomStarted = true;
+
   } 
 
   ngOnInit() {

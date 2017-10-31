@@ -1,29 +1,28 @@
 <div>
-    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex class="coloredContainerX box">
-        <div fxFlex> <app-navbar></app-navbar></div>
-        <div fxFlex> 
-            <mat-card class="card-demo">
-                <mat-card-title>Main Area Heading</mat-card-title>
-                <mat-card-subtitle>Main Area Subtitle</mat-card-subtitle>
-                <mat-card-content>
-                  <div>This is where our stuff will go for each card</div>
-                </mat-card-content>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex class="coloredContainerX box">
+    <div fxFlex> <app-navbar></app-navbar></div>
+    
+    <div fxFlex> 
+      <mat-card class="card-demo">
+        <mat-card-title>Main Area Heading</mat-card-title>
+        <mat-card-subtitle>Main Area Subtitle</mat-card-subtitle>
+        <mat-card-content>
+          <div>This is where our stuff will go for each card</div>
+        </mat-card-content>
+
                 <mat-card-footer style="width:95%">
                 </mat-card-footer>
               </mat-card>
+              <router-outlet></router-outlet>
               <app-login></app-login>
               <app-search-bar></app-search-bar>
               <app-content-feed></app-content-feed>
               <app-friends-list></app-friends-list>
-              <!-- <app-stream-view></app-stream-view> -->
         </div>
         
     </div>
-  hello
-  <!-- <app-testing></app-testing>
-  <app-login></app-login> -->
-  <!-- <app-search-bar></app-search-bar> -->
-  <!-- <app-stream-view></app-stream-view> -->
+
+
 </div>
 
 
