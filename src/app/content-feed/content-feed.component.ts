@@ -27,7 +27,15 @@ export class ContentFeedComponent implements OnInit {
   content: any;
   liked: boolean;
 
-  constructor(private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+  constructor(
+    private likeService: LikesService, 
+    private sanitizer: DomSanitizer, 
+    private postService: PostService, 
+    private authService: AuthService, 
+    private categoryService: CategoryService, 
+    private afAuth: AngularFireAuth,
+    private fb: FormBuilder) {
+
     this.content = [];
     this.cats = [];
     this.uid = '';

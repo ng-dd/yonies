@@ -41,6 +41,9 @@ export class SearchBarComponent implements OnInit {
   roomStarted: boolean = false;
   roomId: any;
   keyWord: any;
+  commentOn: boolean = false;
+  comments: any;
+  commentForm: FormGroup;
 
   
   constructor(
@@ -68,15 +71,35 @@ export class SearchBarComponent implements OnInit {
     this.hashForm = fb.group({
       'hash': null
     })
+    this.commentForm = fb.group({
+      'comment': null
+    });  
+    this.commentOn = false;
+    this.comments = [];
 
     this.tweets = [];
     this.twitch = [];
     this.youtube = [];
     this.content = [];
     this.users = [];
-    this.keyWord = '';
   }
 
+  toggleComment() {
+    if(!this.commentOn) {
+      //get request to get comments on the post id
+      this.postService.getComments(1)
+        .subscribe(data => {
+          this.comments = data;
+          console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
+        })
+      } 
+      this.commentOn = !this.commentOn;
+    }
+
+  postComment(text) {
+    console.log('TEXT!!!', text);
+    this.postService.addComment(text);
+  }
 
 
   toggleQuery(value: any) {
@@ -110,18 +133,18 @@ export class SearchBarComponent implements OnInit {
 
   visitWall(user) {
     this.content = [];
-    console.log(user, 'user')
+    // console.log(user, 'user')
     this.userService.getUser(user)
     .subscribe((data) => {
-      console.log(data, '<<<<<<DATA')
+      // console.log(data, '<<<<<<DATA')
       this.likeService.getLikes({uid: data[0].uid})
       .subscribe((data) => {
-        // console.log(data)
+        // console.log("LIKE DATA!! >>>>", data)
         data.forEach((data) => {
-          this.postService.getPost({post_id: Number(data.post_id)})
+          this.postService.getPost({post_id: data.post_id})
           .subscribe((data) => {
-            console.log({src: data[0].text})
-            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data[0].text)})
+            // console.log('HERE IS SOURCE!!', {src: data.text})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text)})
           })
         })
       })
@@ -236,11 +259,12 @@ export class SearchBarComponent implements OnInit {
 
   //add the post to the post table and the likes table
   likePost(post) {
-    let user = firebase.auth().currentUser;    
+    let user = firebase.auth().currentUser;  
+    console.log(post, '<<<<<KERSHAW!!!')  
     this.postService.addPost(post)
     .subscribe((res) => {
       console.log(res, '<<<<<< RES')
-      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
+      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id), type: 'post'})
       .subscribe((data) => {
         console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
