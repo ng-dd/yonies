@@ -44,6 +44,7 @@ export class SearchBarComponent implements OnInit {
   commentOn: boolean = false;
   comments: any;
   commentForm: FormGroup;
+  name: string; 
 
   
   constructor(
@@ -84,10 +85,10 @@ export class SearchBarComponent implements OnInit {
     this.users = [];
   }
 
-  toggleComment() {
+  toggleComment(id) {
     if(!this.commentOn) {
       //get request to get comments on the post id
-      this.postService.getComments(1)
+      this.postService.getComments(id)
         .subscribe(data => {
           this.comments = data;
           console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
@@ -96,9 +97,12 @@ export class SearchBarComponent implements OnInit {
       this.commentOn = !this.commentOn;
     }
 
-  postComment(text) {
-    console.log('TEXT!!!', text);
-    this.postService.addComment(text);
+  postComment(text, id) {
+    console.log('THIS IS THE ID!!!', id);
+    this.postService.addComment(text, id)
+      .subscribe(res => {
+        console.log(res);
+      })
   }
 
 
@@ -131,6 +135,10 @@ export class SearchBarComponent implements OnInit {
     this.myForm.reset();
   } 
 
+  test() {
+    console.log('THIS IS THE CURRENT USER', firebase.auth().currentUser)
+  }
+
   visitWall(user) {
     this.content = [];
     // console.log(user, 'user')
@@ -144,7 +152,7 @@ export class SearchBarComponent implements OnInit {
           this.postService.getPost({post_id: data.post_id})
           .subscribe((data) => {
             // console.log('HERE IS SOURCE!!', {src: data.text})
-            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text)})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text), id: data.post_id})
           })
         })
       })
@@ -259,13 +267,10 @@ export class SearchBarComponent implements OnInit {
   //add the post to the post table and the likes table
   likePost(post) {
     let user = firebase.auth().currentUser;  
-    console.log(post, '<<<<<KERSHAW!!!')  
     this.postService.addPost(post)
     .subscribe((res) => {
-      console.log(res, '<<<<<< RES')
       this.likeService.addLike({uid: user.uid, post_id: String(res.post_id), type: 'post'})
       .subscribe((data) => {
-        console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
     })  
   }
@@ -300,6 +305,11 @@ export class SearchBarComponent implements OnInit {
 
   } 
 
+  getName() {
+    console.log('THIS IS THE CURRENT USER', firebase.auth().currentUser)
+  }
+
   ngOnInit() {
+    this.getName();
   }
 }
