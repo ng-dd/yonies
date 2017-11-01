@@ -53,9 +53,12 @@ app.get('/', (req, res) => {
 
 
 
-// io.on('connection', function(socket) {
-//   console.log('a user connected')
-// })
+io.on('connection', (socket) => {
+  console.log('a user connected')
+  socket.emit('signal', {
+    greeting: 'we get signal'
+  })
+})
 
 server.listen(port, (err)=>{
   if (err) {

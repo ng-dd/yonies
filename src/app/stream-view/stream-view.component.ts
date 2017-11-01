@@ -35,13 +35,16 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   user: number = Math.random()*10
   messages: object[] = [];
   io: any;
+  connection: any;
+  private socketService: SocketService;
   constructor(
     private sanitizer: DomSanitizer,
     private script: ScriptService,
     private afAuth: AngularFireAuth,
     private roomstatService: RoomstatService,
-    private socketService: SocketService,
   ) {
+    this.socketService = new SocketService('room');
+    console.log('looking at the instance: ', this.socketService)
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/faG5mmkDbyc');
     this.script.load('youtube')
       .then((data) => { console.log('Script loaded: ', data, window) })
@@ -49,85 +52,31 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
-    // const doc = (<any>window).document;
-    // let playerApiScript = doc.createElement('script');
-    // playerApiScript.type = 'text/javascript';
-    // playerApiScript.src = 'https://www.youtube.com/iframe_api';
-    // doc.body.appendChild(playerApiScript);
+
   }
 
   ngOnInit() {
     this.videoId = this.roomstatService.getVideo();
+    this.videoId = 'oCrwzN6eb4Q'
     this.ioInit();
-  //   console.log('room id from inside stream-view componen>>>>>>', this.roomId)
-  //   this.p = new SimplePeer({ initiator: location.hash === '#1', trickle: false });
-  //   // this.peerId = this.p._id;
-  //   console.log(this.room)
-  //   this.roomstatService.getRoomstat(this.roomId, (data)=>{
-  //     console.log('DATA!!>>>>>>', data['_body'])
-  //     let parsed = JSON.parse(data['_body'])
-  //     this.room = parsed[0]
-  //     console.log('CHECKING ROOM AT!!!!!!!!!', this.room['peer_id'])
-  //     this.host = this.room['peer_id'];
-
-  //     this.p.on('signal', (data) => {
-  //       if(!this.room['peer_id']){
-  //         this.host = data;
-  //         console.log('updating peer id w/: ', JSON.stringify(data));
-  //         this.roomstatService.updateRoomstat(this.roomId, {
-  //           peer_id: JSON.stringify(data)
-  //         })
-  //       }
-  //       console.log('creating signal.....');
-  //       console.log('SIGNAL', JSON.stringify(data));
-  //       this.targetPeer = JSON.stringify(data);
-  //     });
-  //     console.log(this.room)
-  //     console.log('get room data: ', this.room)
-  //     console.log('Room info: ', this.room, 'with host: ', this.host)
-
-  //  //replace with variable upon generating/joining room 
-  //     // .subscribe((data) => {
-  //     // })
-  //     // .unsubscribe(( ) => {
-  //       // if (roomInfo.hasOwnProperty('host_id')) {
-  //       //   // this.roomstatService.addRoomstat({
-    
-  //       //   //   hostId: this.p._id,
-  //       //   // })
-  //       //   this.host = this.peerId;
-  //       // } else {
-  //       //   this.host = roomInfo['host_id'];
-  //       // }
-  //     // })
-
-  //   console.log('oniniting')
-  //   // if (!this.host) { //set host UID uncomment when auth is established on page
-  //   //   // this.host = this.afAuth.auth.currentUser.uid
-  //   // } else {
-  //   //   this.peerId = String(this.counter);
-  //   //   this.counter++
-  //   // }
-  //   console.log('initial peer information: ', this.p)
-  //   // this.p.on('error', (err) => { console.log('error', err) });
-    
-  //   // this.p.signal(this.host);
-    
-
-  //   // document.querySelector('form').addEventListener('submit', function (ev) {
-  //   //   ev.preventDefault();
-  //   //   this.p.signal(JSON.parse(this.incoming));
-  //   // });
-  //   // this.roomstatService.getHostId(this.room)
-  //   console.log('target peer i guess', this.targetPeer)
-  //   this.p.signal(this.targetPeer); //connect to host via get
-  //   this.p.on('connect', function () {
-  //     console.log('CONNECT');
-  //     this.p.send(this.videoUrl);
-  //   });
-  //   this.p.on('data', function (data) {
-  //     console.log('data: ' + data);
-  //   });
+    this.connection = this.socketService.recieveStateChange()
+    .subscribe((state)=>{ 
+      console.log('Getting new state from socket server: ', state)
+      if (Number(state[0]) === 1) {
+        //socket over play request
+        this.player.seekTo(state[1])
+        this.player.playVideo();
+      } else if (Number(state[0]) === 2) {
+        //socket over pause request to peers
+        this.player.seekTo(state[1])
+        this.player.pauseVideo();
+      } else if (state[0] === '3') {
+        //Buffering- means socket over seekto request to peers /or/ video change
+        this.player.seekTo();
+      } else if (state[0] === '5') {
+        //Video cued up, socket over queue
+      }
+    });
     
     (<any>window).onYouTubeIframeAPIReady = () => {
       this.player = new window['YT'].Player('player', {
@@ -150,14 +99,6 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       event.target.playVideo();
     }
     console.log('checking host before close', this.host)
-    // this.p.signal(JSON.parse(this.host));
-    
-    this.p.on('close', ()=>{  
-      this.roomstatService.updateRoomstat(this.roomId, {
-      room_info: 'closed',
-    })
-    // })
-  })
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -167,21 +108,13 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ioInit() {
-    // this.socketService.socketInit();
-    // console.log('init the socket')
-    // this.io = this.socketService.onMessage()
-    // .subscribe((message)=>{
-    //   this.messages.push(message);
-    // })
-    // this.socketService.onConnect()
-    // .subscribe(() => {
-    //   console.log('Connecting...')
-    // })
-    // this.socketService.onDisconnect()
-    // .subscribe(() => {
-    //   console.log('Disconnecting...')
-    // })
-    // this.socketService.send('test from '+ this.user)
+    this.socketService.signalTest()
+    console.log('checking io', this.socketService.socketIo)
+    if (!this.roomId){
+      this.roomId = '1';
+    }
+    
+    this.socketService.joinRoom(this.roomId)
   }
 
   
@@ -198,15 +131,8 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       console.log('Player state changed: ', this.player.getPlayerState(), this.player.getCurrentTime())
       console.log(this.player)
       let state = this.player.getPlayerState();
-      if (state === 1) {
-        //socket over play request
-      } else if (state === 2 && this.host !== this.peerId) {
-        //socket over pause request to peers
-      } else if (state === 3) {
-        //Buffering- means socket over seekto request to peers /or/ video change
-      } else if (state === 5) {
-        //Video cued up, socket over queue
-      }
+      this.socketService.stateChange(this.roomId, state, this.player.getCurrentTime())
+
     }
 
     if (event.data == window['YT'].PlayerState.PLAYING && !this.done) {

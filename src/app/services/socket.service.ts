@@ -4,26 +4,49 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class SocketService {
-  private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+  private host: string = /*window.location.protocol + '//' + window.location.hostname +*/ 'http://localhost:' + 4201;
   socket: any;
   socketIo: any;
-  SERVER_URL: string = 'http://localhost.com:4201';
+  SERVER_URL: string = 'http://localhost:4201';
 
   constructor(private name: string){
-    let URL = this.host + '/' + this.name;
+    let URL = this.host //+ '/' + this.name;
     this.socketIo = io.connect(URL);
+    console.log('checkign socketio from constructor: ', this.socketIo)
   }
 
   // Get items observable
-  items(): Observable<any> {
-    return Observable.create(observer => {
-      this.socket.on('item', (item: any) => observer.next(item));
+  items(){
+      this.socketIo.on('signal', (data) => {
+      console.log(data);
     });
+  }
+
+  stateChange(roomId, state, time) {
+    this.socketIo.emit('changeState', roomId, state, time);
+  }
+
+  recieveStateChange(): Observable<[string]> {
+    return new Observable((observer) => {
+      this.socketIo.on('newState', (state, time) =>{
+        observer.next([state, time]);
+      })
+    })
+  }
+
+  joinRoom(roomId) {
+    this.socketIo.emit('joinRoom', roomId)
   }
 
   // Request initial list when connected
   list(): void {
     this.socket.emit('list');
+  }
+
+  signalTest() {
+    this.socketIo.on('signal',(data) => {
+      console.log(data)
+    })
   }
 
 
@@ -54,7 +77,9 @@ export class SocketService {
 
   onConnect(): Observable<any> {
     return new Observable(observer => {
-      this.socket.on('connect', () => {
+      console.log('connecting...')
+      this.socket.on('connect', (data) => {
+        console.log('here is the data', data)
         observer.next();
       })
     })
