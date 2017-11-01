@@ -38,11 +38,7 @@
     <div class="section fp-section fp-table"></div>
 
     <div class="section fp-section fp-table" *ngFor='let vid of content'>
-      <iframe
-        [src]='vid.src'
-        height='315'
-        width='420'>
-      </iframe>
+      <app-content-item [vid]="vid"></app-content-item>
       <button (click)='roomStart(vid)'> Start a room</button>
       <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
       <button (click)="toggleComment()">Comment</button>

@@ -41,20 +41,21 @@ export class FeaturedComponent implements OnInit {
       data.items.forEach((video) => {
         console.log(video, 'videos')
         this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
-        this.postService.getTwitch(tag)
-        .subscribe((data) => {
-          data.videos.forEach((video) => {
-            this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
-          })
-        })
+        console.log(this.content, 'CONtent *&&&&')
+        // this.postService.getTwitch(tag)
+        // .subscribe((data) => {
+        //   data.videos.forEach((video) => {
+        //     this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
+        //   })
+        // })
       })
       this.content.sort((a, b) => {
         var c = new Date(a.date).getTime()
         var d = new Date(b.date).getTime()
         return c > d ? 1 : -1; 
       })
-      this.content = this.content.slice(0, 11);   
     })
+    this.content = this.content.slice(0, 11);   
   }
 
   ngOnInit() {

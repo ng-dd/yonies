@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 import { MnFullpageModule } from 'ngx-fullpage';
-import { MnFullpageDirective, MnFullpageService } from "ng2-fullpage";
 
 // Design modules Material Design and Flex layout modules, hammerjs for gestures
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
