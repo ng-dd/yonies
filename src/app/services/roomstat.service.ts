@@ -21,6 +21,14 @@ export class RoomstatService {
     // })
   }
 
+  getRoom() {
+    return this.roomId
+  }
+
+  setRoom(room) {
+    this.roomId = room;
+  }
+
   getHostId(room) {
     this.http.get('http://localhost:4201/rooms/' + room )
     .subscribe((data) => {
@@ -65,7 +73,23 @@ export class RoomstatService {
     this.selectedUrl = url;
   }
 
-  getVideo() {
+  getSelectedVideo() {
     return this.selectedUrl;
+  }
+
+  setVideo(room, url) {
+    this.http.put('http://localhost:4201/rooms/' + room, {
+      video_url: url
+    })
+  }
+
+  getVideo(room): Observable<any> {
+    return new Observable((observer) => {
+      this.http.get('http://localhost:4201/rooms/' + room)
+      .subscribe((data) => {
+        console.log('getting data from getvideo', JSON.parse(data['_body'])[0]);
+        observer.next(JSON.parse(data['_body'])[0]['video_url'])
+      })
+    })
   }
 }

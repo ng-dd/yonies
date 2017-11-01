@@ -64,7 +64,11 @@ export class FriendsListComponent implements OnInit {
   }
   
   ngOnInit() {
-
+    //>>REMOVE_BEFORE_LAUNCH<< generates lists of all users- when friends work >>REMOVE_BEFORE_LAUNCH<<
+    
   }
+
+
+  
 
 }

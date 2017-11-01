@@ -17,6 +17,7 @@ import { SocketService } from '../services/socket.service';
 export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() videoId: string;
   @Input() roomId: string;
+  @Input() private socketService: SocketService;
   @HostListener('window:unload', ['event'])
   incoming: string;
   host: any;
@@ -36,14 +37,13 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   messages: object[] = [];
   io: any;
   connection: any;
-  private socketService: SocketService;
   constructor(
     private sanitizer: DomSanitizer,
     private script: ScriptService,
     private afAuth: AngularFireAuth,
     private roomstatService: RoomstatService,
   ) {
-    this.socketService = new SocketService('room');
+    // this.socketService = new SocketService('room');
     console.log('looking at the instance: ', this.socketService)
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/faG5mmkDbyc');
     this.script.load('youtube')
@@ -56,7 +56,17 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    this.videoId = this.roomstatService.getVideo();
+    if (!this.roomId){
+      this.roomId = '1'
+    }
+
+    // this.roomstatService
+    this.roomstatService.getVideo(this.roomId)
+    .subscribe((vid)=>{
+      if (!vid) {
+        this.roomstatService.setVideo(this.roomId, this.videoId)
+      }
+    }); 
     this.ioInit();
     this.connection = this.socketService.recieveStateChange()
     .subscribe((state)=>{ 
@@ -113,7 +123,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       this.roomId = '1';
     }
     
-    this.socketService.joinRoom(this.roomId)
+    // this.socketService.joinRoom(this.roomId)
   }
 
   
