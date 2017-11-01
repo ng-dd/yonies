@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'notfound', component: NotFoundComponent },
   { path: 'room', component: VideoShareComponent},
+  { path: '', component: ContentFeedComponent},
   { path: '**', redirectTo: '/notfound' },
 ];
 
