@@ -1,5 +1,15 @@
 <div>
-  <input type='button' value='getfriends' (click)="getFriendsList({user_id: '5'})">
+
+  <input type='button' value='getfriends' (click)="getFriendsList()">
+  <div class="col-sm">
+    <ul *ngFor="let friend of friendsList" class="list-group">
+      <li class="list-group-item justify-content-between">
+        {{friend}}
+        <span class="badge badge-default badge-pill" (click)="visitWall(friend)">visit page</span>
+      </li>
+    </ul>
+  </div>
+  <input type='button' value='getfriends' (click)="getFriendsList()">
   <div *ngFor="let friend of friendsList">
     {{friend}}
     <input type='button' value='visit their wall' (click)="visitWall(friend)">

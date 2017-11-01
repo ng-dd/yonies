@@ -4,12 +4,12 @@ import { HttpModule }  from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RoutingModule } from './routing/routing.module';
 
 // Socket IO Chat Requirements
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 import { MnFullpageModule } from 'ngx-fullpage';
+import { MnFullpageDirective, MnFullpageService } from "ng2-fullpage";
 
 // Design modules Material Design and Flex layout modules, hammerjs for gestures
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
@@ -79,7 +79,7 @@ import { VideoShareComponent } from './video-share/video-share.component';
     NotFoundComponent,
     InstagramComponent,
     ChatComponent,
-    VideoShareComponent
+    VideoShareComponent,
   ],
   imports: [
     RoutingModule,

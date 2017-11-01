@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { FriendsListComponent } from '../friends-list/friends-list.component';
 import { ContentFeedComponent } from '../content-feed/content-feed.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
