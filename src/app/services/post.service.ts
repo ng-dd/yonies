@@ -95,17 +95,18 @@ export class PostService {
   }
 
   getComments(postid): Observable<any> {
-    console.log(postid.url, '<<<<<< COMMENT')
+    console.log(postid, '<<< POST ID')
     return this.http.get(`http://localhost:4201/comments/${postid}`)
     .map((res) => {return res.json()})
   }
 
-  addComment(text): Observable<any>{
-    return this.http.post('http://localhost:4201/posts'), {
-      text: text,
+  addComment(commentText): Observable<any>{
+    return this.http.post('http://localhost:4201/posts', {
+      text: commentText.comment,
       type: 'comment', 
       parent: 1
-    }
+    })
+    .map((res) => {return res.json()})
   }
 
 }

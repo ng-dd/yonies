@@ -6,6 +6,16 @@
         height='315'
         width='420'>
       </iframe>
+      <div *ngIf="commentOn">
+          <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value)">
+            <input formControlName="comment" placeholder="post comment">
+            <input type='submit' value='Post Comment'>
+          </form>
+          <p *ngFor="let comment of comments">
+              Username: {{comment.text}}
+          </p>
+      </div>
+      <button (click)="toggleComment()">Comment</button>
       <i *ngIf="this.liked === false" class="material-icons" (click)="likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
       <i *ngIf="this.liked === true" class="material-icons">favorite</i>
       <!-- <i *ngIf="!checkIfLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})" class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
@@ -14,7 +24,7 @@
       <button (click)='checkIfLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>check if liked</button>
       <!-- <input type="button" value="like" (click)="likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"> -->
     </div> 
-<div *ngFor='let vid of content'>
+<!-- <div *ngFor='let vid of content'>
   <iframe
     [src]='vid.src'
     height='315'
@@ -31,4 +41,4 @@
   </div>
   <button (click)="toggleComment()">Comment</button>
   <button (click)='roomStart(vid)'> Start a room</button>
-</div>
+</div> -->

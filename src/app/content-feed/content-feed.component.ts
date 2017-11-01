@@ -28,8 +28,20 @@ export class ContentFeedComponent implements OnInit {
   liked: boolean;
   commentOn: boolean = false;
   comments: any;
+  commentForm: FormGroup;
 
-  constructor(private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+  constructor(
+    private likeService: LikesService, 
+    private sanitizer: DomSanitizer, 
+    private postService: PostService, 
+    private authService: AuthService, 
+    private categoryService: CategoryService, 
+    private afAuth: AngularFireAuth,
+    private fb: FormBuilder) {
+
+    this.commentForm = fb.group({
+      'comment': null
+    });  
     this.content = [];
     this.cats = [];
     this.uid = '';
@@ -51,6 +63,7 @@ export class ContentFeedComponent implements OnInit {
   }
 
   postComment(text) {
+    console.log('TEXT!!!', text);
     this.postService.addComment(text);
   }
 

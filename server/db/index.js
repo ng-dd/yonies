@@ -6,19 +6,19 @@ require('dotenv').config();
 var dbUrl = require('../../dburl');
 
 console.log(dbUrl, 'EEEEEEEEEEEEEEEEEEEEE')
-// const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
-//   host: dbUrl,
-//   port: 5432,
-//   dialect: 'postgres',
-//   dialectOptions: {
-//     ssl:'Amazon RDS'
-//   },
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     idle: 20000,
-//     acquire: 20000
-//   }});
+const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
+  host: dbUrl,
+  port: 5432,
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl:'Amazon RDS'
+  },
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 20000,
+    acquire: 20000
+  }});
   
   sequelize.authenticate()
     .then(console.log('connected to the database!'))
