@@ -4,7 +4,6 @@ import { HttpModule }  from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RoutingModule } from './routing/routing.module';
 
 // Socket IO Chat Requirements
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
@@ -15,6 +14,7 @@ import { MnFullpageModule } from 'ngx-fullpage';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RoutingModule } from './routing/routing.module';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -58,6 +58,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { InstagramComponent } from './instagram/instagram.component';
 import { ChatComponent } from './chat/chat.component';
 import { VideoShareComponent } from './video-share/video-share.component';
+import { FollowingComponent } from './following/following.component';
+import { FeaturedComponent } from './featured/featured.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { VideoShareComponent } from './video-share/video-share.component';
     NotFoundComponent,
     InstagramComponent,
     ChatComponent,
-    VideoShareComponent
+    VideoShareComponent,
+    FollowingComponent,
+    FeaturedComponent,
   ],
   imports: [
     RoutingModule,

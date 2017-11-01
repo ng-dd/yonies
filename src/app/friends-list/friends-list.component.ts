@@ -26,7 +26,9 @@ export class FriendsListComponent implements OnInit {
   }
 
   getFriendsList() {
-    let currId = firebase.auth().currentUser.uid;    
+    console.log(firebase)
+    let currId = firebase.auth().currentUser.uid;  
+    console.log(currId, 'current user')  
     this.friendsList = [];
     //friend.userid should be the current session user
     this.friendService.getFriend(currId)

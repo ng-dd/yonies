@@ -48,6 +48,14 @@ export class PostService {
   //   })
   // }
 
+  getPopularTags(): Observable<any> {
+    
+    return this.http.get('http://localhost:4201/tags')
+    .map((res) => {
+      return res.json()
+    })
+  }
+
   getEmbed(id): Observable<any> {
     return this.http.get(`http://localhost:4201/embed/${id}`)
     .map((res) => {return res.json()})

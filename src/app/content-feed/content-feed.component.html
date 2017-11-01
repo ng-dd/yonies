@@ -1,11 +1,7 @@
 <div mnFullpage [mnFullpageNavigation]="false">
   <div class="section fp-section fp-table"></div>
     <div class="section fp-section fp-table" *ngFor='let vid of content'>
-      <iframe
-        [src]='vid.src'
-        height='315'
-        width='420'>
-      </iframe>
+      <app-content-item [vid]="vid"></app-content-item>
       <div *ngIf="commentOn">
           <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value)">
             <input formControlName="comment" placeholder="post comment">
