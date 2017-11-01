@@ -57,7 +57,6 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this.videoId = this.roomstatService.getVideo();
-    this.videoId = 'oCrwzN6eb4Q'
     this.ioInit();
     this.connection = this.socketService.recieveStateChange()
     .subscribe((state)=>{ 
