@@ -26,9 +26,6 @@ export class ContentFeedComponent implements OnInit {
   uid: any;
   content: any;
   liked: boolean;
-  commentOn: boolean = false;
-  comments: any;
-  commentForm: FormGroup;
 
   constructor(
     private likeService: LikesService, 
@@ -39,33 +36,11 @@ export class ContentFeedComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private fb: FormBuilder) {
 
-    this.commentForm = fb.group({
-      'comment': null
-    });  
     this.content = [];
     this.cats = [];
     this.uid = '';
     this.liked = false;
-    this.commentOn = false;
-    this.comments = [];
    }
-
-   toggleComment() {
-    if(!this.commentOn) {
-      //get request to get comments on the post id
-      this.postService.getComments(1)
-        .subscribe(data => {
-          this.comments = data;
-          console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
-        })
-    } 
-    this.commentOn = !this.commentOn;
-  }
-
-  postComment(text) {
-    console.log('TEXT!!!', text);
-    this.postService.addComment(text);
-  }
 
   //get current user, get content feed based on keywords of stuff they have liked,
   //so when they like, add the search query of what they liked 

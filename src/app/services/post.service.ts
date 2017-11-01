@@ -100,13 +100,15 @@ export class PostService {
     .map((res) => {return res.json()})
   }
 
-  addComment(commentText): Observable<any>{
+  addComment(post) {
+    console.log(post, "<<<< COMMENT TEXT")
     return this.http.post('http://localhost:4201/posts', {
-      text: commentText.comment,
-      type: 'comment', 
-      parent: 1
+      text: post.comment,
+      type: 'comment'
     })
-    .map((res) => {return res.json()})
+    .map((res) => {
+      console.log('JANSEN!!!!', res)
+      return res.json()})
   }
 
 }

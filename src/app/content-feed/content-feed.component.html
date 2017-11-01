@@ -30,15 +30,5 @@
     height='315'
     width='420'>
   </iframe>
-  <div *ngIf="commentOn">
-    <form [formGroup]='comment' (ngSubmit)="postComment(comment.value)">
-      <input formControlName="comment" placeholder="Post a comment">
-      <input type='submit' value=''>
-    </form>
-    <p *ngFor="let comment of comments">
-        Username: {{comment.text}}
-    </p>
-  </div>
-  <button (click)="toggleComment()">Comment</button>
   <button (click)='roomStart(vid)'> Start a room</button>
 </div> -->
