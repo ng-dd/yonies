@@ -12,9 +12,9 @@ require('dotenv').config()
 const server = http.createServer(app);
 
 // Socket
-// const io = require('socket.io')(server);
-// const startSocket = require('./socket');
-// startSocket(io);
+const io = require('socket.io')(server);
+const startSocket = require('./socket');
+startSocket(io);
 
 // Routes
 const routes = require('./routes/routes');

@@ -30,7 +30,6 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { StreamViewComponent } from './stream-view/stream-view.component';
 import { StreamChatLogComponent } from './stream-chat-log/stream-chat-log.component';
 import { SingleCelebFeedComponent } from './single-celeb-feed/single-celeb-feed.component';
-import { RoutingModule } from './routing/routing.module';
 
 // import { Peer } from 'simple-peer'; //webrtc 
 
@@ -85,7 +84,6 @@ import { VideoShareComponent } from './video-share/video-share.component';
   imports: [
     RoutingModule,
     BrowserModule,
-    RoutingModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,  
