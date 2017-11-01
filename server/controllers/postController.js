@@ -4,6 +4,7 @@ const request = require('request');
 
 module.exports = {
     addPost: (req, res) => {
+        console.log('this is the req.body ', req.body)
         Post.create({
             type: req.body.type,
             text: req.body.text,
