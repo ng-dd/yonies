@@ -20,8 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     room_info: {
-      type: DataTypes.STRING({length: 1000})
-    }},
+      type: DataTypes.STRING
+    },
+    video_url: {
+      type: DataTypes.STRING
+    }
+  },
     {
       timestamps: false
     }

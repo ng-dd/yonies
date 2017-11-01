@@ -13,7 +13,7 @@ export class RoomstatService {
   getRoomstat(room, cb) {
     this.http.get('http://localhost:4201/rooms/' + room )
     .subscribe((data) => {
-      console.log('data from getRoomStat service: ',data)
+      console.log('data from getRoomStat service: ', data)
       cb(data)
     })
     // , (err) => {

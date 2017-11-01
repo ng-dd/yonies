@@ -7,10 +7,11 @@ module.exports = {
             person_count: req.body.person_count,
             host_id: req.body.host_id,
             duration: req.body.duration,
-            room_info: req.body.room_info
+            room_info: req.body.room_info,
+            video_url: req.body.video_url
         })
         .then((data) => {
-            console.log('Data inserted correctly>>>>>>>> ', data)
+            console.log('Data inserted correctly>>>>>>>> ')
             res.send(data)
         })
         .catch(err => {
@@ -28,7 +29,6 @@ module.exports = {
             res.send(data)
         })
         .catch(err => {
-            console.log('some bullshit error>>>>> ', err)
             res.status(500).send(err)
         })
     },
@@ -40,7 +40,10 @@ module.exports = {
     },
 
     updateRoomstat: (req, res) => {
-        RoomStat.update({room_id: req.body.room_id},
+        RoomStat.update({
+            room_info: req.body.room_info,
+            video_url: req.body.video_url
+        },
         { where: { room_id: req.params.id } })
         .then((data)=>{
             res.send(data);
