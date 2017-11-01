@@ -7,6 +7,8 @@ import { ContentFeedComponent } from '../content-feed/content-feed.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { VideoShareComponent } from '../video-share/video-share.component';
+import { FollowingComponent } from '../following/following.component';
+import { FeaturedComponent } from '../featured/featured.component';
 
 const routes: Routes = [
   { path: 'home', component: ContentFeedComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'notfound', component: NotFoundComponent },
   { path: 'room', component: VideoShareComponent},
   { path: '', component: ContentFeedComponent},
+  { path: 'following', component: FollowingComponent},
+  { path: 'featured', component: FeaturedComponent},
   { path: '**', redirectTo: '/notfound' },
 ];
 

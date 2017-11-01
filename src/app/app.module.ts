@@ -15,6 +15,7 @@ import { MnFullpageDirective, MnFullpageService } from "ng2-fullpage";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RoutingModule } from './routing/routing.module';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -58,6 +59,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { InstagramComponent } from './instagram/instagram.component';
 import { ChatComponent } from './chat/chat.component';
 import { VideoShareComponent } from './video-share/video-share.component';
+import { FollowingComponent } from './following/following.component';
+import { FeaturedComponent } from './featured/featured.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,8 @@ import { VideoShareComponent } from './video-share/video-share.component';
     InstagramComponent,
     ChatComponent,
     VideoShareComponent,
+    FollowingComponent,
+    FeaturedComponent,
   ],
   imports: [
     RoutingModule,

@@ -1,0 +1,15 @@
+<div *ngFor="let tag of tags">
+  <ul (click)="getTagContent(tag)">{{tag}}</ul>
+  <div *ngFor='let vid of content'>
+    <iframe
+      [src]='vid.src'
+      height='315'
+      width='420'>
+    </iframe>
+    <i *ngIf="!this.liked" class="material-icons" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
+    <i *ngIf="this.liked" class="material-icons" (click)="toggleLiked()">favorite</i>
+    <!-- <i *ngIf="!checkIfLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})" class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
+    <i *ngIf="checkIfLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})" class="fa fa-heart fa-3x" aria-hidden="true"></i> -->
+    <!-- <input type="button" value="like" (click)="likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"> -->
+  </div> 
+</div>

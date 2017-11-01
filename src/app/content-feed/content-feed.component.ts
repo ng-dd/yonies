@@ -116,8 +116,7 @@ export class ContentFeedComponent implements OnInit {
               })
               this.content = this.content.slice(0, 11);   
           })
-      
-            console.log(this.content, '<<<<<<< CONTENT BY DATES')
+          console.log(this.content, '<<<<<<< CONTENT BY DATES')
           })
         })
       })
