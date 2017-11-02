@@ -87,10 +87,9 @@ export class PostService {
     })
   }
 
-  addPost(post): Observable<any> {
-    console.log(post.url, '<<<<<< POST')
+  addPost({ url }): Observable<any> {
     return this.http.post('http://localhost:4201/posts', {
-      text: post.url, 
+      text: url, 
       type: 'post'
     })
     .map((res) => {return res.json()})
@@ -109,15 +108,13 @@ export class PostService {
     .map((res) => {return res.json()})
   }
 
-  addComment(post) {
-    console.log(post, "<<<< COMMENT TEXT")
+  addComment({ comment }, id): Observable<any> {
     return this.http.post('http://localhost:4201/posts', {
-      text: post.comment,
-      type: 'comment'
+      text: comment,
+      type: 'comment',
+      parent: id
     })
-    .map((res) => {
-      console.log('JANSEN!!!!', res)
-      return res.json()})
+    .map((res) => {return res.json()})
   }
 
 }

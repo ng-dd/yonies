@@ -5,7 +5,7 @@ import { FriendService } from '../services/friend.service';
 import { PostService } from '../services/post.service';
 import { HashService } from '../services/hash.service';
 import { LikesService } from '../services/likes.service';
-import { CategoryService } from '../services/category.service';
+import { FollowService } from '../services/follow.service';
 import { ScriptService } from '../services/script.service';
 import { AuthService } from '../services/auth.services';
 import { Http, Response, Headers } from '@angular/http';
@@ -44,6 +44,7 @@ export class SearchBarComponent implements OnInit {
   commentOn: boolean = false;
   comments: any;
   commentForm: FormGroup;
+  name: string; 
 
   
   constructor(
@@ -57,7 +58,7 @@ export class SearchBarComponent implements OnInit {
     private friendService: FriendService, 
     private fb: FormBuilder, 
     private roomstatService: RoomstatService, 
-    private categoryService: CategoryService, 
+    private followService: FollowService, 
     private firebaseAuth: AngularFireAuth, 
     private likeService: LikesService, 
     private router: Router,
@@ -75,19 +76,20 @@ export class SearchBarComponent implements OnInit {
       'comment': null
     });  
     this.commentOn = false;
-    this.comments = [];
 
     this.tweets = [];
     this.twitch = [];
     this.youtube = [];
     this.content = [];
     this.users = [];
+    this.name = "";
   }
 
-  toggleComment() {
+  toggleComment(id) {
+    this.comments = [];
     if(!this.commentOn) {
       //get request to get comments on the post id
-      this.postService.getComments(1)
+      this.postService.getComments(id)
         .subscribe(data => {
           this.comments = data;
           console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
@@ -96,9 +98,12 @@ export class SearchBarComponent implements OnInit {
       this.commentOn = !this.commentOn;
     }
 
-  postComment(text) {
-    console.log('TEXT!!!', text);
-    this.postService.addComment(text);
+  postComment(text, id) {
+    console.log('THIS IS THE ID!!!', id);
+    this.postService.addComment(text, id)
+      .subscribe(res => {
+        console.log(res);
+      })
   }
 
 
@@ -144,7 +149,7 @@ export class SearchBarComponent implements OnInit {
           this.postService.getPost({post_id: data.post_id})
           .subscribe((data) => {
             // console.log('HERE IS SOURCE!!', {src: data.text})
-            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text)})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text), id: data.post_id})
           })
         })
       })
@@ -169,7 +174,7 @@ export class SearchBarComponent implements OnInit {
   follow(person) {
     let uid = firebase.auth().currentUser.uid;
     console.log(person, uid)
-    this.categoryService.addCategory({name: person, uid: uid})     
+    this.followService.addFollow({name: person, uid: uid})     
   }
 
   searchPosts(query) {
@@ -259,23 +264,13 @@ export class SearchBarComponent implements OnInit {
   //add the post to the post table and the likes table
   likePost(post) {
     let user = firebase.auth().currentUser;  
-    console.log(post, '<<<<<KERSHAW!!!')  
     this.postService.addPost(post)
     .subscribe((res) => {
-      console.log(res, '<<<<<< RES')
       this.likeService.addLike({uid: user.uid, post_id: String(res.post_id), type: 'post'})
       .subscribe((data) => {
-        console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
     })  
   }
-
-  //daniel, remember to delete this
-  currentUser() {
-    let user = firebase.auth().currentUser;
-    console.log(user)
-  }
-
 
   roomStart(vid) {
     console.log(vid.src['changingThisBreaksApplicationSecurity']);
@@ -297,9 +292,13 @@ export class SearchBarComponent implements OnInit {
 
   connectToRoom(roomId){
     console.log('room', this.roomId)
-
   } 
 
   ngOnInit() {
+    // let uid = firebase.auth().currentUser.uid;
+    // this.userService.getUserById(uid)
+    //   .subscribe(data => {
+    //     console.log('HERE IS USER DATA ON PAGE LOAD!!', data)
+    //   }) 
   }
 }
