@@ -15,7 +15,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
 import { RoomstatService } from '../services/roomstat.service'
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import * as firebase from 'firebase/app';
 
 
@@ -144,23 +144,25 @@ export class SearchBarComponent implements OnInit {
   } 
 
   visitWall(user) {
-    this.content = [];
-    // console.log(user, 'user')
-    this.userService.getUser(user)
-    .subscribe((data) => {
-      console.log(data, '<<<<<<DATA')
-      this.likeService.getLikes({uid: data[0].uid})
-      .subscribe((data) => {
-        console.log("LIKE DATA!! >>>>", data)
-        data.forEach((data) => {
-          this.postService.getPost({post_id: data.post_id})
-          .subscribe((data) => {
-            // console.log('HERE IS SOURCE!!', {src: data.text})
-            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text), id: data.post_id})
-          })
-        })
-      })
-    })
+    console.log(user, 'THIS IS THE USER BRUH!!')
+    
+    // this.content = [];
+    // // console.log(user, 'user')
+    // this.userService.getUser(user)
+    // .subscribe((data) => {
+    //   console.log(data, '<<<<<<DATA')
+    //   this.likeService.getLikes({uid: data[0].uid})
+    //   .subscribe((data) => {
+    //     console.log("LIKE DATA!! >>>>", data)
+    //     data.forEach((data) => {
+    //       this.postService.getPost({post_id: data.post_id})
+    //       .subscribe((data) => {
+    //         // console.log('HERE IS SOURCE!!', {src: data.text})
+    //         this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text), id: data.post_id})
+    //       })
+    //     })
+    //   })
+    // })
   }
 
   searchHashTags(query) {

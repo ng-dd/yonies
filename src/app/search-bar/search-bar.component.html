@@ -32,7 +32,8 @@
   <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
   <div *ngFor='let user of users'>
       {{user.username}}
-      <input type='button' value='visit wall' (click)="visitWall(user)">
+      <!-- <input type='button' value='visit wall' (click)="visitWall(user)"> -->
+      <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
       <!-- <app-wallfeed [userId]=""></app-wallfeed> -->
       <!-- <a [routerLink]="/wall"> -->
     </div>
