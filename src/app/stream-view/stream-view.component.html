@@ -6,6 +6,6 @@
     <h1>Guest Controls</h1>
     <button (click)='playRequest()'>Play Request</button>
     <button (click)='pauseRequest()'>Pause Request</button>
-    <input value='time'>
-    <button (click)='skipTo(time)'>Skip to...</button>
+    <input value='' placeholder='hour.minute.second' [(ngModel)]='time' (keyup.enter)='skipTo()'>
+    <button (click)='skipTo()'>Skip to...</button>
 </div>
