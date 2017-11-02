@@ -13,7 +13,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
-import { RoomstatService } from '../services/roomstat.service'
+import { RoomstatService } from '../services/roomstat.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -49,12 +49,24 @@ export class WallfeedComponent implements OnInit {
     private firebaseAuth: AngularFireAuth, 
     private likeService: LikesService, 
     private router: Router,
+    private route: ActivatedRoute
   ) { 
     this.content = [];
+    this.userId = "";
+  }
+
+  test() {
+    console.log(this.userId, "USER ID??");
   }
  
   ngOnInit() {
-    this.userService.getUserById('Q458Mpsh0La5g8ZmSslxhdsenQl1')
+    this.route
+    .queryParams
+    .subscribe(params => {
+      this.userId = params.userId;
+    })
+
+    this.userService.getUserById(this.userId)
     .subscribe((data) => {
       console.log(data, '<<<<<<DATA')
       this.likeService.getLikes({uid: data.uid})
