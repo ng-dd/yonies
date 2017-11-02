@@ -20,10 +20,22 @@ module.exports = {
         })
     },
 
+    getRoomByHost: (req, res) => {
+        RoomStat.findLast({
+            where: {host_id: req.params.host_id}
+        })
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) =>{
+            res.status(500).send(err)
+        })
+    },
+
     getRoomstat: (req, res) => {
         console.log(req.params.id)
         RoomStat.findAll({
-            where: {room_id: Number(req.params.id)}
+            where: {room_info: Number(req.params.id)}
         })
         .then((data) => {
             res.send(data)
@@ -44,7 +56,7 @@ module.exports = {
             room_info: req.body.room_info,
             video_url: req.body.video_url
         },
-        { where: { room_id: req.params.id } })
+        { where: { room_info: req.params.id } })
         .then((data)=>{
             res.send(data);
         })

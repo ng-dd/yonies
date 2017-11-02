@@ -46,4 +46,13 @@ export class UserService {
   deleteUser(user) {
     this.http.delete(`/users/${user.id}`)
   }
+
+  getAllUsers(): Observable<any> {
+    return new Observable((observer)=>{
+      this.http.get('http://localhost:4201/allUsers')
+      .subscribe((data)=>{
+        observer.next(data.json())
+      })
+    })
+  }
 }

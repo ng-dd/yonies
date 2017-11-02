@@ -8,8 +8,8 @@ export class SocketService {
   socket: any;
   socketIo: any;
   SERVER_URL: string = 'http://localhost:4201';
-
-  constructor(private name: string){
+  private name: string
+  constructor(){
     let URL = this.host //+ '/' + this.name;
     this.socketIo = io.connect(URL);
     console.log('checkign socketio from constructor: ', this.socketIo)

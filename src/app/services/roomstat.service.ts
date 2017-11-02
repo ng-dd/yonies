@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 export class RoomstatService {
   roomId: string;
   selectedUrl: string;
+  roomUID: string;
   constructor(private http: Http) { }
   
   getRoomstat(room, cb) {
@@ -22,11 +23,13 @@ export class RoomstatService {
   }
 
   getRoom() {
-    return this.roomId
+    return this.roomId;
   }
 
   setRoom(room) {
+    console.log('setting room to: '+ room, typeof(room));
     this.roomId = room;
+    console.log('roomId successfully changed')
   }
 
   getHostId(room) {
@@ -37,12 +40,24 @@ export class RoomstatService {
     })
   }
 
-  addRoomstat(cb) {
+  getHostRoom(host): Observable<any> {
+    return new Observable((observer)=>{
+      console.log('what the hell is coming through? ', host)
+      this.http.get('http://localhost:4201/rooms/' + host)
+      .subscribe((data) =>{
+        console.log('weve broken through with: ' + data)
+        observer.next(data.json());
+      })
+    })
+  }
+
+  addRoomstat(input, cb) {
     console.log('attempting to add a room', )
     this.http.post('http://localhost:4201/rooms', {
       // categoryId: room.categoryId,
       // count: room.count,
-      // hostId: room.hostId,
+      host_id: input.hostId,
+      video_url: input.video_url
       // duration: room.duration,
       // peer_id: String(room.peer_id)
     }).subscribe((data)=>{ 
@@ -65,11 +80,12 @@ export class RoomstatService {
     .subscribe((data)=>{ return data })
   }
 
-  deleteRoomstat(room) {
-    this.http.delete(`/rooms/${room.roomId}`)
-  }
+  // deleteRoomstat(room) {
+  //   this.http.delete(`/rooms/${room.roomId}`)
+  // }
 
   selectVideo(url) {
+    console.log('selecting video! ', url)
     this.selectedUrl = url;
   }
 
@@ -85,10 +101,16 @@ export class RoomstatService {
 
   getVideo(room): Observable<any> {
     return new Observable((observer) => {
+      console.log('room from inside observable: ',room)
+
       this.http.get('http://localhost:4201/rooms/' + room)
       .subscribe((data) => {
-        console.log('getting data from getvideo', JSON.parse(data['_body'])[0]);
-        observer.next(JSON.parse(data['_body'])[0]['video_url'])
+        if (data) {
+          console.log('getting data from getvideo', data.json());
+          observer.next(data.json());
+        } else {
+          observer.next(false);
+        }
       })
     })
   }

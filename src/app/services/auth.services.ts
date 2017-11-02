@@ -42,14 +42,15 @@ export class AuthService {
   }
 
   signup(email: string, password: string, firstname: string, lastname: string) {
-    // let user = firebase.auth().currentUser;    
+    let user = firebase.auth().currentUser;    
     this.firebaseAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value, value.uid);
+
         this.confirmEmail();
-        this.userService.addUser({username: email, uid: value.uid, first_name: firstname, last_name: lastname})
+        this.userService.addUser({uid: user.uid})
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);

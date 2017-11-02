@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     host_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     duration: {
       type: DataTypes.STRING

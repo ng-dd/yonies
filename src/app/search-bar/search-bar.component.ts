@@ -275,17 +275,22 @@ export class SearchBarComponent implements OnInit {
   roomStart(vid) {
     console.log(vid.src['changingThisBreaksApplicationSecurity']);
 
-    this.roomstatService.addRoomstat((roomData)=>{
-      let response = JSON.parse(roomData._body)
-      this.roomId = response.room_id;
-      this.roomStarted = true;
-    })
+
     let url  = vid.src['changingThisBreaksApplicationSecurity']
     if (url.indexOf('youtube') >= 0){
       this.videoUrl = url.slice(url.indexOf('embed')+ 6, url.length)
     } else {
       this.videoUrl = url;
     }
+    this.roomstatService.addRoomstat({
+      hostId: this.firebaseAuth.auth.currentUser,
+      video_url: this.videoUrl
+    }, (roomData)=>{
+      let response = JSON.parse(roomData._body)
+      this.roomId = response.room_id;
+      this.roomStarted = true;
+    })
+    console.log('video url', this.videoUrl)
     this.roomstatService.selectVideo(this.videoUrl)
     this.router.navigate(['/room'])
   }
