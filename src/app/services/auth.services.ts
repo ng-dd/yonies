@@ -49,7 +49,12 @@ export class AuthService {
       .then(value => {
         console.log('Success!', value, value.uid);
         this.confirmEmail();
-        this.userService.addUser({uid: value.uid, username: email, first_name: firstname, last_name: lastname})
+        this.userService.addUser({
+          username: email,
+          first_name: firstname,
+          last_name: lastname,
+          uid: user.uid
+        })
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
@@ -61,6 +66,12 @@ export class AuthService {
     firebase.auth()
       .signInWithPopup(new firebase.auth.FacebookAuthProvider)
       .then(res => {
+        this.userService.addUser({
+          uid: this.firebaseAuth.auth.currentUser.uid,
+          username: this.firebaseAuth.auth.currentUser.email,
+          first_name: res.additionalUserInfo.profile.first_name,
+          last_name: res.additionalUserInfo.profile.last_name,
+        })
         console.log(res);
       });
   }
@@ -69,6 +80,12 @@ export class AuthService {
     this.firebaseAuth.auth
       .signInWithPopup(new firebase.auth.GoogleAuthProvider)
       .then(res => {
+        this.userService.addUser({
+          uid: this.firebaseAuth.auth.currentUser.uid,
+          username: this.firebaseAuth.auth.currentUser.email,
+          first_name: res.additionalUserInfo.profile.given_name,
+          last_name: res.additionalUserInfo.profile.family_name,
+        })
         console.log(res);
       });
   }
@@ -76,9 +93,17 @@ export class AuthService {
   twitterLogin(): void {
     this.firebaseAuth.auth
       .signInWithPopup(new firebase.auth.TwitterAuthProvider)
-      .then(res => {
+      .then((res) => {
+        let nameArray: string[] = res.additionalUserInfo.profile.name.split(' ')
+        this.userService.addUser({
+          uid: this.firebaseAuth.auth.currentUser.uid,
+          username: this.firebaseAuth.auth.currentUser.email,
+          first_name: nameArray[0],
+          last_name: nameArray.length > 1 ? nameArray[nameArray.length - 1] : 'unspecified',
+          // imageUrl: res.additionalUserInfo.profile.profile_image_url,
+        });
         console.log(res)
-      });
+      })
   }
 
   login(email: string, password: string) {

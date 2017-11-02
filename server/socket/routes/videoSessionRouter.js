@@ -12,7 +12,20 @@ const videoSessionRouter = (io, client) => {
     console.log('Emitting changing state to: ', state)
     // console.log('heres io.sockets: ', io.sockets)
     client.broadcast.to(roomId).emit('newState', state, time)
-  })
+  });
+
+  client.on('pauseRequest', (roomId) => {
+    client.broadcast.to(roomId).emit('pauseResponse');
+  });
+
+  client.on('playRequest', (roomId) => {
+    client.broadcast.to(roomId).emit('playResponse');
+  });
+
+  client.on('skipToRequest', (roomId, time) => {
+    client.broadcast.to(roomId).emit('skipToResponse', time);
+  });
+
 };
 
 module.exports = videoSessionRouter;
