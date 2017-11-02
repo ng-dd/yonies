@@ -25,8 +25,9 @@ import * as firebase from 'firebase/app';
     width='420'>
   </iframe>
   </div>
-  <i *ngIf="!this.liked" class="material-icons" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
-  <i *ngIf="this.liked" class="material-icons" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite</i>
+  <i *ngIf="!this.liked" class="material-icons md-48" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
+  <i *ngIf="this.liked" class="material-icons md-48" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite</i>
+  <div>{{this.likeCount}} likes</div>
   `,
   styleUrls: ['./content-item.component.css']
 })
@@ -34,6 +35,7 @@ export class ContentItemComponent implements OnInit {
 
   content: any;
   liked: boolean;
+  likeCount: number;
 
   @Input() 
   
@@ -42,6 +44,7 @@ export class ContentItemComponent implements OnInit {
   constructor(private friendService: FriendService, private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
     this.content = [];
     this.liked = false;
+    this.likeCount = 0;
   }
 
   likePost(post) {
@@ -49,7 +52,7 @@ export class ContentItemComponent implements OnInit {
     this.postService.addPost(post)
     .subscribe((res) => {
       console.log(res, '<<<<<< RES')
-      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
+      this.likeService.addLike({uid: user.uid, post_id: String(res[0].post_id)})
       .subscribe((data) => {
         console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
@@ -77,14 +80,17 @@ export class ContentItemComponent implements OnInit {
   toggleLiked(post) {
     if (this.liked === false) {
       this.liked = true;
+      this.likeCount++;
       this.likePost(post)
     } else if (this.liked === true) {
       this.liked = false;
+      this.likeCount--;
       this.deletePost(post)
     }
   }
 
   ngOnInit() {
+    this.likeCount = 0;
     var url = this.vid['src']['changingThisBreaksApplicationSecurity'].toString();
     this.afAuth.authState.subscribe((data) => {
       var uid = data.uid;
@@ -94,8 +100,8 @@ export class ContentItemComponent implements OnInit {
         postIds.forEach((id) => {
           this.postService.getPost({post_id: id})
           .subscribe((data) => {
-            // console.log(data, 'please !!!! AHHHAHAHAHAHAHAH')
             if (data.text === url) {
+              this.likeCount = data.like_count;
               this.liked = true;
             }
           })

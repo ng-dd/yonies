@@ -91,7 +91,7 @@ export class PostService {
     console.log(post.url, '<<<<<< POST')
     return this.http.post('http://localhost:4201/posts', {
       text: post.url, 
-      type: 'post'
+      type: 'post',
     })
     .map((res) => {return res.json()})
   }
