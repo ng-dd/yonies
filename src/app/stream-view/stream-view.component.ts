@@ -18,6 +18,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() videoId: string;
   @Input() roomId: string;
   @Input() private socketService: SocketService;
+  @Input() uid: string;
   @HostListener('window:unload', ['event'])
   incoming: string;
   host: any;
@@ -25,7 +26,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   n: any = navigator;
   player: any;
   targetPeer: any;
-  // videoId: string = 'M7lc1UVf-VE';
+  isHost: boolean;
   done: boolean = false;
   videoUrl: SafeResourceUrl;
   peerId: string;
@@ -56,8 +57,9 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
+    this.isHost = this.roomId === this.uid;
     console.log('Here is initial roomId: ', this.roomId, ' Here In initial video', this.videoId, 'with selected video as: ', this.roomstatService.getSelectedVideo())
-
+    this.videoId = this.roomstatService.getSelectedVideo()
     // if (!this.roomId){
     //   this.roomId = '1'
     // }
@@ -67,8 +69,9 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.roomstatService.getHostRoom(this.roomId)
     .subscribe((data) => {
       console.log('Selected video on init: ', this.roomstatService.getSelectedVideo())
-      if (!data.video_url) {
-        this.roomstatService.setVideo(this.roomId, this.roomstatService.getSelectedVideo())
+      if (!this.videoId) {
+        // this.roomstatService.setVideo(this.roomId, this.roomstatService.getSelectedVideo())
+        this.videoId = data.video_url
       }
       this.ioInit();
       this.connection = this.socketService.recieveStateChange()
@@ -137,7 +140,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     console.log('PLAYER INFO!!!!: ', this.player)
     // this.player.loadVideoByUrl('https://player.twitch.tv/?channel=masgamerstv')
     console.log(this.iframeElem);
-    if (this.host) {
+    if (!this.isHost) {
       // this.player.playerVars.controls = 0;
       this.iframeElem.setAttribute('style', 'pointer-events: none;')
     } else {

@@ -8,7 +8,6 @@ import 'rxjs/Rx';
 export class RoomstatService {
   roomId: string;
   selectedUrl: string;
-  roomUID: string;
   constructor(private http: Http) { }
   
   getRoomstat(room, cb) {
@@ -51,18 +50,22 @@ export class RoomstatService {
     })
   }
 
-  addRoomstat(input, cb) {
-    console.log('attempting to add a room', )
-    this.http.post('http://localhost:4201/rooms', {
-      // categoryId: room.categoryId,
-      // count: room.count,
-      host_id: input.hostId,
-      video_url: input.video_url
-      // duration: room.duration,
-      // peer_id: String(room.peer_id)
-    }).subscribe((data)=>{ 
-      console.log('entered room>>>>>> ', data)
-      cb(data)//['_body'].room_id
+  addRoomstat(input): Observable<any> {
+    return new Observable((observer)=>{
+      console.log('attempting to add a room', input)
+      this.http.post('http://localhost:4201/rooms', {
+        // categoryId: room.categoryId,
+        // count: room.count,
+        host_id: input.host_id,
+        video_url: input.video_url
+        // duration: room.duration,
+        // peer_id: String(room.peer_id)
+      })
+      .subscribe((data)=>{ 
+        console.log('entered room>>>>>> ', data)
+        observer.next(data.json())
+      })
+
     })
     // .map((data) => {
     //   console.log('data from addRoomStat service: ', data)

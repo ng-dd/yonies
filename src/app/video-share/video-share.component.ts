@@ -14,6 +14,7 @@ export class VideoShareComponent implements OnInit {
   connection: any;
   roomId: string;
   done: boolean = false;
+  uid: string;
   constructor(
     private afAuth: AngularFireAuth, 
     private router: Router, 
@@ -23,14 +24,16 @@ export class VideoShareComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.io = new SocketService()
-    // console.log('rendering videoshare component')
-    let invitedRoom = this.roomstatService.getRoom()
-    this.roomId = this.afAuth.auth.currentUser.uid;
+    this.io = new SocketService();
+    // console.log('rendering videoshare component');
+    this.uid = this.afAuth.auth.currentUser.uid
+    let invitedRoom = this.roomstatService.getRoom();
     if (invitedRoom) {
       this.io.joinRoom(invitedRoom);
+      this.roomId = invitedRoom;
     } else {
-      this.io.joinRoom(this.afAuth.auth.currentUser.uid);
+      this.roomId = this.uid;
+      this.io.joinRoom(this.uid);
     }
 
     this.done = true;
