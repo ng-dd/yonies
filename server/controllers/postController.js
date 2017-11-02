@@ -20,13 +20,8 @@ module.exports = {
 
     //for like counter, comment out if problems occur and comment in the function above.
     addPost: (req, res) => {
-        console.log('this is the req.body ', req.body)
-        Post.create({
-            type: req.body.type,
-            text: req.body.text,
-            like_count: req.body.like_count,
-            parent: req.body.parent
-        })
+        Post.findOrCreate({where: {text: req.body.text}, 
+            defaults: {type: req.body.type, text: req.body.text, like_count: 1, parent: req.body.parent}})
         .then((data) => {
             console.log(data[0].dataValues.like_count, 'AJAJAJ')
             Post.update({like_count: data[0].dataValues.like_count + 1}, {where: {text: req.body.text}})

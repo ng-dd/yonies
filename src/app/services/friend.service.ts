@@ -17,7 +17,6 @@ export class FriendService {
   }
 
   addFriend(user, friend) {
-    // console.log('user-->', user, 'friend-->', String(friend))
     this.http.post('http://localhost:4201/friends', {
       user_id: user,
       friend_id: friend
@@ -27,7 +26,7 @@ export class FriendService {
     })
   }
 
-  deleteMessage(friend) {
-    this.http.delete(`/friends/${friend.id}`)
+  deleteFriend(friend) {
+    this.http.delete(`http://localhost:4201/friends/${friend.id}`)
   }
 }

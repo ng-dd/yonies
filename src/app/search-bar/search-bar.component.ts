@@ -167,11 +167,9 @@ export class SearchBarComponent implements OnInit {
   addFriend(user) {
     let currId = firebase.auth().currentUser.uid;
     console.log(currId, user.uid)
-    this.friendService.addFriend(currId, user.uid)
+    this.friendService.addFriend(currId, user.uid);
+    this.friendService.addFriend(user.uid, currId);
   }
-  // addFriend(query) {
-  //   this.friendService.addFriend(11, String(query))
-  // }
   
   follow(person) {
     let uid = firebase.auth().currentUser.uid;
