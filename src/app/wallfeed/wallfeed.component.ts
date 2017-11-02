@@ -17,6 +17,7 @@ import { RoomstatService } from '../services/roomstat.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase/app';
+
 @Component({
   selector: 'app-wallfeed',
   templateUrl: './wallfeed.component.html',
@@ -51,6 +52,7 @@ export class WallfeedComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) { 
+    const id: Observable<string> = route.params.map(p => p.id);    
     this.content = [];
     this.userId = "";
   }

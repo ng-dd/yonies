@@ -16,7 +16,7 @@
     <input formControlName="hash" placeholder="search hashtags">
     <input type='submit' value='search hash'>
   </form>
-  <input value="Hashes" type="submit" (click)="toggleQuery('Hashes')">
+  <input value="Content by Category" type="submit" (click)="toggleQuery('Hashes')">
   <input value="Users" type="submit" (click)="toggleQuery('People')">
   <input value="Posts by People" type="submit" (click)="toggleQuery('Posts')">
   <input value='auth' type='button' (click)="auth()">
@@ -66,5 +66,6 @@
 </div>
   <div>
     <input type="button" value="get current user" (click)="currentUser()">
+    <input type='button' value='get content by categort' (click)='getContent()'>
   </div>
 </div>

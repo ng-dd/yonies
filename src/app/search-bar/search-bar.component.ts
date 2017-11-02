@@ -167,7 +167,7 @@ export class SearchBarComponent implements OnInit {
 
   searchHashTags(query) {
     console.log(query)
-    this.hashService.getHash(query)
+    this.searchPosts({post: query.hash});
     this.hashForm.reset();
   }
 
@@ -223,6 +223,18 @@ export class SearchBarComponent implements OnInit {
           var d = new Date(b.date).getTime()
           return c > d ? 1 : -1; 
         })   
+      })
+      this.postService.getVideosForGame(query.post)
+      .subscribe((data) => {
+        data.videos.forEach((video) => {
+          this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
+        })
+        console.log(this.content, '<<<<<<< CONTENT BY DATES')
+        this.content.sort((a, b) => {
+          var c = new Date(a.date).getTime()
+          var d = new Date(b.date).getTime()
+          return c > d ? 1 : -1; 
+        })
       })
       // console.log(this.youtube, 'YOUTUBE <<<<<<<<')
     })
@@ -336,12 +348,14 @@ export class SearchBarComponent implements OnInit {
     })
   }
 
+  getContent(){
+    this.postService.getVideosForGame('Overwatch')
+    .subscribe((data) => {
+      console.log(data)
+    })
+  }
 
-  ngOnInit() {
-    // let uid = firebase.auth().currentUser.uid;
-    // this.userService.getUserById(uid)
-    //   .subscribe(data => {
-    //     console.log('HERE IS USER DATA ON PAGE LOAD!!', data)
-    //   }) 
+
+  ngOnInit() { 
   }
 }
