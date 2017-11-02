@@ -65,6 +65,7 @@
     "socket.io-client": "^2.0.4",
     "socket.io-redis": "^5.2.0",
     "socketio": "^1.0.0",
+    "twemoji": "^2.5.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

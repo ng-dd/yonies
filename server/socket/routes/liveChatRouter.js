@@ -7,4 +7,3 @@ const chatRouter = (io, client) => {
 };
 
 module.exports = chatRouter;
-

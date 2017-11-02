@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ng-socket-io';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth'
+import { SocketService } from '../services/socket.service'
+import { RoomstatService } from '../services/roomstat.service'
 
 declare var $: any;
 
@@ -41,7 +45,6 @@ export class ChatComponent implements OnInit {
   }
 
   // Room group chat functions
-
   openChatRoom(): void {
     $('.tap-target').tapTarget('open');
   }
@@ -68,6 +71,7 @@ export class ChatComponent implements OnInit {
     this.chatEnded = false;
     this.userID = this.socket.id;
     this.username = $('#chat-username').val || 'user';
+    this.haveUserName = true;    
     this.socket.emit('userRequestInitChat', this.username, this.userID);
   }
 
@@ -138,3 +142,100 @@ export class ChatComponent implements OnInit {
   }
 
 }
+
+
+
+// // Other
+
+
+//   // init chat
+//   getQueueSize(): void {
+//     this.socket.emit('getQueueSize');
+//   }
+
+//   getUserCredentials(): void {
+//     this.socket.emit('getUserSocketid');
+//     this.socket.emit('getUsername');
+//   }
+
+//   handleChatRequest(): void {
+//     if (this.queueSize > 0) {
+//       this.chatInitiated = true;
+//       this.haveUsername = false;
+//       if (!this.socket.connected) {
+//         this.socket.connect();
+//       }
+//     }
+//   }
+
+//   handleAdminAccept(): void {
+//     this.haveUsername = true;
+//     this.adminName = $('#chat-username').val() || 'admin';
+//     this.adminID = this.socket.id;
+//     console.log('admin id is ', this.adminID);
+//     this.socket.emit('adminAcceptChat', this.adminName, this.adminID);
+//     this.roomAvailable = true;
+//   }
+
+//   // handle chat
+//   handleSendMessage(): void {
+//     const message = $('#chat-input').val();
+//     this.socket.emit('chatMessage', message, this.adminName);
+//     $('#chat-input').val('');
+//     console.log('ADMIN sending message of', message);
+//   }
+
+//   // end chat
+//   handleEndChat(): void {
+//     this.getUserCredentials();
+//     this.chatInitiated = false;
+//     this.roomAvailable = false;
+//     this.username = '';
+//     this.userID = '';
+//     this.chatEnded = true;
+//     this.haveUsername = false;
+//     this.socket.emit('ended', this.userID);
+//   }
+
+//   ngOnInit() {
+//     this.getQueueSize();
+    
+//     // Event Listeners
+//     this.socket.on('username', (username) => {
+//       this.username = username;
+//     });
+
+//     this.socket.on('chatMessagesAdmin', (msg, sender) => {
+//       $('#chat-messages-admin').append($('<li>').text(msg + ' ~ ' + sender));
+//       console.log('Admin recvd msg ' + msg + ' from sender ' + sender);
+//     });
+
+//     this.socket.on('userSocketid', (socketid) => {
+//       this.socket.emit('ended', socketid);
+//       this.getQueueSize();
+//     });
+
+//     this.socket.on('firstInLine', (username, socketid) => {
+//       this.username = username;
+//       this.userID = socketid;
+//       this.haveUsername = true;
+//     });
+
+//     this.socket.on('updateQueue', (length) => {
+//       this.queueSize = length;
+//     });
+
+//     this.socket.on('connectedWith', (user, id) => {
+//       this.username = user;
+//       this.userID = id;
+//     });
+
+//     // end chat
+//     this.socket.on('ended', () => {
+//       this.chatEnded = true;
+//       this.socket.disconnect();
+//       this.handleEndChat();
+//     });
+//   }
+
+// }

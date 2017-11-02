@@ -16,9 +16,7 @@ export class RoomstatService {
       console.log('data from getRoomStat service: ', data)
       cb(data)
     })
-    // , (err) => {
-    //   console.log(err)
-    // })
+
   }
 
   getRoom() {

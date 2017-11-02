@@ -7,7 +7,6 @@ const app = express();
 
 const http = require('http')
 require('dotenv').config()
-// const io = require('socket.io')(http);
 
 const server = http.createServer(app);
 

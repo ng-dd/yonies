@@ -9,9 +9,10 @@ import { NotFoundComponent } from '../not-found/not-found.component';
 import { VideoShareComponent } from '../video-share/video-share.component';
 import { FollowingComponent } from '../following/following.component';
 import { FeaturedComponent } from '../featured/featured.component';
+import { SplashComponent } from '../splash/splash.component';
 
 const routes: Routes = [
-  { path: 'home', component: ContentFeedComponent },
+  { path: 'home', component: SplashComponent },
   { path: 'search', component: SearchBarComponent },
   { path: 'login', component: LoginComponent },
   { path: 'notfound', component: NotFoundComponent },
