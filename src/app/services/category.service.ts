@@ -9,22 +9,19 @@ export class CategoryService {
 
   constructor(private http: Http) { }
 
-  getCategory(category): Observable <any> {
-    var path = category.uid;
-    var realPath = `http://localhost:4201/categories/${path}`;
-    return this.http.get(realPath)
+  getCategory(person): Observable <any> {
+    return this.http.get(`http://localhost:4201/categories/${person}`)
     .map((data) => {
       return data.json();
     })
   }
 
-  addCategory(category) {
-    this.http.post('http://localhost:4201/categories', {
-      name: category.name,
-      uid: category.uid
+  addCategory(person): Observable <any>  {
+    return this.http.post('http://localhost:4201/categories', {
+      name: person
     })
-    .subscribe((data) => {
-      console.log(data, 'category data')
+    .map((data) => {
+      return data.json();
     })
   }
 

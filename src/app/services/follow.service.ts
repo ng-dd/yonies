@@ -20,7 +20,7 @@ export class FollowService {
 
   addFollow(follow) {
     this.http.post('http://localhost:4201/follows', {
-      name: follow.name,
+      category_id: follow.category_id,
       uid: follow.uid
     })
     .subscribe((data) => {

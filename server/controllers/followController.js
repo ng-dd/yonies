@@ -3,7 +3,7 @@ const Follow = require('../db/index').Follow;
 module.exports = {
   addFollow: (req, res) => {
     Follow.create({
-        name: req.body.name,
+        category_id: req.body.category_id,
         uid: req.body.uid
     })
     .then((data) => {
