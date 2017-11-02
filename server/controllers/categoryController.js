@@ -3,8 +3,7 @@ const Category = require('../db/index').Category;
 module.exports = {
     addCategory: (req, res) => {
         Category.create({
-            name: req.body.name,
-            uid: req.body.uid
+            name: req.body.name
         })
         .then((data) => {
             res.send(data)
@@ -15,8 +14,8 @@ module.exports = {
     },
 
     getCategory: (req, res) => {
-        Category.findAll({
-            where: {uid: req.params.id}
+        Category.findOne({
+            where: {name: req.params.id}
         })
         .then((data) => {
             res.send(data)

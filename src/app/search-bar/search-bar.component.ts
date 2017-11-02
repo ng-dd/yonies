@@ -8,6 +8,7 @@ import { LikesService } from '../services/likes.service';
 import { FollowService } from '../services/follow.service';
 import { ScriptService } from '../services/script.service';
 import { AuthService } from '../services/auth.services';
+import { CategoryService } from '../services/category.service';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -58,7 +59,8 @@ export class SearchBarComponent implements OnInit {
     private friendService: FriendService, 
     private fb: FormBuilder, 
     private roomstatService: RoomstatService, 
-    private followService: FollowService, 
+    private followService: FollowService,
+    private categoryService: CategoryService, 
     private firebaseAuth: AngularFireAuth, 
     private likeService: LikesService, 
     private router: Router,
@@ -174,7 +176,16 @@ export class SearchBarComponent implements OnInit {
   follow(person) {
     let uid = firebase.auth().currentUser.uid;
     console.log(person, uid)
-    this.followService.addFollow({name: person, uid: uid})     
+    this.categoryService.addCategory(person)
+      .subscribe(res => {
+        console.log('HERE IS THE CATEGORY INFO', res)
+        this.followService.addFollow({
+          category_id: res.category_id,
+          uid: uid
+        })
+      })
+
+    // this.followService.addFollow({name: person, uid: uid})     
   }
 
   searchPosts(query) {
