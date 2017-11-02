@@ -63,9 +63,8 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     // if (!this.roomId){
     //   this.roomId = '1'
     // }
-
+    // if (!this.videoId)
     // this.roomstatService
-    let test = this.roomId
     this.roomstatService.getHostRoom(this.roomId)
     .subscribe((data) => {
       console.log('Selected video on init: ', this.roomstatService.getSelectedVideo())
@@ -129,6 +128,8 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.roomId) {
       this.roomId = '1';
     }
+
+    
     
     // this.socketService.joinRoom(this.roomId)
   }
@@ -167,4 +168,16 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   //     peer_id: 'closed',
   //   })
   // }
+
+  skipTo = (time) => {
+    this.socketService.skipToRequest(this.roomId, time);
+  }
+
+  pauseRequest = () => {
+    this.socketService.pauseRequest(this.roomId);
+  }
+
+  playRequest = () => {
+    this.socketService.playRequest(this.roomId);
+  }
 }

@@ -1,4 +1,11 @@
 <div>
     <div id="player"></div>
-  <!-- <iframe class="embed-responsive-item" [src]='videoUrl' allowfullscreen></iframe> -->
+    <!-- <iframe class="embed-responsive-item" [src]='videoUrl' allowfullscreen></iframe> -->
+</div>
+<div *ngIf = '!isHost'>
+    <h1>Guest Controls</h1>
+    <button (click)='playRequest()'>Play Request</button>
+    <button (click)='pauseRequest()'>Pause Request</button>
+    <input value='time'>
+    <button (click)='skipTo(time)'>Skip to...</button>
 </div>
