@@ -4,12 +4,8 @@ const request = require('request');
 
 module.exports = {
     addPost: (req, res) => {
-        Post.create({
-            type: req.body.type,
-            text: req.body.text,
-            like_count: req.body.like_count,
-            parent: req.body.parent
-        })
+        Post.findOrCreate({where: {text: req.body.text}, 
+            defaults: {type: req.body.type, text: req.body.text, like_count: 1, parent: req.body.parent}})
         .then((data) => {
             res.send(data)
         })
