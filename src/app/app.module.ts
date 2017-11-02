@@ -64,6 +64,7 @@ import { FeaturedComponent } from './featured/featured.component';
 import { FollowService } from './services/follow.service';
 import { SplashComponent } from './splash/splash.component';
 import { FooterComponent } from './footer/footer.component';``
+import { WallfeedComponent } from './wallfeed/wallfeed.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,9 @@ import { FooterComponent } from './footer/footer.component';``
     FeaturedComponent,
     SplashComponent,
     FooterComponent,
+    ContentItemComponent,
+    ContentItemWallComponent,
+    WallfeedComponent
   ],
   imports: [
     RoutingModule,

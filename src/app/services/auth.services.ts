@@ -53,7 +53,7 @@ export class AuthService {
           username: email,
           first_name: firstname,
           last_name: lastname,
-          uid: user.uid
+          uid: value.uid
         })
       })
       .catch(err => {

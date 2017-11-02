@@ -10,6 +10,7 @@ import { VideoShareComponent } from '../video-share/video-share.component';
 import { FollowingComponent } from '../following/following.component';
 import { FeaturedComponent } from '../featured/featured.component';
 import { SplashComponent } from '../splash/splash.component';
+import { WallfeedComponent } from '../wallfeed/wallfeed.component';
 
 const routes: Routes = [
   { path: 'home', component: SplashComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: '', component: ContentFeedComponent},
   { path: 'following', component: FollowingComponent},
   { path: 'featured', component: FeaturedComponent},
+  { path: 'wall', component: WallfeedComponent},
   { path: '**', redirectTo: '/notfound' },
 ];
 
