@@ -76,25 +76,25 @@ export class FollowingComponent implements OnInit {
             })
             console.log(this.cats, 'friends cats %%%%%%%%%%%')
             this.cats.forEach((cat) => {
-              this.postService.getTwitch(cat)
+              this.postService.getYouTube(cat)
               .subscribe((data) => {
-                data.videos.forEach((video) => {
-                  this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
+                data.items.forEach((video) => {
+                  console.log(video, 'videos')
+                  this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
                 })
-                this.postService.getYouTube(cat)
+                this.postService.getTwitch(cat)
                 .subscribe((data) => {
-                  data.items.forEach((video) => {
-                    console.log(video, 'videos')
-                    this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+                  data.videos.forEach((video) => {
+                    this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
                   })
-                  this.content.sort((a, b) => {
-                    var c = new Date(a.date).getTime()
-                    var d = new Date(b.date).getTime()
-                    return c > d ? 1 : -1; 
-                  })
-                  this.content = this.content.slice(0, 11);   
-              })
-              console.log(this.content, '<<<<<<< CONTENT BY DATES')
+                console.log(this.content, '<<<<<<< CONTENT BY DATES')
+                })
+                this.content.sort((a, b) => {
+                  var c = new Date(a.date).getTime()
+                  var d = new Date(b.date).getTime()
+                  return c > d ? 1 : -1; 
+                })
+                this.content = this.content.slice(0, 11);   
               })
             })
           })

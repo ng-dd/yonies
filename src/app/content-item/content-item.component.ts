@@ -26,7 +26,7 @@ import * as firebase from 'firebase/app';
   </iframe>
   </div>
   <i *ngIf="!this.liked" class="material-icons" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
-  <i *ngIf="this.liked" class="material-icons" (click)="toggleLiked()">favorite</i>
+  <i *ngIf="this.liked" class="material-icons" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite</i>
   `,
   styleUrls: ['./content-item.component.css']
 })
@@ -57,6 +57,22 @@ export class ContentItemComponent implements OnInit {
     this.liked = true; 
   }
 
+  deletePost(post) {
+    let user = firebase.auth().currentUser;
+    this.likeService.getLikes({uid: user.uid})
+    .subscribe((data) => {
+      var ids = data.map((item) => {return item.post_id});
+      ids.forEach((id) => {
+        this.postService.getPost({post_id: id})
+        .subscribe((data) => {
+          if (data.text === post.url) {
+            this.postService.deletePost({id: data.post_id})
+          }
+        })
+      })
+    })
+  }
+
 
   toggleLiked(post) {
     if (this.liked === false) {
@@ -64,11 +80,28 @@ export class ContentItemComponent implements OnInit {
       this.likePost(post)
     } else if (this.liked === true) {
       this.liked = false;
+      this.deletePost(post)
     }
   }
 
   ngOnInit() {
-    console.log(this.vid, 'loggin vid <<<<@@@##$$')
+    var url = this.vid['src']['changingThisBreaksApplicationSecurity'].toString();
+    this.afAuth.authState.subscribe((data) => {
+      var uid = data.uid;
+      this.likeService.getLikes({uid: uid})
+      .subscribe((data) => {
+        var postIds = data.map((post) => {return post.post_id});
+        postIds.forEach((id) => {
+          this.postService.getPost({post_id: id})
+          .subscribe((data) => {
+            // console.log(data, 'please !!!! AHHHAHAHAHAHAHAH')
+            if (data.text === url) {
+              this.liked = true;
+            }
+          })
+        })
+      })
+    })
   }
 
 }

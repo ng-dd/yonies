@@ -40,14 +40,12 @@ export class PostService {
   //     console.log('HERE IS DATA!', data.json());
   //   })
   // }
-
   // getYouTube(query) {
   //   this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=channel&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
   //   .subscribe((data) => {
   //     // console.log(data.json(), 'this is the youtube data')
   //   })
   // }
-
   getPopularTags(): Observable<any> {
     
     return this.http.get('http://localhost:4201/tags')
@@ -99,7 +97,10 @@ export class PostService {
   }
 
   deletePost(post) {
-    this.http.delete(`/post/${post.id}`)
+    this.http.delete(`http://localhost:4201/posts/${post.id}`)
+    .subscribe(() => {
+      console.log("deleted post")
+    })
   }
 
   getComments(postid): Observable<any> {

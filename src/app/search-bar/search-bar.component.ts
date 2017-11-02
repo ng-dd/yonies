@@ -180,25 +180,24 @@ export class SearchBarComponent implements OnInit {
     this.youtube = [];
     this.content = [];
     // console.log(query, 'this is from searchbar')
-    this.postService.getTwitch(query.post)
+    this.postService.getYouTube(query.post)
     .subscribe((data) => {
-      data.videos.forEach((video) => {
-        this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
+      data.items.forEach((video) => {
+        this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
       })
-      this.postService.getYouTube(query.post)
+      this.postService.getTwitch(query.post)
       .subscribe((data) => {
-        data.items.forEach((video) => {
-          this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+        data.videos.forEach((video) => {
+          this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
         })
-        // console.log(this.youtube, 'YOUTUBE <<<<<<<<')
-        this.content.sort((a, b) => {
-          var c = new Date(a.date).getTime()
-          var d = new Date(b.date).getTime()
-          return c > d ? 1 : -1; 
-        })   
-    })
-
-      console.log(this.content, '<<<<<<< CONTENT BY DATES')
+        console.log(this.content, '<<<<<<< CONTENT BY DATES')
+      })
+      // console.log(this.youtube, 'YOUTUBE <<<<<<<<')
+      this.content.sort((a, b) => {
+        var c = new Date(a.date).getTime()
+        var d = new Date(b.date).getTime()
+        return c > d ? 1 : -1; 
+      })   
     })
 
     this.postService.getTwitter(query.post)

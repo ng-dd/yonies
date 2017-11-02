@@ -17,28 +17,28 @@ router.post('/postcache', redisController.postSomething);
 router.get('/userid/:id', userController.getUserById);
 router.get('/users/:id', userController.getUser);
 router.post('/users', userController.addUser);
-router.delete('/users', userController.deleteUser);
+router.delete('/users:/id', userController.deleteUser);
 
 //posts
 router.get('/posts/:id', postController.getPost);
 // router.get('/posturl/:id', postController.getPostUrl);
 router.post('/posts', postController.addPost);
-router.delete('/posts', postController.deletePost);
+router.delete('/posts/:id', postController.deletePost);
 
 //likes
 router.get('/likes/:id', likeController.getLike);
 router.post('/likes', likeController.addLike);
-router.delete('/likes', likeController.deleteLike);
+router.delete('/likes/:id', likeController.deleteLike);
 
 //message
 router.get('/messages/:id', messageController.getMessage);
 router.post('/messages', messageController.addMessage);
-router.delete('/messages', messageController.deleteMessage);
+router.delete('/messages/:id', messageController.deleteMessage);
 
 //friend
 router.get('/friends/:id', friendController.getFriend)
 router.post('/friends', friendController.addFriend)
-router.delete('/friends', friendController.deleteFriend)
+router.delete('/friends/:id', friendController.deleteFriend)
 
 //categories
 router.get('/categories/:id', categoryController.getCategory)
@@ -48,7 +48,7 @@ router.delete('/categories', categoryController.deleteCategory)
 //roomstat
 router.get('/rooms/:id', roomstatController.getRoomstat)
 router.post('/rooms/', roomstatController.addRoomstat)
-router.delete('/rooms', roomstatController.deleteRoomstat)
+router.delete('/rooms/:id', roomstatController.deleteRoomstat)
 router.put('/rooms/:id', roomstatController.updateRoomstat)
 
 //hashes
