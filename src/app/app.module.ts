@@ -19,6 +19,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { ContentItemComponent } from './content-item/content-item.component';
+import { ContentItemWallComponent } from './content-item-wall/content-item-wall.component';
 import { ContentFeedComponent } from './content-feed/content-feed.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
@@ -60,7 +61,7 @@ import { ChatComponent } from './chat/chat.component';
 import { VideoShareComponent } from './video-share/video-share.component';
 import { FollowingComponent } from './following/following.component';
 import { FeaturedComponent } from './featured/featured.component';
-import { FollowService } from './services/follow.service';``
+import { FollowService } from './services/follow.service';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,8 @@ import { FollowService } from './services/follow.service';``
     VideoShareComponent,
     FollowingComponent,
     FeaturedComponent,
+    ContentItemComponent,
+    ContentItemWallComponent
   ],
   imports: [
     RoutingModule,
