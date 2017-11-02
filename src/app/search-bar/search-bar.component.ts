@@ -148,10 +148,10 @@ export class SearchBarComponent implements OnInit {
     // console.log(user, 'user')
     this.userService.getUser(user)
     .subscribe((data) => {
-      // console.log(data, '<<<<<<DATA')
+      console.log(data, '<<<<<<DATA')
       this.likeService.getLikes({uid: data[0].uid})
       .subscribe((data) => {
-        // console.log("LIKE DATA!! >>>>", data)
+        console.log("LIKE DATA!! >>>>", data)
         data.forEach((data) => {
           this.postService.getPost({post_id: data.post_id})
           .subscribe((data) => {

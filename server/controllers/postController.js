@@ -3,11 +3,26 @@ const axios = require('axios');
 const request = require('request');
 
 module.exports = {
+    //for like counter, comment out if problems occur and comment in the function above.
     addPost: (req, res) => {
-        Post.findOrCreate({where: {text: req.body.text}, 
-            defaults: {type: req.body.type, text: req.body.text, like_count: 1, parent: req.body.parent}})
+        Post.findOne({where: {text: req.body.text}})
         .then((data) => {
-            res.send(data)
+            if (data) {
+                Post.update({like_count: data.dataValues.like_count + 1}, {where: {text: data.dataValues.text}})
+                .then((data) => {
+                    console.log(data)
+                    res.send(data)
+                })
+                .catch((err) => {
+                    res.status(500).send(err)
+                })
+            } else {
+                Post.create({text: req.body.text, like_count: 1})
+                .then((data) => {
+                    res.send(data)
+                })
+                .catch((err) => {res.status(500).send(err)})
+            }
         })
         .catch((err) => {
             res.status(500).send(err)
