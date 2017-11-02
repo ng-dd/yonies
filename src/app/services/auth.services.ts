@@ -48,9 +48,8 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value, value.uid);
-
         this.confirmEmail();
-        this.userService.addUser({uid: user.uid})
+        this.userService.addUser({uid: value.uid, username: email, first_name: firstname, last_name: lastname})
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);

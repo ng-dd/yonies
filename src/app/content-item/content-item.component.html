@@ -1,3 +1,10 @@
-<p>
-  content-item works!
-</p>
+<div>
+    <iframe
+      [src]='vid.src'
+      height='315'
+      width='420'>
+    </iframe>
+    <i *ngIf="!liked" class="material-icons md-48" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
+    <i *ngIf="liked" class="material-icons md-48" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite</i>
+    <div>{{likeCount}} likes</div>
+  </div>

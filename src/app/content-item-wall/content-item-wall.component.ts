@@ -16,24 +16,40 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-content-item',
-  templateUrl: './content-item.component.html',
-  styleUrls: ['./content-item.component.css']
+  selector: 'app-content-item-wall',
+  templateUrl: './content-item-wall.component.html',
+  styleUrls: ['./content-item-wall.component.css']
 })
-export class ContentItemComponent implements OnInit {
+export class ContentItemWallComponent implements OnInit {
 
   content: any;
   liked: boolean;
   likeCount: number;
+  commentOn: boolean = false;
+  comments: any;
+  commentForm: FormGroup;
 
   @Input() 
   
   vid: object;
   
-  constructor(private friendService: FriendService, private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+  constructor(
+    private friendService: FriendService, 
+    private likeService: LikesService, 
+    private sanitizer: DomSanitizer, 
+    private postService: PostService, 
+    private authService: AuthService, 
+    private categoryService: CategoryService, 
+    private fb: FormBuilder, 
+    private afAuth: AngularFireAuth) {
+
     this.content = [];
     this.liked = false;
     this.likeCount = 0;
+    this.commentForm = fb.group({
+      'comment': null
+    });  
+    this.commentOn = false;
   }
 
   likePost(post) {
@@ -76,6 +92,27 @@ export class ContentItemComponent implements OnInit {
       this.likeCount--;
       this.deletePost(post)
     }
+  }
+
+  toggleComment(id) {
+    this.comments = [];
+    if(!this.commentOn) {
+      //get request to get comments on the post id
+      this.postService.getComments(id)
+        .subscribe(data => {
+          this.comments = data;
+          console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
+        })
+      } 
+      this.commentOn = !this.commentOn;
+    }
+
+  postComment(text, id) {
+    console.log('THIS IS THE ID!!!', id);
+    this.postService.addComment(text, id)
+      .subscribe(res => {
+        console.log(res);
+      })
   }
 
   ngOnInit() {

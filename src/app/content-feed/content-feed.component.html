@@ -1,6 +1,5 @@
-<div mnFullpage [mnFullpageNavigation]="false">
-  <div class="section fp-section fp-table"></div>
-    <div class="section fp-section fp-table" *ngFor='let vid of content'>
+<div >
+    <div  *ngFor='let vid of content'>
       <app-content-item [vid]="vid"></app-content-item>
       <div *ngIf="commentOn">
           <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value)">

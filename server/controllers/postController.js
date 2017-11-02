@@ -3,24 +3,7 @@ const axios = require('axios');
 const request = require('request');
 
 module.exports = {
-    // addPost: (req, res) => {
-    //     Post.create({
-    //         type: req.body.type,
-    //         text: req.body.text,
-    //         like_count: req.body.like_count,
-    //         parent: req.body.parent
-    //     })
-    //     .then((data) => {
-    //         res.send(data)
-    //     })
-    //     .catch((err) => {
-    //         res.status(500).send(err)
-    //     })
-    // },
-
-    //for like counter, comment out if problems occur and comment in the function above.
     addPost: (req, res) => {
-        console.log('this is the req.body ', req.body)
         Post.create({
             type: req.body.type,
             text: req.body.text,
@@ -28,20 +11,32 @@ module.exports = {
             parent: req.body.parent
         })
         .then((data) => {
-            console.log(data[0].dataValues.like_count, 'AJAJAJ')
-            Post.update({like_count: data[0].dataValues.like_count + 1}, {where: {text: req.body.text}})
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => {
-                res.status(500).send(err)
-            })
-            res.send(data);
+            res.send(data)
         })
         .catch((err) => {
             res.status(500).send(err)
         })
     },
+
+    //for like counter, comment out if problems occur and comment in the function above.
+    // addPost: (req, res) => {
+    //     Post.findOrCreate({where: {text: req.body.text}, 
+    //         defaults: {type: req.body.type, text: req.body.text, like_count: 1, parent: req.body.parent}})
+    //     .then((data) => {
+    //         console.log(data[0].dataValues.like_count, 'AJAJAJ')
+    //         Post.update({like_count: data[0].dataValues.like_count + 1}, {where: {text: req.body.text}})
+    //         .then((data) => {
+    //             console.log(data)
+    //         })
+    //         .catch((err) => {
+    //             res.status(500).send(err)
+    //         })
+    //         res.send(data);
+    //     })
+    //     .catch((err) => {
+    //         res.status(500).send(err)
+    //     })
+    // },
 
     authorize: function(req, res) {
         var header = '6CBsjafaj3F2f1AMudmMW5xSB' + ':' + 'BlZMYXZz3VsbObqi8tnDhT36UAxfdMqI2aTnRRBTUdBUeihIjj';
