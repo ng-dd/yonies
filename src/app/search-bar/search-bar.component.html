@@ -33,6 +33,8 @@
   <div *ngFor='let user of users'>
       {{user.username}}
       <input type='button' value='visit wall' (click)="visitWall(user)">
+      <!-- <app-wallfeed [userId]=""></app-wallfeed> -->
+      <!-- <a [routerLink]="/wall"> -->
     </div>
     <div class="wrapper"> 
         
