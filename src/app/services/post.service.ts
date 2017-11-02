@@ -90,7 +90,7 @@ export class PostService {
   addPost({ url }): Observable<any> {
     return this.http.post('http://localhost:4201/posts', {
       text: url, 
-      type: 'post'
+      type: 'post',
     })
     .map((res) => {return res.json()})
   }
