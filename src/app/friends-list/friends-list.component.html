@@ -1,4 +1,7 @@
 <div>
+  <div *ngFor='let user of users'>
+    <a (click)='selectUser(user.uid)'>{{user.first_name}} {{user.uid}}</a>
+  </div>
 
   <input type='button' value='getfriends' (click)="getFriendsList()">
   <div class="col-sm">
@@ -13,6 +16,7 @@
   <div *ngFor="let friend of friendsList">
     {{friend}}
     <input type='button' value='visit their wall' (click)="visitWall(friend)">
+    
     <div *ngFor='let vid of content'>
       <iframe
       [src]='vid.src'

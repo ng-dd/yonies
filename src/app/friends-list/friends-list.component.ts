@@ -10,6 +10,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 
+import { RoomstatService } from '../services/roomstat.service'
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-friends-list',
   templateUrl: './friends-list.component.html',
@@ -19,8 +22,17 @@ export class FriendsListComponent implements OnInit {
   friendRoomList: object = [];
   friendsList: any;
   content: any;
+  users: object[];
 
-  constructor(private sanitizer: DomSanitizer, private userService: UserService, private likeService: LikesService, private postService: PostService, private friendService: FriendService) {
+  constructor(
+    private sanitizer: DomSanitizer, 
+    private userService: UserService, 
+    private likeService: LikesService, 
+    private postService: PostService, 
+    private friendService: FriendService,
+    private roomstatService: RoomstatService,
+    private router: Router
+  ) {
     this.friendsList = [];
     this.content = [];
   }
@@ -64,7 +76,18 @@ export class FriendsListComponent implements OnInit {
   }
   
   ngOnInit() {
-
+    //>>REMOVE_BEFORE_LAUNCH<< generates lists of all users- when friends work >>REMOVE_BEFORE_LAUNCH<<
+    this.userService.getAllUsers()
+    .subscribe((data) => {
+      console.log(data);
+      this.users = data;
+    })
   }
+
+  selectUser(user) {
+    this.roomstatService.setRoom(String(user));
+    this.router.navigate(['/room'])
+  }
+  
 
 }
