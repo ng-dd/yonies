@@ -3,25 +3,35 @@ const redis = require('../redis.js');
 
 module.exports = {
     addUser: (req, res) => {
-        User.create({
-            username: req.body.username,
-            uid: req.body.uid,
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            admin_status: req.body.admin_status,
-            age: req.body.age,
-            gender: req.body.gender,
-            street_address: req.body.street_address,
-            city: req.body.city,
-            state: req.body.state,
-            zip_code: req.body.zip_code,
-            email: req.body.email,
-            phone: req.body.phone
-        })
+        User.findOne({where: {uid: req.body.uid}})
         .then((data) => {
-            res.send(data);
+            if (!data) {
+                User.create({
+                    username: req.body.username,
+                    uid: req.body.uid,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    admin_status: req.body.admin_status,
+                    age: req.body.age,
+                    gender: req.body.gender,
+                    street_address: req.body.street_address,
+                    city: req.body.city,
+                    state: req.body.state,
+                    zip_code: req.body.zip_code,
+                    email: req.body.email,
+                    phone: req.body.phone
+                })
+                .then((data) => {
+                    res.send(data)
+                })
+                .catch((err) => {
+                    res.status(500).send(err)
+                })
+            } else {
+                res.send('user already in db', data)
+            }
         })
-        .catch(err => {
+        .catch((err) => {
             res.status(500).send(err)
         })
     },

@@ -48,7 +48,7 @@ export class ContentFeedComponent implements OnInit {
     let user = firebase.auth().currentUser;    
     this.postService.addPost(post)
     .subscribe((res) => {
-      console.log(res, '<<<<<< RES')
+      console.log(res.post_id, '<<<<<< REALLY?????')
       this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
       .subscribe((data) => {
         console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
