@@ -300,21 +300,37 @@ export class SearchBarComponent implements OnInit {
       this.videoUrl = url;
     }
     this.roomstatService.addRoomstat({
-      hostId: this.firebaseAuth.auth.currentUser,
+      host_id: this.firebaseAuth.auth.currentUser.uid,
       video_url: this.videoUrl
-    }, (roomData)=>{
-      let response = JSON.parse(roomData._body)
+    })
+    .subscribe((roomData)=> {
+      let response = roomData
       this.roomId = response.room_id;
       this.roomStarted = true;
+      console.log('video url', this.videoUrl)
+      this.roomstatService.selectVideo(this.videoUrl)
+      this.router.navigate(['/room'])
     })
-    console.log('video url', this.videoUrl)
-    this.roomstatService.selectVideo(this.videoUrl)
-    this.router.navigate(['/room'])
   }
 
   connectToRoom(roomId){
     console.log('room', this.roomId)
   } 
+
+  login1(){
+    this.firebaseAuth.auth.signInWithEmailAndPassword('test@tester.com', 'testerosa')
+    .then(()=>{
+      console.log('login to test testerson successful')
+    })
+  }
+
+  login2(){
+    this.firebaseAuth.auth.signInWithEmailAndPassword('mrworldwide@pitbull.com', 'plantlife')
+    .then(()=>{
+      console.log('login to mrworldwide successful')
+    })
+  }
+
 
   ngOnInit() {
     // let uid = firebase.auth().currentUser.uid;

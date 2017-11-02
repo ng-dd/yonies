@@ -53,7 +53,7 @@ router.post('/follows', followController.addFollow)
 router.delete('/follows', followController.deleteFollow)
 
 //roomstat
-router.get('/rooms/:id', roomstatController.getRoomstat)
+// router.get('/rooms/:id', roomstatController.getRoomstat)
 router.post('/rooms/', roomstatController.addRoomstat)
 router.delete('/rooms/:id', roomstatController.deleteRoomstat)
 router.put('/rooms/:id', roomstatController.updateRoomstat)

@@ -86,7 +86,7 @@ export class FriendsListComponent implements OnInit {
 
   selectUser(user) {
     this.roomstatService.setRoom(String(user));
-    this.router.navigate(['/room'])
+    this.router.navigate(['/room']);
   }
   
 

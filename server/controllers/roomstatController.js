@@ -21,8 +21,9 @@ module.exports = {
     },
 
     getRoomByHost: (req, res) => {
-        RoomStat.findLast({
-            where: {host_id: req.params.host_id}
+        RoomStat.findOne({
+            where: {host_id: req.params.host_id},
+            order: [[ 'room_id', 'DESC' ]],
         })
         .then((data) => {
             res.send(data)
