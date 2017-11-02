@@ -1,6 +1,8 @@
 <div>
+  <!-- vv-Remove later-vv -->
   <button (click)='login1()'>Log in to test@tester.com</button>
   <button (click)='login2()'>Log in to mrworldwide@pitbull.com</button>
+  <button (click)='currentUser()'>NEW PHONE WHO DIS?</button>
   <app-friends-list></app-friends-list>
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">
@@ -34,17 +36,15 @@
     </div>
     <div class="wrapper"> 
         
-<div mnFullpage [mnFullpageNavigation]="false">
+<div>
                     
 
-    <div class="section fp-section fp-table"></div>
 
-    <div class="section fp-section fp-table" *ngFor='let vid of content'>
+    <div *ngFor='let vid of content'>
       <app-content-item [vid]="vid"></app-content-item>
       <button (click)='roomStart(vid)'> Start a room</button>
       <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
-      <button (click)="toggleComment(vid.id)">Comment</button>
-      <button (click)="test()">test</button>
+      <!-- <button (click)="toggleComment(vid.id)">Comment</button>
       <div *ngIf="commentOn">
           <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value, vid.id)">
             <input formControlName="comment" placeholder="Post a comment">
@@ -53,7 +53,7 @@
           <p *ngFor="let comment of comments">
               Username: {{comment.text}}
           </p>
-      </div>
+      </div> -->
     </div>
     <div *ngFor="let tweet of tweets" class="section fp-section fp-table" [innerHTML]= "tweet"> 
         {{tweet}}

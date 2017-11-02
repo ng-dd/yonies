@@ -25,6 +25,18 @@ module.exports = {
         })
     },
 
+    getCategoryById: (req, res) => {
+        Category.findAll({
+            where: {category_id: req.params.id}
+        })
+        .then((data) => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send(err)
+        })
+    },
+
     deleteCategory: (req, res) => {
         Category.destroy({
             where: {id: req.params.id}

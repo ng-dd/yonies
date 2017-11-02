@@ -1,0 +1,20 @@
+<div>
+  <iframe
+    [src]='vid.src'
+    height='315'
+    width='420'>
+  </iframe>
+  <i *ngIf="!liked" class="material-icons md-48" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite_border</i>
+  <i *ngIf="liked" class="material-icons md-48" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})">favorite</i>
+  <div>{{likeCount}} likes</div>
+  <button (click)="toggleComment(vid.id)">Comment</button>
+  <div *ngIf="commentOn">
+      <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value, vid.id)">
+        <input formControlName="comment" placeholder="Post a comment">
+        <input type='submit' value='Post'>
+      </form>
+      <p *ngFor="let comment of comments">
+          Username: {{comment.text}}
+      </p>
+  </div>
+</div>

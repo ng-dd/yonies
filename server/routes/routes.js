@@ -46,6 +46,7 @@ router.delete('/friends/:id', friendController.deleteFriend)
 router.get('/categories/:id', categoryController.getCategory)
 router.post('/categories', categoryController.addCategory)
 router.delete('/categories', categoryController.deleteCategory)
+router.get('/categoryid/:id', categoryController.getCategoryById)
 
 //follows
 router.get('/follows/:id', followController.getFollow)

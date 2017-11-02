@@ -19,6 +19,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { ContentItemComponent } from './content-item/content-item.component';
+import { ContentItemWallComponent } from './content-item-wall/content-item-wall.component';
 import { ContentFeedComponent } from './content-feed/content-feed.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';

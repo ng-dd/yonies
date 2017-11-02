@@ -42,9 +42,9 @@ export class SearchBarComponent implements OnInit {
   roomStarted: boolean = false;
   roomId: any;
   keyWord: any;
-  commentOn: boolean = false;
-  comments: any;
-  commentForm: FormGroup;
+  // commentOn: boolean = false;
+  // comments: any;
+  // commentForm: FormGroup;
   name: string; 
 
   
@@ -74,10 +74,10 @@ export class SearchBarComponent implements OnInit {
     this.hashForm = fb.group({
       'hash': null
     })
-    this.commentForm = fb.group({
-      'comment': null
-    });  
-    this.commentOn = false;
+    // this.commentForm = fb.group({
+    //   'comment': null
+    // });  
+    // this.commentOn = false;
 
     this.tweets = [];
     this.twitch = [];
@@ -87,26 +87,31 @@ export class SearchBarComponent implements OnInit {
     this.name = "";
   }
 
-  toggleComment(id) {
-    this.comments = [];
-    if(!this.commentOn) {
-      //get request to get comments on the post id
-      this.postService.getComments(id)
-        .subscribe(data => {
-          this.comments = data;
-          console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
-        })
-      } 
-      this.commentOn = !this.commentOn;
-    }
-
-  postComment(text, id) {
-    console.log('THIS IS THE ID!!!', id);
-    this.postService.addComment(text, id)
-      .subscribe(res => {
-        console.log(res);
-      })
+  currentUser() {
+    let user = firebase.auth().currentUser;
+    console.log(user)
   }
+
+  // toggleComment(id) {
+  //   this.comments = [];
+  //   if(!this.commentOn) {
+  //     //get request to get comments on the post id
+  //     this.postService.getComments(id)
+  //       .subscribe(data => {
+  //         this.comments = data;
+  //         console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
+  //       })
+  //     } 
+  //     this.commentOn = !this.commentOn;
+  //   }
+
+  // postComment(text, id) {
+  //   console.log('THIS IS THE ID!!!', id);
+  //   this.postService.addComment(text, id)
+  //     .subscribe(res => {
+  //       console.log(res);
+  //     })
+  // }
 
 
   toggleQuery(value: any) {
@@ -143,10 +148,10 @@ export class SearchBarComponent implements OnInit {
     // console.log(user, 'user')
     this.userService.getUser(user)
     .subscribe((data) => {
-      // console.log(data, '<<<<<<DATA')
+      console.log(data, '<<<<<<DATA')
       this.likeService.getLikes({uid: data[0].uid})
       .subscribe((data) => {
-        // console.log("LIKE DATA!! >>>>", data)
+        console.log("LIKE DATA!! >>>>", data)
         data.forEach((data) => {
           this.postService.getPost({post_id: data.post_id})
           .subscribe((data) => {
@@ -167,11 +172,9 @@ export class SearchBarComponent implements OnInit {
   addFriend(user) {
     let currId = firebase.auth().currentUser.uid;
     console.log(currId, user.uid)
-    this.friendService.addFriend(currId, user.uid)
+    this.friendService.addFriend(currId, user.uid);
+    this.friendService.addFriend(user.uid, currId);
   }
-  // addFriend(query) {
-  //   this.friendService.addFriend(11, String(query))
-  // }
   
   follow(person) {
     let uid = firebase.auth().currentUser.uid;

@@ -34,6 +34,12 @@ export class SocketService {
     })
   }
 
+  requestResponse(): Observable<any> {
+    return new Observable((observer) => {
+      this.socketIo.on('pauseResponse')
+    })
+  }
+
   joinRoom(roomId) {
     this.socketIo.emit('joinRoom', roomId)
   }
@@ -58,6 +64,21 @@ export class SocketService {
   remove(params: any) {
     this.socket.emit('remove', params);
   }
+  
+  pauseRequest(roomId) {
+    this.socket.emit('pauseRequest', roomId)
+  }
+
+  playRequest(roomId) {
+    this.socket.emit('playRequest'), roomId;
+  }
+
+  skipToRequest(roomId, time) {
+    this.socket.emit('skipToRequest', roomId, time);
+  }
+  // socketInit() {
+  //   this.socket = this.socketIo(this.SERVER_URL);
+  // }
 
   onConnect(): Observable<any> {
     return new Observable(observer => {
