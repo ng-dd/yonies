@@ -1,0 +1,218 @@
+$hero-turquoise: #06c8d9;
+$light-blue-gradient: #e1f9fb;
+$dark-blue-gradient: #b9f2f7;
+$light-pink-gradient: #febeae;
+$dark-pink-gradient: #fed3f0;
+$light-yellow-gradient: #fff9d1;
+$dark-yellow-gradient: #f8eea8;
+$dark-text: #3c3d41;
+$button-attention-pink: #f74d62;
+/* Button styling
+*/
+.btn-link {
+    cursor: pointer !important;
+    text-decoration: none !important;
+color: $hero-turquoise;
+}
+button, input {
+    text-decoration: none !important;
+}
+.btn-hero {
+color: white !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 15px solid transparent !important;
+  border-radius: 20px !important;
+  border-color: white !important;
+  font-family: 'soleil', sans-serif !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  background: $button-attention-pink !important;
+padding: 20px;
+}
+.btn-primary {
+color: white !important;
+margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: $button-attention-pink !important;
+}
+
+.btn-facebook {
+color: white !important;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #4568b2 !important;
+}
+.btn-facebook:hover {
+color: white !important;
+}
+.btn-google {
+    margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  color: #484848 !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #ffffff !important;
+  border-color: #767676 !important;
+}
+.btn-google:hover {
+color: #484848 !important;
+}
+.btn-twitter {
+color: white !important;
+    margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #00aced !important;
+}
+.btn-twitter:hover {
+color: white !important;
+}
+.close {
+font-size: 40px;
+color: #a6a6a6;
+}
+.btn-browse {
+color: $button-attention-pink !important;
+margin-top: 2px;
+  margin-bottom: 2px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid $button-attention-pink !important;
+  border-radius: 4px !important;
+  width: 75% !important;
+  font-family: 'Soleil',Helvetica Neue,sans-serif !important;
+  font-size: 15px !important;
+  line-height: 22px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 800 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: white !important;
+}
+
+/* Modal */
+.modal-header {
+border-color: transparent !important;
+ text-align: left !important;
+}
+.modal-body {
+padding-bottom: 0px;
+   text-align: center !important;
+}
+.modal-footer {
+border-color: transparent !important;
+padding-top: 0px;
+}
+
+.input-group-addon {
+  background-color: white;
+}
+.input-group .form-control {
+  border-right-color: transparent !important;
+}
+
+#snazzy-login{
+margin-top: 30px;
+align: center;
+}
+#exampleInputEmail3{
+border-color: transparent !important;
+}
+
+.mary {
+  background: white;
+  border-radius: 10px;
+  padding-top: 10rem ;
+padding-bottom: 10rem;
+padding-left: 10% ;
+padding-right: 10% ;
+}
+
+.browsers {
+margin-bottom: 6rem;
+text-align: center !important;
+}
+

@@ -1,39 +1,33 @@
-<div class = "tap-target" id="chat-popout" data-activates="menu">
-  <div class="tap-target-content">
+<!-- Keep in ind GABE's Room function<div *ngIf='done'>
+  <app-stream-view [uid] = 'uid'[socketService] = 'io'  [roomId] = 'roomId'></app-stream-view>
+  </div> -->
+
+<div class = "container" id="chat-popout">
     <h4 id="user-chat-title">Chat</h4>
 
       <div class="chat-btn-wrapper">
           <button class="btn chat-btn" *ngIf="!chatInitiated" (click)="handleChat()" >Chat</button>
       </div>
 
-      <div *ngIf="chatInitiated && !haveUsername">
+      <div *ngIf="!roomAvailable && haveUserName">
+          <p id="chat-wait-msg">Sup {{this.username | titlecase}}. Waiting for {{ this.hostName }}. Yonies says relax. </p>
+      </div>
+
+      <div *ngIf="roomAvailable && haveHostName">
+        <!-- <ul class="list-group">
+          <li class="list-group-item" *ngFor="let message of messages">{{ message }}</li>
+        </ul> -->
+        <!-- Appending directly UL lI to dom method, above other method -->
+        <ul id="chat-messages">Sup {{this.username | titlecase}}. {{this.hostName | titlecase}} has started a chat. </ul>        
           <form method="">
-            <input placeholder="What is your name?" type="text" id="chat-username" autocomplete="off" autofocus/>
+            <input type="text" id="chat-input" autocomplete="off" autofocus placeholder="Yo I'm waiting..." />
             <div class="chat-btn-wrapper">
-              <button class="btn chat-btn"(click)="handleChatRequest()">Send</button>
+              <button class="btn chat-btn" (click)= "handleSendMessage()">Send</button>
+              <button class="btn chat-btn chat-btn-secondary" (click)="handleEndChat()">Leave</button>
             </div>
           </form>
       </div>
-
-      <div *ngIf="!roomAvailable && haveUsername">
-          <p id="chat-wait-msg">Sup {{this.username | titlecase}}. Your host has not approved chat yet. Relax for a bit. </p>
-      </div>
-
+      <div id="end-chat-btn" *ngIf="chatEnded && !chatInitiated">
+        <p id="chatEnded">Thank you!</p>
   </div>
 </div>
-
-<!-- Socket example  -->
-<!-- <ul class="pages">
-    <li class="chat page">
-      <div class="chatArea">
-        <ul class="messages"></ul>
-      </div>
-      <input class="inputMessage" placeholder="Type here..."/>
-    </li>
-    <li class="login page">
-      <div class="form">
-        <h3 class="title">What's your nickname?</h3>
-        <input class="usernameInput" type="text" maxlength="14" />
-      </div>
-    </li>
-  </ul> -->

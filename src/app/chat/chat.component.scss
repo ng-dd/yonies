@@ -52,93 +52,6 @@
 
 //Socket recommend css
 /* Fix user-agent */
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-}
-
-html, input {
-  font-family:
-    "HelveticaNeue-Light",
-    "Helvetica Neue Light",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    "Lucida Grande",
-    sans-serif;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  list-style: none;
-  word-wrap: break-word;
-}
-
-/* Pages */
-
-.pages {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.page {
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
-/* Login Page */
-
-.login.page {
-  background-color: #000;
-}
-
-.login.page .form {
-  height: 100px;
-  margin-top: -100px;
-  position: absolute;
-
-  text-align: center;
-  top: 50%;
-  width: 100%;
-}
-
-.login.page .form .usernameInput {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #fff;
-  outline: none;
-  padding-bottom: 15px;
-  text-align: center;
-  width: 400px;
-}
-
-.login.page .title {
-  font-size: 200%;
-}
-
-.login.page .usernameInput {
-  font-size: 200%;
-  letter-spacing: 3px;
-}
-
-.login.page .title, .login.page .usernameInput {
-  color: #fff;
-  font-weight: 100;
-}
-
 /* Chat page */
 
 .chat.page {
@@ -199,4 +112,33 @@ ul {
   position: absolute;
   right: 0;
   width: 100%;
+}
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+ul {
+  list-style: none;
+  word-wrap: break-word;
+}
+// Custom Styles
+.chat-btn-secondary {
+  background-color: #b8b8b8;;
+}
+
+input {
+  width: 25% !important;
+}
+
+.chat-input {
+  display: inline-block;
+  margin: 0 38% !important;
 }

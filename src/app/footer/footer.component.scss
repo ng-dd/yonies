@@ -1,0 +1,55 @@
+
+#yoniesFooter {
+    clear: both;
+    font-size: 12px;
+    position: relative;
+    z-index: 1;
+    background-color: #f1f1f1;
+    color: #aaa
+}
+
+#yoniesFooter .info{
+    text-align: justify; 
+    color: #afb0b1;
+}
+
+#yoniesFooter ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+}
+
+#yoniesFooter h5 {
+    font-size: 18px;
+    color: #9e9e9e;	
+    font-weight: bold;
+    margin-top: 30px
+}
+
+#yoniesFooter a {
+    color: #d2d1d1;
+    text-decoration: none;
+}
+
+#yoniesFooter a:hover,
+#yoniesFooter a:focus {
+    text-decoration: none;
+	color: 	#4f4fea;
+	font-weight: bold;
+}
+
+#yoniesFooter .second-bar {
+    text-align: center;
+    background-color: #33373e;
+    text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+    #yoniesFooter {
+        text-align: center;
+    }
+
+    #yoniesFooter .info{
+        text-align: center;
+    }
+}

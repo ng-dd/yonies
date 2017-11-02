@@ -62,6 +62,8 @@ import { VideoShareComponent } from './video-share/video-share.component';
 import { FollowingComponent } from './following/following.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { FollowService } from './services/follow.service';
+import { SplashComponent } from './splash/splash.component';
+import { FooterComponent } from './footer/footer.component';``
 
 @NgModule({
   declarations: [
@@ -86,8 +88,8 @@ import { FollowService } from './services/follow.service';
     VideoShareComponent,
     FollowingComponent,
     FeaturedComponent,
-    ContentItemComponent,
-    ContentItemWallComponent
+    SplashComponent,
+    FooterComponent,
   ],
   imports: [
     RoutingModule,

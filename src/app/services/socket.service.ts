@@ -55,7 +55,6 @@ export class SocketService {
     })
   }
 
-
   // Create signal
   create(params: any) {
     this.socket.emit('create', params);
@@ -79,18 +78,6 @@ export class SocketService {
   }
   // socketInit() {
   //   this.socket = this.socketIo(this.SERVER_URL);
-  // }
-
-  // send(message: any) {
-  //   this.socket.emit('message', message);
-  // }
-
-  // onMessage(): Observable<any> {
-  //   return new Observable(observer => {
-  //     this.socket.on('message', (data) => {
-  //       observer.next(data);
-  //     })
-  //   })
   // }
 
   onConnect(): Observable<any> {
