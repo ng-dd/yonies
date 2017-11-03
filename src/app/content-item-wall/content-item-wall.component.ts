@@ -114,7 +114,7 @@ export class ContentItemWallComponent implements OnInit {
     let user = firebase.auth().currentUser;
     this.postService.addComment({text: text.comment, user: user.uid, postid: id})
     .subscribe(res => {
-      this.comments.push([res.text, this.names[this.name]])
+      this.comments.push([res.text, this.name])
       console.log('RERENDERING NEW POST', this.name)
       this.likeService.addLike({uid: user.uid, post_id: res.post_id, type: 'comment'})
       .subscribe((data) => {
@@ -134,17 +134,21 @@ export class ContentItemWallComponent implements OnInit {
 
   
   ngOnInit() {
-    // this.namedata = this.userService.getUserById(firebase.auth().currentUser.uid)
-    //   .subscribe(data => {
-    //     console.log('NAME DATAAAAA', data);
-    //   })
-    this.name = firebase.auth().currentUser.uid;
+
+    // this.name = firebase.auth().currentUser.uid;
 
     this.route
     .queryParams
     .subscribe(params => {
       this.userId = params.userId;
     })
+
+    let user = firebase.auth().currentUser;
+    this.userService.getUserById(user.uid)
+      .subscribe(data => {
+        this.name = data.first_name;
+      })  
+
     this.likeCount = 0;
     var url = this.vid['src']['changingThisBreaksApplicationSecurity'].toString();
     this.afAuth.authState.subscribe((data) => {
