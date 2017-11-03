@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentChecked } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { FriendService } from '../services/friend.service';
@@ -42,10 +42,10 @@ export class SearchBarComponent implements OnInit {
   roomStarted: boolean = false;
   roomId: any;
   keyWord: any;
-  // commentOn: boolean = false;
-  // comments: any;
-  // commentForm: FormGroup;
   name: string; 
+  categories: any;
+  keys: any;
+  tags: any;
 
   
   constructor(
@@ -61,9 +61,10 @@ export class SearchBarComponent implements OnInit {
     private roomstatService: RoomstatService, 
     private followService: FollowService,
     private categoryService: CategoryService, 
-    private firebaseAuth: AngularFireAuth, 
+    private afAuth: AngularFireAuth, 
     private likeService: LikesService, 
     private router: Router,
+    private authService: AuthService, 
   ) { 
     this.myForm = fb.group({
       'username': null
@@ -74,10 +75,23 @@ export class SearchBarComponent implements OnInit {
     this.hashForm = fb.group({
       'hash': null
     })
-    // this.commentForm = fb.group({
-    //   'comment': null
-    // });  
-    // this.commentOn = false;
+    this.categories = {
+      "🚗": 2,
+      "😂": 23,
+      "🏫": 27,
+      "🎭": 24,
+      "🎥": 1,
+      "🎮": 20,
+      "👗": 26,
+      "🎵": 10,
+      "🌎": 25,
+      "❤️": 29,
+      "🐶": 15,
+      "📱": 28,
+      "🏈": 17,
+      "✈️": 19
+    }
+    this.keys = Object.keys(this.categories);
 
     this.tweets = [];
     this.twitch = [];
@@ -85,6 +99,7 @@ export class SearchBarComponent implements OnInit {
     this.content = [];
     this.users = [];
     this.name = "";
+    this.tags = [];
   }
 
   currentUser() {
@@ -92,27 +107,45 @@ export class SearchBarComponent implements OnInit {
     console.log(user)
   }
 
-  // toggleComment(id) {
-  //   this.comments = [];
-  //   if(!this.commentOn) {
-  //     //get request to get comments on the post id
-  //     this.postService.getComments(id)
-  //       .subscribe(data => {
-  //         this.comments = data;
-  //         console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
-  //       })
-  //     } 
-  //     this.commentOn = !this.commentOn;
-  //   }
+  getVidsByCategory(cat) {
+    this.content = [];
+    this.http.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY&part=snippet&chart=mostpopular&videoCategoryId=${cat}`)
+    .subscribe((data) => {
+      console.log(data.json())
+      data.json().items.forEach((video) => {
+        this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id)})
+        console.log(this.content, 'COntent <<<<<')
+      })
+    })
+  }
 
-  // postComment(text, id) {
-  //   console.log('THIS IS THE ID!!!', id);
-  //   this.postService.addComment(text, id)
-  //     .subscribe(res => {
-  //       console.log(res);
-  //     })
-  // }
-
+  getTagContent(tag) {
+    if (tag[0] === '#') {
+      tag = tag.slice(1);
+    }
+    tag = tag.split(' ').join('').toLowerCase();
+    this.content = [];
+    this.postService.getYouTube(tag)
+    .subscribe((data) => {
+      data.items.forEach((video) => {
+        console.log(video, 'videos')
+        this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+        console.log(this.content, 'CONtent *&&&&')
+        // this.postService.getTwitch(tag)
+        // .subscribe((data) => {
+        //   data.videos.forEach((video) => {
+        //     this.content.push({date: video.created_at, src: this.sanitizer.bypassSecurityTrustResourceUrl(`http://player.twitch.tv/?video=${video._id}&autoplay=false`)})
+        //   })
+        // })
+      })
+      this.content.sort((a, b) => {
+        var c = new Date(a.date).getTime()
+        var d = new Date(b.date).getTime()
+        return c > d ? 1 : -1; 
+      })
+    })
+    this.content = this.content.slice(0, 11);   
+  }
 
   toggleQuery(value: any) {
     if (value === 'Hashes') {
@@ -316,7 +349,7 @@ export class SearchBarComponent implements OnInit {
       this.videoUrl = url;
     }
     this.roomstatService.addRoomstat({
-      host_id: this.firebaseAuth.auth.currentUser.uid,
+      host_id: this.afAuth.auth.currentUser.uid,
       video_url: this.videoUrl
     })
     .subscribe((roomData)=> {
@@ -334,14 +367,14 @@ export class SearchBarComponent implements OnInit {
   } 
 
   login1(){
-    this.firebaseAuth.auth.signInWithEmailAndPassword('test@tester.com', 'testerosa')
+    this.afAuth.auth.signInWithEmailAndPassword('test@tester.com', 'testerosa')
     .then(()=>{
       console.log('login to test testerson successful')
     })
   }
 
   login2(){
-    this.firebaseAuth.auth.signInWithEmailAndPassword('mrworldwide@pitbull.com', 'plantlife')
+    this.afAuth.auth.signInWithEmailAndPassword('mrworldwide@pitbull.com', 'plantlife')
     .then(()=>{
       console.log('login to mrworldwide successful')
     })
@@ -363,5 +396,18 @@ export class SearchBarComponent implements OnInit {
 
 
   ngOnInit() { 
+    this.tags = [];
+    var alpha = 'abcdefhijklmnopqrstuvwxyz'.split('');        
+    this.postService.getPopularTags()
+    .subscribe((data) => {
+      console.log(data[0].trends);
+      var trends = data[0].trends.filter((res) => {
+        if (alpha.indexOf(res.name[1].toLowerCase()) !== -1) {
+          return res.name;
+        }
+      })
+      trends = trends.slice(0, 10).map((trend) => {return trend.name})
+      this.tags = trends;
+    })
   }
 }
