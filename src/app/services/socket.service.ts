@@ -16,8 +16,20 @@ export class SocketService {
   }
 
 
+  sendMessage(roomId, chatInput, username) {
+    this.socketIo.emit('chatMessage', roomId, chatInput, username);
+  }
+
   stateChange(roomId, state, time) {
     this.socketIo.emit('changeState', roomId, state, time);
+  }
+
+  recieveMessages(): Observable<string[]> {
+    return new Observable((observer)=>{
+      this.socketIo.on('newMessage', (username, message) => {
+        observer.next([username, message]);
+      })
+    })
   }
 
   recieveStateChange(): Observable<[string]> {

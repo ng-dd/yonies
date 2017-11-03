@@ -6,29 +6,34 @@
       <h4 id="user-chat-title">Chat</h4>
 
         <div class="chat-btn-wrapper">
-            <button class="btn chat-btn" *ngIf="!chatInitiated" (click)="handleChat()" >Chat</button>
+            <button class="btn chat-btn" *ngIf="!chatInitiated" >Chat</button>
         </div>
 
-        <div *ngIf="!roomAvailable && haveUserName">
+        <div id='chat-log'>
+
+        </div>
+
+        <!-- <div *ngIf="!roomAvailable && haveUserName">
             <p id="chat-wait-msg">Sup {{this.username | titlecase}}. Waiting for {{ this.hostName }}. Yonies says relax. </p>
         </div>
 
-        <div *ngIf="roomAvailable && haveHostName">
+        <div *ngIf="roomAvailable && haveHostName"> -->
           <!-- <ul class="list-group">
             <li class="list-group-item" *ngFor="let message of messages">{{ message }}</li>
           </ul> -->
           <!-- Appending directly UL lI to dom method, above other method -->
-          <ul id="chat-messages">Sup {{this.username | titlecase}}. {{this.hostName | titlecase}} has started a chat. </ul>        
-            <form method="">
-              <input type="text" [(ngModel)]='chatInput' id="chat-input" autocomplete="off" autofocus placeholder="Yo I'm waiting..." />
+          <!-- <ul id="chat-messages">Sup {{this.username | titlecase}}. {{this.hostName | titlecase}} has started a chat. </ul>        
+            <form method=""> -->
+              <input type="text" [(ngModel)]='chatInput' id="chat-input" autocomplete="off" autofocus placeholder="Yo I'm waiting..." (keyup.enter)='handleSendMessage()'/>
               <div class="chat-btn-wrapper">
-                <button class="btn chat-btn" (click)= "handleSendMessage()">Send</button>
+                <!-- <button class="btn chat-btn" (click)= "handleSendMessage()">Send</button> -->
+                  <!--
                 <button class="btn chat-btn chat-btn-secondary" (click)="handleEndChat()">Leave</button>
               </div>
             </form>
         </div>
         <div id="end-chat-btn" *ngIf="chatEnded && !chatInitiated">
           <p id="chatEnded">Thank you!</p>
-    </div>
+    </div> -->
   </div>
 </div>
