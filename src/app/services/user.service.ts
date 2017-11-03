@@ -55,4 +55,12 @@ export class UserService {
       })
     })
   }
+
+  deleteAllUsers() {
+    console.log('going to delete...')
+    this.http.delete('http://localhost:4201/allUsers')
+    .subscribe(()=>{
+      
+    })
+  }
 }

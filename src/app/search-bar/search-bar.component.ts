@@ -347,6 +347,12 @@ export class SearchBarComponent implements OnInit {
     })
   }
 
+  deleteUsers() {
+    console.log('deleting users...')
+    this.userService.deleteAllUsers()
+  }
+
+
   //remove later
   getContent(){
     this.postService.getVideosForGame('Overwatch')

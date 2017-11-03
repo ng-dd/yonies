@@ -126,8 +126,8 @@ export class ChatComponent implements OnInit {
     // Socket -- Chat Messages, add as bullet points to HTML with scroll
 
     this.socket.on('chatMessages', (msg, sender) => {
-      $('#chat-messages').append($('<li>').text(msg + ' ~  ' + sender));
-      $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+      // $('#chat-messages').append($('<li>').text(msg + ' ~  ' + sender));
+      // $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
       
     });
 
