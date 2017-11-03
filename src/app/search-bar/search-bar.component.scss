@@ -6,18 +6,9 @@ body {
   h3 {
     margin-top: 2rem;
   }
-  
-  .row {
-    margin-bottom: 1rem;
-  }
-  .row .row {
-    margin-top: 1rem;
-    margin-bottom: 0;
-  }
   [class*="col-"] {
-    padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: rgba(86,61,124,.15);
+    background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(86,61,124,.2);
   }
   
@@ -285,4 +276,8 @@ Emoji Categories Horizontal Scroll */
   -ms-transform: scale(1.1) rotate(360deg);
   -o-transform: scale(1.1) rotate(360deg);
   transform: scale(1.1) rotate(360deg);
+}
+
+.fa-4x {
+  padding-top:1rem;
 }

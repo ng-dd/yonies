@@ -145,7 +145,7 @@ export class SearchBarComponent implements OnInit {
       })
     })
     this.content = this.content.slice(0, 11);  
-    window.scrollTo(0, 1000);
+    // window.scrollTo(0, 1000);
     // this.content.scrollIntoView();
   }
 
