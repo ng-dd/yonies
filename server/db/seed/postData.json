@@ -1,66 +1,55 @@
 [
-    {//starcraft
-        "post_id": 100,
+    {
         "type": "post",
         "text": "https://www.youtube.com/embed/bO4BOCvRBv8",
         "like_count": 4
     },
     {
-        "post_id": 101,
         "type": "post",
         "text": "http://player.twitch.tv/?video=v186143203&autoplay=false",
         "like_count": 0
     },
     {
-        "post_id": 102,
         "type": "post",
         "text": "http://player.twitch.tv/?video=v186179363&autoplay=false",
         "like_count": 1
     },
-    {//dota
-        "post_id": 103,
+    {
         "type": "post",
         "text": "http://player.twitch.tv/?video=v184440284&autoplay=false",
         "like_count": 3
     },
     {
-        "post_id": 104,
         "type": "post",
         "text": "https://www.youtube.com/embed/GuWzvs8rtY0",
         "like_count": 2
     },
     {
-        "post_id": 105,
         "type": "post",
         "text": "https://www.youtube.com/embed/ssHDpWS6y2Q",
         "like_count": 0
     },
-    {//grumpy cat
-        "post_id": 106,
+    {
         "type": "post",
         "text": "https://www.youtube.com/embed/AO25AQgfER0",
         "like_count": 4
     },
     {
-        "post_id": 107,
         "type": "post",
         "text": "https://www.youtube.com/embed/XbNFrfZADA8",
         "like_count": 0
     },
     {
-        "post_id": 108,
         "type": "post",
         "text": "https://www.youtube.com/embed/g-1g3SDswGA",
         "like_count": 0
     },
-    {//pudding
-        "post_id": 109,
+    {
         "type": "post",
         "text": "https://www.youtube.com/embed/rRPp8yngXpo",
         "like_count": 0
     },
     {
-        "post_id": 110,
         "type": "post",
         "text": "https://www.youtube.com/embed/kF2B7qgnUpw",
         "like_count": 1
