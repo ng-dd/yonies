@@ -1,0 +1,23 @@
+[
+    {
+        "uid": "1",
+        "username": "grumpycat@google.com",
+        "first_name": "Grumpycat"
+        
+    },
+    {
+        "uid": "2",
+        "username": "dotalover@gmail.com",
+        "first_name": "DotaLover"
+    },
+    {
+        "uid": "3",
+        "username": "starcraftlover@gmail.com",
+        "first_name": "StarcraftLover"
+    },
+    {
+        "uid": "4",
+        "username": "pudding@gmail.com",
+        "first_name": "IlovePudding"
+    }
+]
