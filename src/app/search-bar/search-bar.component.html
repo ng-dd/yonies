@@ -1,27 +1,20 @@
 <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3 d-flex justify-content-center">Carpool Karaoke Week</h1>
-      <p><a class="btn btn-primary btn-lg" href="https://itunes.apple.com/us/show/carpool-karaoke/id1219046821?app=music&mttnpid=305109&mttnsiteid=125115&mttnagencyid=2486&mttngadurl=https%3A%2F%2Fitunes.apple.com%2Fus%2Fshow%2Fcarpool-karaoke%2Fid1219046821%3F&mttnsubpid=g&mttnsubplmnt=&mttnsubad=228695380739&mttnsubcmp=920251662&mttnsubkw=carpool%20karaoke&mttnsub2=c&mttngmo=&is_mobile=&mttnsub1=e&gclid=EAIaIQobChMI8unj7vOi1wIVSk1-Ch3HnQkXEAAYASAAEgJWNfD_BwE&ign-itsct=PMKTNG&ign-itscg=3140" role="button">Details</a></p>
+      <h1 class="display-3 d-flex justify-content-left">Carpool<br>Karaoke<br>Week<br>!!!</h1>
+      <p><a class="btn btn-deets" href="https://itunes.apple.com/us/show/carpool-karaoke/id1219046821?app=music&mttnpid=305109&mttnsiteid=125115&mttnagencyid=2486&mttngadurl=https%3A%2F%2Fitunes.apple.com%2Fus%2Fshow%2Fcarpool-karaoke%2Fid1219046821%3F&mttnsubpid=g&mttnsubplmnt=&mttnsubad=228695380739&mttnsubcmp=920251662&mttnsubkw=carpool%20karaoke&mttnsub2=c&mttngmo=&is_mobile=&mttnsub1=e&gclid=EAIaIQobChMI8unj7vOi1wIVSk1-Ch3HnQkXEAAYASAAEgJWNfD_BwE&ign-itsct=PMKTNG&ign-itscg=3140" role="button">Deets ✌️</a></p>
     </div>
   </div>
 <div>
-<div class="container-fluid">
-  <!-- vv-Remove later-vv -->
+<!-- <div class="container-fluid">
+  <div class="row">
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">
-    <input type='submit' value='search users'>
+    <input type='submit' value='search my 👯' class="btn btn-info btn-lg"> 
   </form>
   <form *ngIf="postButton" [formGroup]='postForm' (ngSubmit)="searchPosts(postForm.value)">
-    <input formControlName="post" placeholder="search posts">
-    <input type='submit' value='search posts'>
+    <input formControlName="post" placeholder="general search">
+    <input type='submit' value='search the 🌎' class="btn btn-info btn-lg">
   </form>
-  <form *ngIf="hashButton" [formGroup]='hashForm' (ngSubmit)="searchHashTags(hashForm.value)">
-    <input formControlName="hash" placeholder="search hashtags">
-    <input type='submit' value='search hash'>
-  </form>
-  <input value="Content by Category" type="submit" (click)="toggleQuery('Hashes')">
-  <input value="Users" type="submit" (click)="toggleQuery('People')">
-  <input value="Posts by People" type="submit" (click)="toggleQuery('Posts')">
   
   {{keyWord}}
   <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
@@ -32,10 +25,54 @@
     <button (click)="addFriend(user)">Add Friend</button>
     <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
   </div>
-
-
 </div>
-  <div class="row">
+
+</div> -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+                <input value="People" type="submit" class="btn btn-ghost" (click)="toggleQuery('People')">              
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+                <input value="Tags" type="submit" class="btn btn-ghost" (click)="toggleQuery('Posts')">              
+            </div>
+        </div>
+      <div class="custom-search-input">
+        <div class="col-md-12">
+            <form *ngIf="userButton" [formGroup]='myForm' class="form-control input-lg input-group" (ngSubmit)="searchUsers(myForm.value)" type="text">
+                <input formControlName="username" placeholder="search people">
+                <span class="input-group-btn">
+                <input type='submit' value='search my 👯' class="btn btn-info btn-lg input-group"> 
+              </span>
+              </form>  
+            <form *ngIf="postButton" [formGroup]='postForm' (ngSubmit)="searchPosts(postForm.value)" class="form-control input-lg">
+                  <input formControlName="post" placeholder="general search">
+                  <span class="input-group-btn">
+                    <input type='submit' value='search the 🌎' class="btn btn-info btn-lg">
+                    </span>
+            </form>        
+
+
+            <!-- <input type="text" class="form-control input-lg" placeholder="Search" /> -->
+            <!-- Follow the keyword you just searched for -->
+            {{keyWord}}
+            <input *ngIf="keyWord" type='button' class="btn btn-ghost" value="follow" (click)="follow(keyWord)">
+            <div *ngFor="let user of users">
+                {{user.firstname}} | {{user.username}}
+                <button (click)="addFriend(user)">Add Friend</button>
+                <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
+              </div>
+            <!-- <span class="input-group-btn">
+                <button class="btn btn-info btn-lg" type="button">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>  -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="custom-search-input">
         <div class="input-group col-md-12">
@@ -48,35 +85,46 @@
         </div>
       </div>
       <div class="row">
-          <div class="col-4 d-flex justify-content-center">🔥</div>
-          <div class="col-4 d-flex justify-content-center">🎥</div>
-          <div class="col-4 d-flex justify-content-center">🌎</div>
+          <div class="col-3 d-flex justify-content-center">🔥</div>
+          <div class="col-3 d-flex justify-content-center">🎥</div>
+          <div class="col-3 d-flex justify-content-center">🌎</div>
+          <div class="col-3 d-flex justify-content-center">🌎</div>          
       </div>
     </div>
-  </div>
+  </div> -->
   <hr class="hr-text" data-content="CATEGORIES">
   <!-- <app-categories></app-categories> -->
   <div class="container">
       <div id='sideways-cat'>
-          <div class="d-flex justify-content-center flex-wrap">              
-              <ul>
-                  <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
-              </ul>
-          </div>              
+        <div class="row">
+          <div class="col-md-10">
+              <div class="d-flex justify-content-center flex-wrap">              
+                  <ul class="rotate-icons">
+                      <li *ngFor="let cat of keys" class="emoji" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
+                    </ul>
+                    </div> 
+          </div>
+          <div class="col-md-2">
+              <i class="fa fa-angle-right fa-4x" id="padding" aria-hidden="true"></i>
+          </div>
+        </div>             
       </div>
   </div>
+  
 
   <hr class="hr-text" data-content="TRENDING">  
   <!-- <app-featured></app-featured>   -->
   <div class="container">
       <ul>
-         <li *ngFor="let tag of tags" class="btn btn-primary btn-lg" role="button" (click)="getTagContent(tag)">{{tag}}</li>        
-      </ul>
-  </div>    
-
-
-  <div class="wrapper">      
-    <div>
+          <li class="btn btn-featured btn-lg" role="button" (click)="getTagContent(tag)">Carpool Karaoke</li>        
+         <li *ngFor="let tag of tags" class="btn btn-trending btn-lg" role="button" (click)="getTagContent(tag)" href="#resultscroll">{{tag}}</li>        
+     </ul>
+ </div>    
+<div>
+    <hr class="hr-text" data-content="RESULTS">       
+    
+  <div class="wrapper">  
+    <div id="resultscroll"></div>
       <div *ngFor='let vid of content'>
         <app-content-item [vid]="vid"></app-content-item>
         <button (click)='roomStart(vid)'> Start a room</button>

@@ -18,7 +18,7 @@ import * as firebase from 'firebase/app';
 @Component({
   selector: 'app-featured',
   templateUrl: './featured.component.html',
-  styleUrls: ['./featured.component.css']
+  styleUrls: ['./featured.component.scss']
 })
 export class FeaturedComponent implements OnInit {
 

@@ -8,7 +8,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
 
 import { RoomstatService } from '../services/roomstat.service'
 import { Router } from '@angular/router';
@@ -32,7 +34,8 @@ export class FriendsListComponent implements OnInit {
     private postService: PostService, 
     private friendService: FriendService,
     private roomstatService: RoomstatService,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) {
     this.friendsList = [];
     this.content = [];
@@ -44,7 +47,7 @@ export class FriendsListComponent implements OnInit {
   }
 
   getFriendsList() {
-    this.showFriends = !this.showFriends;
+    // this.showFriends = !this.showFriends;
     console.log(this.showFriends, 'la')
     let currId = firebase.auth().currentUser.uid;  
     console.log(currId, 'current user')  
@@ -89,6 +92,25 @@ export class FriendsListComponent implements OnInit {
       console.log(data);
       this.users = data;
     })
+    this.afAuth.authState.subscribe((data) => {
+      var curId = data.uid
+      this.friendsList = [];
+      //friend.userid should be the current session user
+      this.friendService.getFriend(curId)
+      .subscribe((data) => {
+        data.forEach((friend) => {
+          // this.friendsList.push(friend.friend_id)
+          console.log('WHAT IS THIS?!?!?!?!?!?!', friend.friend_id)
+          this.userService.getUserById(friend.friend_id)
+          .subscribe((data) => {
+            console.log(data, 'from get friends list');
+            this.friendsList.push({name: data.first_name + ' ' + data.last_name, username: data.username, uid: data.uid})
+            console.log(this.friendsList, 'friends')
+          })
+        })
+      })
+    })
+
   }
 
   selectUser(user) {

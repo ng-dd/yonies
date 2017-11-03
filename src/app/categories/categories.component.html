@@ -1,11 +1,10 @@
-
 <div class="container">
     <div id='sideways-cat'>
         <div class="d-flex justify-content-center flex-wrap">              
-            <ul>
-                <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
-            </ul>
-        </div>              
+            <ul class="rotate-icons">
+                <li *ngFor="let cat of keys" class="emoji" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
+              </ul>
+              </div>              
     </div>
 </div>
 

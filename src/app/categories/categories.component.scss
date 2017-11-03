@@ -1,7 +1,9 @@
+/* 
+Emoji Categories Horizontal Scroll */
 
 #sideways-cat {
-    height: 40px;
-    background: silver;
+    height: 80px;
+    background: white;
     overflow-x: auto;
     overflow-y: hidden;
    &:-webkit-scrollbar {display: none;}
@@ -17,19 +19,35 @@
     padding:1em;
     
     /* color for some visual of the spacing */
-    box-shadow:0 0 10px black inset;
   }
   #sideways-cat li {
     float: left;
     text-align: center;
-    font-size: 20px;
+    font-size: 40px;
         /* remove list style bullets */
         list-style-type:none;
         
         /* vertical center with 10px on left and right */
         margin:auto 10px; 
   }
-  #sideways-cat li.active {
+  #sideways-cat li.hover {
     margin: 0 auto;
     border-bottom: 2px red solid;
+  }
+
+  .rotate-icons .emoji {
+    text-align: center;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  .rotate-icons .emoji:hover, .social-icons .emoji:active {
+    color: #FFF;
+      -webkit-transform: scale(1.1) rotate(360deg);
+    -moz-transform: scale(1.1) rotate(360deg);
+    -ms-transform: scale(1.1) rotate(360deg);
+    -o-transform: scale(1.1) rotate(360deg);
+    transform: scale(1.1) rotate(360deg);
   }
