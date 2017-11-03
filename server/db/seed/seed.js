@@ -50,3 +50,7 @@ const seedUsers = (table) => {
         })
     })
 }
+
+module.exports = {
+    seedPosts, seedFriends, seedUsers, seedLikes
+}
