@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
   haveUserName: boolean;
   userInRoom: boolean;
   chatEnded: boolean;
+  chatInput: string;
 
   socket= io();
 
@@ -29,6 +30,8 @@ export class ChatComponent implements OnInit {
   hostID: string;
   username: string;
   userID: string;
+
+  toggleRoom: boolean = true;
 
   constructor() { 
     this.chatInitiated = false;
@@ -46,7 +49,7 @@ export class ChatComponent implements OnInit {
 
   // Room group chat functions
   openChatRoom(): void {
-    $('.tap-target').tapTarget('open');
+    this.toggleRoom = !this.toggleRoom;
   }
 
   // Start a room as the host
@@ -77,9 +80,9 @@ export class ChatComponent implements OnInit {
 
   // Send a Message formatting
   handleSendMessage(): void {
-    const message = $('#chat-input').val();
-    this.socket.emit('chatMessage', message, this.username);
-    $('#chat-input').val('');
+    // const message = $('#chat-input').val();
+    this.socket.emit('chatMessage', this.chatInput, this.username);
+    // $('#chat-input').val('');
   }
   
   // Ending a room chat -- User in Room
@@ -177,13 +180,13 @@ export class ChatComponent implements OnInit {
 //     this.roomAvailable = true;
 //   }
 
-//   // handle chat
-//   handleSendMessage(): void {
-//     const message = $('#chat-input').val();
-//     this.socket.emit('chatMessage', message, this.adminName);
-//     $('#chat-input').val('');
-//     console.log('ADMIN sending message of', message);
-//   }
+  // // handle chat
+  // handleSendMessage(): void {
+  //   const message = $('#chat-input').val();
+  //   this.socket.emit('chatMessage', message, this.adminName);
+  //   $('#chat-input').val('');
+  //   console.log('ADMIN sending message of', message);
+  // }
 
 //   // end chat
 //   handleEndChat(): void {

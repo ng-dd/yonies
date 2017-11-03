@@ -75,7 +75,7 @@ module.exports = {
             res.send(data)
         })
         .catch((err) => {
-            res.stat(500).send(err);
+            res.status(500).send(err);
         })
     }
 }
