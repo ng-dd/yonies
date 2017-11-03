@@ -39,6 +39,10 @@ export class FriendsListComponent implements OnInit {
     this.showFriends = false;
   }
 
+  refresh() {
+    window.location.reload(true);
+  }
+
   getFriendsList() {
     this.showFriends = !this.showFriends;
     console.log(this.showFriends, 'la')
@@ -50,7 +54,7 @@ export class FriendsListComponent implements OnInit {
     .subscribe((data) => {
       data.forEach((friend) => {
         // this.friendsList.push(friend.friend_id)
-        console.log(friend.friend_id)
+        console.log('WHAT IS THIS?!?!?!?!?!?!', friend.friend_id)
         this.userService.getUserById(friend.friend_id)
         .subscribe((data) => {
           console.log(data, 'from get friends list');
