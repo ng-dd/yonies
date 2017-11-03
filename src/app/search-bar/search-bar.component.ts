@@ -307,8 +307,6 @@ export class SearchBarComponent implements OnInit {
 
   roomStart(vid) {
     console.log(vid.src['changingThisBreaksApplicationSecurity']);
-
-
     let url  = vid.src['changingThisBreaksApplicationSecurity']
     if (url.indexOf('youtube') >= 0){
       this.videoUrl = url.slice(url.indexOf('embed')+ 6, url.length)

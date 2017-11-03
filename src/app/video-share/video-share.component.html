@@ -1,4 +1,4 @@
 <div *ngIf='done'>
   <app-stream-view [uid] = 'uid'[socketService] = 'io'  [roomId] = 'roomId'></app-stream-view>
-  <app-chat></app-chat>
+  <app-chat [socketService] = 'io' [roomId] = 'roomId'></app-chat>
 </div>

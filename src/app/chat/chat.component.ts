@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ng-socket-io';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth'
@@ -13,6 +13,8 @@ declare var $: any;
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @Input() private socketService: SocketService;
+  @Input() roomId: string;
 
   friendWantsToChat: boolean;
   chatInitiated: boolean;
@@ -32,8 +34,11 @@ export class ChatComponent implements OnInit {
   userID: string;
 
   toggleRoom: boolean = true;
+  connection: any;
 
-  constructor() { 
+  constructor(
+    private afAuth: AngularFireAuth,
+  ) { 
     this.chatInitiated = false;
     this.roomAvailable = false;
     this.haveHostName = false;
@@ -52,28 +57,30 @@ export class ChatComponent implements OnInit {
     this.toggleRoom = !this.toggleRoom;
   }
 
-  // Start a room as the host
-  getHostApproval(): void {
-    this.socket.emit('getHostSocketid');
-  }
+  // // Start a room as the host
+  // getHostApproval(): void {
+  //   this.socket.emit('getHostSocketid');
+  // }
 
-  initChat(): void {
-    if (!this.socket.connected) {
-      this.socket.connect();
-    }
-    this.chatInitiated = true;
-    this.haveUserName = false;
-    if (this.friendWantsToChat) {
-      this.friendWantsToChat = false;
-    } else {
-      this.friendWantsToChat = true;
-    }
-  }
+
+
+  // initChat(): void {
+  //   if (!this.socket.connected) {
+  //     this.socket.connect();
+  //   }
+  //   this.chatInitiated = true;
+  //   this.haveUserName = false;
+  //   if (this.friendWantsToChat) {
+  //     this.friendWantsToChat = false;
+  //   } else {
+  //     this.friendWantsToChat = true;
+  //   }
+  // }
 
   handleUserChatRequest(): void {
     this.chatEnded = false;
     this.userID = this.socket.id;
-    this.username = $('#chat-username').val || 'user';
+    // this.username = $('#chat-username').val || 'user';
     this.haveUserName = true;    
     this.socket.emit('userRequestInitChat', this.username, this.userID);
   }
@@ -81,7 +88,7 @@ export class ChatComponent implements OnInit {
   // Send a Message formatting
   handleSendMessage(): void {
     // const message = $('#chat-input').val();
-    this.socket.emit('chatMessage', this.chatInput, this.username);
+    this.socketService.sendMessage(this.roomId, this.chatInput, this.username);
     // $('#chat-input').val('');
   }
   
@@ -102,47 +109,61 @@ export class ChatComponent implements OnInit {
     this.chatEnded = true;
     this.socket.emit('ended', this.hostID);
   }
+
   ngOnInit() {
+    // console.log('looking at current user', this.afAuth.auth.currentUser)
+    this.username = this.afAuth.auth.currentUser.email; 
+    this.connection = this.socketService.recieveMessages()
+    .subscribe((response) =>{
+      let author = document.createElement('ul');
+      author.appendChild(document.createTextNode(response[0]));
+      author.className += 'author';
+      let message = document.createElement('ul');
+      message.className += 'message';
+      message.appendChild(document.createTextNode(response[1]));
+      document.getElementById('chat-log').appendChild(author).appendChild(message);
+    })
 
-    // Socket  -- Listeners
-    this.socket.on('hostSocketid', (socketid) => {
-      this.socket.emit('ended', socketid);
-    });
+    // // Socket  -- Listeners
+    // this.socket.on('hostSocketid', (socketid) => {
+    //   this.socket.emit('ended', socketid);
+    // });
 
-    // Socket -- Start Chat 
-    this.socket.on('waitingForHost', (username) => {
-      this.userInRoom = true;
-    });
+    // // Socket -- Start Chat 
+    // this.socket.on('waitingForHost', (username) => {
+    //   this.userInRoom = true;
+    // });
 
-    this.socket.on('startChatWithUserAndHost', (username, userID, hostName) => {
-      this.hostName = hostName;
-      this.haveHostName = true;
+    // this.socket.on('startChatWithUserAndHost', (username, userID, hostName) => {
+    //   this.hostName = hostName;
+    //   this.haveHostName = true;
 
-      if (username  === this.username && userID === this.userID ) {
-        this.roomAvailable = true;
-      }
-    });
+    //   if (username  === this.username && userID === this.userID ) {
+    //     this.roomAvailable = true;
+    //   }
+    // });
 
-    // Socket -- Chat Messages, add as bullet points to HTML with scroll
+    // // Socket -- Chat Messages, add as bullet points to HTML with scroll
 
-    this.socket.on('chatMessages', (msg, sender) => {
-      // $('#chat-messages').append($('<li>').text(msg + ' ~  ' + sender));
-      // $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+    // this.socket.on('chatMessages', (msg, sender) => {
+    //   // $('#chat-messages').append($('<li>').text(msg + ' ~  ' + sender));
+    //   // $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
       
-    });
+    // });
 
-    this.socket.on('connectedWith', (user, id) => {
-      this.hostName = user;
-      this.hostID = id;
-    });
+    // this.socket.on('connectedWith', (user, id) => {
+    //   this.hostName = user;
+    //   this.hostID = id;
+    // });
 
-    // Socket -- End Chat
+    // // Socket -- End Chat
 
-    this.socket.on('ended', () => {
-      this.socket.disconnect();
-      this.handleEndChat();
-    });
+    // this.socket.on('ended', () => {
+    //   this.socket.disconnect();
+    //   this.handleEndChat();
+    // });
   }
+
 
 }
 
