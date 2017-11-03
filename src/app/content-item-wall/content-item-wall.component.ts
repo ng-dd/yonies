@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -31,6 +32,7 @@ export class ContentItemWallComponent implements OnInit {
   @Input() 
   
   vid: object;
+  userId: any;
   
   constructor(
     private friendService: FriendService, 
@@ -41,7 +43,9 @@ export class ContentItemWallComponent implements OnInit {
     private authService: AuthService, 
     private categoryService: CategoryService, 
     private fb: FormBuilder, 
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth,
+    private route: ActivatedRoute
+  ) {
 
     this.comments = [];
     this.liked = false;
@@ -119,11 +123,16 @@ export class ContentItemWallComponent implements OnInit {
 
   
   ngOnInit() {
+    this.route
+    .queryParams
+    .subscribe(params => {
+      this.userId = params.userId;
+    })
     this.likeCount = 0;
     var url = this.vid['src']['changingThisBreaksApplicationSecurity'].toString();
     this.afAuth.authState.subscribe((data) => {
       var uid = data.uid;
-      this.likeService.getLikes({uid: uid})
+      this.likeService.getLikes({uid: this.userId})
       .subscribe((data) => {
         var postIds = data.map((post) => {return post.post_id});
         postIds.forEach((id) => {
