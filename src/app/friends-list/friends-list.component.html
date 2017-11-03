@@ -6,7 +6,9 @@
   <div *ngIf="showFriends">
     <div *ngFor="let friend of friendsList">
       {{friend.name}}
-      <a routerLink="/wall" [queryParams]="{userId: friend.uid}"><button>Visit Wall</button></a>
+      <a routerLink="/wall" [queryParams]="{userId: friend.uid}">
+        <button (click)="refresh()">Visit Wall</button>
+      </a>
     </div>
   </div>
 </div>
