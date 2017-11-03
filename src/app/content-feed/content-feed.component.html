@@ -1,15 +1,18 @@
 <div>
-  <div class="site-wrapper">
-      <section *ngFor='let vid of content'>
-          <div class="site-wrapper-inner">
-              <app-content-item [vid]="vid"></app-content-item>
-                <div class="cover-container">
-                <main role="main" class="inner cover">
-                  <p><button (click)='roomStart(vid)' type="btn btn-transparent"> <mat-icon class="size">play_circle_filled</mat-icon></button></p>             
-                </main>
-              </div>
+<div class="site-wrapper">
+    <section *ngFor='let vid of content'>
+        <div class="site-wrapper-inner">
+            <app-content-item [vid]="vid"></app-content-item>
+              <div class="cover-container">
+              <main role="main" class="inner cover">
+                 <p>     
+                   <button (click)='roomStart(vid)' type="btn btn-transparent"> <mat-icon class="size">play_circle_filled</mat-icon></button>                
+                    </p>             
+              </main>
+    
             </div>
-      </section>
-  </div>
+          </div>
+    </section>
+</div>
 </div>
 <app-navbar></app-navbar>
