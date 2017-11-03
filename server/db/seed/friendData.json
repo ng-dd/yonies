@@ -14,5 +14,21 @@
     {
         "user_id": "4",
         "friend_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2"
+    },
+    {
+        "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
+        "friend_id": "1"
+    },
+    {
+        "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
+        "friend_id": "2"
+    },
+    {
+        "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
+        "friend_id": "3"
+    },
+    {
+        "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
+        "friend_id": "4"
     }
 ]
