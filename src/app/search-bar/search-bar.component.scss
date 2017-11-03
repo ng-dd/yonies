@@ -7,16 +7,20 @@ body {
     margin-top: 2rem;
   }
   [class*="col-"] {
-    padding-bottom: 1rem;
+    padding-bottom: .5rem;
     background-color: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(86,61,124,.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
   hr {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-  
+  .display-3 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    text-shadow: 5px 5px 0px #4f4fea;
+}
 
 .hr-text {
   color: #9e9e9e !important;
@@ -194,9 +198,10 @@ background-color: #ea4f4f;
     display: inline-block !important;
     text-align: center !important;
     text-decoration: none !important;
-    border: 2px solid transparent !important;
+    border: 3px solid #4f4fea!important;
     border-radius: 4px !important;
     width: 100% !important;
+    text-shadow: 2px 2px 0px #4f4fea;    
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
     font-size: 19px !important;
     line-height: 22px !important;
@@ -206,14 +211,17 @@ background-color: #ea4f4f;
     font-weight: 700 !important;
   //   padding-right: 24px !important;
   //   padding-left: 24px !important;
-  background: url('https://static.highsnobiety.com/wp-content/uploads/2016/05/06001004/gwen-stefani-james-corden-george-clooney-julia-roberts-carpool-karaoke-00.jpg
-  ') no-repeat;
+  background: url('http://emojis.slackmojis.com/emojis/images/1471119458/990/party_parrot.gif?1471119458') repeat;
 }
 
   
 .btn-featured:hover {
-color: #ea4f4f !important;
-
+  color: #ea4f90 !important;
+  background: none;
+  background-color: white !important;
+  border: 2px solid #4f4fea !important;
+  text-shadow: 2px 2px 0px white;    
+  
 }
   ul, menu, dir {
     display: block;
@@ -281,3 +289,75 @@ Emoji Categories Horizontal Scroll */
 .fa-4x {
   padding-top:1rem;
 }
+
+.btn-deets  {
+  color: white !important;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+    -webkit-transition: background 0.3s, border-color 0.3s !important;
+    -moz-transition: background 0.3s, border-color 0.3s !important;
+    transition: background 0.3s, border-color 0.3s !important;
+    position: relative !important;
+    display: inline-block !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    border: 2px solid transparent !important;
+    border-radius: 4px !important;
+    width: 100px !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 19px !important;
+    line-height: 22px !important;
+    letter-spacing: undefined !important;
+  //   padding-top: 12px !important;
+  //   padding-bottom: 12px !important;
+    font-weight: 700 !important;
+  //   padding-right: 24px !important;
+  //   padding-left: 24px !important;
+  background-color: #4f4fea;
+  
+}
+
+  
+.btn-deets:hover {
+  color: #4f4fea !important;
+  background-color: white !important;
+  border: 2px solid #4f4fea !important;
+  
+}
+
+.btn-ghost  {
+  color: #4f4fea !important;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+    -webkit-transition: background 0.3s, border-color 0.3s !important;
+    -moz-transition: background 0.3s, border-color 0.3s !important;
+    transition: background 0.3s, border-color 0.3s !important;
+    position: relative !important;
+    display: inline-block !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    border: 2px solid #4f4fea !important;
+    border-radius: 4px !important;
+    width: 100px !important;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-size: 19px !important;
+    line-height: 22px !important;
+    letter-spacing: undefined !important;
+  //   padding-top: 12px !important;
+  //   padding-bottom: 12px !important;
+    font-weight: 700 !important;
+  //   padding-right: 24px !important;
+  //   padding-left: 24px !important;
+  background-color: white;
+  
+}
+
+  
+.btn-ghost:hover {
+color: white !important;
+background-color: #4f4fea !important;
+}
+.btn-ghost:avtive{
+  color: white !important;
+  background-color: #4f4fea !important;
+  }
