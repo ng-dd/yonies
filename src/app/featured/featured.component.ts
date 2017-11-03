@@ -25,7 +25,14 @@ export class FeaturedComponent implements OnInit {
   content: any;
   tags: any;
 
-  constructor(private friendService: FriendService, private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+  constructor(private friendService: FriendService, 
+    private likeService: LikesService, 
+    private sanitizer: DomSanitizer, 
+    private postService: PostService, 
+    private authService: AuthService, 
+    private categoryService: CategoryService, 
+    private afAuth: AngularFireAuth) {
+      
     this.content = [];
     this.tags = [];
   }

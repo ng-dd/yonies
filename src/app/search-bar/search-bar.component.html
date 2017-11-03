@@ -26,24 +26,14 @@
   {{keyWord}}
   <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
 
+
   <div *ngFor="let user of users">
     {{user.firstname}} | {{user.username}}
     <button (click)="addFriend(user)">Add Friend</button>
     <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
   </div>
-    <div class="wrapper"> 
-        
-<div>
-    <div *ngFor='let vid of content'>
-      <app-content-item [vid]="vid"></app-content-item>
-      <button (click)='roomStart(vid)'> Start a room</button>
-      <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
-    </div>
-    <div *ngFor="let tweet of tweets" class="section fp-section fp-table" [innerHTML]= "tweet"> 
-        {{tweet}}
-    </div>
-  </div>
-</div>
+
+
 </div>
   <div class="row">
     <div class="col-md-12">
@@ -65,11 +55,38 @@
     </div>
   </div>
   <hr class="hr-text" data-content="CATEGORIES">
-  <app-categories></app-categories>
+  <!-- <app-categories></app-categories> -->
+  <div class="container">
+      <div id='sideways-cat'>
+          <div class="d-flex justify-content-center flex-wrap">              
+              <ul>
+                  <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
+              </ul>
+          </div>              
+      </div>
+  </div>
+
   <hr class="hr-text" data-content="TRENDING">  
-  <app-featured></app-featured>  
-  <div *ngFor='let vid of content'>
-      <app-content-item [vid]="vid"></app-content-item>
-  </div>   
- </div> <!-- /container -->
+  <!-- <app-featured></app-featured>   -->
+  <div class="container">
+      <ul>
+         <li *ngFor="let tag of tags" class="btn btn-primary btn-lg" role="button" (click)="getTagContent(tag)">{{tag}}</li>        
+      </ul>
+  </div>    
+
+
+  <div class="wrapper">      
+    <div>
+      <div *ngFor='let vid of content'>
+        <app-content-item [vid]="vid"></app-content-item>
+        <button (click)='roomStart(vid)'> Start a room</button>
+        <input type='button' value='like' (click)='likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>
+      </div>
+      <div *ngFor="let tweet of tweets" class="section fp-section fp-table" [innerHTML]= "tweet"> 
+          {{tweet}}
+      </div>
+    </div>
+  </div>
+
+</div> <!-- /container -->
 <app-navbar></app-navbar>
