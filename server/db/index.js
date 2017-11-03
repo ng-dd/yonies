@@ -5,19 +5,7 @@ const Promise = require('bluebird');
 var seed = require('./seed/seed');
 
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
-<<<<<<< ab8f5625144b476e30b411a5e9e2da16fb4fa8a9
-<<<<<<< 5f77fac3afe662038aa28fbd411242d64dd207e6
-<<<<<<< 056d5536e6cbe9b820aea97a3a45b706b7597751
-  host: process.env.DATABASE_URL,
-=======
   host: 'yonies.cxdawuxv7dpb.us-west-2.rds.amazonaws.com',
->>>>>>> a
-=======
-  host: 'yonies.cxdawuxv7dpb.us-west-2.rds.amazonaws.com',
->>>>>>> rebaseing
-=======
-  host: process.env.DATABASE_URL,
->>>>>>> seed
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {
