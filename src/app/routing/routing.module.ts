@@ -11,6 +11,7 @@ import { FollowingComponent } from '../following/following.component';
 import { FeaturedComponent } from '../featured/featured.component';
 import { SplashComponent } from '../splash/splash.component';
 import { WallfeedComponent } from '../wallfeed/wallfeed.component';
+import { CategoriesComponent } from '../categories/categories.component';
 
 const routes: Routes = [
   { path: 'home', component: SplashComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'following', component: FollowingComponent},
   { path: 'featured', component: FeaturedComponent},
   { path: 'wall', component: WallfeedComponent},
+  { path: 'categories', component: CategoriesComponent},
   { path: '**', redirectTo: '/notfound' },
 ];
 

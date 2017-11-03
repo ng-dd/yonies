@@ -65,6 +65,7 @@ import { FollowService } from './services/follow.service';
 import { SplashComponent } from './splash/splash.component';
 import { FooterComponent } from './footer/footer.component';``
 import { WallfeedComponent } from './wallfeed/wallfeed.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { WallfeedComponent } from './wallfeed/wallfeed.component';
     FooterComponent,
     ContentItemComponent,
     ContentItemWallComponent,
-    WallfeedComponent
+    WallfeedComponent,
+    CategoriesComponent
   ],
   imports: [
     RoutingModule,

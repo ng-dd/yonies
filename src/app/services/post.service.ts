@@ -27,6 +27,15 @@ export class PostService {
     })
   }
 
+  getVideosForGame(query): Observable<any> {
+    var headers = new Headers()
+    this.createAuthorizationHeader(headers);
+    return this.http.get(`https://api.twitch.tv/kraken/videos/top?period=month&game=${query}`, {headers: headers})
+    .map((res) => {
+      return res.json()
+    })
+  }
+
   getYouTube(query): Observable<any> {
     return this.http.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&chart=mostPopular&key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY`)
     .map((res) => {return res.json()})
