@@ -56,10 +56,6 @@ export class WallfeedComponent implements OnInit {
     this.content = [];
     this.userId = "";
   }
-
-  test() {
-    console.log(this.userId, "USER ID??");
-  }
  
   ngOnInit() {
     this.route

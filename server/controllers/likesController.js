@@ -17,7 +17,19 @@ module.exports = {
 
     getLike: (req, res) => {
         Like.findAll({
-            where: {uid: req.params.id}
+            where: {uid: req.params.id, type: 'post'}
+        })
+        .then((data) => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        })
+    },
+
+    getLikePost: (req, res) => {
+        Like.findOne({
+            where: {post_id: req.params.id}
         })
         .then((data) => {
             res.send(data)

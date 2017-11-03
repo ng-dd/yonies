@@ -7,14 +7,13 @@
   <i *ngIf="!liked" class="fa fa-heart-o fa-2x" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"></i>
   <i *ngIf="liked" class="fa fa-heart fa-2x" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"></i>
   <div>{{likeCount}} likes</div>
-  <button (click)="toggleComment(vid.id)">Comment</button>
-  <div *ngIf="commentOn">
+  <div>
       <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value, vid.id)">
         <input formControlName="comment" placeholder="Post a comment">
         <input type='submit' value='Post'>
       </form>
       <p *ngFor="let comment of comments">
-          Username: {{comment.text}}
+          {{comment[1]}}: {{comment[0]}}
       </p>
   </div>
 </div>

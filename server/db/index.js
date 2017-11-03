@@ -36,7 +36,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 
 for (var key in db) {
   console.log('@@@@@@@@@@@@SYNCING@@@@@@@@@@@: ', key)
-  db[key].sync()
+  db[key].sync({force: true})
 }
 
 module.exports = db;

@@ -59,7 +59,7 @@ module.exports = {
 
     deleteUser: (req, res) => {
         User.destroy({
-            where: {username: req.params.id}
+            where: {user_id: req.params.id}
         })
         .then(() => {
             res.send('deleted user')

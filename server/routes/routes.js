@@ -19,7 +19,7 @@ router.get('/userid/:id', userController.getUserById);
 router.get('/users/:id', userController.getUser);
 router.post('/users', userController.addUser);
 router.get('/allUsers', userController.getAllUsers);
-router.delete('/users:/id', userController.deleteUser);
+router.delete('/users/:id', userController.deleteUser);
 
 //posts
 router.get('/posts/:id', postController.getPost);
@@ -29,6 +29,7 @@ router.delete('/posts/:id', postController.deletePost);
 
 //likes
 router.get('/likes/:id', likeController.getLike);
+router.get('/likeposts/:id', likeController.getLikePost)
 router.post('/likes', likeController.addLike);
 router.delete('/likes/:id', likeController.deleteLike);
 

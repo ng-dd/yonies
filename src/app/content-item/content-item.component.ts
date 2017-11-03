@@ -41,7 +41,7 @@ export class ContentItemComponent implements OnInit {
     this.postService.addPost(post)
     .subscribe((res) => {
       console.log(res, '<<<<<< RES')
-      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id)})
+      this.likeService.addLike({uid: user.uid, post_id: String(res.post_id), type: 'post'})
       .subscribe((data) => {
         console.log(data, '<<<< LIKESERVICE ADD LIKE DATA')
       })
