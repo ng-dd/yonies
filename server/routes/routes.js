@@ -28,6 +28,7 @@ router.get('/posts/:id', postController.getPost);
 // router.get('/posturl/:id', postController.getPostUrl);
 router.post('/posts', postController.addPost);
 router.delete('/posts/:id', postController.deletePost);
+router.post('/decrementcount', postController.decrementLikeCount);
 
 //likes
 router.get('/likes/:id', likeController.getLike);

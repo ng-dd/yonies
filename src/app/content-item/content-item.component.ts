@@ -65,8 +65,12 @@ export class ContentItemComponent implements OnInit {
     })
   }
 
+  decrementCounter(post) {
+    this.postService.decrementLikeCount(post.id);
+  }
 
   toggleLiked(post) {
+    console.log(this.vid, 'psssttt')
     if (this.liked === false) {
       this.liked = true;
       this.likeCount++;

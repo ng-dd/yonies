@@ -89,6 +89,15 @@ export class PostService {
     })
   }
 
+  decrementLikeCount(post) {
+    this.http.post(`http://localhost:4201/posts`, {
+      post_id: post.id
+    })
+    .subscribe((data) => {
+      console.log(data)
+    })
+  }
+
   getPostByUrl(post): Observable <any> {
     return this.http.get(`http://localhost:4201/postbyid/${post.url}`)
     .map((data) => {

@@ -29,6 +29,31 @@ module.exports = {
         })
     },
 
+    decrementLikeCount: (req, res) => {
+        Post.findOne({where: {post_id: req.body.post_id}})
+        .then((data) => {
+            console.log(data, 'AHHHHHHHHHHHHHHHHHHHHHH')
+            if (data) {
+                Post.update({like_count: data.dataValues.like_count - 1}, {where: {text: data.dataValues.text}})
+                .then((data) => {
+                    res.send(data)
+                })
+                .catch((err) => {
+                    res.status(500).send(err)
+                })
+            } else {
+                Post.create({type: req.body.type, text: req.body.text, like_count: 1, parent: req.body.parent})
+                .then((data) => {
+                    res.send(data)
+                })
+                .catch((err) => {res.status(500).send(err)})
+            }
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+
     authorize: function(req, res) {
         var header = '6CBsjafaj3F2f1AMudmMW5xSB' + ':' + 'BlZMYXZz3VsbObqi8tnDhT36UAxfdMqI2aTnRRBTUdBUeihIjj';
         var encheader = new Buffer(header).toString('base64');
