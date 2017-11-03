@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 export class RoomstatService {
   roomId: string;
   selectedUrl: string;
+  player: any;
   constructor(private http: Http) { }
   
   getRoomstat(room, cb) {
@@ -98,6 +99,22 @@ export class RoomstatService {
     this.http.put('http://localhost:4201/rooms/' + room, {
       video_url: url
     })
+  }
+
+  setPlayer(player) {
+    this.player = player
+  }
+
+  skipTo(time) {
+    this.player.seekTo(time);
+  }
+
+  playVideo() {
+    this.player.playVideo();
+  }
+
+  pauseVideo() {
+    this.player.pauseVideo();
   }
 
   getVideo(room): Observable<any> {

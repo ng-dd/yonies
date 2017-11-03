@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ng-socket-io';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth'
@@ -15,6 +15,9 @@ declare var $: any;
 export class ChatComponent implements OnInit {
   @Input() private socketService: SocketService;
   @Input() roomId: string;
+  @Input() username: string;
+  @Input() player: any;
+  @Output() updatePlayer: EventEmitter<any> = new EventEmitter(); 
 
   friendWantsToChat: boolean;
   chatInitiated: boolean;
@@ -30,14 +33,20 @@ export class ChatComponent implements OnInit {
   userQueue: Array<any>;
   hostName: string;
   hostID: string;
-  username: string;
   userID: string;
 
   toggleRoom: boolean = true;
   connection: any;
+  userList: any;
+  messageWatch: any;
+  userDisconnect: any;
+  stateWatch: any;
+
+
 
   constructor(
     private afAuth: AngularFireAuth,
+    private roomstatService: RoomstatService,
   ) { 
     this.chatInitiated = false;
     this.roomAvailable = false;
@@ -48,7 +57,6 @@ export class ChatComponent implements OnInit {
 
     this.hostName = '';
     this.hostID = '';
-    this.username = '';
     this.userID = '';
   }
 
@@ -103,29 +111,69 @@ export class ChatComponent implements OnInit {
     this.haveUserName = false;
     this.chatInitiated = false;
     this.roomAvailable = false;
-    this.username = '';
+    // this.username = '';
     this.userID = '';
     this.chatEnded = true;
     this.socket.emit('ended', this.hostID);
   }
 
   ngOnInit() {
+    console.log('player from inside chat comp', this.player)
     // console.log('looking at current user', this.afAuth.auth.currentUser)
-    this.username = this.afAuth.auth.currentUser.email; 
-    this.connection = this.socketService.recieveMessages()
-    .subscribe((response) =>{
-      let author = document.createElement('ul');
-      author.appendChild(document.createTextNode(response[0]));
-      author.className += 'author';
-      let message = document.createElement('ul');
-      message.className += 'message';
-      message.appendChild(document.createTextNode(response[1]));
-      document.getElementById('chat-log').appendChild(author).appendChild(message);
-    })
+    // this.connection = this.socketService.onConnect()
+    // .subscribe(()=>{
+    this.stateWatch = this.socketService.requestResponse()
+    .subscribe((res)=> {
+      console.log('processing request for state change in chat: ', res)
+      let lastElement = document.getElementById('chat-log').firstChild
+      let request = document.createElement('ul');
+      request.className += 'message';
+      if (res[0] === 'pause') {
+        request.className += 'pause'
+        request.addEventListener('click', ()=> {this.updatePlayer.emit('pause')})
+        request.appendChild(document.createTextNode(res[1]+ ' has made a '+ res[0] + ' request'))
+      } else if (res[0] === 'play') {
+        request.className += 'play'
+        request.addEventListener('click', ()=> {this.updatePlayer.emit('play')})
+        request.appendChild(document.createTextNode(res[1]+ ' has made a '+ res[0] + ' request'))
+      } else {
+        request.addEventListener('click', ()=> {this.updatePlayer.emit(res[1])})
+        request.appendChild(document.createTextNode(res[0]+ ' has made a request to skip to '+ res[1]));
+      }
+      document.getElementById('chat-log').insertBefore(request, lastElement);
+    });
 
-    // // Socket  -- Listeners
-    // this.socket.on('hostSocketid', (socketid) => {
-    //   this.socket.emit('ended', socketid);
+      this.socketService.displayUser(this.roomId, this.username);
+      this.userList = this.socketService.newUser()
+      .subscribe((username) => {
+        let user = document.createElement('h3');
+        user.id += username;
+        user.appendChild(document.createTextNode(username));
+        console.log('looking at username dom ele: ', user)
+        document.getElementById('users').appendChild(user);
+      })
+
+      this.userDisconnect = this.socketService.removeUser()
+      .subscribe((username)=> {
+        document.getElementById(this.username).remove()
+      })
+
+      this.messageWatch = this.socketService.recieveMessages()
+      .subscribe((response) =>{
+        let lastElement = document.getElementById('chat-log').firstChild
+        let author = document.createElement('ul');
+        author.appendChild(document.createTextNode(response[0]));
+        author.className += 'author';
+        let message = document.createElement('ul');
+        message.className += 'message';
+        message.appendChild(document.createTextNode(response[1]));
+        document.getElementById('chat-log').insertBefore(author, lastElement).appendChild(message);
+      })
+    // })
+      
+      // // Socket  -- Listeners
+      // this.socket.on('hostSocketid', (socketid) => {
+        //   this.socket.emit('ended', socketid);
     // });
 
     // // Socket -- Start Chat 
@@ -161,6 +209,11 @@ export class ChatComponent implements OnInit {
     //   this.socket.disconnect();
     //   this.handleEndChat();
     // });
+    this.socketService.onDisconnect()
+    .subscribe(()=>{
+      // document.getElementById(this.username).remove()
+      this.socketService.leftRoom(this.roomId, this.username);
+    })
   }
 
 

@@ -19,6 +19,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() roomId: string;
   @Input() private socketService: SocketService;
   @Input() uid: string;
+  @Input() username: string
   @HostListener('window:unload', ['event'])
   incoming: string;
   host: any;
@@ -40,6 +41,8 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   connection: any;
   requestResponse: any;
   time: string = '';
+  rendered: boolean = false;
+
   constructor(
     private sanitizer: DomSanitizer,
     private script: ScriptService,
@@ -58,8 +61,21 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   }
 
+  getUpdate(evt) {
+    if (this.isHost){
+      if (evt === 'pause') {
+        this.player.pauseVideo();
+      } else if (evt === 'play') {
+        this.player.playVideo();
+      } else {
+        this.player.seekTo(evt)
+      }
+    }
+  }
+
   ngOnInit() {
     this.isHost = this.roomId === this.uid;
+
     console.log('Here is initial roomId: ', this.roomId, ' Here In initial video', this.videoId, 'with selected video as: ', this.roomstatService.getSelectedVideo())
     this.videoId = this.roomstatService.getSelectedVideo()
     // if (!this.roomId){
@@ -95,41 +111,47 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
         }
       });
 
-      this.requestResponse = this.socketService.requestResponse()
-      .subscribe((res) => {
-        console.log(res);
-        if (res === 'pause') {
-          //pop up message as pause
+      // this.requestResponse = this.socketService.requestResponse()
+      // .subscribe((res) => {
+      //   console.log(res);
+      //   if (res === 'pause') {
+      //     //pop up message as pause
           
-        } else if (res === 'play') {
-          //pop up message as play
+      //   } else if (res === 'play') {
+      //     //pop up message as play
 
-        } else {
-          //pop up message to fast forward to time specified as res
+      //   } else {
+      //     //pop up message to fast forward to time specified as res
 
-        }
+      //   }
 
-      });
+      // });
       
       (<any>window).onYouTubeIframeAPIReady = () => {
         this.player = new window['YT'].Player('player', {
           height: '390',
           width: '640',
           videoId: this.videoId,
-          playerVars: { 'autoplay': 0, 'controls': 1 },
+          playerVars: { 'autoplay': 0, 'controls': 1, rel: 0 },
           events: {
             'onReady': onPlayerReady,
             'onStateChange': this.onPlayerStateChange
           }
         });
-        
-        
+        this.iframeElem = document.getElementById('player');
+        if (!this.isHost) {
+          this.iframeElem.setAttribute('style', 'pointer-events: none;')
+        }
+        this.rendered = true;
         console.log('finished initing')
       }
+
       
       function onPlayerReady(event) {
         console.log('Player loaded: ', this.player)
-        event.target.playVideo();
+        // event.target.playVideo();
+
+        this.roomstatService.setPlayer(this.player)
       }
       console.log('checking host before close', this.host)
     }); 
@@ -156,18 +178,16 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   
 
   onPlayerStateChange = (event) => {
-    this.iframeElem = document.getElementById('player');
+
     console.log('PLAYER INFO!!!!: ', this.player);
     // this.player.loadVideoByUrl('https://player.twitch.tv/?channel=masgamerstv')
     console.log(this.iframeElem);
-    if (!this.isHost) {
+    if (this.isHost) {
       // this.player.playerVars.controls = 0;
-      this.iframeElem.setAttribute('style', 'pointer-events: none;')
-    } else {
       console.log('Player state changed: ', this.player.getPlayerState(), this.player.getCurrentTime());
       console.log(this.player);
       let state = this.player.getPlayerState();
-      this.socketService.stateChange(this.roomId, state, this.player.getCurrentTime())
+      this.socketService.stateChange(this.roomId, state, this.player.getCurrentTime(), this.afAuth.auth.currentUser.email)
 
     }
 
@@ -178,7 +198,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.player.getPlayerState();
   }
   stopVideo = () => {
-    this.player.stopVideo();
+    // this.player.stopVideo();
   }
 
 
@@ -196,14 +216,16 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
         seconds += parseInt(time[i]) * 60 ** magnitude;
       magnitude+= 1;
     }
-    this.socketService.skipToRequest(this.roomId, String(seconds));
+    this.socketService.skipToRequest(this.roomId, this.username, String(seconds));
   }
 
   pauseRequest = () => {
-    this.socketService.pauseRequest(this.roomId);
+    console.log('submitting pause req..')
+    this.socketService.pauseRequest(this.roomId, this.username);
   }
 
   playRequest = () => {
-    this.socketService.playRequest(this.roomId);
+    console.log('submitting play req..')
+    this.socketService.playRequest(this.roomId, this.username);
   }
 }
