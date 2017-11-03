@@ -58,7 +58,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getVidsByCategory(cat) {
-    this.categories = [];
+    this.content = [];
     this.http.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCs8PIBc9_thyv60k4mFAtlz1caOoU-aMY&part=snippet&chart=mostpopular&videoCategoryId=${cat}`)
     .subscribe((data) => {
       console.log(data.json())

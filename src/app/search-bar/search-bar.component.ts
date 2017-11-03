@@ -145,24 +145,23 @@ export class SearchBarComponent implements OnInit {
 
   visitWall(user) {
     console.log(user, 'THIS IS THE USER BRUH!!')
-    
-    // this.content = [];
-    // // console.log(user, 'user')
-    // this.userService.getUser(user)
-    // .subscribe((data) => {
-    //   console.log(data, '<<<<<<DATA')
-    //   this.likeService.getLikes({uid: data[0].uid})
-    //   .subscribe((data) => {
-    //     console.log("LIKE DATA!! >>>>", data)
-    //     data.forEach((data) => {
-    //       this.postService.getPost({post_id: data.post_id})
-    //       .subscribe((data) => {
-    //         // console.log('HERE IS SOURCE!!', {src: data.text})
-    //         this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text), id: data.post_id})
-    //       })
-    //     })
-    //   })
-    // })
+        this.content = [];
+    // console.log(user, 'user')
+    this.userService.getUser(user)
+    .subscribe((data) => {
+      console.log(data, '<<<<<<DATA')
+      this.likeService.getLikes({uid: data[0].uid})
+      .subscribe((data) => {
+        console.log("LIKE DATA!! >>>>", data)
+        data.forEach((data) => {
+          this.postService.getPost({post_id: data.post_id})
+          .subscribe((data) => {
+            // console.log('HERE IS SOURCE!!', {src: data.text})
+            this.content.push({src: this.sanitizer.bypassSecurityTrustResourceUrl(data.text), id: data.post_id})
+          })
+        })
+      })
+    })
   }
 
   searchHashTags(query) {
