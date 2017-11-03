@@ -49,7 +49,7 @@ export class ContentItemWallComponent implements OnInit {
     this.commentForm = fb.group({
       'comment': null
     });
-    this.name = null;  
+    this.name = '';  
   }
 
   
@@ -100,7 +100,7 @@ export class ContentItemWallComponent implements OnInit {
     this.postService.addComment({text: text.comment, user: user.uid, postid: id})
     .subscribe(res => {
       this.comments.push([res.text, this.name])
-      console.log('RERENDERING NEW POST')
+      console.log('RERENDERING NEW POST', this.name)
       this.likeService.addLike({uid: user.uid, post_id: res.post_id, type: 'comment'})
       .subscribe((data) => {
         // this.postService.getComments(this.vid['id'])
@@ -155,9 +155,7 @@ export class ContentItemWallComponent implements OnInit {
     let user = firebase.auth().currentUser;
     this.userService.getUserById(user.uid)
       .subscribe(data => {
-        if(!this.name) {
-          this.name = data.first_name;
-        }
+        this.name = data.first_name;
       })  
 
     
