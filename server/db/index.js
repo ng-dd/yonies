@@ -3,7 +3,7 @@ require('dotenv').config();
 // var dbUrl = require('../../dburl');
 
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
-  host: PROCESS.ENV.DATABASE_URL,
+  host: process.env.DATABASE_URL,
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {

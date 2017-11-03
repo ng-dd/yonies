@@ -3,7 +3,7 @@
     <a (click)='selectUser(user.uid)'>{{user.first_name}} {{user.uid}}</a>
   </div>
 
-  <input type='button' value='getfriends' (click)="getFriendsList()">
+  <!-- <input type='button' value='getfriends' (click)="getFriendsList()">
   <div class="col-sm">
     <ul *ngFor="let friend of friendsList" class="list-group">
       <li class="list-group-item justify-content-between">
@@ -11,18 +11,12 @@
         <span class="badge badge-default badge-pill" (click)="visitWall(friend)">visit page</span>
       </li>
     </ul>
-  </div>
-  <input type='button' value='getfriends' (click)="getFriendsList()">
-  <div *ngFor="let friend of friendsList">
-    {{friend}}
-    <input type='button' value='visit their wall' (click)="visitWall(friend)">
-    
-    <div *ngFor='let vid of content'>
-      <iframe
-      [src]='vid.src'
-      height='315'
-      width='420'>
-    </iframe>
+  </div> -->
+  <input type='button' value='Show friends list' (click)="getFriendsList()">
+  <div *ngIf="showFriends">
+    <div *ngFor="let friend of friendsList">
+      {{friend.name}}
+      <a routerLink="/wall" [queryParams]="{userId: friend.uid}"><button>Visit Wall</button></a>
     </div>
   </div>
 </div>

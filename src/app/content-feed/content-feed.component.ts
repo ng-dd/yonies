@@ -70,7 +70,7 @@ export class ContentFeedComponent implements OnInit {
                   .subscribe((data) => {
                     data.items.forEach((video) => {
                       console.log(video, 'videos')
-                      this.content.push({date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+                      this.content.push({name: video.snippet.title, date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
                     })
                     this.content.sort((a, b) => {
                       var c = new Date(a.date).getTime()

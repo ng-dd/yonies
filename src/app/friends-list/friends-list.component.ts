@@ -23,6 +23,7 @@ export class FriendsListComponent implements OnInit {
   friendsList: any;
   content: any;
   users: object[];
+  showFriends: boolean;
 
   constructor(
     private sanitizer: DomSanitizer, 
@@ -35,10 +36,12 @@ export class FriendsListComponent implements OnInit {
   ) {
     this.friendsList = [];
     this.content = [];
+    this.showFriends = false;
   }
 
   getFriendsList() {
-    console.log(firebase)
+    this.showFriends = !this.showFriends;
+    console.log(this.showFriends, 'la')
     let currId = firebase.auth().currentUser.uid;  
     console.log(currId, 'current user')  
     this.friendsList = [];
@@ -51,11 +54,11 @@ export class FriendsListComponent implements OnInit {
         this.userService.getUserById(friend.friend_id)
         .subscribe((data) => {
           console.log(data, 'from get friends list');
-          this.friendsList.push(data.username)
+          this.friendsList.push({name: data.username, uid: data.uid})
+          console.log(this.friendsList, 'friends')
         })
       })
     })
-    console.log(this.friendsList, 'friends')
   }
 
   visitWall(user) {
