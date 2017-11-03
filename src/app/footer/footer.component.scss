@@ -53,3 +53,237 @@
         text-align: center;
     }
 }
+.icon-github {
+	width: 1.5em;
+	height: 1.5em;
+	fill: currentColor;
+}
+.small-svg {
+	font-size: .25em;
+	fill: currentColor;
+}
+.scene {
+	background: #282886;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.scene path:first-child {
+	fill: #4f4fea;
+}
+
+.scene path:nth-child(2) {
+	fill: #0c27cf;
+}
+
+.scene path:nth-child(3) {
+	fill: #13269c;
+}
+
+.scene path:nth-child(4) {
+	fill: #242468;
+}
+
+.scene path:nth-child(5) {
+	fill: #2648e6;
+}
+
+.scene path:nth-child(6) {
+	fill: #2c31b0;
+}
+
+.scene path:nth-child(7) {
+	fill: #262689;
+}
+
+.title {
+	z-index: 1000;
+	pointer-events: none;
+	color:white;
+    font-size: 48px;
+	font-weight: bold;
+	line-height: 62px;
+	
+}
+
+.sub-title {
+	z-index: 1000;
+	pointer-events: none;
+	color:white;
+    font-size: 18px;
+	line-height: 62px;
+	padding-bottom: 1em;
+	
+}
+
+body {
+	font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
+	min-height: 100vh;
+	color: #fff;
+	background-color: #193ccf;
+	background-color: var(--color-background);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Fade effect */
+.js body {
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.js body.render {
+	opacity: 1;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+	outline: none;
+}
+
+a:hover,
+a:focus {
+	color: #423c2b;
+	color: #000;
+	outline: none;
+}
+
+.hidden {
+	position: absolute;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+/* SVG Icons */
+.icon {
+	display: block;
+	width: 1.5em;
+	height: 1.5em;
+	margin: 0 auto;
+	fill: currentColor;
+}
+
+main {
+	position: relative;
+	width: 100%;
+}
+
+.content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0 auto;
+}
+
+.mama {
+	font-size: 1.15em;
+	fill: white;
+	margin: 1em 0 0 3.5em;
+}
+
+.small-svg {
+	font-size: .25em;
+	fill: currentColor;
+}
+.icon-github {
+	width: 1.5em;
+	height: 1.5em;
+	fill: currentColor;
+}
+
+/* bg */
+@media screen and (max-width: 55em) {
+	html,
+	body {
+		overflow-x: hidden;
+		width: 100vw;
+		height: 100%;
+	}
+	.content {
+		height: auto;
+		min-height: 0;
+		padding-bottom: 10em;
+		flex-direction: column;
+	}
+}
+
+.preview {
+    text-align: center;
+    vertical-align: middle;
+	width: 50%;
+	padding-top: 2em;
+}
+
+.preview .phone {
+    background: url(https://static.muscdn.com/website/static/phone@2x.f9f82a28.png) no-repeat 50%;
+    background-size: contain;
+    padding: 85px 25px 0 23px;
+    width: 270px;
+    height: 560px;
+    display: inline-block
+}
+
+.preview .phone video {
+    width: 100%;
+    border-radius: 5px
+}
+
+.download {
+    text-align: center !important;
+    vertical-align: middle;
+    width: 50%
+}
+
+.download .logo {
+    margin-bottom: 40px
+}
+
+.download .logo>img {
+    width: 238px
+}
+
+.download .logo>p {
+    color: #fff;
+    font-size: 18px
+}
+
+.download .download-btn {
+    width: 200px;
+    margin: auto;
+    border-radius: 50px;
+    background-color: hsla(0,0%,100%,.3);
+    text-align: left;
+    margin-bottom: 20px;
+    overflow: hidden
+}
+
+.download .download-btn:hover {
+    background-color: hsla(0,0%,100%,.15)
+}
+
+.download .download-btn>a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none
+}
+
+.download .download-btn>a>.icon {
+    width: 24px;
+    margin: 0 15px 0 26px;
+    position: relative;
+    top: -2px;
+	vertical-align: middle;
+	text-align: center !important;
+}

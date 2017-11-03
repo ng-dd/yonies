@@ -8,7 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <link rel="stylesheet" href="/src/styles.css">   
+  <link rel="stylesheet" src="/src/normalize.css">
+  <link rel="stylesheet" src="/src/styles.css">   
 
    <!-- Bootstrap core CSS -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
@@ -24,18 +25,20 @@
    <!-- Fonts -->
 
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <script src=“https://use.fontawesome.com/46ffe7540c.js“></script>
+   <script href=“https://use.fontawesome.com/46ffe7540c.js“></script>
 
     <!-- SVG support check -->
    <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this app in a modern browser.");</script>
   
+   
 
 </head>
 <body>
-  <app-root></app-root>
-    <div class="app-loader" id="content">
-      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-      <span class="sr-only">Loading...</span>
+    <!-- <div class="app-loader" id="content">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span> -->
+  <div>
+        <app-root></app-root>
     <noscript>
       <h4 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica;">
         Sorry, JavaScript needs to be enabled in order to run this application.

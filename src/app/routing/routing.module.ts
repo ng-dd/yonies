@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'featured', component: FeaturedComponent},
   { path: 'wall', component: WallfeedComponent},
   { path: 'categories', component: CategoriesComponent},
+  { path: 'friends', component: FriendsListComponent},    
   { path: '**', redirectTo: '/notfound' },
 ];
 
