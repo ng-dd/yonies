@@ -57,3 +57,4 @@ pip-selfcheck.json
 #config files
 firebase.config.ts
 youtube.config.ts
+.env

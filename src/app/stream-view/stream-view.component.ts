@@ -157,15 +157,15 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   onPlayerStateChange = (event) => {
     this.iframeElem = document.getElementById('player');
-    console.log('PLAYER INFO!!!!: ', this.player)
+    console.log('PLAYER INFO!!!!: ', this.player);
     // this.player.loadVideoByUrl('https://player.twitch.tv/?channel=masgamerstv')
     console.log(this.iframeElem);
     if (!this.isHost) {
       // this.player.playerVars.controls = 0;
       this.iframeElem.setAttribute('style', 'pointer-events: none;')
     } else {
-      console.log('Player state changed: ', this.player.getPlayerState(), this.player.getCurrentTime())
-      console.log(this.player)
+      console.log('Player state changed: ', this.player.getPlayerState(), this.player.getCurrentTime());
+      console.log(this.player);
       let state = this.player.getPlayerState();
       this.socketService.stateChange(this.roomId, state, this.player.getCurrentTime())
 
@@ -175,7 +175,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       setTimeout(this.stopVideo, 6000);
       this.done = true;
     }
-    this.player.getPlayerState()
+    this.player.getPlayerState();
   }
   stopVideo = () => {
     this.player.stopVideo();
