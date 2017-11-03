@@ -38,7 +38,7 @@ export class FeaturedComponent implements OnInit {
   }
 
   getTagContent(tag) {
-    if (tag[0] === '#') {
+    if (tag[0] === '#') { 
       tag = tag.slice(1);
     }
     tag = tag.split(' ').join('').toLowerCase();

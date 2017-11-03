@@ -13,6 +13,8 @@
             </div>
           </div>
     </section>
+
+    <section *ngFor="let tweet of tweets" [innerHTML]='tweet'>{{tweet}}</section>
 </div>
 </div>
 <app-navbar></app-navbar>

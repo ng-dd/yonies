@@ -27,6 +27,7 @@ export class ContentFeedComponent implements OnInit {
   uid: any;
   content: any;
   liked: boolean;
+  tweets: any;
 
   constructor(
     private likeService: LikesService, 
@@ -36,11 +37,13 @@ export class ContentFeedComponent implements OnInit {
     private followService: FollowService, 
     private afAuth: AngularFireAuth,
     private fb: FormBuilder,
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService,
+    private scriptService: ScriptService) {
 
     this.content = [];
     this.cats = [];
     this.uid = '';
+    this.tweets = [];
    }
 
   //get current user, get content feed based on keywords of stuff they have liked,
@@ -61,6 +64,29 @@ export class ContentFeedComponent implements OnInit {
             data.forEach((category) => {
               this.cats.push(category.name)
               this.cats.forEach((cat) => {
+                this.postService.getTwitter(cat)
+                .subscribe((data) => {
+                  for (var i = 0; i < data.length; i++) {
+                    this.postService.getEmbed(data[i])
+                    .subscribe((data) => {
+                      // console.log(data, 'TWITTER OMBED DATA <<<<<<<<<<<<<')
+                      var el = document.createElement('html');
+                      el.innerHTML = data;
+                      console.log(el, 'TWITTER <<<<<<<<<<<<') 
+                      var twt = this.sanitizer.bypassSecurityTrustHtml(el.innerHTML);          
+                      this.tweets.push(twt);
+                      this.scriptService.load('twitterWidget')
+                      .then(data => {
+                        console.log('script loaded ', data);
+                      })
+                      .catch(error => console.log(error));    
+                    })
+                  }
+                }, (err) => {
+                  console.log(err, 'error from searchPosts')
+                })
+
+
                 this.postService.getTwitch(cat)
                 .subscribe((data) => {
                   data.videos.forEach((video) => {
@@ -70,7 +96,7 @@ export class ContentFeedComponent implements OnInit {
                   .subscribe((data) => {
                     data.items.forEach((video) => {
                       console.log(video, 'videos')
-                      this.content.push({name: video.snippet.title, date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
+                      this.content.push({twitter: video.snippet.channelTitle, name: video.snippet.title, date: video.snippet.publishedAt, src: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video.id.videoId)})
                     })
                     this.content.sort((a, b) => {
                       var c = new Date(a.date).getTime()
