@@ -1,28 +1,23 @@
-<div>
-  <div *ngFor='let user of users'>
-    <a (click)='selectUser(user.uid)'>{{user.first_name}} {{user.uid}}</a>
-  </div>
-  <input type='button' value='Show friends list' (click)="getFriendsList()">
-  <div *ngIf="showFriends">
-    <div *ngFor="let friend of friendsList">
-      {{friend.name}} | {{friend.username}}
-      <a routerLink="/wall" [queryParams]="{userId: friend.uid}">
-        <button (click)="refresh()">Visit Wall</button>
-      </a>
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3 d-flex justify-content-left">My<br>Friends</h1>
+      <p><a class="btn btn-deets" href="https://itunes.apple.com/us/show/carpool-karaoke/id1219046821?app=music&mttnpid=305109&mttnsiteid=125115&mttnagencyid=2486&mttngadurl=https%3A%2F%2Fitunes.apple.com%2Fus%2Fshow%2Fcarpool-karaoke%2Fid1219046821%3F&mttnsubpid=g&mttnsubplmnt=&mttnsubad=228695380739&mttnsubcmp=920251662&mttnsubkw=carpool%20karaoke&mttnsub2=c&mttngmo=&is_mobile=&mttnsub1=e&gclid=EAIaIQobChMI8unj7vOi1wIVSk1-Ch3HnQkXEAAYASAAEgJWNfD_BwE&ign-itsct=PMKTNG&ign-itscg=3140" role="button">Deets ✌️</a></p>
     </div>
   </div>
-</div>
 <div>
-    <h2>My friends</h2>
-    <ul>
-      <li><a href="#">Martin</a></li>
-      <li><a href="#">Jimmy</a></li>
-      <li><a href="#">Lausanne</a></li>
-      <li><a href="#">Lucerne</a></li>
-    </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+        <div class="d-flex justify-content-center flex-wrap">              
+        <ul>
+          <li *ngFor="let friend of friendsList">{{friend.name}} | {{friend.username}} 
+            <a routerLink="/wall" [queryParams]="{userId: friend.uid}" (click)="refresh()" class="btn btn-ghost" >Visit Wall</a>
+          </li>              
+        </ul>
+    </div>
+
+    </div>
+  </div>
   </div>
 
-  <!-- <ul>
-      <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
-    </ul> -->
 <app-navbar></app-navbar>
