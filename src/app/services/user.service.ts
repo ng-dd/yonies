@@ -20,6 +20,10 @@ export class UserService {
     .map((res) => {return res.json()});
   }
 
+  getUid(uid): Observable <any> { 
+    return this.http.get(`http://localhost:4201/userid/${uid}`)
+  }
+
   addUser(user) {
     this.http.post('http://localhost:4201/users', {
       username: user.username,
@@ -45,6 +49,12 @@ export class UserService {
 
   deleteUser(user) {
     this.http.delete(`/users/${user.id}`)
+  }
+
+  getUsersByName(name): Observable<any>  {
+    console.log(name, 'inside user service!?!?!?!??!?!?!')
+    return this.http.get(`http://localhost:4201/usernames/${name.username}`)
+    .map((res) => {return res.json()})
   }
 
   getAllUsers(): Observable<any> {

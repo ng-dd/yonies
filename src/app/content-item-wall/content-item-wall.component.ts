@@ -28,6 +28,8 @@ export class ContentItemWallComponent implements OnInit {
   comments: any;
   commentForm: FormGroup;
   name: any;
+  namedata: any;
+  names: any;
 
   @Input() 
   
@@ -53,7 +55,16 @@ export class ContentItemWallComponent implements OnInit {
     this.commentForm = fb.group({
       'comment': null
     });
-    this.name = '';  
+    this.names = {
+      'YfvpvHVyRUfV2FGyLBhumbixxVF2': 'David',
+      'JE1hS7cU3SYWB51GB9taPK2uQKc2': 'Pitbull',
+      'qnIJ5lQEOhSZ7iFKLXZXftqatIk2': 'Marty'
+    };  
+  }
+
+  test() {
+    console.log('WHATS MY NAME', this.name)
+    // console.log('LOGGED IN?', firebase.auth().currentUser)
   }
 
   
@@ -103,7 +114,7 @@ export class ContentItemWallComponent implements OnInit {
     let user = firebase.auth().currentUser;
     this.postService.addComment({text: text.comment, user: user.uid, postid: id})
     .subscribe(res => {
-      this.comments.push([res.text, this.name])
+      this.comments.push([res.text, this.names[this.name]])
       console.log('RERENDERING NEW POST', this.name)
       this.likeService.addLike({uid: user.uid, post_id: res.post_id, type: 'comment'})
       .subscribe((data) => {
@@ -123,6 +134,12 @@ export class ContentItemWallComponent implements OnInit {
 
   
   ngOnInit() {
+    // this.namedata = this.userService.getUserById(firebase.auth().currentUser.uid)
+    //   .subscribe(data => {
+    //     console.log('NAME DATAAAAA', data);
+    //   })
+    this.name = firebase.auth().currentUser.uid;
+
     this.route
     .queryParams
     .subscribe(params => {
@@ -160,13 +177,6 @@ export class ContentItemWallComponent implements OnInit {
         })
       })
     })
-
-    let user = firebase.auth().currentUser;
-    this.userService.getUserById(user.uid)
-      .subscribe(data => {
-        this.name = data.first_name;
-      })  
-
     
   } 
 

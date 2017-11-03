@@ -5,7 +5,7 @@
   <input type='button' value='Show friends list' (click)="getFriendsList()">
   <div *ngIf="showFriends">
     <div *ngFor="let friend of friendsList">
-      {{friend.name}}
+      {{friend.name}} | {{friend.username}}
       <a routerLink="/wall" [queryParams]="{userId: friend.uid}">
         <button (click)="refresh()">Visit Wall</button>
       </a>

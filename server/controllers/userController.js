@@ -36,6 +36,15 @@ module.exports = {
         })
     },
 
+    getUsersByName: (req, res) => {
+        User.findAll({where: {first_name: req.params.id}})
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
 
     getUserById: (req, res) => {
         User.findOne({where: {uid: req.params.id}})

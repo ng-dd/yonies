@@ -31,10 +31,12 @@
   </ul>
   {{keyWord}}
   <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
-  <div *ngFor='let user of users'>
-      {{user.username}}
-      <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
-    </div>
+
+  <div *ngFor="let user of users">
+    {{user.firstname}} | {{user.username}}
+    <button (click)="addFriend(user)">Add Friend</button>
+    <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
+  </div>
     <div class="wrapper"> 
         
 <div>

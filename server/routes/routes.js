@@ -21,6 +21,7 @@ router.post('/users', userController.addUser);
 router.get('/allUsers', userController.getAllUsers);
 router.delete('/users/:id', userController.deleteUser);
 router.delete('/allUsers', userController.deleteAllUsers)
+router.get('/usernames/:id', userController.getUsersByName)
 
 //posts
 router.get('/posts/:id', postController.getPost);

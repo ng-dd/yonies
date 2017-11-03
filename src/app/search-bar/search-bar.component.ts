@@ -135,10 +135,12 @@ export class SearchBarComponent implements OnInit {
   searchUsers(query) {
     console.log(query)
     this.users = [];
-    this.userService.getUser(query)
-    .subscribe((data) => {
+    this.userService.getUsersByName(query)
+    .subscribe(data => {
       console.log(data, 'users data')
-      this.users.push({username: data[0].username, uid: data[0].uid})
+      data.forEach(person => {
+        this.users.push({firstname: person.first_name, username: person.username, uid: person.uid})
+      })
     })
     this.myForm.reset();
   } 
