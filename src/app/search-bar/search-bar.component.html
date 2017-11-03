@@ -3,6 +3,7 @@
   <button (click)='login1()'>Log in to test@tester.com</button>
   <button (click)='login2()'>Log in to mrworldwide@pitbull.com</button>
   <button (click)='currentUser()'>NEW PHONE WHO DIS?</button>
+  <button (click)='deleteUsers()'>Delete users (Drop DB)</button>
   <app-friends-list></app-friends-list>
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">

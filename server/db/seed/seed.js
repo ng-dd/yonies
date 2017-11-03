@@ -3,6 +3,7 @@ const likes = require('./likeData.json');
 const friends = require('./friendData.json');
 const users = require('./userData.json');
 
+
 const seedPosts = (table) => {
     posts.forEach((data) => {
         table.create({

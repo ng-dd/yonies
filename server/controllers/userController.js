@@ -77,5 +77,15 @@ module.exports = {
         .catch((err) => {
             res.status(500).send(err);
         })
+    },
+
+    deleteAllUsers: (req, res) => {
+        console.log('deleting......')
+        User.destroy({
+            where: {}
+        })
+        .catch((err)=> {
+            res.status(500).send(err);
+        })
     }
 }
