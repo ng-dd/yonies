@@ -26,6 +26,7 @@ export class ContentItemWallComponent implements OnInit {
   likeCount: number;
   comments: any;
   commentForm: FormGroup;
+  name: any;
 
   @Input() 
   
@@ -47,7 +48,8 @@ export class ContentItemWallComponent implements OnInit {
     this.likeCount = 0;
     this.commentForm = fb.group({
       'comment': null
-    });  
+    });
+    this.name = null;  
   }
 
   
@@ -97,13 +99,16 @@ export class ContentItemWallComponent implements OnInit {
     let user = firebase.auth().currentUser;
     this.postService.addComment({text: text.comment, user: user.uid, postid: id})
     .subscribe(res => {
+      this.comments.push([res.text, this.name])
+      console.log('RERENDERING NEW POST')
       this.likeService.addLike({uid: user.uid, post_id: res.post_id, type: 'comment'})
       .subscribe((data) => {
-        this.postService.getComments(this.vid['id'])
-        .subscribe(data => {
-          this.comments = data;
-          console.log("IS THIS COMMENTS OBJECT?>>", this.comments)
-        })
+        // this.postService.getComments(this.vid['id'])
+        // .subscribe(data => {
+        //   this.comments.push([data., this.name])
+        //   console.log('NEW COMMENT!!', data);
+        //   console.log("MY NAME IS", this.name)
+        // })
         
       })
       
@@ -141,12 +146,20 @@ export class ContentItemWallComponent implements OnInit {
         .subscribe(data => {
           this.userService.getUserById(data.uid)
           .subscribe(data => {
-            console.log('THIRD DATA', data)
             this.comments[index].push(data.first_name)
           })
         })
       })
     })
+
+    let user = firebase.auth().currentUser;
+    this.userService.getUserById(user.uid)
+      .subscribe(data => {
+        if(!this.name) {
+          this.name = data.first_name;
+        }
+      })  
+
     
   } 
 
