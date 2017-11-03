@@ -10,11 +10,12 @@ import { RoomstatService } from '../services/roomstat.service'
   styleUrls: ['./video-share.component.css']
 })
 export class VideoShareComponent implements OnInit {
-  // @Input() invitedRoom: string;
+  @Input() nameList: string[];
   connection: any;
   roomId: string;
   done: boolean = false;
   uid: string;
+  username: string;
   constructor(
     private afAuth: AngularFireAuth, 
     private router: Router, 
@@ -27,6 +28,7 @@ export class VideoShareComponent implements OnInit {
     this.io = new SocketService();
     // console.log('rendering videoshare component');
     this.uid = this.afAuth.auth.currentUser.uid
+    this.username = this.afAuth.auth.currentUser.email
     let invitedRoom = this.roomstatService.getRoom();
     if (invitedRoom) {
       this.io.joinRoom(invitedRoom);
@@ -37,11 +39,6 @@ export class VideoShareComponent implements OnInit {
     }
 
     this.done = true;
-    // let currentUrl = this.router.url;
-    // if (currentUrl.slice(currentUrl.length -  4) === 'room') {
-    //   this.router.createUrlTree(['/room', this.afAuth.auth.currentUser.uid])
-    //   this.router.navigate(['/room', this.afAuth.auth.currentUser.uid])
-    // }
   }
 
 }

@@ -8,22 +8,21 @@ const videoSessionRouter = (io, client) => {
 
   client.on('leaveRoom', roomId => videoSessionController.leaveRoom(io, client, roomId));
 
-  client.on('changeState', (roomId, state, time) => {
+  client.on('changeState', (roomId, state, time, username) => {
     console.log('Emitting changing state to: ', state)
-    // console.log('heres io.sockets: ', io.sockets)
-    client.broadcast.to(roomId).emit('newState', state, time)
+    client.broadcast.to(roomId).emit('newState', state, time, username)
   });
 
-  client.on('pauseRequest', (roomId) => {
-    client.broadcast.to(roomId).emit('pauseResponse');
+  client.on('pauseRequest', (roomId, username) => {
+    io.in(roomId).emit('pauseResponse', username);
   });
 
-  client.on('playRequest', (roomId) => {
-    client.broadcast.to(roomId).emit('playResponse');
+  client.on('playRequest', (roomId, username) => {
+    io.in(roomId).emit('playResponse', username);
   });
 
-  client.on('skipToRequest', (roomId, time) => {
-    client.broadcast.to(roomId).emit('skipToResponse', time);
+  client.on('skipToRequest', (roomId, username, time) => {
+    io.in(roomId).emit('skipToResponse', username, time);
   });
 
 };

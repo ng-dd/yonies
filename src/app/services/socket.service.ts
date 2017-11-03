@@ -15,13 +15,17 @@ export class SocketService {
     console.log('checkign socketio from constructor: ', this.socketIo)
   }
 
+  requestGuestList = (roomId) => {
+    console.log('requesting new guest list')
+    this.socketIo.emit('getGuestList', roomId);
+  }
 
   sendMessage(roomId, chatInput, username) {
     this.socketIo.emit('chatMessage', roomId, chatInput, username);
   }
 
-  stateChange(roomId, state, time) {
-    this.socketIo.emit('changeState', roomId, state, time);
+  stateChange(roomId, state, time, username) {
+    this.socketIo.emit('changeState', roomId, state, time, username);
   }
 
   recieveMessages(): Observable<string[]> {
@@ -34,28 +38,52 @@ export class SocketService {
 
   recieveStateChange(): Observable<[string]> {
     return new Observable((observer) => {
-      this.socketIo.on('newState', (state, time) =>{
-        observer.next([state, time]);
+      this.socketIo.on('newState', (state, time, username) =>{
+        observer.next([state, time, username]);
       });
     });
   }
 
-  requestResponse(): Observable<string> {
+  displayUser(roomId, username) {
+    this.socketIo.emit('addUser', roomId, username);
+  }
+
+  newUser(): Observable<any> {
+    return new Observable((observer)=>{
+      this.socketIo.on('newUser', (username) => {
+        observer.next(username);
+      })
+
+    })
+  }
+
+  requestResponse(): Observable<[string]> {
     return new Observable((observer) => {
-      this.socketIo.on('pauseResponse', () => {
-        observer.next('pause');
+      this.socketIo.on('pauseResponse', (username) => {
+        console.log('recieved pause req')
+        observer.next(['pause', username]);
       });
-      this.socketIo.on('playResponse', () => {
-        observer.next('play');
+      this.socketIo.on('playResponse', (username) => {
+        console.log('recieved play req')
+        observer.next(['play', username]);
       });
-      this.socketIo.on('skipToResponse', (time) =>{
-        observer.next(time);
+      this.socketIo.on('skipToResponse', (username, time) =>{
+        observer.next([username, time]);
       });
     });
   }
 
   joinRoom(roomId) {
     this.socketIo.emit('joinRoom', roomId)
+  }
+
+  recieveGuestList(): Observable<string[]> {
+    console.log('getting new list...')
+    return new Observable((observer) => {
+      this.socketIo.on('sendGuestList', (list) =>{
+      observer.next(list);
+      });
+    });
   }
 
   signalTest() {
@@ -65,22 +93,34 @@ export class SocketService {
   }
 
   
-  pauseRequest(roomId) {
-    this.socketIo.emit('pauseRequest', roomId)
+  pauseRequest(roomId, username) {
+    this.socketIo.emit('pauseRequest', roomId, username)
   }
 
-  playRequest(roomId) {
-    this.socketIo.emit('playRequest', roomId);
+  playRequest(roomId, username) {
+    this.socketIo.emit('playRequest', roomId, username);
   }
 
-  skipToRequest(roomId, time) {
-    this.socketIo.emit('skipToRequest', roomId, time);
+  skipToRequest(roomId, username, time) {
+    this.socketIo.emit('skipToRequest', roomId, username, time);
+  }
+
+  leftRoom(roomId, username) {
+    this.socketIo.emit('leftRoom', roomId, username)
+  }
+
+  removeUser(): Observable<string> {
+    return new Observable((observer) => {
+      this.socketIo.on('removeUser', (username) => {
+        observer.next(username)
+      })
+    })
   }
 
   onConnect(): Observable<any> {
+    console.log('connecting...')
     return new Observable(observer => {
-      console.log('connecting...')
-      this.socket.on('connect', (data) => {
+      this.socketIo.on('connect', (data) => {
         console.log('here is the data', data)
         observer.next();
       })
@@ -89,7 +129,7 @@ export class SocketService {
 
   onDisconnect(): Observable<any> {
     return new Observable(observer => {
-      this.socket.on('disconnect', () => {
+      this.socketIo.on('disconnect', () => {
         observer.next();
       })
     })

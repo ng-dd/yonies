@@ -1,5 +1,9 @@
 <div *ngIf='done'>
-  <app-stream-view [uid] = 'uid'[socketService] = 'io'  [roomId] = 'roomId'></app-stream-view>
-  <app-chat [socketService] = 'io' [roomId] = 'roomId'></app-chat>
+  <app-stream-view [uid] = 'uid'[socketService] = 'io'  [roomId] = 'roomId' [username] = 'username'></app-stream-view>
+  <div *ngFor='let person of nameList'>
+    {{person}}
+  </div>
 </div>
-<app-navbar></app-navbar>
+
+
+<app-navbar [socketService] = 'io'></app-navbar>

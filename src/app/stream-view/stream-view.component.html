@@ -9,3 +9,6 @@
     <input value='' placeholder='hour.minute.second' [(ngModel)]='time' (keyup.enter)='skipTo()'>
     <button (click)='skipTo()'>Skip to...</button>
 </div>
+<div *ngIf='rendered'>
+<app-chat [nameList]='nameList' [player] = 'player' [socketService] = 'socketService' [roomId] = 'roomId' [username] = 'username' (updatePlayer) = 'getUpdate($event)'></app-chat>
+</div>
