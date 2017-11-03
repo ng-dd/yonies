@@ -144,7 +144,9 @@ export class SearchBarComponent implements OnInit {
         return c > d ? 1 : -1; 
       })
     })
-    this.content = this.content.slice(0, 11);   
+    this.content = this.content.slice(0, 11);  
+    window.scrollTo(0, 1000);
+    // this.content.scrollIntoView();
   }
 
   toggleQuery(value: any) {
@@ -409,5 +411,8 @@ export class SearchBarComponent implements OnInit {
       trends = trends.slice(0, 10).map((trend) => {return trend.name})
       this.tags = trends;
     })
+  }
+  scrollTop() {
+    window.scrollTo(300, 0);
   }
 }

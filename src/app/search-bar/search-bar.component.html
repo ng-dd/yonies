@@ -59,24 +59,27 @@
   <div class="container">
       <div id='sideways-cat'>
           <div class="d-flex justify-content-center flex-wrap">              
-              <ul>
-                  <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
-              </ul>
-          </div>              
+              <ul class="rotate-icons">
+                  <li *ngFor="let cat of keys" class="emoji" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
+                </ul>
+                </div>              
       </div>
   </div>
+  
 
   <hr class="hr-text" data-content="TRENDING">  
   <!-- <app-featured></app-featured>   -->
   <div class="container">
       <ul>
-         <li *ngFor="let tag of tags" class="btn btn-primary btn-lg" role="button" (click)="getTagContent(tag)">{{tag}}</li>        
-      </ul>
-  </div>    
-
-
-  <div class="wrapper">      
-    <div>
+          <li class="btn btn-featured btn-lg" role="button" (click)="getTagContent(tag)">Carpool Karaoke</li>        
+         <li *ngFor="let tag of tags" class="btn btn-trending btn-lg" role="button" (click)="getTagContent(tag)" href="#resultscroll">{{tag}}</li>        
+     </ul>
+ </div>    
+<div>
+    <hr class="hr-text" data-content="RESULTS">       
+    
+  <div class="wrapper">  
+    <div id="resultscroll"></div>
       <div *ngFor='let vid of content'>
         <app-content-item [vid]="vid"></app-content-item>
         <button (click)='roomStart(vid)'> Start a room</button>
