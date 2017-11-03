@@ -17,7 +17,7 @@ module.exports = {
                     res.status(500).send(err)
                 })
             } else {
-                Post.create({text: req.body.text, like_count: 1})
+                Post.create({type: req.body.type, text: req.body.text, like_count: 1, parent: req.body.parent})
                 .then((data) => {
                     res.send(data)
                 })

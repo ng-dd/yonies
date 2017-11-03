@@ -117,11 +117,21 @@ export class PostService {
     .map((res) => {return res.json()})
   }
 
-  addComment({ comment }, id): Observable<any> {
+  getUsernames(postid): Observable<any> {
+    return this.http.get(`http://localhost:4201/likeposts/${postid}`)
+    .map((res) => {return res.json()})
+  }
+
+  getNames(userid): Observable<any> {
+    return this.http.get(`http://localhost:4201/userid/${userid}`)
+    .map((res) => {return res.json()})
+  }
+
+  addComment(commentInfo): Observable<any> {
     return this.http.post('http://localhost:4201/posts', {
-      text: comment,
+      text: commentInfo.text,
       type: 'comment',
-      parent: id
+      parent: commentInfo.postid
     })
     .map((res) => {return res.json()})
   }
