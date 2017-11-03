@@ -1,8 +1,9 @@
-<div>
+<div class="wrapper">
+    <div class="h_iframe">
+        <img class="ratio" src="http://emojis.slackmojis.com/emojis/images/1471119458/990/party_parrot.gif?1471119458"/>
     <iframe
       [src]='vid.src'
-      height='315'
-      width='420'>
+      frameborder="0" allowfullscreen>
     </iframe>
     <i *ngIf="!liked" class="fa fa-heart-o fa-2x" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"></i>
     <i *ngIf="liked" class="fa fa-heart fa-2x" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"></i>

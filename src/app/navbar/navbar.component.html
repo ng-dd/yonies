@@ -1,46 +1,24 @@
-<header>
-<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <!-- Brand -->
-      <a class="navbar-brand" routerLink="/content-feed" routerLinkActive="active" (click)="scrollTop()">
-        <div class="logo-inner"></div>
-        <img class="logo" src="assets/images/logo.svg" alt="Logo">
-      </a>
-      
-      <!-- Links -->
-      <div class="collapse navbar-collapse" id="nav-content">   
-      <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/feed" routerLinkActive="active" (click)="scrollTop()">feed</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/featured" routerLinkActive="active" (click)="scrollTop()">featured<mat-icon class="size">verified_user</mat-icon></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/featured" routerLinkActive="active" (click)="scrollTop()">featured<mat-icon class="size">verified_user</mat-icon></a>
-      </li>
-      <li class="nav-item">
-        <a  class="nav-link" routerLink="/friends" routerLinkActive="active" (click)="scrollTop()">friends<mat-icon class="size">favorite</mat-icon></a>
-      </li>
-      <li class="nav-item dropup">
-        <a class="nav-link dropdown-toggle" href="https://getbootstrap.com" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropup</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown10">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+<nav class="navbar navbar-default navbar-expand navbar-fixed-bottom">
+    <div class="collapse navbar-collapse" id="nav-feed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+           <a class="nav-link" routerLink="/feed" routerLinkActive="active" (click)="scrollTop()"><mat-icon class="size">home</mat-icon></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/featured" routerLinkActive="active" (click)="scrollTop()"><mat-icon class="size">trending_up</mat-icon></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/friends" routerLinkActive="active" (click)="scrollTop()"><mat-icon class="size">people</mat-icon></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/friends" routerLinkActive="active" (click)="scrollTop()"><mat-icon class="size">search</mat-icon></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/friends" routerLinkActive="active" (click)="scrollTop()"><mat-icon class="size">bookmark</mat-icon></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/friends" routerLinkActive="active" (click)="scrollTop()"><mat-icon class="size">contactsr</mat-icon></a>
+        </li>
       </ul>
-      </div>
+    </div>
   </nav>
-      
-      <!-- Set body height in some way so that content flows under navbar -->
-      <style scoped>
-      body {
-      height:2000px;
-      }
-      </style>
-</header>

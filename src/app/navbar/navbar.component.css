@@ -1,8 +1,7 @@
-.size {
-  padding: 0 14px;
+.navbar-default {
+  background-color: #fafafa ;
+  box-shadow: black;
 }
-  
-.spacer {
-  flex: 1 1 auto;
+.navbar-default .navbar-collapse {
+  border-color: #fafafa !important;
 }
-  
