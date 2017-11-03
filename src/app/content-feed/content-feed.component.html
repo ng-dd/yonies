@@ -1,32 +1,41 @@
 <div>
-    <app-friends-list></app-friends-list>        
-    <div *ngFor='let vid of content'>
-      <app-content-item [vid]="vid"></app-content-item>
-      <div *ngIf="commentOn">
-          <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value)">
-            <input formControlName="comment" placeholder="post comment">
-            <input type='submit' value='Post Comment'>
-          </form>
-          <p *ngFor="let comment of comments">
-              Username: {{comment.text}}
-          </p>
-      </div>
-      <button (click)="toggleComment()">Comment</button>
-      <button (click)='roomStart(vid)'> Start a room</button>
-      <button (click)='checkIfLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>check if liked</button>
-<<<<<<< refs/remotes/upstream/dev
-    </div> 
-=======
-      <!-- <input type="button" value="like" (click)="likePost({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"> -->
-    </div> 
-<!-- <div *ngFor='let vid of content'>
-  <iframe
-    [src]='vid.src'
-    height='315'
-    width='420'>
-  </iframe>
-  <button (click)='roomStart(vid)'> Start a room</button>
-</div> -->
-<app-navbar></app-navbar>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+    <section *ngFor='let vid of content'>
+          <div class="site-wrapper-inner">
+          <app-content-item [vid]="vid"></app-content-item>
+            <div class="cover-container">
+    
+              <main role="main" class="inner cover">
+                <h1 class="cover-heading">{{vid.title}}</h1>
+                <div *ngIf="commentOn">
+                    <form [formGroup]='commentForm' (ngSubmit)="postComment(commentForm.value)">
+                      <input formControlName="comment" placeholder="post comment">
+                      <input type='submit' value='Post Comment'>
+                    </form>
+                    <p *ngFor="let comment of comments">
+                        Username: {{comment.text}}
+                    </p>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                <p>      
+                  <button (click)="toggleComment()">Comment</button>
+                  <button (click)='roomStart(vid)'> Start a room</button>
+                  <button (click)='checkIfLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})'>check if liked</button>
+                </p>    
+              </div>  
+              <div class="col-md-6">    
+                <p class="lead">Comments Overlay</p>  
+                </div>
+              </div>                    
+              </main>
+    
+            </div>
+    
+          </div>
+    </section>
 </div>
->>>>>>> bottom drop up navbar
+</div>
+</div>
+<app-navbar></app-navbar>
