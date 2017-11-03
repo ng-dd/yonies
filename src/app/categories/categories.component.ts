@@ -38,20 +38,20 @@ export class CategoriesComponent implements OnInit {
     private categoryService: CategoryService) { 
     
       this.categories = {
-      "Cars & Vehicles": 2,
-      "Comedy": 23,
-      "Education": 27,
-      "Entertainment": 24,
-      "Film & Animation": 1,
-      "Gaming": 20,
-      "How-to & Style": 26,
-      "Music": 10,
-      "News & Politics": 25,
-      "Non-profits & Activism": 29,
-      "Pets & Animals": 15,
-      "Science & Technology": 28,
-      "Sport": 17,
-      "Travel & Events": 19
+      "🚗": 2,
+      "😂": 23,
+      "🏫": 27,
+      "🎭": 24,
+      "🎥": 1,
+      "🎮": 20,
+      "👗": 26,
+      "🎵": 10,
+      "🌎": 25,
+      "❤️": 29,
+      "🐶": 15,
+      "📱": 28,
+      "🏈": 17,
+      "✈️": 19
     }
     this.keys = Object.keys(this.categories);
     this.content = [];
