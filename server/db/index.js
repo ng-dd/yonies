@@ -40,7 +40,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
   db.Post = require('../db/models/postModel')(sequelize, Sequelize);
   db.RoomStat = require('../db/models/roomStatModel')(sequelize, Sequelize);
 
- const bs = [[seed.seedPosts, db.Post], [seed.seedUsers,db.User], [seed.seedLikes, db.Like], [seed.seedFriends, db.Friend]];
+ const bs = [[seed.seedCategories, db.Category], [seed.seedFollows, db.Follow], [seed.seedPosts, db.Post], [seed.seedUsers,db.User], [seed.seedLikes, db.Like], [seed.seedFriends, db.Friend]];
  let counter = 0;
  
 const sync = (param) =>{

@@ -2,7 +2,27 @@ const posts = require('./postData.json');
 const likes = require('./likeData.json');
 const friends = require('./friendData.json');
 const users = require('./userData.json');
+const categories = require('./categoryData.json');
+const follows = require('./followingData.json');
 
+
+const seedCategories = (table) => {
+    categories.forEach((data) => {
+        table.create(data)
+        .catch((err) => {
+            console.log('couldnt seed data', err)
+        })
+    })
+}
+
+const seedFollows = (table) => {
+    follows.forEach((data) => {
+        table.create(data)
+        .catch((err) => {
+            console.log('couldnt seed data', err)
+        })
+    })
+}
 
 const seedPosts = (table) => {
     posts.forEach((data) => {

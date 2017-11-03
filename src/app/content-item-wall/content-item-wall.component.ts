@@ -97,8 +97,12 @@ export class ContentItemWallComponent implements OnInit {
     })
   }
   
-  
+  decrementCounter(post) {
+    this.postService.decrementLikeCount(post.id);
+  }
+
   toggleLiked(post) {
+    console.log(this.vid, 'vddddddd')
     if (this.liked === false) {
       this.liked = true;
       this.likeCount++;
@@ -107,6 +111,7 @@ export class ContentItemWallComponent implements OnInit {
       this.liked = false;
       this.likeCount--;
       this.deletePost(post)
+      // this.decrementCounter(this.vid)
     }
   }
   
