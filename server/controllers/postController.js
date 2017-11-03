@@ -145,7 +145,7 @@ module.exports = {
     getPopularTags: function(req, res) {
         var encsearchquery = encodeURIComponent(req.body.query);
         var bearerheader = 'Bearer ' + req.body.token;
-        axios.get('https://api.twitter.com/1.1/trends/place.json?oauth_consumer_key=6CBsjafaj3F2f1AMudmMW5xSB&oauth_token=920364354737864704-puoJWNWhL4nrETA9P9rwB7W25mZ821m&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1509654985&oauth_nonce=zLdLsg&oauth_version=1.0&oauth_signature=tnAml8s2KX20R1UPA9M8aWIIpqY%3D&id=1')
+        axios.get('https://api.twitter.com/1.1/trends/place.json?oauth_consumer_key=6CBsjafaj3F2f1AMudmMW5xSB&oauth_token=920364354737864704-puoJWNWhL4nrETA9P9rwB7W25mZ821m&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1509745537&oauth_nonce=ik0PXC&oauth_version=1.0&oauth_signature=5ESv9L6E2LQwA%2FMvzBI7q3Kb%2F4Q%3D&id=1')
         .then((data) => {
             // console.log(data.data, "Data *%%%%%%%%%@@@@@@")
             res.json(data.data);

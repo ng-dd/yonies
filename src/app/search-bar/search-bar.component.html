@@ -9,11 +9,11 @@
   <div class="row">
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">
-    <input type='submit' value='search my friends' class="btn btn-info btn-lg"> 
+    <input type='submit' value='search my 👯' class="btn btn-info btn-lg"> 
   </form>
   <form *ngIf="postButton" [formGroup]='postForm' (ngSubmit)="searchPosts(postForm.value)">
     <input formControlName="post" placeholder="general search">
-    <input type='submit' value='search everything'>
+    <input type='submit' value='search the 🌎' class="btn btn-info btn-lg">
   </form>
   
   {{keyWord}}
