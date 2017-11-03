@@ -216,3 +216,103 @@ margin-bottom: 6rem;
 text-align: center !important;
 }
 
+
+.download {
+  text-align: center !important;
+  vertical-align: middle;
+  width: 50%
+}
+
+.download .logo {
+  margin-bottom: 40px
+}
+
+.download .logo>img {
+  width: 238px
+}
+
+.download .logo>p {
+  color: #fff;
+  font-size: 18px
+}
+
+.btn-download {
+  width: 200px;
+  margin: auto;
+  border-radius: 50px;
+  background-color: hsla(0,0%,100%,.3);
+  text-align: left;
+  margin-bottom: 20px;
+  overflow: hidden
+}
+
+.btn-download:hover {
+  background-color: hsla(0,0%,100%,.15)
+}
+
+.btn-download >a {
+  display: block;
+  padding: 14px 20px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none
+}
+
+.btn-download >a>.icon {
+  width: 24px;
+  margin: 0 15px 0 26px;
+  position: relative;
+  top: -2px;
+vertical-align: middle;
+text-align: center !important;
+}
+
+.download {
+  text-align: center !important;
+  vertical-align: middle;
+  width: 50%
+}
+
+.download .logo {
+  margin-bottom: 40px
+}
+
+.download .logo>img {
+  width: 238px
+}
+
+.download .logo>p {
+  color: #fff;
+  font-size: 18px
+}
+
+.download .download-btn {
+  width: 200px;
+  margin: auto;
+  border-radius: 50px;
+  background-color: hsla(0,0%,100%,.3);
+  text-align: left;
+  margin-bottom: 20px;
+  overflow: hidden
+}
+
+.download .download-btn:hover {
+  background-color: hsla(0,0%,100%,.15)
+}
+
+.download .download-btn>a {
+  display: block;
+  padding: 14px 20px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none
+}
+
+.download .download-btn>a>.icon {
+  width: 24px;
+  margin: 0 15px 0 26px;
+  position: relative;
+  top: -2px;
+vertical-align: middle;
+text-align: center !important;
+}
