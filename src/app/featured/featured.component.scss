@@ -21,7 +21,7 @@
       font-weight: 700 !important;
     //   padding-right: 24px !important;
     //   padding-left: 24px !important;
-    background: #4f4fea;
+    background-color: #4f4fea;
     
     
     &:nth-of-type(2n) {
@@ -41,6 +41,32 @@
     }
   }
     
-    .btn-trending:hover {
-    background-color: red !important;
-    }
+.btn-trending:hover {
+  background-color: #ea4f4f;
+  
+  
+  &:nth-of-type(2n) {
+    background-color: #ea4f90;
+  }
+  &:nth-of-type(3n) {
+    background-color: #cf0c57;
+  }
+  &:nth-of-type(4n) {
+    background-color: #682438;
+  }
+  &:nth-of-type(5n) {
+    background-color: #b02c63;
+  }
+  &:nth-of-type(6n) {
+    background-color: #89263f;
+  }
+}
+    ul, menu, dir {
+      display: block;
+      list-style-type: disc;
+      -webkit-margin-before: 0em;
+      -webkit-margin-after: 0em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 0px;
+  }
