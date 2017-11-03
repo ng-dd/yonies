@@ -1,14 +1,28 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
-      <div class="col-md-6">
-          <div class="d-flex justify-content-around">              
+      <div class="col-md-12">
+          <div class="d-flex justify-content-center flex-wrap">              
           <div *ngFor="let cat of keys">
               <ul (click)="getVidsByCategory(this.categories[cat])">{{cat}}</ul>
             </div>
           </div>
+          <div class="d-flex justify-content-center flex-wrap">              
+              <ul>
+                  <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
+                </ul>
+                </div>
       </div>
   </div>
-</div>
+</div> -->
+<div class="container">
+    <div id='sideways-cat'>
+        <div class="d-flex justify-content-center flex-wrap">              
+            <ul>
+                <li *ngFor="let cat of keys" (click)="getVidsByCategory(this.categories[cat])">{{cat}}</li>
+              </ul>
+              </div>              
+    </div>
+    </div>
 <div>
   <div *ngFor='let vid of content'>
     <app-content-item [vid]='vid'></app-content-item>

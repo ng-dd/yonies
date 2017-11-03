@@ -1,0 +1,35 @@
+
+#sideways-cat {
+    height: 40px;
+    background: silver;
+    overflow-x: auto;
+    overflow-y: hidden;
+   &:-webkit-scrollbar {display: none;}
+  }
+  #sideways-cat ul {
+    display:flex;
+    
+    /* allow scrolling of flex container */
+    overflow-x:auto; 
+    
+    /* overwrite list container styles */
+    margin:2px;
+    padding:1em;
+    
+    /* color for some visual of the spacing */
+    box-shadow:0 0 10px black inset;
+  }
+  #sideways-cat li {
+    float: left;
+    text-align: center;
+    font-size: 20px;
+        /* remove list style bullets */
+        list-style-type:none;
+        
+        /* vertical center with 10px on left and right */
+        margin:auto 10px; 
+  }
+  #sideways-cat li.active {
+    margin: 0 auto;
+    border-bottom: 2px red solid;
+  }

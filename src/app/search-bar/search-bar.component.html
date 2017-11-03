@@ -1,10 +1,12 @@
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3 d-flex justify-content-center">Carpool Karaoke Week</h1>
+      <p><a class="btn btn-primary btn-lg" href="https://itunes.apple.com/us/show/carpool-karaoke/id1219046821?app=music&mttnpid=305109&mttnsiteid=125115&mttnagencyid=2486&mttngadurl=https%3A%2F%2Fitunes.apple.com%2Fus%2Fshow%2Fcarpool-karaoke%2Fid1219046821%3F&mttnsubpid=g&mttnsubplmnt=&mttnsubad=228695380739&mttnsubcmp=920251662&mttnsubkw=carpool%20karaoke&mttnsub2=c&mttngmo=&is_mobile=&mttnsub1=e&gclid=EAIaIQobChMI8unj7vOi1wIVSk1-Ch3HnQkXEAAYASAAEgJWNfD_BwE&ign-itsct=PMKTNG&ign-itscg=3140" role="button">Details</a></p>
+    </div>
+  </div>
 <div>
+<div class="container-fluid">
   <!-- vv-Remove later-vv -->
-  <button (click)='login1()'>Log in to test@tester.com</button>
-  <button (click)='login2()'>Log in to mrworldwide@pitbull.com</button>
-  <button (click)='currentUser()'>NEW PHONE WHO DIS?</button>
-  <button (click)='deleteUsers()'>Delete users (Drop DB)</button>
-  <app-friends-list></app-friends-list>
   <form *ngIf="userButton" class="form" [formGroup]='myForm' (ngSubmit)="searchUsers(myForm.value)">
     <input formControlName="username" placeholder="search people">
     <input type='submit' value='search users'>
@@ -20,8 +22,6 @@
   <input value="Content by Category" type="submit" (click)="toggleQuery('Hashes')">
   <input value="Users" type="submit" (click)="toggleQuery('People')">
   <input value="Posts by People" type="submit" (click)="toggleQuery('Posts')">
-  <input value='auth' type='button' (click)="auth()">
-
   <ul>
     <li *ngFor="let user of users">
       IS THIS WORKING?
@@ -47,49 +47,33 @@
         {{tweet}}
     </div>
   </div>
-  <!-- <app-stream-view [videoId]='videoUrl'></app-stream-view> -->
 </div>
-  <div>
-    <input type="button" value="get current user" (click)="currentUser()">
-    <input type='button' value='get content by categort' (click)='getContent()'>
-  </div>
 </div>
-<div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3 d-flex justify-content-center">#firsthashtag</h1>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Details</a></p>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="custom-search-input">
+        <div class="input-group col-md-12">
+            <input type="text" class="form-control input-lg" placeholder="Search" />
+            <span class="input-group-btn">
+                <button class="btn btn-info btn-lg" type="button">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span> 
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-4 d-flex justify-content-center">🔥</div>
+          <div class="col-4 d-flex justify-content-center">🎥</div>
+          <div class="col-4 d-flex justify-content-center">🌎</div>
+      </div>
     </div>
   </div>
-<div class="container">
-          <div class="row">
-              <div class="col-4 d-flex justify-content-center">🎮</div>
-              <div class="col-4 d-flex justify-content-center">🎥</div>
-              <div class="col-4 d-flex justify-content-center">🌎</div>
-            </div>
-          <hr class="hr-text" data-content="CATEGORIES">
-          <div class="row">
-              <div class="col-2 d-flex justify-content-center">🚗</div>
-              <div class="col-2 d-flex justify-content-center">😂</div>
-              <div class="col-2 d-flex justify-content-center">✏️</div>
-              <div class="col-2 d-flex justify-content-center">💁</div>
-              <div class="col-2 d-flex justify-content-center">😍</div> 
-              <div class="col-2 d-flex justify-content-center">📝</div> 
-          </div>
-          <div class="row">
-              <div class="col-3 d-flex justify-content-center">🐶</div>
-              <div class="col-3 d-flex justify-content-center">📱</div>  
-              <div class="col-3 d-flex justify-content-center">🏈</div>   
-              <div class="col-3 d-flex justify-content-center">✈️</div>  
-              <div class="col-3 d-flex justify-content-center">🎵</div>              
-              
-            </div>
-          <app-categories></app-categories>
-          <hr class="hr-text" data-content="TRENDING">
-          <h3>Two columns</h3>
-          <p>Get two columns <strong>starting at desktops and scaling to large desktops</strong>.</p>
-          <div class="row">
-            <div class="col-md-6">.col-md-8</div>
-            <div class="col-md-6">.col-md-4</div>
-          </div>
-        </div> <!-- /container -->
+  <hr class="hr-text" data-content="CATEGORIES">
+  <app-categories></app-categories>
+  <hr class="hr-text" data-content="TRENDING">  
+  <app-featured></app-featured>  
+  <div *ngFor='let vid of content'>
+      <app-content-item [vid]="vid"></app-content-item>
+  </div>   
+ </div> <!-- /container -->
 <app-navbar></app-navbar>
