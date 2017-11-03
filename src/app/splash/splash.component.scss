@@ -40,7 +40,7 @@
 .title {
 	z-index: 1000;
 	pointer-events: none;
-	color:white;
+	color:white !important;
     font-size: 48px;
 	font-weight: bold;
 	line-height: 62px;
@@ -50,7 +50,7 @@
 .sub-title {
 	z-index: 1000;
 	pointer-events: none;
-	color:white;
+	color:white !important;
     font-size: 18px;
 	line-height: 62px;
 	padding-bottom: 1em;

@@ -2,16 +2,6 @@
   <div *ngFor='let user of users'>
     <a (click)='selectUser(user.uid)'>{{user.first_name}} {{user.uid}}</a>
   </div>
-
-  <!-- <input type='button' value='getfriends' (click)="getFriendsList()">
-  <div class="col-sm">
-    <ul *ngFor="let friend of friendsList" class="list-group">
-      <li class="list-group-item justify-content-between">
-        {{friend}}
-        <span class="badge badge-default badge-pill" (click)="visitWall(friend)">visit page</span>
-      </li>
-    </ul>
-  </div> -->
   <input type='button' value='Show friends list' (click)="getFriendsList()">
   <div *ngIf="showFriends">
     <div *ngFor="let friend of friendsList">
@@ -20,3 +10,4 @@
     </div>
   </div>
 </div>
+<app-navbar></app-navbar>

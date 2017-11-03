@@ -1,3 +1,5 @@
+/* General
+*/
 .scene {
 	background: #282886;
 	position: fixed;
@@ -65,4 +67,219 @@ body {
 	background-color: var(--color-background);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+body, p, h2,{
+	font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
+  font-weight: 300;
+color: #a6a6a6;
+}
+* {
+	cursor: pointer !important;
+  text-decoration: none !important;
+}
+a:hover { 
+	   color: mix(black, #282886, 20) !important;
+}
+a {
+color: #282886;
+}
+
+h2 {
+	font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
+  color: #a6a6a6 !important;
+  padding-top: 1rem;
+padding-bottom: 2rem;
+font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
+&.fw300 {
+  font-weight: 300;
+}
+&.fw400 {
+  font-weight: 400;
+}
+&.fw400i {
+  font-weight: 400;
+  font-style: italic;
+}
+&.fw600 {
+  font-weight: 600;
+}
+&.fw700 {
+  font-weight: 700;
+}
+}
+h6 {
+  font-family: "soleil", sans-serif;
+  font-weight: 800;
+color: #242468dark-text;
+text-transform: uppercase;
+padding-left: 2rem;
+padding-top: .5rem;
+
+}
+
+/* Button styling
+*/
+.btn-link {
+	cursor: pointer !important;
+	text-decoration: none !important;
+color: #282886;
+}
+button, input {
+	text-decoration: none !important;
+}
+.btn-hero {
+color: white !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 15px solid transparent !important;
+  border-radius: 20px !important;
+  border-color: white !important;
+	font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
+  
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  background: #4f4fea !important;
+padding: 20px;
+}
+.btn-primary {
+color: white !important;
+margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #4f4fea !important;
+}
+
+.btn-facebook {
+color: white !important;
+  margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #4568b2 !important;
+}
+.btn-facebook:hover {
+color: white !important;
+}
+.btn-google {
+	margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  color: #484848 !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #ffffff !important;
+  border-color: #767676 !important;
+}
+.btn-google:hover {
+color: #484848 !important;
+}
+.btn-twitter {
+color: white !important;
+	margin-bottom: 10px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 19px !important;
+  line-height: 22px !important;
+  letter-spacing: undefined !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 700 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: #00aced !important;
+}
+.btn-twitter:hover {
+color: white !important;
+}
+.close {
+font-size: 40px;
+color: #a6a6a6;
+}
+.btn-browse {
+color: #4f4fea !important;
+margin-top: 2px;
+  margin-bottom: 2px;
+  cursor: pointer !important;
+  -webkit-transition: background 0.3s, border-color 0.3s !important;
+  -moz-transition: background 0.3s, border-color 0.3s !important;
+  transition: background 0.3s, border-color 0.3s !important;
+  position: relative !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  border: 2px solid #4f4fea !important;
+  border-radius: 4px !important;
+  width: 75% !important;
+	font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
+  font-size: 15px !important;
+  line-height: 22px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  font-weight: 800 !important;
+  padding-right: 24px !important;
+  padding-left: 24px !important;
+  background: white !important;
 }
