@@ -28,6 +28,8 @@ export class ContentItemWallComponent implements OnInit {
   comments: any;
   commentForm: FormGroup;
   name: any;
+  namedata: any;
+  names: any;
 
   @Input() 
   
@@ -53,7 +55,16 @@ export class ContentItemWallComponent implements OnInit {
     this.commentForm = fb.group({
       'comment': null
     });
-    this.name = '';  
+    this.names = {
+      'YfvpvHVyRUfV2FGyLBhumbixxVF2': 'David',
+      'JE1hS7cU3SYWB51GB9taPK2uQKc2': 'Pitbull',
+      'qnIJ5lQEOhSZ7iFKLXZXftqatIk2': 'Marty'
+    };  
+  }
+
+  test() {
+    console.log('WHATS MY NAME', this.name)
+    // console.log('LOGGED IN?', firebase.auth().currentUser)
   }
 
   
@@ -123,11 +134,21 @@ export class ContentItemWallComponent implements OnInit {
 
   
   ngOnInit() {
+
+    // this.name = firebase.auth().currentUser.uid;
+
     this.route
     .queryParams
     .subscribe(params => {
       this.userId = params.userId;
     })
+
+    let user = firebase.auth().currentUser;
+    this.userService.getUserById(user.uid)
+      .subscribe(data => {
+        this.name = data.first_name;
+      })  
+
     this.likeCount = 0;
     var url = this.vid['src']['changingThisBreaksApplicationSecurity'].toString();
     this.afAuth.authState.subscribe((data) => {
@@ -160,13 +181,6 @@ export class ContentItemWallComponent implements OnInit {
         })
       })
     })
-
-    let user = firebase.auth().currentUser;
-    this.userService.getUserById(user.uid)
-      .subscribe(data => {
-        this.name = data.first_name;
-      })  
-
     
   } 
 

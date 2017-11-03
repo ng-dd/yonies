@@ -22,19 +22,15 @@
   <input value="Content by Category" type="submit" (click)="toggleQuery('Hashes')">
   <input value="Users" type="submit" (click)="toggleQuery('People')">
   <input value="Posts by People" type="submit" (click)="toggleQuery('Posts')">
-  <ul>
-    <li *ngFor="let user of users">
-      IS THIS WORKING?
-      User: {{user.username}}
-      <button (click)="addFriend(user)">Add Friend</button>
-    </li>
-  </ul>
+  
   {{keyWord}}
   <input *ngIf="keyWord" type='button' value="follow" (click)="follow(keyWord)">
-  <div *ngFor='let user of users'>
-      {{user.username}}
-      <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
-    </div>
+
+  <div *ngFor="let user of users">
+    {{user.firstname}} | {{user.username}}
+    <button (click)="addFriend(user)">Add Friend</button>
+    <a routerLink="/wall" [queryParams]="{userId: user.uid}"><button>Visit Wall</button></a>
+  </div>
     <div class="wrapper"> 
         
 <div>

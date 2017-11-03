@@ -30,5 +30,30 @@
     {
         "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
         "friend_id": "4"
+    },
+    {
+        "user_id": "x0V7rNyw1FWxiQbJ6gNIQ26lfpX2",
+        "friend_id": "masterofsausages"
+    },
+    {
+        "user_id": "masterofsausages",
+        "friend_id": "x0V7rNyw1FWxiQbJ6gNIQ26lfpX2"
+    },
+    {
+        "user_id": "x0V7rNyw1FWxiQbJ6gNIQ26lfpX2",
+        "friend_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2"
+    },
+    {
+        "user_id": "masterofsausages",
+        "friend_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2"
+    },
+    {
+        "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
+        "friend_id": "x0V7rNyw1FWxiQbJ6gNIQ26lfpX2"
+    },
+    {
+        "user_id": "qnIJ5lQEOhSZ7iFKLXZXftqatIk2",
+        "friend_id": "masterofsausages"
     }
+
 ]

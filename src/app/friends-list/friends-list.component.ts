@@ -58,7 +58,7 @@ export class FriendsListComponent implements OnInit {
         this.userService.getUserById(friend.friend_id)
         .subscribe((data) => {
           console.log(data, 'from get friends list');
-          this.friendsList.push({name: data.username, uid: data.uid})
+          this.friendsList.push({name: data.first_name + ' ' + data.last_name, username: data.username, uid: data.uid})
           console.log(this.friendsList, 'friends')
         })
       })
