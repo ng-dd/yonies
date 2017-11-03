@@ -16,6 +16,7 @@ module.exports = {
     },
 
     getLike: (req, res) => {
+        console.log(req.params.id, "AHHA&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         Like.findAll({
             where: {uid: req.params.id, type: 'post'}
         })

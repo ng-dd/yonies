@@ -6,7 +6,7 @@ var seed = require('./seed/seed');
 
 
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
-  host: process.env.DATABASE_URL,
+  host: 'yonies.cxdawuxv7dpb.us-west-2.rds.amazonaws.com',
   port: 5432,
   dialect: 'postgres',
   dialectOptions: {

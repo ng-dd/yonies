@@ -17,7 +17,7 @@ import { RoomstatService } from '../services/roomstat.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import * as firebase from 'firebase/app';
-
+ 
 @Component({
   selector: 'app-wallfeed',
   templateUrl: './wallfeed.component.html',
