@@ -348,6 +348,7 @@ export class SearchBarComponent implements OnInit {
     })
   }
 
+  //remove later
   getContent(){
     this.postService.getVideosForGame('Overwatch')
     .subscribe((data) => {
