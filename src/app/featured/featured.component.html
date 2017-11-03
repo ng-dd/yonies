@@ -1,5 +1,6 @@
 <div class="container">
         <ul>
+            <li class="btn btn-featured btn-lg" role="button" (click)="getTagContent(tag)">Carpool Karaoke</li>        
            <li *ngFor="let tag of tags" class="btn btn-trending btn-lg" role="button" (click)="getTagContent(tag)">{{tag}}</li>        
        </ul>
    </div>    
