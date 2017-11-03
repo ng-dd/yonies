@@ -4,6 +4,7 @@ const Promise = require('bluebird');
 // var dbUrl = require('../../dburl');
 var seed = require('./seed/seed');
 
+
 const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
   host: process.env.DATABASE_URL,
   port: 5432,
@@ -41,11 +42,11 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
  const bs = [[seed.seedPosts, db.Post], [seed.seedUsers,db.User], [seed.seedLikes, db.Like], [seed.seedFriends, db.Friend]];
  let counter = 0;
  
-const sync = () =>{
+const sync = (param) =>{
   return new Promise((resolve, reject)=> {
     for (var key in db) {
       console.log('@@@@@@@@@@@@SYNCING@@@@@@@@@@@: ', key)
-      db[key].sync({force: true})
+      db[key].sync(param)
     }
     resolve()
   })
@@ -53,15 +54,23 @@ const sync = () =>{
 
 sync()
 .then(()=>{
-  let counter = 1
-  bs.forEach((fn) => {
-    setTimeout(()=>{
-      console.log(fn[0], fn[1])
-      fn[0](fn[1])
-
-    }, 1000* counter)
-    counter++;
+  db.User.findAll()
+  .then((data) => {
+    if (data.length === 0){
+      sync({force: true})
+      .then(()=> {
+        let counter = 2
+        bs.forEach((fn) => {
+          setTimeout(()=>{
+            console.log(fn[0], fn[1])
+            fn[0](fn[1])
+          }, 1000 * counter)
+          counter++;
+        })
+      })
+  }
   })
+
 })
       // console.log(db[key], 'please')
       // seed.bs[counter](db[key]);

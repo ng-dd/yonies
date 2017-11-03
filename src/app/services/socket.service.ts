@@ -15,12 +15,6 @@ export class SocketService {
     console.log('checkign socketio from constructor: ', this.socketIo)
   }
 
-  // Get items observable
-  items(){
-      this.socketIo.on('signal', (data) => {
-      console.log(data);
-    });
-  }
 
   stateChange(roomId, state, time) {
     this.socketIo.emit('changeState', roomId, state, time);
@@ -30,23 +24,26 @@ export class SocketService {
     return new Observable((observer) => {
       this.socketIo.on('newState', (state, time) =>{
         observer.next([state, time]);
-      })
-    })
+      });
+    });
   }
 
-  requestResponse(): Observable<any> {
+  requestResponse(): Observable<string> {
     return new Observable((observer) => {
-      this.socketIo.on('pauseResponse')
-    })
+      this.socketIo.on('pauseResponse', () => {
+        observer.next('pause');
+      });
+      this.socketIo.on('playResponse', () => {
+        observer.next('play');
+      });
+      this.socketIo.on('skipToResponse', (time) =>{
+        observer.next(time);
+      });
+    });
   }
 
   joinRoom(roomId) {
     this.socketIo.emit('joinRoom', roomId)
-  }
-
-  // Request initial list when connected
-  list(): void {
-    this.socket.emit('list');
   }
 
   signalTest() {
@@ -55,30 +52,18 @@ export class SocketService {
     })
   }
 
-  // Create signal
-  create(params: any) {
-    this.socket.emit('create', params);
-  }
-
-  // Remove signal
-  remove(params: any) {
-    this.socket.emit('remove', params);
-  }
   
   pauseRequest(roomId) {
-    this.socket.emit('pauseRequest', roomId)
+    this.socketIo.emit('pauseRequest', roomId)
   }
 
   playRequest(roomId) {
-    this.socket.emit('playRequest'), roomId;
+    this.socketIo.emit('playRequest', roomId);
   }
 
   skipToRequest(roomId, time) {
-    this.socket.emit('skipToRequest', roomId, time);
+    this.socketIo.emit('skipToRequest', roomId, time);
   }
-  // socketInit() {
-  //   this.socket = this.socketIo(this.SERVER_URL);
-  // }
 
   onConnect(): Observable<any> {
     return new Observable(observer => {

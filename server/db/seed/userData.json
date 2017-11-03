@@ -17,7 +17,17 @@
     },
     {
         "uid": "4",
-        "username": "pudding@gmail.com",
+        "username": "puddding@gmail.com",
         "first_name": "IlovePudding"
+    },
+    {
+        "uid": "YfvpvHVyRUfV2FGyLBhumbixxVF2",
+        "username": "test@tester.com",
+        "first_name":"David"
+    },
+    {
+        "uid": "JE1hS7cU3SYWB51GB9taPK2uQKc2",
+        "username": "mrworldwide@pitbull.com",
+        "first_name": "Pitbull"
     }
 ]

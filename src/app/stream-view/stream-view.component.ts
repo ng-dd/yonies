@@ -38,6 +38,8 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   messages: object[] = [];
   io: any;
   connection: any;
+  requestResponse: any;
+  time: string = '';
   constructor(
     private sanitizer: DomSanitizer,
     private script: ScriptService,
@@ -69,6 +71,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     .subscribe((data) => {
       console.log('Selected video on init: ', this.roomstatService.getSelectedVideo())
       if (!this.videoId) {
+        console.log('grabbing roomdata from database: ', data, 'with video data as:', data.video_url)
         // this.roomstatService.setVideo(this.roomId, this.roomstatService.getSelectedVideo())
         this.videoId = data.video_url
       }
@@ -91,13 +94,29 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
           //Video cued up, socket over queue
         }
       });
+
+      this.requestResponse = this.socketService.requestResponse()
+      .subscribe((res) => {
+        console.log(res);
+        if (res === 'pause') {
+          //pop up message as pause
+          
+        } else if (res === 'play') {
+          //pop up message as play
+
+        } else {
+          //pop up message to fast forward to time specified as res
+
+        }
+
+      });
       
       (<any>window).onYouTubeIframeAPIReady = () => {
         this.player = new window['YT'].Player('player', {
           height: '390',
           width: '640',
           videoId: this.videoId,
-          playerVars: { 'autoplay': 1, 'controls': 1 },
+          playerVars: { 'autoplay': 0, 'controls': 1 },
           events: {
             'onReady': onPlayerReady,
             'onStateChange': this.onPlayerStateChange
@@ -138,15 +157,15 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   onPlayerStateChange = (event) => {
     this.iframeElem = document.getElementById('player');
-    console.log('PLAYER INFO!!!!: ', this.player)
+    console.log('PLAYER INFO!!!!: ', this.player);
     // this.player.loadVideoByUrl('https://player.twitch.tv/?channel=masgamerstv')
     console.log(this.iframeElem);
     if (!this.isHost) {
       // this.player.playerVars.controls = 0;
       this.iframeElem.setAttribute('style', 'pointer-events: none;')
     } else {
-      console.log('Player state changed: ', this.player.getPlayerState(), this.player.getCurrentTime())
-      console.log(this.player)
+      console.log('Player state changed: ', this.player.getPlayerState(), this.player.getCurrentTime());
+      console.log(this.player);
       let state = this.player.getPlayerState();
       this.socketService.stateChange(this.roomId, state, this.player.getCurrentTime())
 
@@ -156,7 +175,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       setTimeout(this.stopVideo, 6000);
       this.done = true;
     }
-    this.player.getPlayerState()
+    this.player.getPlayerState();
   }
   stopVideo = () => {
     this.player.stopVideo();
@@ -169,8 +188,15 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   //   })
   // }
 
-  skipTo = (time) => {
-    this.socketService.skipToRequest(this.roomId, time);
+  skipTo = () => {
+    let seconds = 0;
+    let time = this.time.split('.');
+    let magnitude = 0;
+    for (let i = time.length-1; i >= 0; i--){
+        seconds += parseInt(time[i]) * 60 ** magnitude;
+      magnitude+= 1;
+    }
+    this.socketService.skipToRequest(this.roomId, String(seconds));
   }
 
   pauseRequest = () => {

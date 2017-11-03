@@ -1,5 +1,5 @@
 const addChatMessage = (io, client, roomId, messages) => {
-  io.to(roomId).emit('newChatMessage', messages);
+  client.broadcast.to(roomId).emit('newChatMessage', messages);
 
   Message.create({
     roomId,

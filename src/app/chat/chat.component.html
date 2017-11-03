@@ -1,33 +1,34 @@
 <!-- Keep in ind GABE's Room function<div *ngIf='done'>
   <app-stream-view [uid] = 'uid'[socketService] = 'io'  [roomId] = 'roomId'></app-stream-view>
   </div> -->
+<div *ngIf='toggleRoom'>
+  <div class = "container" id="chat-popout">
+      <h4 id="user-chat-title">Chat</h4>
 
-<div class = "container" id="chat-popout">
-    <h4 id="user-chat-title">Chat</h4>
+        <div class="chat-btn-wrapper">
+            <button class="btn chat-btn" *ngIf="!chatInitiated" (click)="handleChat()" >Chat</button>
+        </div>
 
-      <div class="chat-btn-wrapper">
-          <button class="btn chat-btn" *ngIf="!chatInitiated" (click)="handleChat()" >Chat</button>
-      </div>
+        <div *ngIf="!roomAvailable && haveUserName">
+            <p id="chat-wait-msg">Sup {{this.username | titlecase}}. Waiting for {{ this.hostName }}. Yonies says relax. </p>
+        </div>
 
-      <div *ngIf="!roomAvailable && haveUserName">
-          <p id="chat-wait-msg">Sup {{this.username | titlecase}}. Waiting for {{ this.hostName }}. Yonies says relax. </p>
-      </div>
-
-      <div *ngIf="roomAvailable && haveHostName">
-        <!-- <ul class="list-group">
-          <li class="list-group-item" *ngFor="let message of messages">{{ message }}</li>
-        </ul> -->
-        <!-- Appending directly UL lI to dom method, above other method -->
-        <ul id="chat-messages">Sup {{this.username | titlecase}}. {{this.hostName | titlecase}} has started a chat. </ul>        
-          <form method="">
-            <input type="text" id="chat-input" autocomplete="off" autofocus placeholder="Yo I'm waiting..." />
-            <div class="chat-btn-wrapper">
-              <button class="btn chat-btn" (click)= "handleSendMessage()">Send</button>
-              <button class="btn chat-btn chat-btn-secondary" (click)="handleEndChat()">Leave</button>
-            </div>
-          </form>
-      </div>
-      <div id="end-chat-btn" *ngIf="chatEnded && !chatInitiated">
-        <p id="chatEnded">Thank you!</p>
+        <div *ngIf="roomAvailable && haveHostName">
+          <!-- <ul class="list-group">
+            <li class="list-group-item" *ngFor="let message of messages">{{ message }}</li>
+          </ul> -->
+          <!-- Appending directly UL lI to dom method, above other method -->
+          <ul id="chat-messages">Sup {{this.username | titlecase}}. {{this.hostName | titlecase}} has started a chat. </ul>        
+            <form method="">
+              <input type="text" [(ngModel)]='chatInput' id="chat-input" autocomplete="off" autofocus placeholder="Yo I'm waiting..." />
+              <div class="chat-btn-wrapper">
+                <button class="btn chat-btn" (click)= "handleSendMessage()">Send</button>
+                <button class="btn chat-btn chat-btn-secondary" (click)="handleEndChat()">Leave</button>
+              </div>
+            </form>
+        </div>
+        <div id="end-chat-btn" *ngIf="chatEnded && !chatInitiated">
+          <p id="chatEnded">Thank you!</p>
+    </div>
   </div>
 </div>
