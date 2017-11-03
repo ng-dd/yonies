@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { RoomstatService } from '../services/roomstat.service';
 import { UserService } from '../services/user.service';
 import { SocketService } from '../services/socket.service';
+import { PostService } from '../services/post.service';
 // import * as YT from 'youtube';
 
 
@@ -32,22 +33,26 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
   videoUrl: SafeResourceUrl;
   peerId: string;
   iframeElem: HTMLElement;
-  guestList: object = [];
+  guestList: string[] = [];
   counter: number = 0;
   room: object;
   user: number = Math.random()*10
   messages: object[] = [];
   io: any;
   connection: any;
+  observeStateChange: any;
   requestResponse: any;
   time: string = '';
   rendered: boolean = false;
+  checkList: any;
+  nameList: string[] = [];
 
   constructor(
     private sanitizer: DomSanitizer,
     private script: ScriptService,
     private afAuth: AngularFireAuth,
     private roomstatService: RoomstatService,
+    private postService: PostService,
   ) {
     // this.socketService = new SocketService('room');
     console.log('looking at the instance: ', this.socketService)
@@ -85,30 +90,54 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     // this.roomstatService
     this.roomstatService.getHostRoom(this.roomId)
     .subscribe((data) => {
+
       console.log('Selected video on init: ', this.roomstatService.getSelectedVideo())
       if (!this.videoId) {
         console.log('grabbing roomdata from database: ', data, 'with video data as:', data.video_url)
         // this.roomstatService.setVideo(this.roomId, this.roomstatService.getSelectedVideo())
         this.videoId = data.video_url
       }
-      this.ioInit();
-      this.connection = this.socketService.recieveStateChange()
-      .subscribe((state)=>{ 
-        console.log('Getting new state from socket server: ', state)
-        if (Number(state[0]) === 1) {
-          //socket over play request
-          this.player.seekTo(state[1])
-          this.player.playVideo();
-        } else if (Number(state[0]) === 2) {
-          //socket over pause request to peers
-          this.player.seekTo(state[1])
-          this.player.pauseVideo();
-        } else if (state[0] === '3') {
-          //Buffering- means socket over seekto request to peers /or/ video change
-          this.player.seekTo();
-        } else if (state[0] === '5') {
-          //Video cued up, socket over queue
-        }
+
+      this.checkList = this.socketService.recieveGuestList()
+      .subscribe((data)=>{
+        this.guestList = data;
+        this.nameList = []
+        this.guestList.forEach((person)=>{
+          this.postService.getNames(person)
+          .subscribe((data)=>{
+            this.nameList.push(data.first_name)
+          })
+        })
+        console.log('room participants:', this.guestList, data)
+      })
+      
+      this.connection = this.socketService.onConnect()
+      .subscribe(()=>{
+
+      
+        this.ioInit();
+        this.connection = this.socketService.recieveStateChange()
+        .subscribe((state)=>{ 
+          console.log('Getting new state from socket server: ', state)
+          if (Number(state[0]) === 1) {
+            //socket over play request
+            this.player.seekTo(state[1])
+            this.player.playVideo();
+          } else if (Number(state[0]) === 2) {
+            //socket over pause request to peers
+            this.player.seekTo(state[1])
+            this.player.pauseVideo();
+          } else if (state[0] === '3') {
+            //Buffering- means socket over seekto request to peers /or/ video change
+            this.player.seekTo();
+          } else if (state[0] === '5') {
+            //Video cued up, socket over queue
+          }
+        });
+        this.socketService.onDisconnect()
+        .subscribe(()=>{
+          this.socketService.leftRoom(this.roomId, this.username)
+        })
       });
 
       // this.requestResponse = this.socketService.requestResponse()
@@ -126,7 +155,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
       //   }
 
       // });
-      
+      this.socketService.requestGuestList(this.roomId);
       (<any>window).onYouTubeIframeAPIReady = () => {
         this.player = new window['YT'].Player('player', {
           height: '390',
@@ -171,7 +200,7 @@ export class StreamViewComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     
-    
+
     // this.socketService.joinRoom(this.roomId)
   }
 

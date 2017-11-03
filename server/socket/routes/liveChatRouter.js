@@ -11,11 +11,17 @@ const chatRouter = (io, client) => {
 
   client.on('addUser', (roomId, username) =>{
     io.in(roomId).emit('newUser', username)
-  })
+  });
 
   client.on('leftRoom', (roomId, username) => {
     io.in(roomId).emit('removeUser', username);
-  })
+  });
+
+  client.on('getGuestList', (roomId) => {
+    console.log('looking for guests....')
+    // console.log('getttting guest list', io.of('/').in(roomId).clients)
+    client.emit('sendGuestList', io.of('/').adapter.rooms)
+  });
 };
 
 module.exports = chatRouter;

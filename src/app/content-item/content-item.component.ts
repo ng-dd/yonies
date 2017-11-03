@@ -30,7 +30,15 @@ export class ContentItemComponent implements OnInit {
   
   vid: object;
   
-  constructor(private friendService: FriendService, private likeService: LikesService, private sanitizer: DomSanitizer, private postService: PostService, private authService: AuthService, private categoryService: CategoryService, private afAuth: AngularFireAuth) {
+  constructor(
+    private friendService: FriendService, 
+    private likeService: LikesService, 
+    private sanitizer: DomSanitizer, 
+    private postService: PostService, 
+    private authService: AuthService, 
+    private categoryService: CategoryService, 
+    private afAuth: AngularFireAuth
+  ) {
     this.content = [];
     this.liked = false;
     this.likeCount = 0;
@@ -102,5 +110,27 @@ export class ContentItemComponent implements OnInit {
       })
     })
   }
+
+  // roomStart() {
+  //   console.log(this.vid['src']);
+  //   let url  = this.vid['src']
+  //   if (url.indexOf('youtube') >= 0){
+  //     this.videoUrl = url.slice(url.indexOf('embed')+ 6, url.length)
+  //   } else {
+  //     this.videoUrl = url;
+  //   }
+  //   this.roomstatService.addRoomstat({
+  //     host_id: this.afAuth.auth.currentUser.uid,
+  //     video_url: this.videoUrl
+  //   })
+  //   .subscribe((roomData)=> {
+  //     let response = roomData
+  //     this.roomId = response.room_id;
+  //     this.roomStarted = true;
+  //     console.log('video url', this.videoUrl)
+  //     this.roomstatService.selectVideo(this.videoUrl)
+  //     this.router.navigate(['/room'])
+  //   })
+  // }
 
 }

@@ -10,7 +10,7 @@ import { RoomstatService } from '../services/roomstat.service'
   styleUrls: ['./video-share.component.css']
 })
 export class VideoShareComponent implements OnInit {
-  // @Input() invitedRoom: string;
+  @Input() nameList: string[];
   connection: any;
   roomId: string;
   done: boolean = false;

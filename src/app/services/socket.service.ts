@@ -15,6 +15,10 @@ export class SocketService {
     console.log('checkign socketio from constructor: ', this.socketIo)
   }
 
+  requestGuestList = (roomId) => {
+    console.log('requesting new guest list')
+    this.socketIo.emit('getGuestList', roomId);
+  }
 
   sendMessage(roomId, chatInput, username) {
     this.socketIo.emit('chatMessage', roomId, chatInput, username);
@@ -73,6 +77,15 @@ export class SocketService {
     this.socketIo.emit('joinRoom', roomId)
   }
 
+  recieveGuestList(): Observable<string[]> {
+    console.log('getting new list...')
+    return new Observable((observer) => {
+      this.socketIo.on('sendGuestList', (list) =>{
+      observer.next(list);
+      });
+    });
+  }
+
   signalTest() {
     this.socketIo.on('signal',(data) => {
       console.log(data)
@@ -105,9 +118,9 @@ export class SocketService {
   }
 
   onConnect(): Observable<any> {
+    console.log('connecting...')
     return new Observable(observer => {
-      console.log('connecting...')
-      this.socket.on('connect', (data) => {
+      this.socketIo.on('connect', (data) => {
         console.log('here is the data', data)
         observer.next();
       })
@@ -116,7 +129,7 @@ export class SocketService {
 
   onDisconnect(): Observable<any> {
     return new Observable(observer => {
-      this.socket.on('disconnect', () => {
+      this.socketIo.on('disconnect', () => {
         observer.next();
       })
     })

@@ -5,6 +5,7 @@
       [src]='vid.src'
       frameborder="0" allowfullscreen>
     </iframe>
+    <button (click)='roomStart()'>Start Room</button>
     <i *ngIf="!liked" class="fa fa-heart-o fa-2x" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"></i>
     <i *ngIf="liked" class="fa fa-heart fa-2x" (click)="toggleLiked({url: vid.src.changingThisBreaksApplicationSecurity.toString()})"></i>
     <div>{{likeCount}} likes</div>

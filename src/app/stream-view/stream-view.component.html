@@ -10,5 +10,5 @@
     <button (click)='skipTo()'>Skip to...</button>
 </div>
 <div *ngIf='rendered'>
-<app-chat [player] = 'player' [socketService] = 'socketService' [roomId] = 'roomId' [username] = 'username' (updatePlayer) = 'getUpdate($event)'></app-chat>
+<app-chat [nameList]='nameList' [player] = 'player' [socketService] = 'socketService' [roomId] = 'roomId' [username] = 'username' (updatePlayer) = 'getUpdate($event)'></app-chat>
 </div>

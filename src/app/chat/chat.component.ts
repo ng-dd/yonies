@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit {
   @Input() roomId: string;
   @Input() username: string;
   @Input() player: any;
+  @Input() nameList: string[];
   @Output() updatePlayer: EventEmitter<any> = new EventEmitter(); 
 
   friendWantsToChat: boolean;

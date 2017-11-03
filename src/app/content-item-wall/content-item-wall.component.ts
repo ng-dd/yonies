@@ -14,6 +14,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ElementRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { RoomstatService } from '../services/roomstat.service';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -30,6 +31,8 @@ export class ContentItemWallComponent implements OnInit {
   name: any;
   namedata: any;
   names: any;
+  videoUrl: string;
+  roomId: string;
 
   @Input() 
   
@@ -46,7 +49,9 @@ export class ContentItemWallComponent implements OnInit {
     private categoryService: CategoryService, 
     private fb: FormBuilder, 
     private afAuth: AngularFireAuth,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private roomstatService: RoomstatService,
+    private router: Router,
   ) {
 
     this.comments = [];
@@ -188,6 +193,26 @@ export class ContentItemWallComponent implements OnInit {
     })
     
   } 
+  roomStart() {
+    console.log(this.vid['src']['changingThisBreaksApplicationSecurity']);
+    let url  = this.vid['src']['changingThisBreaksApplicationSecurity']
+    if (url.indexOf('youtube') >= 0){
+      this.videoUrl = url.slice(url.indexOf('embed')+ 6, url.length)
+    } else {
+      this.videoUrl = url;
+    }
+    this.roomstatService.addRoomstat({
+      host_id: this.afAuth.auth.currentUser.uid,
+      video_url: this.videoUrl
+    })
+    .subscribe((roomData)=> {
+      let response = roomData
+      this.roomId = response.room_id;
+      this.roomstatService.selectVideo(this.videoUrl)
+      this.router.navigate(['/room'])
+    })
+  }
+
 
 }
 
