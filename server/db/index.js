@@ -21,6 +21,7 @@ const sequelize = new Sequelize('yoniesDB', 'ngdd', 'plantlife', {
 
 // var sequelize = new Sequelize('postgres://gqhmxfxh:0moqyFAzfF1UOx3Nw8kKuly4cdpyH3f5@pellefant.db.elephantsql.com:5432/gqhmxfxh', {dialect: "postgres"});
   
+  
   sequelize.authenticate()
     .then(console.log('connected to the database!'))
     .catch(err => console.log('error connecting to database!', err));
