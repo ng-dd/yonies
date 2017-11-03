@@ -1,6 +1,13 @@
-<app-friends-list></app-friends-list>
-<div *ngFor="let cat of keys">
-  <ul (click)="getVidsByCategory(this.categories[cat])">{{cat}}</ul>
+<div class="container">
+  <div class="row">
+      <div class="col-md-6">
+          <div class="d-flex justify-content-around">              
+          <div *ngFor="let cat of keys">
+              <ul (click)="getVidsByCategory(this.categories[cat])">{{cat}}</ul>
+            </div>
+          </div>
+      </div>
+  </div>
 </div>
 <div>
   <div *ngFor='let vid of content'>

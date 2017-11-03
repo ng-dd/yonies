@@ -62,7 +62,7 @@
 body {
 	font-family: avenir next, BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif !important;
 	min-height: 100vh;
-	color: #fff;
+  color: #a6a6a6;
 	background-color: #193ccf;
 	background-color: var(--color-background);
 	-webkit-font-smoothing: antialiased;
